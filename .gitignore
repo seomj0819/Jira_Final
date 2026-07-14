@@ -48,7 +48,6 @@ buildNumber.properties
 
 .springBeans
 .settings/
-pom.xml
 servlet-context.xml
 root-context.xml
 
