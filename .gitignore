@@ -48,7 +48,5 @@ buildNumber.properties
 
 .springBeans
 .settings/
-servlet-context.xml
-root-context.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven
