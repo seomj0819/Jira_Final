@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>addUserPopUp</title>
+</head>
+<style>
+	html, body {
+		width: 400px;
+		height: 289px;
+	}
+	main > div {
+		margin-top: 10px;
+	}
+	#container {
+		padding: 15px;
+	}
+	#close {
+		border: none;
+		background-color: white;
+		width: 32px;
+		height: 32px;
+		cursor: pointer;
+	}
+	#close:hover {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 3px;
+	}
+	#close > img {
+		width: 14px;
+		height: 14px;
+	}
+	#title {
+		font-size: 20px;
+		font-weight: 653;
+	}
+	.required {
+		color: rgb(174, 46, 36);
+		display: inline-block;
+		font-weight: 653;
+	}
+	.small_title {
+		color: rgb(107, 110, 118);
+		cursor: default;
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 653;
+		line-height: 16px;
+		margin: 0px auto;
+	}
+	#header-container {
+		display: flex;
+    	justify-content: space-around;
+	}
+	#email-input {
+		width: 348px;
+		height: 40px;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+		border-radius: 3px;
+		font-size: 14px;
+	}
+	#email-input:focus {
+		border: 1px solid rgb(70, 136, 236);
+		
+	}
+	#user_roll {
+		width: 354px;
+		height: 44px;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+	}
+	#cancle {
+		background-color: white;
+		border: none;
+		cursor: pointer;
+		width: 52px;
+		height: 32px;
+		padding: 0px 10px;
+	}
+	#cancle:hover {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 3px;
+	}
+	#add {
+		background-color: rgb(24, 104, 219);
+		border: none;
+		cursor: pointer;
+		width: 52px;
+		height: 32px;
+		padding: 0px 10px;
+		color: white;
+		border-radius: 3px;
+	}
+	#add:hover {
+		background-color: rgb(21, 88, 188);
+	}
+	#button-container {
+		text-align: right;
+		padding: 30px 10px 0px;
+	}
+	#container {
+		box-shadow: 20px 23px 24px rgba(30, 31, 33, 0.15);
+		box-sizing: border-box;
+		border-radius: 3px;
+	}
+</style>
+<body>
+	<div id="container">
+		<header id="header-container">
+			<span id="title">프로젝트 스페이스에 사용자 추가</span>
+			<button id="close"><img src="img/close.png"></button>
+		</header>
+		<main>
+			<div>
+				<span class="small_title">이름 또는 이메일</span>
+				<a class="required">*</a><br/>
+				<input id="email-input" type="text" placeholder="예: Maria, maria@company.com">
+			</div>
+			<div>
+				<span class="small_title">역할</span>
+				<a class="required">*</a><br>
+				<select id="user_roll">
+					<option selected>관리자</option>
+					<option>조회자</option>
+					<option>편집자</option>
+				</select>
+			</div>
+		</main>
+		<footer>
+			<div id="button-container">
+				<button type="reset" id="cancle">취소</button>
+				<button type="submit" id="add">추가</button>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

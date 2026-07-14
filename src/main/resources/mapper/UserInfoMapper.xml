@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.UserInfoMapper">
+
+<select id="checkLocalLogin" parameterType="com.team.dto.UserInfoDto" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT user_no
+		FROM users 
+		WHERE email = #{email} AND pw = #{pw}
+	]]>
+</select>
+<insert id="localRegister" parameterType="com.team.dto.UserInfoDto">
+	<![CDATA[
+		INSERT INTO users (user_no, email, pw, user_name, image_no)
+		VALUES (seq_user_no.nextVal, #{email}, #{pw}, #{userName}, #{imageNo})
+	]]>
+</insert>
+</mapper>
