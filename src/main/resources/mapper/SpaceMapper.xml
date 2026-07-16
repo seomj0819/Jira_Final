@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.SpaceMapper">
+
+<insert id="createSpace" parameterType="com.team.dto.SpaceListDto">
+	<![CDATA[
+		INSERT INTO space(space_key, space_title, space_order, space_status, image_no) VALUES (#{spaceKey}, #{spaceTitle}, seq_space_order.nextVal, #{spaceStatus}, 1)
+	]]>
+</insert>
+
+<delete id="deleteSpaceMemberFirstly" parameterType="java.lang.Integer">
+	<![CDATA[
+		DELETE FROM space_members WHERE space_key IN ( SELECT space_key FROM space_members WHERE user_role = '관리자' AND user_no = #{userNo} )
+	]]>
+</delete>
+<delete id="deleteSpace" parameterType="java.lang.String">
+	<![CDATA[
+		DELETE FROM space WHERE space_key = #{spaceKey}
+	]]>
+</delete>
+</mapper>
