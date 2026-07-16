@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,28 +72,17 @@ public class SpaceDaoImpl implements SpaceDao {
 	// user_no : 현재 유저번호
 	// user_role = '관리자' 인 경우만 수정가능
 	// 테이블에 트리거 적용
-	public boolean UpdateSpace(String space_key, String new_space_title, String new_space_key, int user_no) {
+	public boolean UpdateSpace(Map<String, Object> paramMap) {
 		boolean isUpdated = false;
-
-		String sql = "UPDATE space SET space_title = ?, space_key = ? " + "WHERE space_key IN (" + "SELECT space_key "
-				+ "FROM space_members " + "WHERE user_role = '관리자' " + "AND user_no = ?) " + "AND space_key = ?";
-
-		try (Connection conn = DriverManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, new_space_title);
-			pstmt.setString(2, new_space_key);
-			pstmt.setInt(3, user_no);
-			pstmt.setString(4, space_key);
-			int result = pstmt.executeUpdate();
-
-			if (result > 0) {
+		
+		try {
+			int updatedRowCount = sqlSession.update("com.team.mapper.SpaceMapper.updateSpace", paramMap);
+			if(updatedRowCount > 0) {
 				isUpdated = true;
 			}
-
-		} catch (SQLException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-
 		return isUpdated;
 	}
 

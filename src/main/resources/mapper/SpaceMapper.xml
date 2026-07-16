@@ -20,4 +20,10 @@
 		DELETE FROM space WHERE space_key = #{spaceKey}
 	]]>
 </delete>
+
+<update id="updateSpace" parameterType="map">
+	<![CDATA[
+		UPDATE space SET space_title = #{spaceDto.spaceTitle, jdbcType=VARCHAR}, space_status = #{spaceDto.spaceStatus, jdbcType=VARCHAR}, image_no = #{spaceDto.imageNo, jdbcType=NUMERIC} WHERE space_key IN ( SELECT space_key FROM space_members WHERE user_role = '관리자' AND user_no = #{userNo} ) AND space_key = #{spaceDto.spaceKey}
+	]]>
+</update>
 </mapper>
