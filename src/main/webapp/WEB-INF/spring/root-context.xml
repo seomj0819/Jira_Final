@@ -16,8 +16,8 @@
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="test0424" />
-		<property name="password" value="12345" />
+		<property name="username" value="jira" />
+		<property name="password" value="1234" />
 	</bean>
 
 	<!-- SQL 처리르 관리할 빈: SqlSession (=>SqlSessionFactory가 만든다) -->
