@@ -24,8 +24,8 @@ public class LoginServiceTest {
 	@Test
 	public void testLoginCheck() {
 		// Given
-		String email="admin@admin.com";
-		String pw="0000";
+		String email="seomj081923@gmail.com";
+		String pw="12345abcd";
 		
 		// When
 		boolean loginCnt = lSvc.loginCheck(email, pw);
@@ -37,7 +37,7 @@ public class LoginServiceTest {
 	
 	// 2. 로컬 로그인 실패 테스트
 	@Test
-	public void testRegisterUser() {
+	public void testLoginFail() {
 		// Given
 		String email="XXX@XXX.com";
 		String pw="1234";

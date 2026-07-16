@@ -1,5 +1,6 @@
 package com.team.project;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -25,8 +26,8 @@ public class LoginDaoTest {
 	public void testLocalLoginSuccess() {
 		// Given
 		UserInfoDto dto = new UserInfoDto();
-		dto.setEmail("admin@admin.com");
-		dto.setPw("0000");
+		dto.setEmail("seomj081923@gmail.com");
+		dto.setPw("12345abcd");
 		
 		// When
 		Integer userNo = loginDao.checkLocalLogin(dto);
@@ -48,7 +49,8 @@ public class LoginDaoTest {
 		Integer userNo = loginDao.checkLocalLogin(dto);
 		
 		// Then
-		assertTrue(userNo <= 0);
+		/* assertTrue(userNo <= 0); */
+		assertNull(userNo);
 		System.out.println("Login Fail");
 	}
 	

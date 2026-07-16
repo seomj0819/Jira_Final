@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		Integer LoginCnt = loginDao.checkLocalLogin(dto);
 		
-		return LoginCnt > 0;
+		return (LoginCnt != null);
 	}
 
 }
