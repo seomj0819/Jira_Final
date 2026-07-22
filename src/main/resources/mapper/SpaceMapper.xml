@@ -26,4 +26,15 @@
 		UPDATE space SET space_title = #{spaceDto.spaceTitle, jdbcType=VARCHAR}, space_status = #{spaceDto.spaceStatus, jdbcType=VARCHAR}, image_no = #{spaceDto.imageNo, jdbcType=NUMERIC} WHERE space_key IN ( SELECT space_key FROM space_members WHERE user_role = '관리자' AND user_no = #{userNo} ) AND space_key = #{spaceDto.spaceKey}
 	]]>
 </update>
+
+<select id="showSpaceList" resultType="com.team.dto.SpaceListDto">
+	<![CDATA[
+		SELECT sm.space_key "spaceKey", s.space_title "spaceTitle", s.image_no "imageNo" FROM space_members sm INNER JOIN space s ON sm.space_key = s.space_key WHERE sm.user_no = #{userNo} ORDER BY s.space_order
+	]]>
+</select>
+
+<select id="showSpaceProfile" resultType="com.team.dto.SpaceListDto">
+	SELECT space_key "spaceKey", space_title "spaceTitle", space_status "spaceStatus", image_no "imageNo" FROM space WHERE space_key = #{spaceKey}
+</select>
+
 </mapper>

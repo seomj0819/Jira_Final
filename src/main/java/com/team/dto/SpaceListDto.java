@@ -7,6 +7,7 @@ public class SpaceListDto {
 	private String spaceStatus;
 	private int imageNo;
 	
+	public SpaceListDto() {}
 	public SpaceListDto(String spaceKey, String spaceTitle, int spaceOrder, String spaceStatus, int imageNo) {
 		this.spaceKey = spaceKey;
 		this.spaceTitle = spaceTitle;
@@ -50,7 +51,6 @@ public class SpaceListDto {
 		this.imageNo = imageNo;
 	}
 	
-	public SpaceListDto() {}
 	@Override
 	public String toString() {
 		return "SpaceListDto [spaceKey = "+ spaceKey +", spaceTitle = "+ spaceTitle +", spaceOrder = "+ spaceOrder +", spaceStatus = "+ spaceStatus +", imageNo = "+ imageNo + "]";

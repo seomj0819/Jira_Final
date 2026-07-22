@@ -10,6 +10,6 @@ public interface SpaceDao {
 	boolean DeleteSpaceMemberFirstly(int userNo);
 	boolean DeleteSpace(String spaceKey);
 	boolean UpdateSpace(Map<String, Object> paramMap);
-	List<SpaceListDto> ShowSpaceList(int user_no);
-	SpaceListDto ShowSpaceProfile(String space_key);
+	List<SpaceListDto> showSpaceList(int userNo);
+	SpaceListDto showSpaceProfile(String spaceKey);
 }

@@ -1,11 +1,5 @@
 package com.team.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +14,13 @@ public class SpaceDaoImpl implements SpaceDao {
 	@Autowired
 	SqlSession sqlSession;
 	
+	// 명세 2.1
+	// input : space_key, space_title, space_status, image_no
+	// output : -
+	// space_key, space_title : 유저입력
+	// space_status : 공개(Y)/비공개(N)
+	// image_no : default 디폴트 스페이스 이미지 번호(1)
+	@Override
 	public boolean CreateSpace(SpaceListDto spaceDto) {
 		boolean isCreated = false;
 				
@@ -32,7 +33,14 @@ public class SpaceDaoImpl implements SpaceDao {
 		
 		return isCreated;
 	}
-
+	
+	// 명세 2.2
+	// input : space_key, user_no
+	// output : -
+	// space_key : 지우려는 스페이스키
+	// user_no : 현재 유저번호
+	// user_role = '관리자' 인 경우만 삭제가능
+	@Override
 	public boolean DeleteSpaceMemberFirstly(int userNo) {
 		boolean isDeleted = false;
 		
@@ -47,7 +55,7 @@ public class SpaceDaoImpl implements SpaceDao {
 		
 		return isDeleted;
 	}
-	
+	@Override
 	public boolean DeleteSpace(String spaceKey) {
 		boolean isDeleted = false;
 		
@@ -72,6 +80,7 @@ public class SpaceDaoImpl implements SpaceDao {
 	// user_no : 현재 유저번호
 	// user_role = '관리자' 인 경우만 수정가능
 	// 테이블에 트리거 적용
+	@Override
 	public boolean UpdateSpace(Map<String, Object> paramMap) {
 		boolean isUpdated = false;
 		
@@ -90,59 +99,18 @@ public class SpaceDaoImpl implements SpaceDao {
 	// input : user_no
 	// output : List<SpaceListDto>
 	// user_no : 현재 유저번호
-	public List<SpaceListDto> ShowSpaceList(int user_no) {
-		List<SpaceListDto> list = new ArrayList<>();
-
-		String sql = "SELECT sm.space_key, space_title, image_no FROM space_members sm INNER JOIN space s ON sm.space_key = s.space_key WHERE sm.user_no = ? ORDER BY space_order";
-
-		
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, user_no);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					SpaceListDto dto = new SpaceListDto();
-					dto.setSpaceKey(rs.getString("space_key"));
-					dto.setSpaceTitle(rs.getString("space_title"));
-					dto.setImageNo(rs.getInt("image_no"));
-
-					list.add(dto);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return list;
+	@Override
+	public List<SpaceListDto> showSpaceList(int userNo) {
+		return sqlSession.selectList("com.team.mapper.SpaceMapper.showSpaceList", userNo);
 	}
 
 	// 명세 2.5
 	// input : space_key
 	// output : SpaceListDto(space_key, space_title, image_no)
 	// space_key : 현재 스페이스키
-	public SpaceListDto ShowSpaceProfile(String space_key) {
-		SpaceListDto dto = null;
-
-		String sql = "SELECT space_key, space_title, image_no FROM space WHERE space_key = ?";
-
-		try (Connection conn = DriverManager.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			pstmt.setString(1, space_key);
-
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				dto = new SpaceListDto();
-				dto.setSpaceKey(rs.getString("space_key"));
-				dto.setSpaceTitle(rs.getString("space_title"));
-				dto.setImageNo(rs.getInt("image_no"));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return dto;
+	@Override
+	public SpaceListDto showSpaceProfile(String spaceKey) {
+		return sqlSession.selectOne("com.team.mapper.SpaceMapper.showSpaceProfile", spaceKey);
 	}
 
 }

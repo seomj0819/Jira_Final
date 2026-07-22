@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.HistoryMapper">
+
+<insert id="createHistory" parameterType="com.team.dto.HistoryDto">
+	<![CDATA[
+		INSERT INTO history(history_no, space_key, task_no, reply_no, user_no, field_name, action_type, created_at, old_value, new_value) VALUES (seq_history_no.nextVal, #{space_key}, #{task_no}, #{reply_no, jdbcType=NUMERIC}, #{user_no}, #{field_name}, #{action_type}, SYSDATE, #{old_value, jdbcType=VARCHAR}, #{new_value, jdbcType=VARCHAR})
+	]]>
+</insert>
+
+<select id="showHistory" parameterType="java.lang.Integer" resultType="com.team.dto.HistoryDto">
+	<![CDATA[
+		SELECT history_no, space_key, task_no, reply_no, user_no, field_name, action_type, created_at, old_value, new_value FROM history WHERE MONTHS_BETWEEN ( sysdate, created_at ) <= 1 AND space_key IN(SELECT space_key FROM space_members WHERE user_no = #{user_no}) ORDER BY created_at DESC
+	]]>
+</select>
+
+<select id="showTaskHistory" parameterType="com.team.dto.HistoryDto" resultType="com.team.dto.HistoryDto">
+	<![CDATA[
+		SELECT history_no, reply_no, user_no, field_name, action_type, created_at, old_value, new_value FROM history WHERE space_key = #{space_key} AND task_no = #{task_no} ORDER BY history_no
+	]]>
+</select>
+
+</mapper>
