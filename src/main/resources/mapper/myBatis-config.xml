@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+ <configuration>
+  	<settings>
+        <!-- null 값을 처리할 때 사용하는 JDBC 타입을 NULL로 지정 -->
+        <setting name="jdbcTypeForNull" value="NULL" />
+        
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+ </configuration>

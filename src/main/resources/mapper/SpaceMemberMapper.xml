@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.SpaceMemberMapper">
+	<select id="isSpaceMemberDuplicate" resultType="boolean">
+		<![CDATA[
+			SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+			FROM space_members
+			WHERE space_key = #{spaceKey}
+			AND user_no = #{userNo}
+		]]>
+	</select>
+	<insert id="insertInviteCode" parameterType="com.team.dto.SpaceMemberDto">
+		<![CDATA[
+			INSERT INTO space_members(space_key, user_no, user_role, invite_code, expire_date) 
+	        VALUES (#{spaceKey}, #{userNo}, #{userRole}, #{inviteCode}, SYSDATE + (1/24/60 * 10))
+		]]>
+	</insert>
+	<select id="checkInviteCode" parameterType="com.team.dto.SpaceMemberDto" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) 
+			FROM space_members 
+			WHERE invite_code = #{inviteCode} 
+			AND expire_date > SYSDATE 
+			AND user_no = #{userNo} 
+			AND space_key = #{spaceKey}
+		]]>
+	</select>
+	<update id="updateSpaceMember" parameterType="com.team.dto.SpaceMemberDto">
+		<![CDATA[
+			UPDATE space_members 
+			SET invite_code = null, expire_date = null 
+			WHERE user_no = #{userNo} 
+			AND space_key = #{spaceKey}
+		]]>
+	</update>
+	<delete id="deleteSpaceMember" parameterType="com.team.dto.SpaceMemberDto">
+		<![CDATA[
+			DELETE FROM space_members
+			WHERE user_no = #{userNo} 
+			AND space_key = #{spaceKey}
+		]]>
+	</delete>
+	<select id="searchUserRole" parameterType="com.team.dto.SpaceMemberDto" resultType="java.lang.String">
+		<![CDATA[
+			SELECT user_role 
+			FROM space_members 
+			WHERE space_key = #{spaceKey} 
+			AND user_no = #{userNo}
+		]]>
+	</select>
+	<select id="getSpaceMembers" resultType="com.team.dto.UserInfoDto">
+		<![CDATA[
+			SELECT u.user_no, u.user_name, u.email, i.image_title 
+			FROM users u 
+			LEFT OUTER JOIN image i 
+			ON u.image_no = i.image_no 
+			WHERE u.user_no IN ( 
+				SELECT DISTINCT space.user_no 
+				FROM space_members space 
+				WHERE space.space_key IN ( 
+					SELECT my_space.space_key 
+					FROM space_members my_space 
+					WHERE my_space.user_no = #{currentUserNo} 
+				) 
+			AND space.user_no != #{currentUserNo} 
+			)
+		]]>
+	</select>
+	<select id="getAllSpaceMembers" resultType="com.team.dto.UserInfoDto">
+		<![CDATA[
+			SELECT i.image_title, u.user_no, u.user_name, u.email 
+			FROM space_members s 
+			JOIN users u 
+			ON s.user_no = u.user_no 
+			LEFT OUTER JOIN image i 
+			ON u.image_no = i.image_no 
+			WHERE s.space_key = #{spaceKey}
+		]]>
+	</select>
+</mapper>

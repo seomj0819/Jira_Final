@@ -9,14 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskSimpleInfoDto {
-	String spaceKey;
-	int taskNo;
-	int workerNo;
-	String taskTitle;
-	String dueDate;
-	String labelTitle;
+public class TaskOrderDto {
 	int statusNo;
-	String priority;
-	int taskOrder;
+	int taskNo;
+	int afterTaskOrder;
+	int beforeTaskOrder;
+	String spaceKey;
 }

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.SearchConditionMapper">
+	<insert id="createSearchCondition" parameterType="com.team.dto.TaskSearchDto">
+		<selectKey keyProperty="searchConditionNo" resultType="int" order="BEFORE">
+			<![CDATA[
+				SELECT seq_condition_no.nextVal 
+				FROM dual
+			]]>	
+		</selectKey>
+		<![CDATA[
+			INSERT INTO search_condition (
+				search_condition_no,
+				search_condition_title,
+				search_condition_description,
+				operator_space,
+				operator_worker,
+				operator_creator,
+				operator_priority,
+				operator_status,
+				operator_due_date,
+				favorite
+			) VALUES (
+				#{searchConditionNo},
+				#{searchConditionTitle},
+				#{searchConditionDescription},
+				#{operatorSpace},
+				#{operatorWorker},
+				#{operatorCreator},
+				#{operatorPriority},
+				#{operatorStatus},
+				#{operatorDueDate},
+				#{favorite}
+			)
+		]]>	
+	</insert>
+	<insert id="createSearchConditionDetailSpace">
+		<![CDATA[
+			INSERT INTO sc_detail_space
+			VALUES (seq_scd_space_no.nextVal, #{searchConditionNo}, #{spaceKey})
+		]]>
+	</insert>
+	<insert id="createSearchConditionDetailWorker">
+		<![CDATA[
+			INSERT INTO sc_detail_worker
+			VALUES (seq_scd_worker_no.nextVal, #{searchConditionNo}, #{workerNo})
+		]]>
+	</insert>
+	<insert id="createSearchConditionDetailCreator">
+		<![CDATA[
+			INSERT INTO sc_detail_creator
+			VALUES (seq_scd_creator_no.nextVal, #{searchConditionNo}, #{creatorNo})
+		]]>
+	</insert>
+	<insert id="createSearchConditionDetailPriority">
+		<![CDATA[
+			INSERT INTO sc_detail_priority
+			VALUES (seq_scd_priority_no.nextVal, #{searchConditionNo}, #{priority})
+		]]>
+	</insert>
+	<insert id="createSearchConditionDetailStatus">
+		<![CDATA[
+			INSERT INTO sc_detail_status
+			VALUES (seq_scd_status_no.nextVal, #{searchConditionNo}, #{statusNo})
+		]]>
+	</insert>
+	<insert id="createSearchConditionDetailDueDate">
+		<![CDATA[
+			INSERT INTO sc_detail_due_date
+			VALUES (seq_scd_due_date_no.nextVal, #{searchConditionNo}, #{dueDate})
+		]]>
+	</insert>
+	<insert id="createSearchConditionAccess">
+		<![CDATA[
+			INSERT INTO search_condition_access
+			VALUES (#{searchConditionNo}, #{accessUserNo}, #{accessSpaceKey}, #{accessType})
+		]]>
+	</insert>
+	
+	<update id="updateSearchCondition" parameterType="com.team.dto.TaskSearchDto">
+		<![CDATA[
+			UPDATE search_condition 
+			SET search_condition_title = #{searchConditionTitle}, 
+				search_condition_description = #{searchConditionDescription}, 
+				operator_space = #{operatorSpace}, 
+				operator_worker = #{operatorWorker}, 
+				operator_creator = #{operatorCreator}, 
+				operator_priority = #{operatorPriority}, 
+				operator_status = #{operatorStatus}, 
+				operator_due_date = #{operatorDueDate}, 
+				favorite = #{favorite}
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</update>
+	<delete id="deleteSearchConditionDetailSpace">
+		<![CDATA[
+			DELETE FROM sc_detail_space 
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+	<delete id="deleteSearchConditionDetailWorker">
+		<![CDATA[
+			DELETE FROM sc_detail_worker
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+	<delete id="deleteSearchConditionDetailCreator">
+		<![CDATA[
+			DELETE FROM sc_detail_creator
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+	<delete id="deleteSearchConditionDetailPriority">
+		<![CDATA[
+			DELETE FROM sc_detail_priority
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+	<delete id="deleteSearchConditionDetailStatus">
+		<![CDATA[
+			DELETE FROM sc_detail_status
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+	<delete id="deleteSearchConditionDetailDueDate">
+		<![CDATA[
+			DELETE FROM sc_detail_due_date
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>	
+	</delete>
+
+	<delete id="deleteSearchConditionAccess" parameterType="com.team.dto.SearchConditionAccessDto">
+		DELETE FROM search_condition_access
+		WHERE search_condition_no = #{searchConditionNo}
+		<choose>
+			<when test="accessUserNo != null and accessUserNo != 0">
+				AND user_no = #{accessUserNo}
+			</when>
+			<when test="accessSpaceKey != null and accessSpaceKey != ''">
+				AND space_key = #{accessSpaceKey}
+			</when>
+			<otherwise>
+				AND 1 = 0
+			</otherwise>
+		</choose>
+	</delete>
+	
+	<delete id="deleteSearchCondition" parameterType="com.team.dto.SearchConditionAccessDto">
+		<![CDATA[
+			DELETE FROM search_condition
+			WHERE search_condition_no = #{searchConditionNo}
+			AND EXISTS (
+				SELECT 1
+				FROM search_condition_access
+				WHERE search_condition_no = #{searchConditionNo}
+				AND access_type = 'owner'
+				AND user_no = #{currentUserNo}
+			)
+		]]>
+	</delete>
+	<select id="showSearchConditionList" parameterType="int" resultType="com.team.dto.SearchConditionDto">
+		<![CDATA[
+			SELECT sc.*
+			FROM search_condition sc
+			INNER JOIN search_condition_access sca
+				ON sc.search_condition_no = sca.search_condition_no
+			WHERE sca.user_no = #{currentUserNo}
+		]]>
+	</select>
+	<update id="favoriteSearchCondition">
+		<![CDATA[
+			UPDATE search_condition
+			SET favorite = #{favorite}
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</update>
+	<select id="isFavorite" resultType="boolean">
+		<![CDATA[
+			SELECT CASE WHEN TRIM(favorite) = 'Y' THEN 1 ELSE 0 END
+			FROM search_condition
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="searchCriteriaByOwner" resultType="com.team.dto.SearchConditionDto">
+		<![CDATA[
+			SELECT DISTINCT sc.search_condition_no
+			FROM search_condition sc
+			INNER JOIN search_condition_access owner_acc
+				ON sc.search_condition_no = owner_acc.search_condition_no
+			INNER JOIN search_condition_access my_acc
+				ON sc.search_condition_no = my_acc.search_condition_no
+			WHERE owner_acc.user_no = #{searchUserNo}
+			AND owner_acc.access_type = 'owner'
+			AND my_acc.user_no = #{currentUserNo}
+		]]>
+	</select>
+	<select id="searchCriteriaBySpace" resultType="com.team.dto.SearchConditionDto">
+		<![CDATA[
+			SELECT DISTINCT sc.search_condition_no
+			FROM search_condition sc
+			INNER JOIN search_condition_access owner_acc
+				ON sc.search_condition_no = owner_acc.search_condition_no
+			INNER JOIN search_condition_access my_acc
+				ON sc.search_condition_no = my_acc.search_condition_no
+			WHERE acc.space_key = #{searchSpaceKey}
+			AND my_acc.user_no = #{currentUserNo}
+		]]>
+	</select>
+	<select id="searchCriteriaByTitle" resultType="com.team.dto.SearchConditionDto">
+		<![CDATA[
+			SELECT DISTINCT sc.search_condition_no
+			FROM search_condition sc
+			INNER JOIN search_condition_access my_acc
+				ON sc.search_condition_no = my_acc.search_condition_no
+			WHERE my_acc.user_no = #{currentUserNo}
+			AND sc.search_condition_title LIKE '%' || #{searchKeyWord} || '%'
+		]]>
+	</select>
+</mapper>

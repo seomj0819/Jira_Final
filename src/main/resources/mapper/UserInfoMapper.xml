@@ -17,4 +17,74 @@
 		VALUES (seq_user_no.nextVal, #{email}, #{pw}, #{userName}, #{imageNo})
 	]]>
 </insert>
+<select id="emailDuplicateCheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM users
+		WHERE email = #{email}
+	]]>
+</select>
+<select id="findPassword" resultType="java.lang.String">
+	<![CDATA[
+		SELECT pw
+		FROM users
+		WHERE email = #{email}
+	]]>
+</select>
+<update id="updateVerificationCode" parameterType="java.lang.String">
+	<![CDATA[
+		UPDATE users 
+		SET verification_code = #{verificationCode}, expire_date = SYSDATE + (1/24/60 * 10) 
+		WHERE email = #{email}
+	]]>
+</update>
+<select id="checkVerificationCode" resultType="com.team.dto.UserInfoDto">
+	<![CDATA[
+		SELECT
+			verification_code AS verificationCode,
+	        expire_date AS expireDate
+		FROM users
+		WHERE email = #{email} 
+	]]>
+</select>
+<update id="deleteVerificationCode" parameterType="java.lang.String">
+	<![CDATA[
+		UPDATE users
+		SET verification_code = NULL, expire_date = NULL
+		WHERE email = #{email}
+	]]>
+</update>
+<delete id="deleteUser">
+	<![CDATA[
+		DELETE FROM users
+		WHERE user_no = #{userNo}
+	]]>
+</delete>
+<update id="changePw">
+	<![CDATA[
+		UPDATE users
+		SET pw = #{pw}
+		WHERE user_no = #{userNo}
+	]]>
+</update>
+<select id="getUserProfile" resultType="com.team.dto.UserInfoDto">
+	<![CDATA[
+		SELECT email, user_name, image_no
+		FROM users
+		WHERE user_no = #{userNo}
+	]]>
+</select>
+<select id="checkGoogleLogin" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM users
+		WHERE email = #{email} AND google_api IS NOT NULL
+	]]>
+</select>
+<insert id="googleRegister" parameterType="com.team.dto.UserInfoDto">
+	<![CDATA[
+		INSERT INTO users (user_no, email, google_api, user_name, image_no)
+		VALUES (seq_user_no.nextVal, #{email}, #{googleApi}, #{userName}, #{imageNo})
+	]]>
+</insert>
 </mapper>

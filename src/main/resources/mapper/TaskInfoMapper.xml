@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.TaskInfoMapper">
+<insert id="createTask" parameterType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		INSERT INTO task (
+			space_key,
+			task_no,
+			creator_no,
+			worker_no,
+			task_title,
+			task_description,
+			due_date,
+			label_title,
+			status_no,
+			priority,
+			upper_task_no,
+			task_order,
+			summary
+		) VALUES (
+			#{spaceKey},
+			seq_task_no.nextval,
+			#{creatorNo},
+			#{workerNo},
+			#{taskTitle},
+			#{taskDescription},
+			TO_DATE(#{dueDate}, 'YYYY-MM-DD HH24:MI:SS'),
+			#{labelTitle},
+			#{statusNo},
+			#{priority},
+			#{upperTaskNo},
+			(
+				SELECT NVL(MAX(task_order), 0) + 1
+				FROM task
+				WHERE space_key = #{spaceKey}
+				AND status_no = #{statusNo}
+			),
+			#{summary}
+		)
+	]]>
+</insert>
+<delete id="deleteTask">
+	<![CDATA[
+		DELETE FROM task 
+		WHERE space_key = #{spaceKey} AND task_no = #{taskNo}
+	]]>
+</delete>
+<select id="showTaskList" resultType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		SELECT * 
+		FROM task 
+		WHERE space_key = #{spaceKey} 
+		ORDER BY task_order ASC
+	]]>
+</select>
+<select id="showUpperTaskList" resultType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		SELECT * 
+		FROM task 
+		WHERE space_key = #{spaceKey} AND upper_task_no IS NULL 
+		ORDER BY task_order ASC
+	]]>
+</select>
+<select id="showLowerTaskList" resultType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		SELECT * 
+		FROM task 
+		WHERE space_key = #{spaceKey} AND upper_task_no = #{upperTaskNo} 
+		ORDER BY task_order ASC
+	]]>
+</select>
+<update id="updateTask" parameterType="com.team.dto.TaskInfoDto">
+	UPDATE task 
+	<set>
+		task_no = task_no 
+		<if test="taskDescription != null and taskDescription != ''">
+			, task_description = #{taskDescription}
+		</if>
+		
+		<if test="taskTitle != null and taskTitle != ''">
+			, task_title = #{taskTitle}
+		</if>
+		
+		<if test="dueDate != null and dueDate != ''">
+			, due_date = #{dueDate}
+		</if>
+		
+		<if test="workerNo != null">
+			, worker_no = #{workerNo}
+		</if>
+		
+		<if test="labelTitle != null and labelTitle != ''">
+			, label_title = #{labelTitle}
+		</if>
+		
+		<if test="priority != null and priority != ''">
+			, priority = #{priority}
+		</if>
+		
+		<if test="statusNo != null">
+			, status_no = #{statusNo}
+		</if>
+		
+	</set>
+	WHERE space_key = #{spaceKey}
+	AND task_no = #{taskNo}
+</update>
+<update id="increaseTaskOrder">
+	<![CDATA[
+		UPDATE task
+		SET task_order = task_order + 1
+		WHERE status_no = #{statusNo}
+		AND task_order >= #{afterTaskOrder}
+		AND task_order < #{beforeTaskOrder}
+		AND #{afterTaskOrder} < #{beforeTaskOrder}
+		AND space_key = #{spaceKey}
+	]]>
+</update>
+
+<update id="decreaseTaskOrder">
+	<![CDATA[
+		UPDATE task
+		SET task_order = task_order - 1
+		WHERE status_no = #{statusNo}
+		AND task_order <= #{afterTaskOrder}
+		AND task_order > #{beforeTaskOrder}
+		AND #{beforeTaskOrder} < #{afterTaskOrder}
+		AND space_key = #{spaceKey}
+	]]>
+</update>
+
+<update id="updateTaskOrder">
+	UPDATE task
+	SET task_order = #{afterTaskOrder}
+	WHERE task_no = #{taskNo}
+	AND space_key = #{spaceKey}
+</update>
+<select id="searchTaskBySearchCondition" parameterType="com.team.dto.TaskSearchDto" resultType="com.team.dto.TaskInfoDto">
+	SELECT * 
+	FROM task 
+	WHERE space_key IN (SELECT space_key FROM space_members WHERE user_no = #{currentUserNo}) 
+	<if test="searchKeyWord != null and searchKeyWord != ''">
+		AND (task_title LIKE '%' || #{searchKeyWord} || '%' OR (space_key || '-' || task_no) LIKE '%' || #{searchKeyWord} || '%') 
+	</if>
+	<if test="searchWorkerNo != null">
+		<if test='operatorWorkerNo == "="'>
+			AND worker_no = #{searchWorkerNo} 
+		</if>
+		<if test='operatorWorkerNo == "!="'>
+			AND worker_no != #{searchWorkerNo} 
+		</if>
+	</if>
+	<if test="searchCreatorNo != null">
+		<if test='operatorCreatorNo == "="'>
+			AND creator_no = #{searchCreatorNo} 
+		</if>
+		<if test='operatorCreatorNo == "!="'>
+			AND creator_no != #{searchCreatorNo} 
+		</if>
+	</if>
+	<if test="searchStatusNo != null and searchStatusNo != ''">
+		<if test='operatorStatusNo == "="'>
+			AND status_no = #{searchStatusNo} 			
+		</if>
+		<if test='operatorStatusNo == "!="'>
+			AND status_no != #{searchStatusNo} 
+		</if>
+	</if>
+	<if test="searchSpaceKey != null and searchSpaceKey != ''">
+		<if test='operatorSpaceKey == "="'>
+			AND space_key = #{searchSpaceKey} 			
+		</if>
+		<if test='operatorSpaceKey == "!="'>
+			AND space_key != #{searchSpaceKey} 
+		</if>
+	</if>
+	<if test="searchPriority != null and searchPriority != ''">
+		<if test='operatorPriority == "="'>
+			AND priority = #{searchPriority} 
+		</if>
+		<if test='operatorPriority == "!="'>
+			AND priority != #{searchPriority} 
+		</if>
+	</if>
+	<if test="searchDueDate != null and searchDueDate != '' and operatorDueDate != null
+				and operatorDueDate != ''" >
+		<if test='operatorDueDate == "&gt;="'>
+			AND due_date &gt;= TO_DATE(#{searchDueDate}, 'YYYY-MM-DD')
+		</if>
+		<if test='operatorDueDate == "&lt;="'>
+			AND due_date &lt;= TO_DATE(#{searchDueDate}, 'YYYY-MM-DD')
+		</if>
+	</if>
+	ORDER BY task_order ASC 
+</select>
+</mapper>

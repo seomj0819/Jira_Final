@@ -13,15 +13,15 @@ public class TaskInfoDto {
 	String spaceKey;
 	int taskNo;
 	int creatorNo;
-	int workerNo;
+	Integer workerNo;
 	String taskTitle;
 	String taskDescription;
 	String dueDate;
 	String labelTitle;
 	int statusNo;
 	String priority;
-	int UpperTaskNo;
+	Integer UpperTaskNo;
 	int taskOrder;
-	int imageNo;
+	Integer imageNo;
 	String summary;
 }
