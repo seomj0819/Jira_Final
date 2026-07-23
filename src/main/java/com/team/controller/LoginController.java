@@ -21,6 +21,8 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+    
+    @Autowired
     private SpaceMemberService spaceMemberService;
 
     @RequestMapping("/")
@@ -43,7 +45,7 @@ public class LoginController {
 
     // 비밀번호 검사
     @PostMapping("/login/check")
-    public String loginCheck(@RequestParam String email, @RequestParam String pw, HttpSession session) {
+    public String loginCheck(@RequestParam String email, @RequestParam String pw, HttpSession session, Model model) {
 
         Integer userNo = loginService.loginCheck(email, pw);
 
@@ -55,10 +57,11 @@ public class LoginController {
         
         List<SpaceMemberDto> list = spaceMemberService.getSpacesByUserNo(userNo);
         
-        if(!list.isEmpty()) {
-        	return "Main_assigned";
+        if (!list.isEmpty()) {
+            model.addAttribute("spaceList", list);
+            return "Main_assigned";
         } else {
-        	return "CreateSpace";
+            return "CreateSpace";
         }
         
     }
