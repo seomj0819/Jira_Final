@@ -14,7 +14,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyService rSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/r")
 	public String home(Locale locale, Model model) {
 		
 		return "home";

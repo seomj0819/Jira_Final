@@ -14,7 +14,7 @@ public class FilesController {
 	@Autowired
 	private FilesService fSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/f")
 	public String home(Locale locale, Model model) {
 		
 		return "home";

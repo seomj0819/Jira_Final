@@ -14,7 +14,7 @@ public class HistoryController {
 	@Autowired
 	private HistoryService hSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/h")
 	public String home(Locale locale, Model model) {
 		
 		return "home";

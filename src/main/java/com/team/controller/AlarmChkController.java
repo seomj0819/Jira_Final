@@ -14,7 +14,7 @@ public class AlarmChkController {
 	@Autowired
 	private AlarmChkService alarmchkSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/a")
 	public String home(Locale locale, Model model) {
 		
 		return "home";

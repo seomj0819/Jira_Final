@@ -14,7 +14,7 @@ public class ImageController {
 	@Autowired
 	private ImageService iSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/i")
 	public String home(Locale locale, Model model) {
 		
 		return "home";

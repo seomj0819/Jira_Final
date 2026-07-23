@@ -14,7 +14,7 @@ public class StatusController {
 	@Autowired
 	private StatusService stSvc;
 	
-	@RequestMapping("/")
+	@RequestMapping("/st")
 	public String home(Locale locale, Model model) {
 		
 		return "home";
