@@ -179,7 +179,7 @@
 				<div id="notice">계속하려면 로그인하세요.</div>
 				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
-				<form action="login" method="post">
+				<form action="login/check" method="post">
 					<div id="useremail-container">
 						<input id="email_input" name="email" type="email" placeholder="이메일을 입력하세요"><br/>
 					</div>
