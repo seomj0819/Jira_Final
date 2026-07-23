@@ -122,7 +122,7 @@
 	}
 	#google-login-button {
 		border: 1px solid rgb(193, 199, 208); 
-		width: 284px; 
+		width: 320px; 
 		height: 40px; 
 		border-radius: 3px; 
 		background: rgb(255, 255, 255); 

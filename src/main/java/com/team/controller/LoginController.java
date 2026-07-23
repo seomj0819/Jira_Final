@@ -30,26 +30,27 @@ public class LoginController {
     }
 
     // 이메일 -> 비밀번호 페이지
-    @PostMapping("/login/check")
-    public String loginEmail( @RequestParam String email, Model model ) { 
-    	model.addAttribute("email", email);
+    @PostMapping("/login")
+    public String loginEmail(@RequestParam String email, Model model) {
+        model.addAttribute("email", email);
         return "Login_PassWord";
     }
 
     // 비밀번호 검사
-    @PostMapping("/login")
-    public String loginCheck( @RequestParam String email, @RequestParam String pw, HttpSession session ) {
+    @PostMapping("/login/check")
+    public String loginCheck(
+        @RequestParam String email,
+        @RequestParam String pw,
+        HttpSession session) {
+
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
-            // 실패
             return "Login_Fail";
         }
 
-        // 성공: 로그인 상태 저장
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
-
         return "Main_board";
     }
 }
