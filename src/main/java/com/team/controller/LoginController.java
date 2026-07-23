@@ -30,14 +30,14 @@ public class LoginController {
     }
 
     // 이메일 -> 비밀번호 페이지
-    @PostMapping("/login")
+    @PostMapping("/login/check")
     public String loginEmail( @RequestParam String email, Model model ) { 
     	model.addAttribute("email", email);
         return "Login_PassWord";
     }
 
     // 비밀번호 검사
-    @PostMapping("/login/check")
+    @PostMapping("/login")
     public String loginCheck( @RequestParam String email, @RequestParam String pw, HttpSession session ) {
         Integer userNo = loginService.loginCheck(email, pw);
 
@@ -50,6 +50,6 @@ public class LoginController {
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
 
-        return "redirect:/board";
+        return "Main_board";
     }
 }

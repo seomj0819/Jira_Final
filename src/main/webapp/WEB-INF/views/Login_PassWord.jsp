@@ -123,7 +123,7 @@
 				<div id="notice">계속하려면 로그인하세요.</div>
 				<span id="small_txt">비밀번호</span>
 				<span id="required">*</span><br/>
-				<form action="login" method="post">
+				<form action="<c:url value='/login/check'/>" method="post">
 					<input type="hidden" name="email" value="${email}">
 					<div id="password-container">
 						<input id="password_input" name="pw" type="password" placeholder="비밀번호를 입력하세요"><br/>
