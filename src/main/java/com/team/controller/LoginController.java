@@ -2,6 +2,7 @@ package com.team.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,9 @@ public class LoginController {
     }
     
     @PostMapping("/login")
-    public String loginPage(@RequestParam String email) {
+    public String loginPage(@RequestParam String email, Model model) {
     	System.out.println("Email : " + email);
-        return "Login";
+    	model.addAttribute("email", email);
+        return "Login_PassWord";
     }
 }
