@@ -14,17 +14,19 @@ import com.team.service.SpaceService;
 public class SpaceController {
 	@Autowired
 	private SpaceService sSvc;
-	
+
 	@RequestMapping("/rowsandstatus")
 	public String RowsAndStatus(Model model) {
 		
-		String space_title = sSvc.showSpaceProfile("ABCD").getSpaceTitle();
+		SpaceListDto dto = sSvc.showSpaceProfile("ABCD");
+		List<SpaceListDto> list = sSvc.showSpaceList(1);
 		
-		model.addAttribute("space_title", space_title);
+		model.addAttribute("dto", dto);
+		model.addAttribute("list", list);
 		
 		return "RowsAndStatus";
 	}
-	
+
 	@RequestMapping("/spacedetail")
 	public String SpaceDetail(Model model) {
 		
@@ -36,5 +38,5 @@ public class SpaceController {
 		
 		return "SpaceDetail";
 	}
-	
+
 }

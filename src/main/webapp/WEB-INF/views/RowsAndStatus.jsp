@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String space_title = (String)request.getAttribute("space_title");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -613,18 +611,11 @@
 			</div>
 			<div id="space" class="gap"><img class="menuIcon" src="resources/img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
 			<div id="space_list">
+			<c:forEach var="dto" items="${list}">
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(스페이스 목록)#01</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>${dto.spaceTitle}</a>
 				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(스페이스 목록)#02</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(스페이스 목록)#03</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(스페이스 목록)#04</a>
-				</div>
+			</c:forEach>
 			</div>
 			<br/>
 			<div id="submit" class="gap">
@@ -650,7 +641,7 @@
 				</div>
 			<div id="rowsandstatus">
 				<div id="headerR">
-					<a>스페이스</a> / <a><%=space_title%></a> / <a> 스페이스 설정 </a>
+					<a>스페이스</a> / <a>${dto.spaceTitle}</a> / <a> 스페이스 설정 </a>
 				</div>
 				<div id="headerR2">
 					<div id="titleR">

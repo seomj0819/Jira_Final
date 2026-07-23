@@ -369,7 +369,7 @@
 			background-position: 4px 7px;
 			background-image: url(https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1);
 		}
-		
+
 	</style>
 	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<script>
