@@ -243,19 +243,19 @@
 				<span id="title">스페이스</span>
 			</div>
 			<div id="space-title-container">
-				<span><img src="img/space_sample.png"></span>
+				<span><img src="../resources/img/space_sample.png"></span>
 				<span id="space-title">Project Title</span>
-				<button class="button"><img src="img/add_user.png"></button>
-				<button class="button"><img src="img/more.png"></button>
+				<button class="button"><img src="../resources/img/add_user.png"></button>
+				<button class="button"><img src="../resources/img/more.png"></button>
 			</div>
 			<div id="menu-container">
 				<button class="menu-button">
-					<span><img src="img/dashboard.png"></span>
+					<span><img src="../resources/img/dashboard.png"></span>
 					<span>대시보드</span>
 				</button>
 				
 				<button class="menu-button-on">
-					<span><img src="img/clipboard.png"></span>
+					<span><img src="../resources/img/clipboard.png"></span>
 					<span>보드</span>
 				</button>
 			</div>
@@ -264,12 +264,12 @@
 			<div id="sorting-container">
 				<div id="search-box-container">
 					<span>
-						<img src="img/search.png">
+						<img src="../resources/img/search.png">
 						<input id="search-box" type="text" placeholder="보드 검색">
 					</span>
 				</div>
 				<span>
-					<button class="user-profile" type="button"><img src="img/user.png"></button>
+					<button class="user-profile" type="button"><img src="../resources/img/user.png"></button>
 				</span>
 				<div>
 					<select name="group-by" id="group">
@@ -293,18 +293,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
 									<span><img src=""></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
@@ -316,18 +316,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
-									<span><img src="img/lowerTask.png"></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/lowerTask.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
@@ -351,18 +351,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
-									<span><img src="img/lowerTask.png"></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/lowerTask.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
@@ -374,18 +374,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
 									<span><img src=""></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
@@ -409,18 +409,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
-									<span><img src="img/lowerTask.png"></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/lowerTask.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
@@ -432,18 +432,18 @@
 							</div>
 							<div class="task-body">
 								<div class="duration">
-									<span><img src="img/calendar.png"></span>
+									<span><img src="../resources/img/calendar.png"></span>
 									<span>YYYY-MM-DD</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
-									<span><img src="img/check.png"></span>
+									<span><img src="../resources/img/check.png"></span>
 									<span>TASK NO</span>
 								</div>
 								<div class="task-info-container">
-									<span><img src="img/lowerTask.png"></span>
-									<span><img src="img/user.png"></span>
+									<span><img src="../resources/img/lowerTask.png"></span>
+									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
 						</button>
