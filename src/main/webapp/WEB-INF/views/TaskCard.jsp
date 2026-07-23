@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Task Card</title>
-	<script src="js/jquery-4.0.0.min.js"></script>
+	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<style>
 		* { box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;}
 		html, body {
