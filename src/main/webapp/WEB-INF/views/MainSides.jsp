@@ -300,7 +300,7 @@
 				<div id="logo"><a href="Main.html"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
 			</div>
 			<div id="area2">
-				<div><input id="searchBar"type="text" placeholder="검색"/></div>
+				<div><input id="searchBar" name="searchKeyWord" type="text" placeholder="검색"/></div>
 				<button id="create">
 					<svg id="plus" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-plus" viewBox="0 0 16 16">
   						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4">

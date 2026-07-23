@@ -408,7 +408,7 @@
 					설명
 					<br/>
 					<br/>
-					<input id="inputexp" type="text" name="inputexp" placeholder="설명 편집"/>
+					<input id="inputexp" type="text" name="inputExp" placeholder="설명 편집"/>
 					<div id="expbtns">
 						<button id="expsubmit">저장</button>
 						<button id="expcancel">취소</button>
@@ -445,7 +445,7 @@
 					</tr>
 					<tr>
 						<td>기한</td>
-						<td><input id="duedate" type="date" name="duedate" value=""/></td>
+						<td><input id="duedate" type="date" name="dueDate" value=""/></td>
 					</tr>
 					<tr>
 						<td>우선 순위</td>
@@ -470,7 +470,7 @@
 				<br/>
 				<div id="inputreply">
 					<img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-					<textarea id="replybox" name="replycontent" placeholder="댓글 추가..."></textarea>
+					<textarea id="replybox" name="replyContent" placeholder="댓글 추가..."></textarea>
 				</div>
 				<div id="TaskHistory">
 					<iframe id="taskhis" src="TaskHistory.html" width="100%" height="100%"></iframe>
@@ -486,7 +486,7 @@
 						<th>댓글 요약</th>
 					</tr>
 					<tr>
-						<td id="content"><textarea id="aiai" name="aiai" readonly>(AISum)</textarea></td>
+						<td id="content"><textarea id="aiai" name="aiAi" readonly>(AISum)</textarea></td>
 					</tr>
 				</table>
 			</div>

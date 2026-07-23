@@ -117,7 +117,7 @@
 			<form action="RowsAndStatus.html">
 				이름<span style="color: red;">*</span>
 				<br/>
-				<input id="iptrname" type="text" value="currname" name="rname" required/>
+				<input id="iptrname" type="text" value="currname" name="rName" required/>
 				<br/>
 				<button id="delete" type="button">열 삭제</button>
 				<button id="cancel" type="button">취소</button>
