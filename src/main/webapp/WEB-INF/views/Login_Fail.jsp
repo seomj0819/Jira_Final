@@ -1,8 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Jira Login Exist</title>
+<title>Jira Login Fail</title>
 </head>
 <style>
 	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
@@ -40,17 +44,71 @@
 		font-weight: 653;
 		height: 20px;
 		line-height: 20px;
-		width: 291.297px;
-		margin-left: 25px;
+		width: 184.75px;
+		margin-left: 70px; 
+		margin-top: 35px;
 	}
-	#google-login > div> span> img {
+	#small_txt {
+		color: rgb(80, 82, 88);
+		cursor: default;
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 653;
+		line-height: 16px;
+		padding-inline-start: 2px;
+		margin-top: 8px;
+	}
+	#required {
+		color: rgb(174, 46, 36);
+		display: inline-block;
+		font-weight: 653
+		paddint-inline-start: 2px;
+	}
+	#useremail-container {
+		align-items: center;
+		background-color: rgb(255, 255, 255);
+		width: 288px; 
+		height: 40px; 
+		margin-top: 2px;
+	}
+	#email_input {
+		background-color: rgba(0, 0, 0, 0);
+		color: rgb(41, 42, 46);
+		cursor: text;
+		display: block;
+		font-size: 14px;
+		font-stretch: 100%;
+		font-weight: 400;
+		line-height: 20px;
+		outline-width: 3px;
+		box-sizing: border-box;
+		padding: 10px;
+		width: 320px; 
+		height: 40px;
+		border-radius: 3px;
+		border: 1px solid rgb(193, 199, 208);
+	}
+	#login-submit {
+		background-color: rgb(24, 104, 219);
+		cursor: pointer;
+		display: inline-flex;font-size: 14px;
+		height: 40px;
+		font-weight: 500;
+		line-height: 40px;
+		width: 320px;
+		border: none;
+		border-radius: 3px;
+		margin-top: 22px;
+		text-align: center; 
+	}
+	#google-login > span> img {
 		margin: 0px 6px 0px 0px;
 		height: 24px;
    		width: 24px;
 	}
 	#login-txt {
 		color: white;
-		margin-left: 125px;
+		margin-left: 134px;
 	}
 	#login-option{
 		margin-top: 24px; 
@@ -61,21 +119,27 @@
 	#google-login {
 		text-align: center; 
 		justify-content: center;
-		border: 1px solid rgba(11, 18, 14, 0.14);
-		border-radius: 4px;
-		padding: 12px;
-		row-gap: 8px;
-		width: 320px;
-		height: 96px;
 	}
 	#google-login-button {
 		border: 1px solid rgb(193, 199, 208); 
 		width: 284px; 
 		height: 40px; 
 		border-radius: 3px; 
-		background-color: rgb(24, 104, 219);
+		background: rgb(255, 255, 255); 
 		cursor: pointer;
-		margin-top: 7px;
+	}
+	#google-login-button > span > img {
+		height: 24px; 
+		width: 24px; 
+		position: absolute; 
+		margin-top: -3px;
+	}
+	#google-txt {
+		color: rgb(23, 43, 77); 
+		font-size: 14px; 
+		font-weight: 700; 
+		position: relative; 
+		margin-left: 33px;
 	}
 	.signIn-signUp {
 		color: rgb(24, 104, 219); 
@@ -91,27 +155,6 @@
 		text-align: center; 
 		margin: 13px
 	}
-	#button-txt {
-		color: rgb(255, 255, 255);
-		font-size: 14px;
-		font-weight: 500;
-		height: 40px;
-		line-height: 40px;
-		margin: 0px 2px;
-		width: 270px;
-	}
-	#user-id {
-		color: rgb(41, 42, 46);
-		font-size : 14px;
-		font-weight: 600;
-		height: 20px;
-	}
-	#user-info {
-		width: 294px;
-		height: 24px;
-		display: flex;
-		justify-content: center;
-	}
 </style>
 <body>
 	<div id="background">
@@ -123,21 +166,29 @@
 				</svg>
 			</header>
 			<main id="main">
-				<h1 id="notice">이전에 Google 계정으로 로그인했습니다</h1>
+				<div id="notice">ê³ìíë ¤ë©´ ê°ìíì¸ì.</div>
+				<span id="small_txt">ì´ë©ì¼</span>
+				<span id="required">*</span><br/>
+				<div id="useremail-container">
+					<input id="email_input" placeholder="ì´ë©ì¼ì ìë ¥íì¸ì"><br/><br/>
+				</div>
+				<button id="login-submit">
+					<span id="login-txt">ê³ì</span>
+				</button><br/>
+				<div id="login-option">ëë ë¤ìì ì¬ì©íì¬ ê³ìíê¸°</div><br/>
 				<div id="google-login">
-					<div id="user-info">
+					<button id="google-login-button">
 						<span>
 							<img src="https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/google-logo.5462b711.svg">
 						</span>
-						<span id="user-id">User_Id</span>
-					</div>
-					<button id="google-login-button">
-						<span id="button-txt">Google(으)로 계속</span>
+						<span id="google-txt">Google</span>
 					</button>
 				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">다른 로그인 방법 사용</span>
+				<span class="signIn-signUp">ì´ë¯¸ JIRA ê³ì ì´ ììµëê¹?</span>
+				<span class="dot">â¢</span>
+				<span class="signIn-signUp">ë¡ê·¸ì¸</span>
 			</footer>
 		</div>
 	</div>

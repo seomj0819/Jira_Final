@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,29 +110,29 @@
 <body>
 	<div id="container">
 		<header id="header-container">
-			<span id="title">프로젝트 스페이스에 사용자 추가</span>
+			<span id="title">íë¡ì í¸ ì¤íì´ì¤ì ì¬ì©ì ì¶ê°</span>
 			<button id="close"><img src="img/close.png"></button>
 		</header>
 		<main>
 			<div>
-				<span class="small_title">이름 또는 이메일</span>
+				<span class="small_title">ì´ë¦ ëë ì´ë©ì¼</span>
 				<a class="required">*</a><br/>
-				<input id="email-input" type="text" placeholder="예: Maria, maria@company.com">
+				<input id="email-input" type="text" placeholder="ì: Maria, maria@company.com">
 			</div>
 			<div>
-				<span class="small_title">역할</span>
+				<span class="small_title">ì­í </span>
 				<a class="required">*</a><br>
 				<select id="user_roll">
-					<option selected>관리자</option>
-					<option>조회자</option>
-					<option>편집자</option>
+					<option selected>ê´ë¦¬ì</option>
+					<option>ì¡°íì</option>
+					<option>í¸ì§ì</option>
 				</select>
 			</div>
 		</main>
 		<footer>
 			<div id="button-container">
-				<button type="reset" id="cancle">취소</button>
-				<button type="submit" id="add">추가</button>
+				<button type="reset" id="cancle">ì·¨ì</button>
+				<button type="submit" id="add">ì¶ê°</button>
 			</div>
 		</footer>
 	</div>

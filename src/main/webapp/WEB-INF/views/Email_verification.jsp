@@ -1,8 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Jira Login Fail</title>
+<title>Jira Email Verification</title>
 </head>
 <style>
 	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
@@ -36,55 +40,15 @@
 	#notice {
 		display: block;
 		color: rgb(41, 42, 46);
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 653;
-		height: 20px;
-		line-height: 20px;
-		width: 184.75px;
-		margin-left: 70px; 
-		margin-top: 35px;
+		height: 24px;
+		line-height: 24px;
+		width: 251.05px;
+		margin-left: 32px; 
+		margin-top: 25px;
 	}
-	#small_txt {
-		color: rgb(80, 82, 88);
-		cursor: default;
-		display: inline-block;
-		font-size: 12px;
-		font-weight: 653;
-		line-height: 16px;
-		padding-inline-start: 2px;
-		margin-top: 8px;
-	}
-	#required {
-		color: rgb(174, 46, 36);
-		display: inline-block;
-		font-weight: 653
-		paddint-inline-start: 2px;
-	}
-	#useremail-container {
-		align-items: center;
-		background-color: rgb(255, 255, 255);
-		width: 288px; 
-		height: 40px; 
-		margin-top: 2px;
-	}
-	#email_input {
-		background-color: rgba(0, 0, 0, 0);
-		color: rgb(41, 42, 46);
-		cursor: text;
-		display: block;
-		font-size: 14px;
-		font-stretch: 100%;
-		font-weight: 400;
-		line-height: 20px;
-		outline-width: 3px;
-		box-sizing: border-box;
-		padding: 10px;
-		width: 320px; 
-		height: 40px;
-		border-radius: 3px;
-		border: 1px solid rgb(193, 199, 208);
-	}
-	#login-submit {
+	#code-submit {
 		background-color: rgb(24, 104, 219);
 		cursor: pointer;
 		display: inline-flex;font-size: 14px;
@@ -97,45 +61,11 @@
 		margin-top: 22px;
 		text-align: center; 
 	}
-	#google-login > span> img {
-		margin: 0px 6px 0px 0px;
-		height: 24px;
-   		width: 24px;
-	}
-	#login-txt {
+	#code-txt {
 		color: white;
-		margin-left: 134px;
-	}
-	#login-option{
-		margin-top: 24px; 
-		color: rgb(80, 82, 88); 
-		font-size: 14px; 
-		text-align: center;
-	}
-	#google-login {
-		text-align: center; 
+		position: flex;
 		justify-content: center;
-	}
-	#google-login-button {
-		border: 1px solid rgb(193, 199, 208); 
-		width: 284px; 
-		height: 40px; 
-		border-radius: 3px; 
-		background: rgb(255, 255, 255); 
-		cursor: pointer;
-	}
-	#google-login-button > span > img {
-		height: 24px; 
-		width: 24px; 
-		position: absolute; 
-		margin-top: -3px;
-	}
-	#google-txt {
-		color: rgb(23, 43, 77); 
-		font-size: 14px; 
-		font-weight: 700; 
-		position: relative; 
-		margin-left: 33px;
+		margin-left: 134px;
 	}
 	.signIn-signUp {
 		color: rgb(24, 104, 219); 
@@ -144,12 +74,57 @@
 		cursor: pointer; 
 		text-decoration-line: underline;
 	}
-	.dot {
-		margin: 0px 20px;
-	}
 	#other-option {
 		text-align: center; 
-		margin: 13px
+		margin: 13px;
+	}
+	#code-notice {
+		color: rgb(80, 82, 88);
+		display: block;
+		font-size: 14px;
+		font-weight: 400;
+		height: 40px;
+		line-height: 20px;
+		width: 320px;
+	}
+	#email-sent-info {
+		margin-top: 20px;
+	}
+	#user-email {
+		color: rgb(80, 82, 88);
+		font-size: 16px;
+		font-weight: 653;
+		height: 20px;
+		margin-top: 8px;
+		width : 320px;
+		display: block;
+		text-align: left;
+	}
+	.code {
+		cursor: text;
+		font-size: 20px;
+		font-weight: 400;
+		outline-width: 3px;
+		padding: 8px;
+		text-align: center;
+		height: 100%;
+		width: 100%;
+		outline: none;
+		border: none;
+	}
+	.code-box {
+		border: 1px solid rgb(140, 143, 151);
+		border-radius: 3px;
+		height: 47px;
+		width: 47px;
+		display: flex;
+		
+	}
+	#input-div {
+		display: flex;
+		width: 320px;
+		height: 47px;
+		gap: 8px;
 	}
 </style>
 <body>
@@ -162,29 +137,25 @@
 				</svg>
 			</header>
 			<main id="main">
-				<div id="notice">계속하려면 가입하세요.</div>
-				<span id="small_txt">이메일</span>
-				<span id="required">*</span><br/>
-				<div id="useremail-container">
-					<input id="email_input" placeholder="이메일을 입력하세요"><br/><br/>
+				<div id="notice">ì½ëë¥¼ ì´ë©ì¼ë¡ ë³´ëìµëë¤</div>
+				<div id="email-sent-info">
+					<div id="code-notice">ê³ì  ì¤ì ì ìë£íë ¤ë©´ ë¤ì ì£¼ìë¡ ë³´ë´ëë¦° ì½ëë¥¼ ìë ¥íì¸ì:</div>
+					<p id="user-email">user_Id</p>
 				</div>
-				<button id="login-submit">
-					<span id="login-txt">계속</span>
+				<div id="input-div">
+					<div class="code-box"><input class="code" maxlength="1"></div>
+					<div class="code-box"><input class="code" maxlength="1"></div>
+					<div class="code-box"><input class="code" maxlength="1"></div>
+					<div class="code-box"><input class="code" maxlength="1"></div>
+					<div class="code-box"><input class="code" maxlength="1"></div>
+					<div class="code-box"><input class="code" maxlength="1"></div>
+				</div>
+				<button id="code-submit">
+					<span id="code-txt">íì¸</span>
 				</button><br/>
-				<div id="login-option">또는 다음을 사용하여 계속하기</div><br/>
-				<div id="google-login">
-					<button id="google-login-button">
-						<span>
-							<img src="https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/google-logo.5462b711.svg">
-						</span>
-						<span id="google-txt">Google</span>
-					</button>
-				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">이미 JIRA 계정이 있습니까?</span>
-				<span class="dot">•</span>
-				<span class="signIn-signUp">로그인</span>
+				<span class="signIn-signUp">ì´ë©ì¼ì ë°ì§ ëª»íì¨ìµëê¹?</span>
 			</footer>
 		</div>
 	</div>

@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,45 +124,45 @@
 		<form>
 			<header>
 				<div id="header-container">
-					<h1 class="main-title">스페이스 이름 지정</h1>
-					<span class="header-subtitle">필수 필드는 별표로 표시되어 있습니다</span>
-					<span class="necessary">＊</span>
+					<h1 class="main-title">ì¤íì´ì¤ ì´ë¦ ì§ì </h1>
+					<span class="header-subtitle">íì íëë ë³íë¡ íìëì´ ììµëë¤</span>
+					<span class="necessary">ï¼</span>
 				</div>
 			</header>
 			<main>
 				<div id="input-container">
 					<div id="title-container">
-						<span class="title">이름</span>
-						<span class="necessary">＊</span><br/>
-						<input type="text" placeholder="팀 이름, 프로젝트 목표, 마일스톤 등을 사용해보기">
+						<span class="title">ì´ë¦</span>
+						<span class="necessary">ï¼</span><br/>
+						<input type="text" placeholder="í ì´ë¦, íë¡ì í¸ ëª©í, ë§ì¼ì¤í¤ ë±ì ì¬ì©í´ë³´ê¸°">
 				</div>
 					<div id="key-container">
-						<span class="title">키</span>
-						<span class="necessary">＊</span><br/>
+						<span class="title">í¤</span>
+						<span class="necessary">ï¼</span><br/>
 						<input type="text">
 					</div>
 					<div id="invite-users">
-						<span class="main-title">팀 초대하기</span><br/>
-						<span class="header-subtitle">Jira에서 이미 함께 공동 작업한 사용자를 추가하거나 새로운 사용자를 초대하세요.</span><br/>
-						<a class="title">이름 또는 이메일 입력</a>
+						<span class="main-title">í ì´ëíê¸°</span><br/>
+						<span class="header-subtitle">Jiraìì ì´ë¯¸ í¨ê» ê³µë ììí ì¬ì©ìë¥¼ ì¶ê°íê±°ë ìë¡ì´ ì¬ì©ìë¥¼ ì´ëíì¸ì.</span><br/>
+						<a class="title">ì´ë¦ ëë ì´ë©ì¼ ìë ¥</a>
 						<div id="email-input">
-							<input type="text" placeholder="이메일을 입력하세요">
+							<input type="text" placeholder="ì´ë©ì¼ì ìë ¥íì¸ì">
 						</div>
 					</div>
 					<div id="user-roll-container">
-						<a class="title">역할</a><br/>
+						<a class="title">ì­í </a><br/>
 						<select id="user-roll">
-							<option value="admin" selected>관리자</option>
-							<option value="editor">편집자</option>
-							<option value="viewer">조회자</option>
+							<option value="admin" selected>ê´ë¦¬ì</option>
+							<option value="editor">í¸ì§ì</option>
+							<option value="viewer">ì¡°íì</option>
 						</select>
 					</div>
 				</div>
 			</main>
 			<footer>
 				<div id="button-container">
-					<input type="reset" id="cancle-button" value="이전">
-					<input type="submit" id="submit-button" value="제출">
+					<input type="reset" id="cancle-button" value="ì´ì ">
+					<input type="submit" id="submit-button" value="ì ì¶">
 				</div>
 			</footer>
 		</form>

@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -55,7 +59,7 @@
 			
 		})
 			var selectObject = {
-				"user": ["Minjae Seo", "金成官"],
+				"user": ["Minjae Seo", "éæå®"],
 				"space": ["space01", "space02"]
 			}
 			window.onload = function() {
@@ -474,87 +478,87 @@
 <body>
 	<header>
 		<h1>
-			<span>생성 30일 이내</span>
+			<span>ìì± 30ì¼ ì´ë´</span>
 			<img id="mark" src="img/star_yellow.png">
-			<button id="filter_detail_button">필터 세부 정보</button>
+			<button id="filter_detail_button">íí° ì¸ë¶ ì ë³´</button>
 		</h1>
 	</header>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
 				<img src="img/search.png">
-				<input id="search_filter_by_title" placeholder="업무 검색">
+				<input id="search_filter_by_title" placeholder="ìë¬´ ê²ì">
 			</div>
 		<select>
-			<option value="" selected disabled hidden>스페이스</option>
+			<option value="" selected disabled hidden>ì¤íì´ì¤</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>담당자</option>
+			<option value="" selected disabled hidden>ë´ë¹ì</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>작업자</option>
+			<option value="" selected disabled hidden>ììì</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>우선 순위</option>
+			<option value="" selected disabled hidden>ì°ì  ìì</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>상태</option>
+			<option value="" selected disabled hidden>ìí</option>
 			<option></option>
 			<option></option>
 		</select>
-			<input type="date" id="due_date" class="search_due_date" max="2099-12-31" min="2000-01-01" placeholder="기한 선택">
-			<button type="reset">필터 지우기</button>
-			<button type="submit">필터 저장</button>
+			<input type="date" id="due_date" class="search_due_date" max="2099-12-31" min="2000-01-01" placeholder="ê¸°í ì í">
+			<button type="reset">íí° ì§ì°ê¸°</button>
+			<button type="submit">íí° ì ì¥</button>
 	</div>
 	<main>
 		<div class="table_container">
 			<table>
 				<tr>
-					<th>업무</th>
-					<th>담당자</th>
-					<th>작업자</th>
-					<th>우선순위</th>
-					<th>상태</th>
-					<th>만듦</th>
-					<th>업데이트</th>
-					<th>기한</th>
+					<th>ìë¬´</th>
+					<th>ë´ë¹ì</th>
+					<th>ììì</th>
+					<th>ì°ì ìì</th>
+					<th>ìí</th>
+					<th>ë§ë¦</th>
+					<th>ìë°ì´í¸</th>
+					<th>ê¸°í</th>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/check.png"><a>KEY-01</a><a>상위 작업</a></div></td>
+					<td><div class="task_title"><img src="img/check.png"><a>KEY-01</a><a>ìì ìì</a></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
+					<td><div><img src="img/user.png"><span>éæå®</span></div></td>
 					<td><div class="priority"><img src="img/low.png"><span>Low</span></div></td>
-					<td><span class="task_status">진행 중</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
+					<td><span class="task_status">ì§í ì¤</span></td>
+					<td><span>2026ë 6ì 19ì¼ ì¤í 2:40</span></td>
+					<td><span>2026ë 7ì 03ì¼ ì¤í 4:38</span></td>
+					<td><span>2026ë 8ì 01ì¼ ì¤í 2:40</span></td>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-02</a><a>하위 작업</a></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
+					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-02</a><a>íì ìì</a></div></td>
+					<td><div><img src="img/user.png"><span>éæå®</span></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
 					<td><div class="priority"><img src="img/medium.png"><span>Medium</span></div></td>
-					<td><span class="task_status">해야 할 일</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
+					<td><span class="task_status">í´ì¼ í  ì¼</span></td>
+					<td><span>2026ë 6ì 19ì¼ ì¤í 2:40</span></td>
+					<td><span>2026ë 7ì 03ì¼ ì¤í 4:38</span></td>
+					<td><span>2026ë 8ì 01ì¼ ì¤í 2:40</span></td>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-03</a><a>하위 작업</a></div></td>
+					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-03</a><a>íì ìì</a></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
+					<td><div><img src="img/user.png"><span>éæå®</span></div></td>
 					<td><div class="priority"><img src="img/high.png"><span>High</span></div></td>
-					<td><span class="task_status">완료</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
+					<td><span class="task_status">ìë£</span></td>
+					<td><span>2026ë 6ì 19ì¼ ì¤í 2:40</span></td>
+					<td><span>2026ë 7ì 03ì¼ ì¤í 4:38</span></td>
+					<td><span>2026ë 8ì 01ì¼ ì¤í 2:40</span></td>
 				</tr>
 			</table>
 		</div>
@@ -562,14 +566,14 @@
 	<div class="shadow"></div>
 	<div id="popup_overlay" class="popup-overlay">
 		<div class="popup-content">
-			<h2>필터 세부 정보</h2>
+			<h2>íí° ì¸ë¶ ì ë³´</h2>
 			<hr>
 			<div id="popup_description">
 				<div>
 					<h3>
 						<div class="popup-subtitle-container">
-							<span class="popup-subtitle">설명</span>
-							<span class="edit-button">이름 및 설명 편집</span>
+							<span class="popup-subtitle">ì¤ëª</span>
+							<span class="edit-button">ì´ë¦ ë° ì¤ëª í¸ì§</span>
 						</div>
 					</h3>
 				</div>
@@ -578,81 +582,81 @@
 			<hr>
 			<div id="popup_owner">
 				<img src="img/user.png">
-				<span class="user-info">소유자: </span>
+				<span class="user-info">ìì ì: </span>
 				<span class="user-info">Minjae Seo</span>
 			</div>
 			<hr>
 			<div id="popup_authority">
 				<h3>
 					<div class="popup-subtitle-container">
-						<span class="popup-subtitle">권한</span>
-						<span class="edit-button">권한 편집</span>
+						<span class="popup-subtitle">ê¶í</span>
+						<span class="edit-button">ê¶í í¸ì§</span>
 					</div>
 				</h3>
-				<p class="sub-text">표시 대상:</p>
-				<span class="text">비공개</span>
+				<p class="sub-text">íì ëì:</p>
+				<span class="text">ë¹ê³µê°</span>
 				<br/>
-				<p class="sub-text">편집 가능한 대상:</p>
+				<p class="sub-text">í¸ì§ ê°ë¥í ëì:</p>
 				<div class="user-profile">
 					<img src="img/user.png">
-					<span class="text">金成官</span>
+					<span class="text">éæå®</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div id="edit_filter_popup" class="edit-filter-popup">
 		<div class="popup-content">
-			<h2>필터 편집</h2>
+			<h2>íí° í¸ì§</h2>
 			<hr>
-			<span class="text">필수 필드는 별표로 표시되어 있습니다</span>
+			<span class="text">íì íëë ë³íë¡ íìëì´ ììµëë¤</span>
 			<span class="required">*</span>
 			<div id="content_container">
 				<div id="title_container">
-					<span class="sub-title">이름</span>
+					<span class="sub-title">ì´ë¦</span>
 					<span class="required">*</span>
 					<br/>
 					<input type="text" id="new_title" placeholder="original title">
 				</div>
 				<div id="description_container">
-					<span class="sub-title">설명</span>
+					<span class="sub-title">ì¤ëª</span>
 					<br/>
 					<input type="text" id="new_description">
 				</div>
 				<div class="selection_container">
-					<span class="sub-title">조회자</span><br/>
+					<span class="sub-title">ì¡°íì</span><br/>
 					<select class="select-box mainCategory">
-						<option value="none" selected>비공개</option>
-						<option value="user">사용자</option>
-						<option value="space">스페이스</option>
+						<option value="none" selected>ë¹ê³µê°</option>
+						<option value="user">ì¬ì©ì</option>
+						<option value="space">ì¤íì´ì¤</option>
 					</select>
 					<select name="viewerSub" class="scope_select subCategory" disabled>
-						<option value="" hidden selected>--항목을 선택해주세요--</option>
+						<option value="" hidden selected>--í­ëª©ì ì íí´ì£¼ì¸ì--</option>
 					</select> 
-					<button type="button" class="add-button">추가</button>
+					<button type="button" class="add-button">ì¶ê°</button>
 				</div>
 				<div id="viewer_list" class="add-user-roll">
-					<a><img src="img/user.png">金成官</a>
+					<a><img src="img/user.png">éæå®</a>
 					<button type="button" class="delete-user"><img src="img/close.png"></button>
 				</div>
 				<div class="selection_container">
-					<span class="sub-title">편집자</span><br/>
+					<span class="sub-title">í¸ì§ì</span><br/>
 					<select class="select-box mainCategory">
-						<option value="none" selected>비공개</option>
-						<option value="user">사용자</option>
-						<option value="space">스페이스</option>
+						<option value="none" selected>ë¹ê³µê°</option>
+						<option value="user">ì¬ì©ì</option>
+						<option value="space">ì¤íì´ì¤</option>
 					</select>
 					<select name="editorSub" class="scope_select subCategory" disabled>
-						<option value="" hidden selected>--항목을 선택해주세요--</option>
+						<option value="" hidden selected>--í­ëª©ì ì íí´ì£¼ì¸ì--</option>
 					</select> 
-					<button type="button" class="add-button">추가</button>
+					<button type="button" class="add-button">ì¶ê°</button>
 				</div>
 				<div id="editor_list" class="add-user-roll">
 					<a><img src="img/user.png">Minjae Seo</a>
 					<button type="button" class="delete-user"><img src="img/close.png"></button>
 				</div>
 				<div id="button_container">
-					<button type="reset" id="cancle_button">취소</button>
-					<button type="submit" id="submit_button">저장</button>
+					<button type="reset" id="cancle_button">ì·¨ì</button>
+					<button type="submit" id="submit_button">ì ì¥</button>
 				</div>
 			</div>
 		</div>
@@ -664,11 +668,11 @@
 	priorityTags.forEach(tag => {
 	  const status = tag.textContent.trim();
 	
-	  if (status === '해야 할 일') {
+	  if (status === 'í´ì¼ í  ì¼') {
 	    tag.style.backgroundColor = '#E2E3E5';
-	  } else if (status === '진행 중') {
+	  } else if (status === 'ì§í ì¤') {
 	    tag.style.backgroundColor = '#8FB8F6';
-	  } else if (status === '완료') {
+	  } else if (status === 'ìë£') {
 	    tag.style.backgroundColor = '#BADC7A';
 	  }
 	});
