@@ -178,16 +178,18 @@
 				<div id="notice">계속하려면 로그인하세요.</div>
 				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
-				<div id="useremail-container">
-					<input id="email_input" placeholder="이메일을 입력하세요"><br/><br/>
-				</div>
-				<div>
-					<input id="chkbox" type="checkbox">
-					<span id="chkbox-txt">내 정보 저장</span>
-				</div>
-				<button id="login-submit" type="submit">
-					<span id="login-txt">계속</span>
-				</button><br/>
+				<form action="/login" method="post">
+					<div id="useremail-container">
+						<input id="email_input" name="email" type="email" placeholder="이메일을 입력하세요"><br/>
+					</div>
+					<div>
+						<input id="chkbox" type="checkbox">
+						<span id="chkbox-txt">내 정보 저장</span>
+					</div>
+					<button id="login-submit" type="submit">
+						<span id="login-txt">계속</span>
+					</button><br/>
+				</form>
 				<div id="login-option">또는 다음을 사용하여 계속하기</div><br/>
 				<div id="google-login">
 					<button id="google-login-button">
