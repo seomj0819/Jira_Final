@@ -52,6 +52,7 @@
 	}
 	.space-title {
 		margin: 5px;
+		margin-left: -45px;
 		font-weight: 600;
 		font-size: 14px;
 	}
@@ -143,27 +144,19 @@
 				</div>
 				<div id="body-row">
 					<div id="space-card-list">
-						<div class="space-card">
-							<img src="img/space_sample.png">
-							<div class="space-title-container">
-								<span class="space-title">SPACE 1</span>
-								<p class="space-detail">Software Project</p>
-							</div>
-						</div>
-						<div class="space-card">
-							<img src="img/space_sample.png">
-							<div class="space-title-container">
-								<span class="space-title">SPACE 2</span>
-								<p class="space-detail">Software Project</p>
-							</div>
-						</div>
-						<div class="space-card">
-							<img src="img/space_sample.png">
-							<div class="space-title-container">
-								<span class="space-title">SPACE 3</span>
-								<p class="space-detail">Software Project</p>
-							</div>
-						</div>
+						<c:forEach var="space" items="${spaceList}">
+							<form action="<c:url value='/space/enter'/>" method="post">
+								<input type="hidden" name="spaceKey" value="${space.spaceKey}">
+      							<button type="submit" class="space-card" style="background:none;">
+      								<img src="<c:url value='../resources/img/space_sample.png'/>">
+        							<div class="space-title-container">
+        								<span class="space-title">${space.spaceKey}</span>
+         								<p class="space-detail">Software Project</p>
+        							</div>
+        						</button>
+							</form>
+						</c:forEach>
+						
 					</div>
 				</div>
 					<div id="recommend">
