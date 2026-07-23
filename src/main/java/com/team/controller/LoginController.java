@@ -38,19 +38,32 @@ public class LoginController {
 
     // 비밀번호 검사
     @PostMapping("/login/check")
-    public String loginCheck(
-        @RequestParam String email,
-        @RequestParam String pw,
-        HttpSession session) {
+    public String loginCheck(@RequestParam String email, @RequestParam String pw, HttpSession session) {
 
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
             return "Login_Fail";
         }
-
+        
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
-        return "Main_board";
+        return "redirect:/board";
+    }
+    
+    // 로그인 실패시 회원가입_email
+    @PostMapping("/login_Fail")
+    public String signUpEmail(String email, Model model) {
+    	model.addAttribute("email", email);
+    	return "Jira_SignUp";
+    }
+    
+    // 로그인 실패시 회원가입_pw
+    @PostMapping("/Jira_SignUp")
+    public String sighUpPw(@RequestParam String email, String pw, Model model) {
+    	model.addAttribute("email", email);
+    	model.addAttribute("pw", pw);
+    	
+    	return "Login";
     }
 }
