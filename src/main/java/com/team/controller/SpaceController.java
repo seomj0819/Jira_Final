@@ -9,5 +9,6 @@ import com.team.service.SpaceMemberService;
 public class SpaceController {
 	@Autowired
 	SpaceMemberService spaceMemberService;
+	
 
 }
