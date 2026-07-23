@@ -1,7 +1,5 @@
 package com.team.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +12,14 @@ public class SpaceController {
 	@Autowired
 	private SpaceService sSvc;
 	
-	@RequestMapping("/")
-	public String home(Locale locale, Model model) {
+	@RequestMapping("/rowsandstatus")
+	public String RowsAndStatus(Model model) {
 		
-		return "home";
+		String space_title = sSvc.showSpaceProfile("ABCD").getSpaceTitle();
+		
+		model.addAttribute("space_title", space_title);
+		
+		return "RowsAndStatus";
 	}
 	
 }
