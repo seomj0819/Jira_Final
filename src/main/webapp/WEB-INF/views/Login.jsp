@@ -175,20 +175,20 @@
 				</svg>
 			</header>
 			<main id="main">
-				<div id="notice">ê³ìíë ¤ë©´ ë¡ê·¸ì¸íì¸ì.</div>
-				<span id="small_txt">ì´ë©ì¼</span>
+				<div id="notice">계속하려면 로그인하세요.</div>
+				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
 				<div id="useremail-container">
-					<input id="email_input" placeholder="ì´ë©ì¼ì ìë ¥íì¸ì"><br/><br/>
+					<input id="email_input" placeholder="이메일을 입력하세요"><br/><br/>
 				</div>
 				<div>
 					<input id="chkbox" type="checkbox">
-					<span id="chkbox-txt">ë´ ì ë³´ ì ì¥</span>
+					<span id="chkbox-txt">내 정보 저장</span>
 				</div>
 				<button id="login-submit" type="submit">
-					<span id="login-txt">ê³ì</span>
+					<span id="login-txt">계속</span>
 				</button><br/>
-				<div id="login-option">ëë ë¤ìì ì¬ì©íì¬ ê³ìíê¸°</div><br/>
+				<div id="login-option">또는 다음을 사용하여 계속하기</div><br/>
 				<div id="google-login">
 					<button id="google-login-button">
 						<span>
@@ -199,9 +199,9 @@
 				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">IDì°¾ê¸°</span>
-				<span class="dot">â¢</span>
-				<span class="signIn-signUp">íìê°ì</span>
+				<span class="signIn-signUp">ID찾기</span>
+				<span class="dot">•</span>
+				<span class="signIn-signUp">회원가입</span>
 			</footer>
 		</div>
 	</div>

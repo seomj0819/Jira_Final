@@ -240,7 +240,7 @@
 	<form>
 		<header id="header">
 			<div id="title-container">
-				<span id="title">ì¤íì´ì¤</span>
+				<span id="title">스페이스</span>
 			</div>
 			<div id="space-title-container">
 				<span><img src="img/space_sample.png"></span>
@@ -251,12 +251,12 @@
 			<div id="menu-container">
 				<button class="menu-button">
 					<span><img src="img/dashboard.png"></span>
-					<span>ëìë³´ë</span>
+					<span>대시보드</span>
 				</button>
 				
 				<button class="menu-button-on">
 					<span><img src="img/clipboard.png"></span>
-					<span>ë³´ë</span>
+					<span>보드</span>
 				</button>
 			</div>
 		</header>
@@ -265,7 +265,7 @@
 				<div id="search-box-container">
 					<span>
 						<img src="img/search.png">
-						<input id="search-box" type="text" placeholder="ë³´ë ê²ì">
+						<input id="search-box" type="text" placeholder="보드 검색">
 					</span>
 				</div>
 				<span>
@@ -273,10 +273,10 @@
 				</span>
 				<div>
 					<select name="group-by" id="group">
-						<option value="" disabled selected>ê·¸ë£¹</option>
-						<option value="none">ìì</option>
-						<option value="worker">ë´ë¹ì</option>
-						<option value="lower-task">íììì</option>
+						<option value="" disabled selected>그룹</option>
+						<option value="none">없음</option>
+						<option value="worker">담당자</option>
+						<option value="lower-task">하위작업</option>
 					</select>
 				</div>
 			</div>
@@ -335,7 +335,7 @@
 					<div class="create-task-container">
 						<button class="create-task">
 							<span>+</span>
-							<span>ë§ë¤ê¸°</span>
+							<span>만들기</span>
 						</button>
 					</div>
 				</div>
@@ -393,7 +393,7 @@
 					<div class="create-task-container">
 						<button class="create-task">
 							<span>+</span>
-							<span>ë§ë¤ê¸°</span>
+							<span>만들기</span>
 						</button>
 					</div>
 				</div>
@@ -451,7 +451,7 @@
 					<div class="create-task-container">
 						<button class="create-task">
 							<span>+</span>
-							<span>ë§ë¤ê¸°</span>
+							<span>만들기</span>
 						</button>
 					</div>
 				</div>

@@ -127,7 +127,7 @@
 				</svg>
 			</header>
 			<main id="main">
-				<h1 id="notice">ì´ì ì Google ê³ì ì¼ë¡ ë¡ê·¸ì¸íìµëë¤</h1>
+				<h1 id="notice">이전에 Google 계정으로 로그인했습니다</h1>
 				<div id="google-login">
 					<div id="user-info">
 						<span>
@@ -136,12 +136,12 @@
 						<span id="user-id">User_Id</span>
 					</div>
 					<button id="google-login-button">
-						<span id="button-txt">Google(ì¼)ë¡ ê³ì</span>
+						<span id="button-txt">Google(으)로 계속</span>
 					</button>
 				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">ë¤ë¥¸ ë¡ê·¸ì¸ ë°©ë² ì¬ì©</span>
+				<span class="signIn-signUp">다른 로그인 방법 사용</span>
 			</footer>
 		</div>
 	</div>

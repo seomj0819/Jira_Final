@@ -137,9 +137,9 @@
 				</svg>
 			</header>
 			<main id="main">
-				<div id="notice">ì½ëë¥¼ ì´ë©ì¼ë¡ ë³´ëìµëë¤</div>
+				<div id="notice">코드를 이메일로 보냈습니다</div>
 				<div id="email-sent-info">
-					<div id="code-notice">ê³ì  ì¤ì ì ìë£íë ¤ë©´ ë¤ì ì£¼ìë¡ ë³´ë´ëë¦° ì½ëë¥¼ ìë ¥íì¸ì:</div>
+					<div id="code-notice">계정 설정을 완료하려면 다음 주소로 보내드린 코드를 입력하세요:</div>
 					<p id="user-email">user_Id</p>
 				</div>
 				<div id="input-div">
@@ -151,11 +151,11 @@
 					<div class="code-box"><input class="code" maxlength="1"></div>
 				</div>
 				<button id="code-submit">
-					<span id="code-txt">íì¸</span>
+					<span id="code-txt">확인</span>
 				</button><br/>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">ì´ë©ì¼ì ë°ì§ ëª»íì¨ìµëê¹?</span>
+				<span class="signIn-signUp">이메일을 받지 못하셨습니까?</span>
 			</footer>
 		</div>
 	</div>

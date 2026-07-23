@@ -220,22 +220,22 @@
 		</style>
 <body>
 	<header>
-		<h1>íí°</h1>
-		<button>íí° ë§ë¤ê¸°</button>
+		<h1>필터</h1>
+		<button>필터 만들기</button>
 	</header>
 	<main>
 		<div id="search_filter">
 			<div id="search_box_container" tabindex="0">
 				<img src="img/search.png">
-				<input id="search_filter_by_title" placeholder="íí° ê²ì">
+				<input id="search_filter_by_title" placeholder="필터 검색">
 			</div>
 			<select class="dropbox">
-				<option value="" selected disabled>ìì ì</option>
+				<option value="" selected disabled>소유자</option>
 				<option></option>
 				<option></option>
 			</select>
 			<select class="dropbox">
-				<option value="" selected disabled>íë¡ì í¸</option>
+				<option value="" selected disabled>프로젝트</option>
 				<option></option>
 			</select>
 		</div>
@@ -243,57 +243,57 @@
 			<table>
 				<tr>
 					<th><img class="star" src="img/star_black.png" onclick="changeMarkButtonImg(this)"></th>
-					<th>ì´ë¦<button class="sort" type="button" onclick="changeButtonImg(this)"><img src="img/up.png"></button></th>
-					<th>ìì ì</th>
-					<th>ì¡°íì</th>
-					<th>ë³ííì</th>
+					<th>이름<button class="sort" type="button" onclick="changeButtonImg(this)"><img src="img/up.png"></button></th>
+					<th>소유자</th>
+					<th>조회자</th>
+					<th>별표표시</th>
 					<th></th>
 				</tr>
 				<tr>
 					<td><button type="button" class="star-container"><img class="star" src="img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
-					<td><a class="filter-title">ìì± 30ì¼ ì´ë´</a></td>
-					<td><div class="owner"><img src="img/user.png"><span>éæå®</span></div></td>
+					<td><a class="filter-title">생성 30일 이내</a></td>
+					<td><div class="owner"><img src="img/user.png"><span>金成官</span></div></td>
 					<td><div class="viewer"></div>none</td>
-					<td>2ëª</td>
+					<td>2명</td>
 					<td>
 						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
-							<button>íí° ë³µì¬</button>
-							<button>í¸ì§</button>
-							<button>ìì ì ë³ê²½</button>
-							<button>ì­ì </button>
+							<button>필터 복사</button>
+							<button>편집</button>
+							<button>소유자 변경</button>
+							<button>삭제</button>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td><button type="button" class="star-container"><img class="star" src="img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
-					<td><a class="filter-title">ìë£</a></td>
+					<td><a class="filter-title">완료</a></td>
 					<td><div class="owner"><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div class="viewer"><img src="img/user.png"><span>éæå®</span></div></td>
-					<td>0ëª</td>
+					<td><div class="viewer"><img src="img/user.png"><span>金成官</span></div></td>
+					<td>0명</td>
 					<td>
 						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
-							<button>íí° ë³µì¬</button>
-							<button>í¸ì§</button>
-							<button>ìì ì ë³ê²½</button>
-							<button>ì­ì </button>
+							<button>필터 복사</button>
+							<button>편집</button>
+							<button>소유자 변경</button>
+							<button>삭제</button>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td><button type="button" class="star-container"><img class="star" src="img/star_yellow.png" onclick="changeStarButtonImg(this)"></button></td>
 					<td><a class="filter-title">Filter for Space</a></td>
-					<td><div class="owner"><img src="img/user.png"><span>éæå®</span></div></td>
+					<td><div class="owner"><img src="img/user.png"><span>金成官</span></div></td>
 					<td><div class="viewer"><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td>1ëª</td>
+					<td>1명</td>
 					<td>
 						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
-							<button>íí° ë³µì¬</button>
-							<button>í¸ì§</button>
-							<button>ìì ì ë³ê²½</button>
-							<button>ì­ì </button>
+							<button>필터 복사</button>
+							<button>편집</button>
+							<button>소유자 변경</button>
+							<button>삭제</button>
 						</div>
 					</td>
 				</tr>

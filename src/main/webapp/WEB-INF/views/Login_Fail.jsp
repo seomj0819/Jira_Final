@@ -166,16 +166,16 @@
 				</svg>
 			</header>
 			<main id="main">
-				<div id="notice">ê³ìíë ¤ë©´ ê°ìíì¸ì.</div>
-				<span id="small_txt">ì´ë©ì¼</span>
+				<div id="notice">계속하려면 가입하세요.</div>
+				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
 				<div id="useremail-container">
-					<input id="email_input" placeholder="ì´ë©ì¼ì ìë ¥íì¸ì"><br/><br/>
+					<input id="email_input" placeholder="이메일을 입력하세요"><br/><br/>
 				</div>
 				<button id="login-submit">
-					<span id="login-txt">ê³ì</span>
+					<span id="login-txt">계속</span>
 				</button><br/>
-				<div id="login-option">ëë ë¤ìì ì¬ì©íì¬ ê³ìíê¸°</div><br/>
+				<div id="login-option">또는 다음을 사용하여 계속하기</div><br/>
 				<div id="google-login">
 					<button id="google-login-button">
 						<span>
@@ -186,9 +186,9 @@
 				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">ì´ë¯¸ JIRA ê³ì ì´ ììµëê¹?</span>
-				<span class="dot">â¢</span>
-				<span class="signIn-signUp">ë¡ê·¸ì¸</span>
+				<span class="signIn-signUp">이미 JIRA 계정이 있습니까?</span>
+				<span class="dot">•</span>
+				<span class="signIn-signUp">로그인</span>
 			</footer>
 		</div>
 	</div>

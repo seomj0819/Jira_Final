@@ -138,8 +138,8 @@
 		<div id="main">
 			<div id="space-list">
 				<div class="header-row">
-					<span class="title">ì¶ì² ì¤íì´ì¤</span>
-					<a class="content">ëª¨ë  ì¤íì´ì¤ ë³´ê¸°</a>
+					<span class="title">추천 스페이스</span>
+					<a class="content">모든 스페이스 보기</a>
 				</div>
 				<div id="body-row">
 					<div id="space-card-list">
@@ -168,17 +168,17 @@
 				</div>
 					<div id="recommend">
 						<div class="header-row">
-							<span class="title">ì¶ì² í­ëª©</span>
+							<span class="title">추천 항목</span>
 							<div id="button-container">
-								<button class="button-on" value="assigned">ëìê² í ë¹</button>
-								<button class="button" value="workedon">ìì</button>
-								<button class="button" value="notion">ìë¦¼</button>
+								<button class="button-on" value="assigned">나에게 할당</button>
+								<button class="button" value="workedon">작업</button>
+								<button class="button" value="notion">알림</button>
 							</div>
 						</div>
 						<hr/>
 						<div id="body-row">
 							<div class="status">
-								<a>ì§í ì¤</a>
+								<a>진행 중</a>
 							</div>
 							<div class="task">
 								<div class="task-img">
@@ -186,14 +186,14 @@
 								</div>
 								<div class="task-detail">
 									<p class="task-title">TASK TITLE</p>
-									<a class="task-position">task ã space key ã space title</a>
+									<a class="task-position">task ㆍ space key ㆍ space title</a>
 								</div>
 								<div class="status-styled">
 									<span class="status-txt">task status</span>
 								</div>
 							</div>
 							<div class="status">
-								<a>í´ì¼ í  ì¼</a>
+								<a>해야 할 일</a>
 							</div>
 							<div class="task">
 								<div class="task-img">
@@ -201,7 +201,7 @@
 								</div>
 								<div class="task-detail">
 									<p class="task-title">TASK TITLE</p>
-									<a class="task-position">task ã space key ã space title</a>
+									<a class="task-position">task ㆍ space key ㆍ space title</a>
 								</div>
 								<div class="status-styled">
 									<span class="status-txt">task status</span>
