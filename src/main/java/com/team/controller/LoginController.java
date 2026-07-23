@@ -1,5 +1,7 @@
 package com.team.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team.dto.SpaceMemberDto;
 import com.team.service.LoginService;
+import com.team.service.SpaceMemberService;
 
 @Controller
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
+    private SpaceMemberService spaceMemberService;
 
     @RequestMapping("/")
     public String home() {
@@ -45,10 +50,17 @@ public class LoginController {
         if (userNo == null) {
             return "Login_Fail";
         }
-        
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
-        return "redirect:/board";
+        
+        List<SpaceMemberDto> list = spaceMemberService.getSpacesByUserNo(userNo);
+        
+        if(!list.isEmpty()) {
+        	return "Main_assigned";
+        } else {
+        	return "CreateSpace";
+        }
+        
     }
     
     // 로그인 실패시 회원가입_email
