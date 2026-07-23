@@ -14,4 +14,5 @@ public interface SpaceMemberDao {
 	String searchUserRole(SpaceMemberDto dto);
 	List<UserInfoDto> getSpaceMembers(int currentUserNo);
 	List<UserInfoDto> getAllSpaceMembers(String spaceKey);
+	List<SpaceMemberDto> getSpacesByUserNo(int userNo);
 }

@@ -79,4 +79,12 @@
 			WHERE s.space_key = #{spaceKey}
 		]]>
 	</select>
+	<select id="getSpacesByUserNo" resultType="com.team.dto.SpaceMemberDto">
+		<![CDATA[
+			SELECT space_key, user_no, user_role
+			FROM space_members
+			WHERE user_no = #{userNo}
+			AND invite_code IS NULL
+		]]>
+	</select>
 </mapper>

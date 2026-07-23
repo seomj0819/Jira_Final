@@ -61,4 +61,9 @@ public class SpaceMemberServiceImpl implements SpaceMemberService{
 		return spaceMemberDao.getAllSpaceMembers(spaceKey);
 	}
 
+	@Override
+	public List<SpaceMemberDto> getSpacesByUserNo(int userNo) {
+		return spaceMemberDao.getSpacesByUserNo(userNo);
+	}
+
 }

@@ -157,4 +157,22 @@ public class SpaceMemberDaoTest {
 		}
 	}
 	
+	// 9. userNo로 Space List 조회 테스트
+	@Test
+	public void testGetSpacesByUserNo() {
+		// Given
+		int userNo = 2;
+		
+		// When
+		List<SpaceMemberDto> list = spaceMemberDao.getSpacesByUserNo(userNo);
+		
+		// Then
+		assertNotNull(list);
+		for(SpaceMemberDto dto : list) {
+			System.out.print("[" + dto.getSpaceKey() + ", ");
+			System.out.print(dto.getUserNo() + ", ");
+			System.out.print(dto.getUserRole() + "] ");
+		}
+	}
+	
 }

@@ -55,4 +55,9 @@ public class SpaceMemberDaoImpl implements SpaceMemberDao {
 		return sqlSession.selectList("com.team.mapper.SpaceMemberMapper.getAllSpaceMembers", spaceKey);
 	}
 
+	@Override
+	public List<SpaceMemberDto> getSpacesByUserNo(int userNo) {
+		return sqlSession.selectList("com.team.mapper.SpaceMemberMapper.getSpacesByUserNo", userNo);
+	}
+
 }

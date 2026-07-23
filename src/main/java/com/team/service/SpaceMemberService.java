@@ -13,4 +13,5 @@ public interface SpaceMemberService {
 	void deleteSpaceMember(SpaceMemberDto dto);	// 회원 삭제
 	List<UserInfoDto> getSpaceMembers(int currentUserNo);	// 해당 스페이스에 본인을 제외한 멤버 조회
 	List<UserInfoDto> getAllSpaceMembers(String spaceKey);	// 해당 스페이스에 본인을 포함한 멤버 조회
+	List<SpaceMemberDto> getSpacesByUserNo(int userNo);		// userNo로 Space List 조회
 }
