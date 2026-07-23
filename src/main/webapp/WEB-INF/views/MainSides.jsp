@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,7 @@
 			width: 780px;
 			border-radius: 6px;
 			border: 1px solid gray;
-			background-image: url('img/search.png');
+			background-image: url('resources/img/search.png');
  			background-repeat: no-repeat;
  			background-size: 20px;
  			background-position: 3px center;
@@ -309,7 +310,7 @@
   				</button>
   			</div>
   			<div id="area3">
-				<div id="bell"><a><img id="beru" src="img/ベルのフリーアイコン素材.svg"/></a></div>
+				<div id="bell"><a><img id="beru" src="resources/img/bell.svg"/></a></div>
 				<div id="profile">
 					<a>
 						<img src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
@@ -335,32 +336,25 @@
 			<div id="filter" class="gap"><img id="firuta" src="img/data-filter-icon.svg"/>필터</div>
 			<div id="filter_list">
 				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(사용가능한 필터목록)#01</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#01</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(사용가능한 필터목록)#02</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#02</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(사용가능한 필터목록)#03</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#03</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(사용가능한 필터목록)#04</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#04</a>
 				</div>
 			</div>
-			<div id="space" class="gap"><img class="menuIcon" src="img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
+			<div id="space" class="gap"><img class="menuIcon" src="resources/img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
 			<div id="space_list">
+			<c:forEach var="dto" items="${list}">
 				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(스페이스 목록)#01</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>${dto.spaceTitle}</a>
 				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(스페이스 목록)#02</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(스페이스 목록)#03</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="img/space_sample.png"/>(스페이스 목록)#04</a>
-				</div>
+			</c:forEach>
 			</div>
 			<br/>
 			<div id="submit" class="gap">
