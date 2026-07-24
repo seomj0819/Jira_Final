@@ -77,20 +77,29 @@ public class LoginController {
         
     }
     
-    // 로그인 실패시 회원가입_email
     @PostMapping("/login_fail")
-    public String signUpEmail(String email, Model model) {
-    	model.addAttribute("email", email);
-    	return "Jira_SignUp";
+    public String signUpEmail(@RequestParam String email, Model model) {
+        Map<String, String> codeMap = loginService.createVerificationCode();
+        // updateVerificationCode로 DB 저장
+        // TODO: 메일 발송
+
+        model.addAttribute("email", email);
+        return "Email_verification";
     }
     
     // 로그인 실패시 회원가입_pw
     @PostMapping("/jira_signUp")
-    public String sighUpPw(@RequestParam String email, String pw, Model model) {
-    	model.addAttribute("email", email);
-    	model.addAttribute("pw", pw);
-    	
-    	return "Login";
+    public String completeSignUp(@RequestParam String email, @RequestParam String pw, @RequestParam String name, HttpSession session) {
+        loginService.localRegister(email, pw, name, 0);
+
+        Integer userNo = loginService.findUserNoByEmail(email); // 추가 필요
+        session.setAttribute("userNo", userNo);
+        session.setAttribute("email", email);
+
+        // 유효 초대 조회 후
+        // 있으면 spaceKey 세션 + redirect:/board
+        // 없으면 redirect:/space/create
+        return "redirect:/space/create";
     }
     
     // 회원가입
@@ -107,13 +116,15 @@ public class LoginController {
     
     // 인증 확인
     @PostMapping("/sign_up/verify")
-    public String verify(@RequestParam String email, @RequestParam String code, HttpSession Session) {
+    public String verify(@RequestParam String email, @RequestParam String code, Model model) {
     	
-    	if(!loginService.verificationCodeCheck(email, code)) {
-    		return "Email_verification";
-    	}
-    	
-    	return "";
+        if (!loginService.verificationCodeCheck(email, code)) {
+            model.addAttribute("email", email);
+            return "Email_verification";
+        }
+        
+        model.addAttribute("email", email);
+        return "Jira_SignUp";
     }
     
 }

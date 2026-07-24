@@ -96,4 +96,11 @@
 		AND expire_date > SYSDATE
 	]]>
 </select>
+<select id="findUserNoByEmail" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT user_no
+		FROM space_members
+		WHERE email = #{email}
+	]]>
+</select>
 </mapper>

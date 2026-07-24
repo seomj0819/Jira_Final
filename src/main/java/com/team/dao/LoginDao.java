@@ -15,4 +15,5 @@ public interface LoginDao {
 	UserInfoDto getUserProfile(int userNo);	// 유저 정보 가져오기
 	int checkGoogleLogin(String email);	// 이메일 입력시 구글로그인인지 조회
 	void googleRegister(UserInfoDto dto);	// 구글 로그인 회원 가입
+	Integer findUserNoByEmail(String email);	// Email로 UserNo 조회
 }

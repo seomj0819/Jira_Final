@@ -13,5 +13,6 @@ public interface LoginService {
 	UserInfoDto getUserProfile(int userNo);	// 유저 정보 가져오기
 	void googleRegister(String email, String googleApi, String userName, int imageNo);	// 구글 회원 등록
 	boolean emailDuplicateCheck(String email);	// 이메일 중복 여부 확인
-	int checkGoogleLogin(String email);
+	int checkGoogleLogin(String email);	
+	Integer findUserNoByEmail(String email);	// Email로 UserNo 조회
 }

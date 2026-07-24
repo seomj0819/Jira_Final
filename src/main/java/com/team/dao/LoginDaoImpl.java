@@ -72,4 +72,9 @@ public class LoginDaoImpl implements LoginDao{
 		sqlSession.insert("com.team.mapper.UserInfoMapper.googleRegister", dto);
 	}
 
+	@Override
+	public Integer findUserNoByEmail(String email) {
+		return sqlSession.selectOne("com.team.mapper.UserInfoMapper.findUserNoByEmail", email);
+	}
+
 }

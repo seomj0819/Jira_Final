@@ -115,5 +115,11 @@ public class LoginServiceImpl implements LoginService {
 	public int checkGoogleLogin(String email) {
 		return loginDao.checkGoogleLogin(email);
 	}
+	
+	// UserNo로 Email 조회
+	@Override
+	public Integer findUserNoByEmail(String email) {
+		return loginDao.findUserNoByEmail(email);
+	}
 
 }

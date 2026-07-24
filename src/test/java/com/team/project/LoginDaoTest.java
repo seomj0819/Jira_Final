@@ -2,6 +2,7 @@ package com.team.project;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -232,6 +233,33 @@ public class LoginDaoTest {
 		
 		// Then
 		assertNotNull(dto);
+	}
+	
+	// 12. Email로 UserNo 조회 성공 테스트
+	@Test
+	public void testFineUserNoByEmailSuccess() {
+		// Given
+		String email = "test@test.com";
+		
+		// When
+		int userNo = loginDao.findUserNoByEmail(email);
+		
+		// Then
+		assertNotNull(userNo);
+		System.out.println(userNo);
+	}
+	
+	// 13. Email로 UserNo 조회 실패 테스트
+	@Test
+	public void testFineUserNoByEmailFail() {
+		// Given
+		String email = "test@test.com";
+		
+		// When
+		int userNo = loginDao.findUserNoByEmail(email);
+		
+		// Then
+		assertNull(userNo);
 	}
 }	
 
