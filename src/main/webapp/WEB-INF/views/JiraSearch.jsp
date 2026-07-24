@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Jira Search</title>
-	<script src="js/jquery-4.0.0.min.js"></script>
+	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<style>
 		* { box-sizing: border-box;}
 		html, body {

@@ -15,18 +15,6 @@ public class SpaceController {
 	@Autowired
 	private SpaceService sSvc;
 
-	@RequestMapping("/rowsandstatus")
-	public String RowsAndStatus(Model model) {
-		
-		SpaceListDto dto = sSvc.showSpaceProfile("ABCD");
-		List<SpaceListDto> list = sSvc.showSpaceList(1);
-		
-		model.addAttribute("dto", dto);
-		model.addAttribute("list", list);
-		
-		return "RowsAndStatus";
-	}
-
 	@RequestMapping("/spacedetail")
 	public String SpaceDetail(Model model) {
 		

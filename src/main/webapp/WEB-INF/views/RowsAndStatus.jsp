@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String currname = (String)request.getParameter("currname");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -247,18 +250,6 @@
 		#various {
 			width: 87.5%;
 		}
-		#jiraSearch {
-			width: 782px;
-			height: 100%;
-			margin-left: 271px;
-			border: none;
-			display: none;
-		}
-		#jiraSearch > iframe {
-			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
-			border-radius: 6px;
-			border: none;
-		}
 		.menuIcon {
 			width: 20px;
 		}
@@ -485,9 +476,121 @@
 		#hsframe {
 			display: none;
 			margin-left: 30%;
+		 	height: 320px;
+		 	min-width: 382px;
+		 	width: 603px;
 		}
-		#hsframe > iframe {
+		#editcard {
+			height: 100%;
+			width: 100%;
+			overflow: auto;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+			border-radius: 4px;
+			padding: 20px;
+		}
+		#cardheader {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 35px;
+		}
+		#cardheader > b {
+			font-size: 20px;
+		}
+		#exit {
+			font-size: 24px;
+			color: gray;
+			border: none;
+			background-color: white;
+			cursor: pointer;
+			padding-left: 8px;
+			padding-right: 8px;
+			padding-bottom: 6px;
+		}
+		#exit:hover {
+			background-color: rgba(5,21,36,0.06);
+		}
+		#iptrname {
+			height: 34px;
+			width: 95%;
+			margin-top: 6px;
+			margin-bottom: 10px;
+		}
+		#delete {
+			background-color: white;
+			border: 1px solid rgba(11, 18, 14, 0.14);
+			font-size: 16px;
+			width: 71px;
+			height: 33px;
+			cursor: pointer;
+			margin-top: 100px;
+			border-radius: 4px;
+		}
+		#delete:hover {
+			background-color: rgba(11,18,14,0.14);
+		}
+		#cancel {
+			background-color: white;
+			border: none;
+			border-radius: 4px;
+			font-size: 16px;
+			height: 33px;
+			cursor: pointer;
+			margin-left: 330px;
+		}
+		#cancel:hover {
+			background-color: rgba(5,21,36,0.06);
+		}
+		#update {
+			background-color: rgba(5, 21, 36, 0.06);
+			border: 1px solid rgba(118, 118, 118, 0.3);
+			font-size: 16px;
+			color: rgba(8, 15, 33, 0.29);
+			height: 33px;
+			border-radius: 4px;
+			cursor: not-allowed;
+		}
+		#jiraSearch {
+			width: 782px;
+			height: 92%;
+			margin-left: 271px;
+			border: none;
+			display: none;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+			border-radius: 6px;
+		 	justify-content: center;
+		}
+		#jirasearch {
+			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
+			width: 782px;
+			height: 92%;
 			border:none;
+			/* border-radius: 6px; */
+		}
+		#header {
+			font-size: 18px;
+			font-weight: 600;
+			color: #1868db;
+			display-flex;
+			align-items: center;
+			padding-top: 5px;
+			padding-left: 15px;
+			padding-bottom: 3px;
+		}
+		#span {
+			font-size: 14px;
+			margin:12px;
+		}
+		
+		.list {
+			padding: 12px;
+			cursor: pointer;
+		}
+		.list:hover {
+			background-color: #f5f5f5;
+			
+		}
+		.taskimage {
+			margin-right: 50px;
 		}
 	</style>
 	<script src="resources/js/jquery-4.0.0.min.js"></script>
@@ -500,6 +603,7 @@
 					$("#sideBarArea").css("display","none");
 					$("#jiraSearch").css("display","none");
 					$("#various").css("width","100%");
+					$("#rowsandstatus").show();
 				});
 				$("#open").click(function() {
 					/* $("#closer").html("<button id='close'><img src='https://www.svgrepo.com/show/347842/sidebar-expand.svg'/></button>"); */
@@ -511,10 +615,12 @@
 				$("#searchBar").click(function() {
 					if( $("#sideBarArea").css("display") != "none" ) {
 						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#jiraSearch").toggle();
+						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#rowsandstatus").toggle();
 					}
 				});
 				$("#mainArea").click(function() {
 					$(this).find("#various").find("#jiraSearch").hide();
+					$(this).find("#various").find("#rowsandstatus").show();
 				});
 				$("#todo").hover(function() {
 					$(this).find(".hsform").find(".hsbtn").show();
@@ -634,10 +740,60 @@
 		</div>
 		<div id="various">
 				<div id="jiraSearch">
-					<iframe src="JiraSearch.html" width="782px" height="92%"></iframe>
+					<div id="jirasearch">
+						<div id="header">
+							Jira
+						</div>
+						<hr/>
+						<div id="span">
+							최근에 조회
+						</div>
+						<div id="tasklist">
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								ABCD-4 작업4
+							</div>
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								ABCD-3 작업3
+							</div>
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								ABCD-2 작업2
+							</div>
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								ABCD-1 작업1
+							</div>
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								taskId title
+							</div>
+							<div class="list">
+								<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+								taskId title
+							</div>
+						</div>
+					</div>
 				</div>
 				<div id="hsframe">
-					<iframe src="RowEdit.html" width="610px" height="330px"></iframe>
+					<div id=editcard>
+						<div id=cardheader>
+							<b>열 편집</b>
+							<button id="exit">x</button>
+						</div>
+						<div id="cardform">
+							<form action="rowsandstatus">
+								이름<span style="color: red;">*</span>
+								<br/>
+								<input id="iptrname" type="text" value="<%=currname %>" name="rName" required/>
+								<br/>
+								<button id="delete" type="button">열 삭제</button>
+								<button id="cancel" type="button">취소</button>
+								<input id="update" type="submit" value="업데이트" disabled="true"/>
+							</form>
+						</div>
+					</div>
 				</div>
 			<div id="rowsandstatus">
 				<div id="headerR">
@@ -663,51 +819,49 @@
 						<div>상태를 여기에 끌어 놓으면 보드 및 백로그에서 숨길 수 있습니다. 이 상태의 업무 항목은 표시되지 않습니다.</div>
 					</div>
 					<div id="todo">
-						<b>할 일</b>
-						<form class="hsform" action="RowEdit.html">
-							<button class="hsbtn" type="submit" value="할 일" name="currname"><img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/></button>
+						<b>${todo}</b>
+						<form class="hsform" action="rowedit">
+							<button class="hsbtn" type="submit" value="${todo}" name="currname"><img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/></button>
 						</form>
 						<div class="card">
-							<div class="status">할 일</div>
+							<div class="status">${todo}</div>
 							<div class="taskqty">0 업무 항목</div>
 						</div>
 					</div>
 					<div id="doing">
-						<b>진행 중</b>
-						<form class="hsform" action="RowEdit.html">
-							<button class="hsbtn" type="submit" value="진행 중" name="currname">
+						<b>${doing}</b>
+						<form class="hsform" action="rowedit">
+							<button class="hsbtn" type="submit" value="${doing}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
 						<div class="card">
-							<div class="status">진행 중</div>
+							<div class="status">${doing}</div>
 							<div class="taskqty">1 업무 항목</div>
 						</div>
 					</div>
 					<div id="check">
-						<b>검토 중</b>
-						<form class="hsform" action="RowEdit.html">
-						<!-- <iframe src="jiraSearch" width="782px" height="92%"></iframe>
-						<iframe src="rowEdit" width="610px" height="330px"></iframe> -->
-							<button class="hsbtn" type="submit" value="검토 중" name="currname">
+						<b>${check}</b>
+						<form class="hsform" action="rowedit">
+							<button class="hsbtn" type="submit" value="${check}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
 						<div class="card">
-							<div class="status">검토 중</div>
+							<div class="status">${check}</div>
 							<div class="taskqty">0 업무 항목</div>
 						</div>
 					</div>
 					<div id="clear">
-						<b>완료</b>
+						<b>${clear}</b>
 						<img id="greencheck" src="resources/img/greencheck.png"/>
-						<form class="hsform" action="RowEdit.html">
-							<button class="hsbtn" type="submit" value="완료" name="currname">
+						<form class="hsform" action="rowedit">
+							<button class="hsbtn" type="submit" value="${clear}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
 						<div class="card">
-							<div class="status">완료</div>
+							<div class="status">${clear}</div>
 							<div class="taskqty">1 업무 항목</div>
 						</div>
 					</div>

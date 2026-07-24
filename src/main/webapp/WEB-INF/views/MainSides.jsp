@@ -249,15 +249,13 @@
 		}
 		#jiraSearch {
 			width: 782px;
-			height: 100%;
+			height: 92%;
 			margin-left: 271px;
 			border: none;
 			display: none;
-		}
-		#jiraSearch > iframe {
 			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
 			border-radius: 6px;
-			border: none;
+		 	justify-content: center;
 		}
 		.menuIcon {
 			width: 20px;
@@ -276,8 +274,41 @@
 			width: 18px;
 			margin-right:6px;
 		}
+		#jirasearch {
+			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
+			width: 782px;
+			height: 92%;
+			border:none;
+			/* border-radius: 6px; */
+		}
+		#header {
+			font-size: 18px;
+			font-weight: 600;
+			color: #1868db;
+			display-flex;
+			align-items: center;
+			padding-top: 5px;
+			padding-left: 15px;
+			padding-bottom: 3px;
+		}
+		#span {
+			font-size: 14px;
+			margin:12px;
+		}
+		
+		.list {
+			padding: 12px;
+			cursor: pointer;
+		}
+		.list:hover {
+			background-color: #f5f5f5;
+			
+		}
+		.taskimage {
+			margin-right: 50px;
+		}
 	</style>
-	<script src="js/jquery-4.0.0.min.js"></script>
+	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<script>
 		$(function() {
 			
@@ -328,12 +359,12 @@
 				추천 항목
 			</div>
 			<div id="saikin" class="gap">
-				<div id="tokei"><img id="clock" src="img/clock.png"/>최근</div>
+				<div id="tokei"><img id="clock" src="resources/img/clock.png"/>최근</div>
 				<div><svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray"><path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/></svg> </div>
 			</div>
 			<br/>
 			<br/>
-			<div id="filter" class="gap"><img id="firuta" src="img/data-filter-icon.svg"/>필터</div>
+			<div id="filter" class="gap"><img id="firuta" src="resources/img/data-filter-icon.svg"/>필터</div>
 			<div id="filter_list">
 				<div class="gap">
 					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#01</a>
@@ -373,7 +404,41 @@
 		</div>
 		<div id="various">
 			<div id="jiraSearch">
-				<iframe src="JiraSearch.html" width="782px" height="92%"></iframe>
+				<div id="jirasearch">
+					<div id="header">
+						Jira
+					</div>
+					<hr/>
+					<div id="span">
+						최근에 조회
+					</div>
+					<div id="tasklist">
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-4 작업4
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-3 작업3
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-2 작업2
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-1 작업1
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							taskId title
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							taskId title
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

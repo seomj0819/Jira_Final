@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String currname = (String)request.getParameter("currname");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +87,7 @@
 			cursor: not-allowed;
 		}
 	</style>
-	<script src="js/jquery-4.0.0.min.js"></script>
+	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<script>
 		$(function() {
 			$("#iptrname").on("input",function() {
@@ -114,10 +117,10 @@
 			<button id="exit">x</button>
 		</div>
 		<div id="cardform">
-			<form action="RowsAndStatus.html">
+			<form action="rowsandstatus">
 				이름<span style="color: red;">*</span>
 				<br/>
-				<input id="iptrname" type="text" value="currname" name="rName" required/>
+				<input id="iptrname" type="text" value="<%=currname %>" name="rName" required/>
 				<br/>
 				<button id="delete" type="button">열 삭제</button>
 				<button id="cancel" type="button">취소</button>

@@ -247,18 +247,6 @@
 		#various {
 			width: 87.5%;
 		}
-		#jiraSearch {
-			width: 782px;
-			height: 100%;
-			margin-left: 271px;
-			border: none;
-			display: none;
-		}
-		#jiraSearch > iframe {
-			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
-			border-radius: 6px;
-			border: none;
-		}
 		.menuIcon {
 			width: 20px;
 		}
@@ -369,7 +357,49 @@
 			background-position: 4px 7px;
 			background-image: url(https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1);
 		}
-
+				#jiraSearch {
+			width: 782px;
+			height: 92%;
+			margin-left: 271px;
+			border: none;
+			display: none;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+			border-radius: 6px;
+		 	justify-content: center;
+		}
+		#jirasearch {
+			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
+			width: 782px;
+			height: 92%;
+			border:none;
+			/* border-radius: 6px; */
+		}
+		#header {
+			font-size: 18px;
+			font-weight: 600;
+			color: #1868db;
+			display-flex;
+			align-items: center;
+			padding-top: 5px;
+			padding-left: 15px;
+			padding-bottom: 3px;
+		}
+		#span {
+			font-size: 14px;
+			margin:12px;
+		}
+		
+		.list {
+			padding: 12px;
+			cursor: pointer;
+		}
+		.list:hover {
+			background-color: #f5f5f5;
+			
+		}
+		.taskimage {
+			margin-right: 50px;
+		}
 	</style>
 	<script src="resources/js/jquery-4.0.0.min.js"></script>
 	<script>
@@ -381,6 +411,7 @@
 					$("#sideBarArea").css("display","none");
 					$("#jiraSearch").css("display","none");
 					$("#various").css("width","100%");
+					$("#spaceform").show();
 				});
 				$("#open").click(function() {
 					/* $("#closer").html("<button id='close'><img src='https://www.svgrepo.com/show/347842/sidebar-expand.svg'/></button>"); */
@@ -392,10 +423,12 @@
 				$("#searchBar").click(function() {
 					if( $("#sideBarArea").css("display") != "none" ) {
 						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#jiraSearch").toggle();
+						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#spaceform").toggle();
 					}
 				});
 				$("#mainArea").click(function() {
 					$(this).find("#various").find("#jiraSearch").hide();
+					$(this).find("#various").find("#spaceform").show();
 				});
 				$("#nameipt").on("input",function() {
 					if( $("#nameipt").val() == "" || $("#nameipt").val() == $("#nameipt").attr("value") ) {
@@ -545,9 +578,43 @@
 		</div>
 		<div id="various">
 			<div id="jiraSearch">
-				<iframe src="JiraSearch.html" width="782px" height="92%"></iframe>
+				<div id="jirasearch">
+					<div id="header">
+						Jira
+					</div>
+					<hr/>
+					<div id="span">
+						최근에 조회
+					</div>
+					<div id="tasklist">
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-4 작업4
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-3 작업3
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-2 작업2
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							ABCD-1 작업1
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							taskId title
+						</div>
+						<div class="list">
+							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
+							taskId title
+						</div>
+					</div>
+				</div>
 			</div>
-				<div id=spaceform>
+			<div id=spaceform>
 					<div id="spaceformheader">
 						<a href="spacelist">스페이스</a>&nbsp; / &nbsp;<a href="main">${dto.spaceTitle}</a>&nbsp; / &nbsp;<a href="spacedetail">스페이스 설정</a>
 						<br/>
