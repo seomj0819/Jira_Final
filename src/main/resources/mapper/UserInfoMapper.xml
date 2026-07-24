@@ -87,4 +87,13 @@
 		VALUES (seq_user_no.nextVal, #{email}, #{googleApi}, #{userName}, #{imageNo})
 	]]>
 </insert>
+<select id="checkInviteCode" resultType="">
+	<![CDATA[
+		SELECT space_key, user_no, user_role, invite_code
+		FROM space_members
+		WHERE user_no = #{userNo}
+		AND invite_code IS NOT NULL
+		AND expire_date > SYSDATE
+	]]>
+</select>
 </mapper>

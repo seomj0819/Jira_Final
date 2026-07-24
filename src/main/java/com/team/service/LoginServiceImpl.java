@@ -106,4 +106,14 @@ public class LoginServiceImpl implements LoginService {
 		loginDao.googleRegister(dto);
 	}
 
+	@Override
+	public boolean emailDuplicateCheck(String email) {
+		return loginDao.emailDuplicateCheck(email);
+	}
+
+	@Override
+	public int checkGoogleLogin(String email) {
+		return loginDao.checkGoogleLogin(email);
+	}
+
 }

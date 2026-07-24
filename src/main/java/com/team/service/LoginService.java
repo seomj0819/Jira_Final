@@ -12,4 +12,6 @@ public interface LoginService {
 	boolean verificationCodeCheck(String email, String inputVerificationCode);	// 인증 코드 확인
 	UserInfoDto getUserProfile(int userNo);	// 유저 정보 가져오기
 	void googleRegister(String email, String googleApi, String userName, int imageNo);	// 구글 회원 등록
+	boolean emailDuplicateCheck(String email);	// 이메일 중복 여부 확인
+	int checkGoogleLogin(String email);
 }

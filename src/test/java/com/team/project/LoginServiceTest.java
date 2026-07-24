@@ -23,7 +23,7 @@ import com.team.service.LoginService;
 
 public class LoginServiceTest {
 	@Autowired
-	LoginService loginServicec;
+	LoginService loginService;
 	
 	// 1. 로컬 로그인 성공 테스트
 	@Test
@@ -33,7 +33,7 @@ public class LoginServiceTest {
 		String pw="0000";
 		
 		// When
-		Integer userNo = loginServicec.loginCheck(email, pw);
+		Integer userNo = loginService.loginCheck(email, pw);
 		
 		// Then
 		System.out.println("userNo : " + userNo);
@@ -49,7 +49,7 @@ public class LoginServiceTest {
 		String pw="1234";
 		
 		// When
-		Integer userNo = loginServicec.loginCheck(email, pw);
+		Integer userNo = loginService.loginCheck(email, pw);
 		
 		// Then
 		System.out.println("Login Fail");
@@ -66,7 +66,7 @@ public class LoginServiceTest {
 		int imageNo = 0000;
 		
 		// When
-		loginServicec.localRegister(email, pw, userName, imageNo);
+		loginService.localRegister(email, pw, userName, imageNo);
 		
 		// Then
 		System.out.println("Register Complete");
@@ -79,7 +79,7 @@ public class LoginServiceTest {
 		String email = "admin@admin.com";
 		
 		// When
-		String pw = loginServicec.findPassword(email);
+		String pw = loginService.findPassword(email);
 		
 		// Then
 		System.out.println("PassWord : " + pw);
@@ -93,7 +93,7 @@ public class LoginServiceTest {
 		
 		// When
 		Map<String, String> map = new HashMap<>();
-		map = loginServicec.createVerificationCode();
+		map = loginService.createVerificationCode();
 		
 		// Then
 		System.out.println("Verification Code : " + map.get("verificationCode"));
@@ -109,7 +109,7 @@ public class LoginServiceTest {
 		String inputVerificationCode = "I0x7s8";
 		
 		// When
-		boolean chk = loginServicec.verificationCodeCheck(email, inputVerificationCode);
+		boolean chk = loginService.verificationCodeCheck(email, inputVerificationCode);
 		
 		// Then
 		System.out.println(chk);
@@ -124,7 +124,7 @@ public class LoginServiceTest {
 		String inputVerificationCode = "I0x7s8";
 		
 		// When
-		boolean chk = loginServicec.verificationCodeCheck(email, inputVerificationCode);
+		boolean chk = loginService.verificationCodeCheck(email, inputVerificationCode);
 		
 		// Then
 		System.out.println(chk);
@@ -139,7 +139,7 @@ public class LoginServiceTest {
 		int userNo = 1;
 		
 		// When
-		dto = loginServicec.getUserProfile(userNo);
+		dto = loginService.getUserProfile(userNo);
 		
 		// Then
 		assertNotNull(dto);
@@ -155,8 +155,21 @@ public class LoginServiceTest {
 		int imageNo = 0;
 		
 		// When
-		loginServicec.googleRegister(email, googleApi, userName, imageNo);
+		loginService.googleRegister(email, googleApi, userName, imageNo);
 		
 		// Then
+	}
+	
+	// 9. 이메일 중복 확인 테슽
+	@Test
+	public void testEmailDuplicateCheck() {
+		// Given
+		String email = "test@test.com";
+		
+		// When
+		boolean chk = loginService.emailDuplicateCheck(email);
+		
+		// Then
+		System.out.println(chk);
 	}
 }
