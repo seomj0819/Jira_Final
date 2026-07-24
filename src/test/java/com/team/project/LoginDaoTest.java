@@ -5,6 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,12 +123,14 @@ public class LoginDaoTest {
 	@Test
 	public void testUpdateVerificationCode() {
 		// Given
-		UserInfoDto dto = new UserInfoDto();
-		dto.setEmail("test@test.com");
-		dto.setVerificationCode("I0x7s8");
+		String email = "test@test.com";
+		String verificationCode = "I0x7s8";
+		Map<String, String> codeMap = new HashMap<>();
+		codeMap.put("email", email);
+		codeMap.put("verificationCode", verificationCode);
 		
 		// When
-		loginDao.updateVerificationCode(dto);
+		loginDao.updateVerificationCode(codeMap);
 		
 		// Then
 		

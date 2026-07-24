@@ -99,7 +99,7 @@
 <select id="findUserNoByEmail" resultType="java.lang.Integer">
 	<![CDATA[
 		SELECT user_no
-		FROM space_members
+		FROM users
 		WHERE email = #{email}
 	]]>
 </select>

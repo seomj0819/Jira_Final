@@ -80,7 +80,7 @@ public class LoginController {
     @PostMapping("/login_fail")
     public String signUpEmail(@RequestParam String email, Model model) {
         Map<String, String> codeMap = loginService.createVerificationCode();
-        // updateVerificationCode로 DB 저장
+        loginService.updateVerificationCode(codeMap);
         // TODO: 메일 발송
 
         model.addAttribute("email", email);
@@ -102,17 +102,6 @@ public class LoginController {
         return "redirect:/space/create";
     }
     
-    // 회원가입
-    @PostMapping("/sign_up")
-    public String signUp(@RequestParam String email, @RequestParam String pw, @RequestParam String name, Model model) {
-    	loginService.localRegister(email, pw, name, 0);
-    	
-    	Map<String, String> codeMap = loginService.createVerificationCode();
-    	// TODO: 이메일 전송 API로 codeMap.get("verificationCode") 발송
-    	
-    	model.addAttribute("email", email);
-		return pw;
-    }
     
     // 인증 확인
     @PostMapping("/sign_up/verify")

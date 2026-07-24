@@ -122,4 +122,9 @@ public class LoginServiceImpl implements LoginService {
 		return loginDao.findUserNoByEmail(email);
 	}
 
+	@Override
+	public void updateVerificationCode(Map<String, String> codeMap) {
+		loginDao.updateVerificationCode(codeMap);
+	}
+
 }

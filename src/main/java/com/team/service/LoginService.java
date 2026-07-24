@@ -15,4 +15,5 @@ public interface LoginService {
 	boolean emailDuplicateCheck(String email);	// 이메일 중복 여부 확인
 	int checkGoogleLogin(String email);	
 	Integer findUserNoByEmail(String email);	// Email로 UserNo 조회
+	void updateVerificationCode(Map<String, String> codeMap);	// 인증 코드 업데이트
 }

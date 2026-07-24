@@ -200,4 +200,22 @@ public class LoginServiceTest {
 		// Then
 		assertNull(userNo);
 	}
+	
+	// 11. Update verificationCode 
+	@Test
+	public void testUpdateVerificationCode() {
+		// Given
+		String email = "test@test.com";
+		String verificationCode = "I0x7s8";
+		
+		Map<String, String> codeMap = new HashMap<>();
+		codeMap.put("email", email);
+		codeMap.put("verificationCode", verificationCode);
+		
+		// When
+		loginService.updateVerificationCode(codeMap);
+		
+		// Then
+		
+	}
 }
