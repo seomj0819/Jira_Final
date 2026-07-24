@@ -613,7 +613,7 @@
 					$("#various").css("width","87.5%");
 				});
 				$("#searchBar").click(function() {
-					if( $("#sideBarArea").css("display") != "none" ) {
+					if( $("#sideBarArea").css("display") != "none" && $("#hsframe").css("display") == "none") {
 						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#jiraSearch").toggle();
 						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#rowsandstatus").toggle();
 					}
@@ -651,10 +651,24 @@
 					$(this).find(".hsform").find(".hs").hide();
 				});
 				
-				$(".hsbtn").click(function() {
+				$(".hsbtn").click(function(e) {		//e: 클릭 이벤트 객체
+					e.stopPropagation();	//부모인 mainarea의 클릭 이벤트까지 영향을 주기 않게 하기위함: .hsbtn 단계에서 클릭 신호를 차단
+					
 					$("#jiraSearch").hide();
 					$("#rowsandstatus").hide();
 					$("#hsframe").show();
+				});
+				$("#hsframe").click(function(e) {
+					e.stopPropagation();
+					
+					$("#jiraSearch").hide();
+					$("#rowsandstatus").hide();
+				});
+				$("#exit, #cancel").click(function(e) {
+					e.stopPropagation();
+					
+				    $("#hsframe").hide();
+				    $("#rowsandstatus").show();
 				});
 		});
 	</script>
@@ -820,8 +834,8 @@
 					</div>
 					<div id="todo">
 						<b>${todo}</b>
-						<form class="hsform" action="rowedit">
-							<button class="hsbtn" type="submit" value="${todo}" name="currname"><img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/></button>
+						<form class="hsform">
+							<button class="hsbtn" type="button" value="${todo}" name="currname"><img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/></button>
 						</form>
 						<div class="card">
 							<div class="status">${todo}</div>
@@ -830,8 +844,8 @@
 					</div>
 					<div id="doing">
 						<b>${doing}</b>
-						<form class="hsform" action="rowedit">
-							<button class="hsbtn" type="submit" value="${doing}" name="currname">
+						<form class="hsform">
+							<button class="hsbtn" type="button" value="${doing}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
@@ -842,8 +856,8 @@
 					</div>
 					<div id="check">
 						<b>${check}</b>
-						<form class="hsform" action="rowedit">
-							<button class="hsbtn" type="submit" value="${check}" name="currname">
+						<form class="hsform">
+							<button class="hsbtn" type="button" value="${check}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
@@ -855,8 +869,8 @@
 					<div id="clear">
 						<b>${clear}</b>
 						<img id="greencheck" src="resources/img/greencheck.png"/>
-						<form class="hsform" action="rowedit">
-							<button class="hsbtn" type="submit" value="${clear}" name="currname">
+						<form class="hsform">
+							<button class="hsbtn" type="button" value="${clear}" name="currname">
 								<img class="hs" src="https://images.icon-icons.com/916/PNG/512/Edit_icon-icons.com_71853.png"/>
 							</button>
 						</form>
