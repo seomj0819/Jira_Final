@@ -8,6 +8,48 @@
 <meta charset="UTF-8">
 <title>Jira Login</title>
 </head>
+<script>
+	$(function() {
+		init();
+		
+		function init() {
+			const saveId = getCookie("saveId");
+			
+			// Cookie에 값 존재시 ID값 추가, 체크
+			if(saveId != "" && typeof(saveId) != "undefined") {
+				$("#saveId").prop("checked", true);
+				$("#email").val(saveId);
+			} else {	// Cookie에 값 부재시 체크 해제
+				$("#saveId").prop("checked", false);
+			}
+		}
+		
+		// 쿠키 조회
+		// email = 쿠키값
+		function getCookie(email) {
+			const cookie = document.cookie;
+			if(document.cookie != "") {
+				var cookieArray = cookie.split(":");
+				for(var index in cookieArray) {
+					var cookieEmail = cookieArray[index].split("=");
+					if(cookieEmail[0] == email) {
+						return cookieEmail[1];
+					}
+				}
+			}
+			return;
+		}
+		
+		// 쿠키 저장
+		function setCookie(email, value, expiredays) {
+			var todayDate = new Date();
+			todayDate.setDate(todatDate.getDate() + expireDays);
+			document.cookie = email + "=" + escape(value) + "; path=/; expires="
+	        + todayDate.toGMTString() + ";"
+		}
+		
+	})
+</script>
 <style>
 	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
 	body {
@@ -107,7 +149,7 @@
 		height: 24px;
    		width: 24px;
 	}
-	#chkbox {
+	#saveId {
 		margin-top: 17px;
 	}
 	#chkbox-txt {
@@ -179,13 +221,13 @@
 				<div id="notice">계속하려면 로그인하세요.</div>
 				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
-				<form action="<c:url value='/login'/>" method="post">
+				<form id="loginForm" action="<c:url value='/login'/>" method="post">
 					<div id="useremail-container">
 						<input id="email_input" name="email" type="email" placeholder="이메일을 입력하세요"><br/>
 					</div>
 					<div>
-						<input id="chkbox" type="checkbox">
-						<span id="chkbox-txt">내 정보 저장</span>
+						<input id=saveId type="checkbox">
+						<label id="chkbox-txt" for="saveId">내 정보 저장</label>
 					</div>
 					<button id="login-submit" type="submit">
 						<span id="login-txt">계속</span>
