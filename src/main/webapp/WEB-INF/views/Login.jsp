@@ -8,48 +8,6 @@
 <meta charset="UTF-8">
 <title>Jira Login</title>
 </head>
-<script>
-	$(function() {
-		init();
-		
-		function init() {
-			const saveId = getCookie("saveId");
-			
-			// Cookie에 값 존재시 ID값 추가, 체크
-			if(saveId != "" && typeof(saveId) != "undefined") {
-				$("#saveId").prop("checked", true);
-				$("#email").val(saveId);
-			} else {	// Cookie에 값 부재시 체크 해제
-				$("#saveId").prop("checked", false);
-			}
-		}
-		
-		// 쿠키 조회
-		// email = 쿠키값
-		function getCookie(email) {
-			const cookie = document.cookie;
-			if(document.cookie != "") {
-				var cookieArray = cookie.split(":");
-				for(var index in cookieArray) {
-					var cookieEmail = cookieArray[index].split("=");
-					if(cookieEmail[0] == email) {
-						return cookieEmail[1];
-					}
-				}
-			}
-			return;
-		}
-		
-		// 쿠키 저장
-		function setCookie(email, value, expiredays) {
-			var todayDate = new Date();
-			todayDate.setDate(todatDate.getDate() + expireDays);
-			document.cookie = email + "=" + escape(value) + "; path=/; expires="
-	        + todayDate.toGMTString() + ";"
-		}
-		
-	})
-</script>
 <style>
 	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
 	body {
@@ -226,7 +184,7 @@
 						<input id="email_input" name="email" type="email" placeholder="이메일을 입력하세요"><br/>
 					</div>
 					<div>
-						<input id=saveId type="checkbox">
+						<input id="saveId" type="checkbox">
 						<label id="chkbox-txt" for="saveId">내 정보 저장</label>
 					</div>
 					<button id="login-submit" type="submit">
@@ -250,5 +208,60 @@
 			</footer>
 		</div>
 	</div>
+<script>
+	// HTML이 모두 그려진 뒤에 실행
+	document.addEventListener("DOMContentLoaded", function () {
+		var emailInput = document.getElementById("email_input");
+		var saveIdChk = document.getElementById("saveId");
+		var form = document.getElementById("loginForm");
+
+		// 1) 페이지 열릴 때: 저장된 이메일이 있으면 복원
+		var savedEmail = getCookie("saveId");
+		if (savedEmail) {
+			saveIdChk.checked = true;
+			emailInput.value = savedEmail;
+		}
+
+		// 2) 로그인 버튼(submit) 눌렀을 때: 체크 여부에 따라 쿠키 저장/삭제
+		//    preventDefault를 안 하므로, 쿠키 처리 후 form이 원래대로 서버에 제출됨
+		form.addEventListener("submit", function () {
+			var email = emailInput.value.trim();
+
+			if (saveIdChk.checked) {
+				setCookie("saveId", email, 30); // 30일 보관
+			} else {
+				setCookie("saveId", "", -1);    // 삭제
+			}
+		});
+
+		// 쿠키 읽기 (이름=값; 이름=값; ... 형태)
+		function getCookie(name) {
+			if (!document.cookie) {
+				return "";
+			}
+
+			var cookieArray = document.cookie.split(";");
+			for (var i = 0; i < cookieArray.length; i++) {
+				var parts = cookieArray[i].trim().split("=");
+				var key = parts[0];
+				var value = parts.slice(1).join("=");
+
+				if (key === name) {
+					return decodeURIComponent(value);
+				}
+			}
+			return "";
+		}
+
+		// 쿠키 저장/삭제 (days가 -1이면 바로 만료 → 삭제)
+		function setCookie(name, value, days) {
+			var todayDate = new Date();
+			todayDate.setDate(todayDate.getDate() + days);
+			document.cookie =
+				name + "=" + encodeURIComponent(value) +
+				"; path=/; expires=" + todayDate.toUTCString() + ";";
+		}
+	});
+</script>
 </body>
 </html>
