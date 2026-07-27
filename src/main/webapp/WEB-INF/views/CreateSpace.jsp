@@ -121,26 +121,27 @@
 		
 	</div>
 	<div id="container">
-		<form>
-			<header>
-				<div id="header-container">
-					<h1 class="main-title">스페이스 이름 지정</h1>
-					<span class="header-subtitle">필수 필드는 별표로 표시되어 있습니다</span>
-					<span class="necessary">＊</span>
-				</div>
-			</header>
-			<main>
-				<div id="input-container">
+		<header>
+			<div id="header-container">
+				<h1 class="main-title">스페이스 이름 지정</h1>
+				<span class="header-subtitle">필수 필드는 별표로 표시되어 있습니다</span>
+				<span class="necessary">＊</span>
+			</div>
+		</header>
+		<main>
+			<div id="input-container">
+				<form action="<c:url value='/space/create'/>" method="post">
 					<div id="title-container">
 						<span class="title">이름</span>
 						<span class="necessary">＊</span><br/>
 						<input type="text" placeholder="팀 이름, 프로젝트 목표, 마일스톤 등을 사용해보기">
-				</div>
+					</div>
 					<div id="key-container">
 						<span class="title">키</span>
 						<span class="necessary">＊</span><br/>
 						<input type="text">
 					</div>
+				</form>
 					<div id="invite-users">
 						<span class="main-title">팀 초대하기</span><br/>
 						<span class="header-subtitle">Jira에서 이미 함께 공동 작업한 사용자를 추가하거나 새로운 사용자를 초대하세요.</span><br/>
@@ -159,13 +160,12 @@
 					</div>
 				</div>
 			</main>
-			<footer>
-				<div id="button-container">
-					<input type="reset" id="cancle-button" value="이전">
-					<input type="submit" id="submit-button" value="제출">
-				</div>
-			</footer>
-		</form>
+		<footer>
+			<div id="button-container">
+				<input type="reset" id="cancle-button" value="이전">
+				<input type="submit" id="submit-button" value="제출">
+			</div>
+		</footer>
 	</div>
 </body>
 </html>
