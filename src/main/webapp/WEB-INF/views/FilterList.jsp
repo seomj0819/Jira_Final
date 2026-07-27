@@ -12,26 +12,51 @@
 		function changeButtonImg(el) {
 			const img = el.querySelector('img');
 			  if (img.src.match('up.png')) {
-			    img.src = 'img/down.png'; 
+			    img.src = '/resources/img/down.png'; 
 			  } else {
-			    img.src = 'img/up.png';
+			    img.src = '/resources/img/up.png';
 			  }
 		}
 		function changeMarkButtonImg(el) {
 		    if (el.src.match('star_black.png')) {
-		        el.src = 'img/star_empty.png';
+		        el.src = '/resources/img/star_empty.png';
 		    } else {
-		        el.src = 'img/star_black.png';
+		        el.src = '/resources/img/star_black.png';
 		    }
 		}
-		function changeStarButtonImg(el) {
-			const img = el.querySelector('img');
+		function changeStarButtonImg(el, searchCondition) {
+			var favorite;
 			if(el.src.match('star_empty.png')) {
-				el.src = 'img/star_yellow.png';
+				favorite = "Y";
 			} else {
-				el.src = 'img/star_empty.png';
+				favorite = "N";
 			}
-		}
+			
+			fetch("/filter/favorite", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/multipart/form-data"
+				},
+				body: "searchConditionNo=" + searchConditionNo + "&favorite=" + favorite
+			})
+			.then(function(res) {
+				return res.text();
+			})
+			.then(function(data) {
+				if(data === "ok") {
+					el.src = "/resources/img/star_yellow.png";
+				} else {
+					el.src = "/resources/img/star_empty.png";
+				}
+			} else {
+				alert("즐겨찾기 실패");
+			}
+		})
+		.catch(function(err) {
+			console.log(err);
+			alert("통신 오류");
+		})
+			
 		function toggleDropdown() {
 			const menu = document.getElementById("dropdownMenu");
 			menu.classList.toggle("show");
@@ -226,7 +251,7 @@
 	<main>
 		<div id="search_filter">
 			<div id="search_box_container" tabindex="0">
-				<img src="img/search.png">
+				<img src="/resources/img/search.png">
 				<input id="search_filter_by_title" placeholder="필터 검색">
 			</div>
 			<select class="dropbox">
@@ -242,21 +267,21 @@
 		<div>
 			<table>
 				<tr>
-					<th><img class="star" src="img/star_black.png" onclick="changeMarkButtonImg(this)"></th>
-					<th>이름<button class="sort" type="button" onclick="changeButtonImg(this)"><img src="img/up.png"></button></th>
+					<th><img class="star" src="/resources/img/star_black.png" onclick="changeMarkButtonImg(this)"></th>
+					<th>이름<button class="sort" type="button" onclick="changeButtonImg(this)"><img src="resources/img/up.png"></button></th>
 					<th>소유자</th>
 					<th>조회자</th>
 					<th>별표표시</th>
 					<th></th>
 				</tr>
 				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
+					<td><button type="button" class="star-container"><img class="star" src="resources/img/star_empty.png" onclick="changeStarButtonImg(this, 8)"></button></td>
 					<td><a class="filter-title">생성 30일 이내</a></td>
-					<td><div class="owner"><img src="img/user.png"><span>金成官</span></div></td>
+					<td><div class="owner"><img src="/resources/img/user.png"><span>金成官</span></div></td>
 					<td><div class="viewer"></div>none</td>
 					<td>2명</td>
 					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
+						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
 							<button>필터 복사</button>
 							<button>편집</button>
@@ -266,13 +291,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
+					<td><button type="button" class="star-container"><img class="star" src="/resources/img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
 					<td><a class="filter-title">완료</a></td>
-					<td><div class="owner"><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div class="viewer"><img src="img/user.png"><span>金成官</span></div></td>
+					<td><div class="owner"><img src="/resources/img/user.png"><span>Minjae Seo</span></div></td>
+					<td><div class="viewer"><img src="/resources/img/user.png"><span>金成官</span></div></td>
 					<td>0명</td>
 					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
+						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
 							<button>필터 복사</button>
 							<button>편집</button>
@@ -282,13 +307,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="img/star_yellow.png" onclick="changeStarButtonImg(this)"></button></td>
+					<td><button type="button" class="star-container"><img class="star" src="/resources/img/star_yellow.png" onclick="changeStarButtonImg(this)"></button></td>
 					<td><a class="filter-title">Filter for Space</a></td>
-					<td><div class="owner"><img src="img/user.png"><span>金成官</span></div></td>
-					<td><div class="viewer"><img src="img/user.png"><span>Minjae Seo</span></div></td>
+					<td><div class="owner"><img src="/resources/img/user.png"><span>金成官</span></div></td>
+					<td><div class="viewer"><img src="/resources/img/user.png"><span>Minjae Seo</span></div></td>
 					<td>1명</td>
 					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="img/more.png"></button>
+						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
 						<div id="dropdownMenu" class="dropdown_content">
 							<button>필터 복사</button>
 							<button>편집</button>

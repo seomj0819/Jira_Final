@@ -1,6 +1,8 @@
 package com.team.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.dto.SearchConditionDto;
 import com.team.service.SearchConditionService;
-import com.team.service.SpaceMemberService;
 
 @Controller
 public class SearchConditionController {
@@ -52,6 +55,24 @@ public class SearchConditionController {
 	        return "FilterDetail_Viewer";
 	    }
 	    return "FilterDetail";
+	}
+	
+	@PostMapping("/filter/favorite")
+	@ResponseBody
+	public String favocite(@RequestParam int searchConditionNo, 
+						   @RequestParam String favorite, 
+						   HttpSession session) {
+		Integer userNo = (Integer) session.getAttribute("userNo");
+		if(userNo == null) {
+			return "fail";
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchConditionNo", searchConditionNo);
+		map.put("favorite", favorite);	// "Y" or "N"
+		
+		searchConditionService.favoriteSearchCondition(map);
+		return "ok";
 	}
 	
 }
