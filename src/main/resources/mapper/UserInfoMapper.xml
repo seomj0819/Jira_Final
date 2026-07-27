@@ -87,7 +87,7 @@
 		VALUES (seq_user_no.nextVal, #{email}, #{googleApi}, #{userName}, #{imageNo})
 	]]>
 </insert>
-<select id="checkInviteCode" resultType="">
+<select id="checkInviteCode" resultType="com.team.dto.SpaceMemberDto">
 	<![CDATA[
 		SELECT space_key, user_no, user_role, invite_code
 		FROM space_members

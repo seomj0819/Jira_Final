@@ -199,4 +199,46 @@ public class SearchConditionDaoTest {
 		
 		// Then
 	}
+	
+	// 11. 필터 상세 조회 테스트
+	@Test
+	public void testShowSearchConditionDetailByNo() {
+		// Given
+		int searchConditionNo = 8;
+		
+		// When
+		List<SearchConditionDto> list = searchDao.showSearchConditionDetailByNo(searchConditionNo);
+		
+		// Then
+		assertNotNull(list);
+	}
+	
+	// 12. 해당 필터 현재 유저 권한 조회 테스트
+	@Test
+	public void testShowAccessTypeByUserNo() {
+		// Given
+		int searchConditionNo = 8; 
+		int userNo = 1;
+		
+		// When
+		String userRoll = searchDao.showAccessTypeByUserNo(searchConditionNo, userNo);
+		
+		// Then
+		assertNotNull(userRoll);
+		System.out.println(userRoll);
+	}
+	
+	// 13. 해당 필터 전체 유저 권한 조회 테스트
+	@Test
+	public void testShowAccessTypeList() {
+		// Given
+		int searchConditionNo = 8;
+		
+		// When
+		List<SearchConditionAccessDto> list = searchDao.showAccessTypeList(searchConditionNo);
+		
+		// Then
+		assertNotNull(list);
+	}
+	
 }

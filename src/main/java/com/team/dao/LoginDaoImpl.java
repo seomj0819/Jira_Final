@@ -1,5 +1,7 @@
 package com.team.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,8 +35,8 @@ public class LoginDaoImpl implements LoginDao{
 	}
 
 	@Override
-	public void updateVerificationCode(UserInfoDto dto) {
-		sqlSession.update("com.team.mapper.UserInfoMapper.updateVerificationCode", dto);
+	public void updateVerificationCode(Map<String, String> codeMap) {
+		sqlSession.update("com.team.mapper.UserInfoMapper.updateVerificationCode", codeMap);
 	}
 
 	@Override

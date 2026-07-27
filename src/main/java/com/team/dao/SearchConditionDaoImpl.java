@@ -162,4 +162,23 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 		sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionAccess", dto);
 	}
 
+	@Override
+	public List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo) {
+		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showSearchConditionDetailByNo", searchConditionNo);
+	}
+
+	@Override
+	public String showAccessTypeByUserNo(int searchConditionNo, int userNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchConditionNo", searchConditionNo);
+		map.put("userNo", userNo);
+		
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showAccessTypeByUserNo", map);
+	}
+
+	@Override
+	public List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo) {
+		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showAccessTypeList", searchConditionNo);
+	}
+
 }

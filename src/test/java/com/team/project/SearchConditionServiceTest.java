@@ -216,4 +216,45 @@ public class SearchConditionServiceTest {
 		assertNotNull(list);
 		System.out.println(list.isEmpty());
 	}
+	
+	// 13. 필터 상세 검색 테스트
+	@Test
+	public void testShowSearchConditionDetailByNo() {
+		// Given
+		int searchConditionNo = 8;
+		
+		// When
+		List<SearchConditionDto> list = searchConditionService.showSearchConditionDetailByNo(searchConditionNo);
+		
+		// Then
+		assertNotNull(list);
+	}
+	
+	// 14. 해당 필터 현재 유저 권한 조회 테스트
+	@Test
+	public void testShowAccessTypeByUserNo() {
+		// Given
+		int searchConditionNo = 8; 
+		int userNo = 1;
+		
+		// When
+		String userRoll = searchConditionService.showAccessTypeByUserNo(searchConditionNo, userNo);
+		
+		// Then
+		assertNotNull(userRoll);
+		System.out.println(userRoll);
+	}
+	
+	// 15. 해당 필터 전체 유저 권한 조회 테스트
+	@Test
+	public void testShowAccessTypeList() {
+		// Given
+		int searchConditionNo = 8;
+		
+		// When
+		List<SearchConditionAccessDto> list = searchConditionService.showAccessTypeList(searchConditionNo);
+		
+		// Then
+		assertNotNull(list);
+	}
 }

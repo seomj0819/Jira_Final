@@ -1,5 +1,6 @@
 package com.team.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +76,21 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 	@Override
 	public List<SearchConditionDto> searchCriteriaByTitle(SearchCriteriaDto dto) {
 		return searchConditionDao.searchCriteriaByTitle(dto);
+	}
+
+	@Override
+	public List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo) {
+		return searchConditionDao.showSearchConditionDetailByNo(searchConditionNo);
+	}
+	
+	@Override
+	public String showAccessTypeByUserNo(int searchConditionNo, int userNo) {
+		return searchConditionDao.showAccessTypeByUserNo(searchConditionNo, userNo);
+	}
+
+	@Override
+	public List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo) {
+		return searchConditionDao.showAccessTypeList(searchConditionNo);
 	}
 
 }

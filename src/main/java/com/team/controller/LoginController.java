@@ -102,7 +102,6 @@ public class LoginController {
         return "redirect:/space/create";
     }
     
-    
     // 인증 확인
     @PostMapping("/sign_up/verify")
     public String verify(@RequestParam String email, @RequestParam String code, Model model) {

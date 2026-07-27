@@ -169,6 +169,13 @@
 			WHERE sca.user_no = #{currentUserNo}
 		]]>
 	</select>
+	<select id="showSearchConditionDetailByNo" resultType="com.team.dto.SearchConditionDto">
+		<![CDATA[
+			SELECT *
+			FROM search_condition
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select> 
 	<update id="favoriteSearchCondition">
 		<![CDATA[
 			UPDATE search_condition
@@ -217,6 +224,21 @@
 				ON sc.search_condition_no = my_acc.search_condition_no
 			WHERE my_acc.user_no = #{currentUserNo}
 			AND sc.search_condition_title LIKE '%' || #{searchKeyWord} || '%'
+		]]>
+	</select>
+	<select id="showAccessTypeByUserNo" parameterType="com.team.dto.SearchConditionAccessDto" resultType="String">
+		<![CDATA[
+			SELECT access_type
+			FROM search_condition_access
+			WHERE search_condition_no = #{searchConditionNo} 
+			AND user_no = #{userNo} 
+		]]>
+	</select>
+	<select id="showAccessTypeList" parameterType="int" resultType="com.team.dto.SearchConditionAccessDto">
+		<![CDATA[
+			SELECT *
+			FROM search_condition_access
+			WHERE search_condition_no = #{searchConditionNo}
 		]]>
 	</select>
 </mapper>

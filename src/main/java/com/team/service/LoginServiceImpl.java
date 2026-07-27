@@ -37,7 +37,7 @@ public class LoginServiceImpl implements LoginService {
 		dto.setUserName(userName);
 		dto.setImageNo(imageNo);
 		
-		loginDao.checkLocalLogin(dto);
+		loginDao.localRegister(dto);
 	}
 
 	// Find Password
@@ -76,8 +76,7 @@ public class LoginServiceImpl implements LoginService {
 		dto.setExpireDate(dto.getExpireDate().replace(" ", "T"));
 		LocalDateTime expireDate = LocalDateTime.parse(dto.getExpireDate());
 		
-		try {
-			if(dto.getVerificationCode() == inputVerificationCode) {
+		try { if(dto.getVerificationCode() == inputVerificationCode) {
 				if(now.isBefore(expireDate)) {
 					isVerificated = true;
 				}

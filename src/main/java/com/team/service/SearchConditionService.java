@@ -20,4 +20,7 @@ public interface SearchConditionService {
 	List<SearchConditionDto> searchCriteriaByOwner(SearchCriteriaDto dto);
 	List<SearchConditionDto> searchCriteriaBySpace(SearchCriteriaDto dto);
 	List<SearchConditionDto> searchCriteriaByTitle(SearchCriteriaDto dto);
+	List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo);
+	String showAccessTypeByUserNo (int searchConditionNo, int userNo);	
+	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);
 }

@@ -22,7 +22,10 @@ public class SpaceController {
 	@GetMapping("/space/select")
 	public String selectSpace(HttpSession session, Model model) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
-	    if (userNo == null) return "redirect:/login";
+	    
+	    if (userNo == null) {
+	    	return "redirect:/login";
+	    }
 
 	    List<SpaceMemberDto> spaceList = spaceMemberService.getSpacesByUserNo(userNo);
 	    if (spaceList == null || spaceList.isEmpty()) {
@@ -34,14 +37,27 @@ public class SpaceController {
 
 	@GetMapping("/space/create")
 	public String createSpacePage(HttpSession session) {
-	    if (session.getAttribute("userNo") == null) return "redirect:/login";
+		
+	    if (session.getAttribute("userNo") == null) {
+	    	return "redirect:/login";
+	    }
+	    
 	    return "CreateSpace";
 	}
 
 	@PostMapping("/space/enter")
 	public String enterSpace(@RequestParam String spaceKey, HttpSession session) {
-	    if (session.getAttribute("userNo") == null) return "redirect:/login";
+		
+	    if (session.getAttribute("userNo") == null) {
+	    	return "redirect:/login";
+	    }
+	    
 	    session.setAttribute("spaceKey", spaceKey);
 	    return "redirect:/board";
+	}
+	
+	@PostMapping("/space/dashBoard")
+	public String spaceDashBoard(@RequestParam String spaceKey) {
+		return "redirect:/dashBoard";
 	}
 }
