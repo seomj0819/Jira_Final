@@ -21,26 +21,37 @@ public class SearchConditionController {
 	
 	@GetMapping("/filter/list")
 	public String filterList(HttpSession session, Model model) {
-		Integer userNo = (Integer) session.getAttribute("userNo");
-		
-		List<SearchConditionDto> list = searchConditionService.showSearchConditoinList(userNo);
-		model.addAttribute(list);
-		
-		return "FilterList";
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    List<SearchConditionDto> list =
+	        searchConditionService.showSearchConditoinList(userNo);
+	    model.addAttribute("list", list);  
+	    return "FilterList";
 	}
-	
-	@GetMapping("filter/detail")
-	public String filterDetail(@RequestParam int searchConditionNo, HttpSession session, Model model) {
-		int userNo = (int) session.getAttribute("userNo");
-		String userRoll = searchConditionService.showAccessTypeByUserNo(searchConditionNo, userNo);
-		List<SearchConditionDto> list = searchConditionService.showSearchConditionDetailByNo(searchConditionNo);
-		
-		if(userRoll != "Viewer" && !userRoll.isEmpty()) {
-			return "FilterDetail_Viewer";
-		}
-		model.addAttribute(userRoll);
-		model.addAttribute(list);
-		return "FilterDetail";
+
+	@GetMapping("/filter/detail") 
+	public String filterDetail(@RequestParam int searchConditionNo,
+	                           HttpSession session, Model model) {
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    String userRoll =
+	        searchConditionService.showAccessTypeByUserNo(searchConditionNo, userNo);
+	    List<SearchConditionDto> list =
+	        searchConditionService.showSearchConditionDetailByNo(searchConditionNo);
+
+	    model.addAttribute("userRoll", userRoll);
+	    model.addAttribute("list", list);
+
+	    if ("viewer".equals(userRoll)) {
+	        return "FilterDetail_Viewer";
+	    }
+	    return "FilterDetail";
 	}
 	
 }
