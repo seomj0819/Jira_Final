@@ -16,18 +16,33 @@ public class TaskController {
 	
 	@GetMapping("/board")
 	public String board(HttpSession session, Model model) {
-		Integer userNo = (Integer) session.getAttribute("userNo");
-		if (userNo == null) {
-		    return "redirect:/login";
-		}
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    String spaceKey = (String) session.getAttribute("spaceKey");
+	    if (spaceKey == null) {
+	        return "redirect:/space/select"; 
+	    }
+
+	    model.addAttribute("taskList", taskService.showTaskList(spaceKey));
+	    return "Main_board";
+	}
 	
-		String spaceKey = (String) session.getAttribute("spaceKey");
-		if (spaceKey == null) {
-		    spaceKey = "ABCD"; 
-		    session.setAttribute("spaceKey", spaceKey);
-		}
-		
-		model.addAttribute("taskList", taskService.showTaskList(spaceKey));
-		return "Main_board";
+	@GetMapping("/dashBoard")
+	public String dashBoard(HttpSession session, Model model) {
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    String spaceKey = (String) session.getAttribute("spaceKey");
+	    if (spaceKey == null) {
+	        return "redirect:/space/select";
+	    }
+
+	    // FETCH...
+	    return "Main_dashboard";
 	}
 }
