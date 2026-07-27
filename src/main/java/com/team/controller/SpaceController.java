@@ -78,7 +78,7 @@ public class SpaceController {
 	    SpaceMemberDto memberDto = new SpaceMemberDto();
 	    memberDto.setSpaceKey(spaceKey);
 	    memberDto.setUserNo(userNo);
-	    memberDto.setUserRole("owner"); 
+	    memberDto.setUserRole("admin"); 
 	    memberDto.setInviteCode(null);  
 	    spaceMemberService.insertInviteCode(memberDto);
 
