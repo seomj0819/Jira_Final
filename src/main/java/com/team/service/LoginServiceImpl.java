@@ -76,7 +76,7 @@ public class LoginServiceImpl implements LoginService {
 		dto.setExpireDate(dto.getExpireDate().replace(" ", "T"));
 		LocalDateTime expireDate = LocalDateTime.parse(dto.getExpireDate());
 		
-		try { if(dto.getVerificationCode() == inputVerificationCode) {
+		try { if(dto.getVerificationCode().equals(inputVerificationCode)) {
 				if(now.isBefore(expireDate)) {
 					isVerificated = true;
 				}

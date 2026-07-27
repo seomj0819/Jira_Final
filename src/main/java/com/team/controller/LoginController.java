@@ -56,30 +56,33 @@ public class LoginController {
 
     // 비밀번호 검사
     @PostMapping("/login/check")
-    public String loginCheck(@RequestParam String email, @RequestParam String pw, HttpSession session, Model model) {
+    public String loginCheck(@RequestParam String email, 
+    						 @RequestParam String pw,
+                             HttpSession session, 
+                             Model model) {
 
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
             return "Login_Fail";
         }
+
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
-        
+
         List<SpaceMemberDto> list = spaceMemberService.getSpacesByUserNo(userNo);
-        
+
         if (!list.isEmpty()) {
-            model.addAttribute("spaceList", list);
-            return "Main_assigned";
+            return "redirect:/space/select";
         } else {
-            return "CreateSpace";
+            return "redirect:/space/create";
         }
-        
     }
     
     @PostMapping("/login_fail")
     public String signUpEmail(@RequestParam String email, Model model) {
         Map<String, String> codeMap = loginService.createVerificationCode();
+        codeMap.put("email", email);
         loginService.updateVerificationCode(codeMap);
         // TODO: 메일 발송
 
@@ -89,22 +92,25 @@ public class LoginController {
     
     // 로그인 실패시 회원가입_pw
     @PostMapping("/jira_signUp")
-    public String completeSignUp(@RequestParam String email, @RequestParam String pw, @RequestParam String name, HttpSession session) {
+    public String completeSignUp(@RequestParam String email,
+                                 @RequestParam String pw,
+                                 @RequestParam String name,
+                                 HttpSession session) {
         loginService.localRegister(email, pw, name, 0);
 
-        Integer userNo = loginService.findUserNoByEmail(email); // 추가 필요
+        Integer userNo = loginService.findUserNoByEmail(email);
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
 
-        // 유효 초대 조회 후
-        // 있으면 spaceKey 세션 + redirect:/board
-        // 없으면 redirect:/space/create
+        // TODO: 유효 초대 있으면 spaceKey 넣고 redirect:/board
         return "redirect:/space/create";
     }
     
     // 인증 확인
     @PostMapping("/sign_up/verify")
-    public String verify(@RequestParam String email, @RequestParam String code, Model model) {
+    public String verify(@RequestParam String email, 
+    					 @RequestParam String code, 
+    					 Model model) {
     	
         if (!loginService.verificationCodeCheck(email, code)) {
             model.addAttribute("email", email);
