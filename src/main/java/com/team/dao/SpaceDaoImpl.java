@@ -39,7 +39,7 @@ public class SpaceDaoImpl implements SpaceDao {
 	// output : -
 	// space_key : 지우려는 스페이스키
 	// user_no : 현재 유저번호
-	// user_role = '관리자' 인 경우만 삭제가능
+	// user_role = 'admin' 인 경우만 삭제가능
 	@Override
 	public boolean DeleteSpaceMemberFirstly(int userNo) {
 		boolean isDeleted = false;
@@ -78,7 +78,7 @@ public class SpaceDaoImpl implements SpaceDao {
 	// new_space_key : 새로운 스페이스키
 	// new_space_title : 새로운 스페이스타이틀
 	// user_no : 현재 유저번호
-	// user_role = '관리자' 인 경우만 수정가능
+	// user_role = 'admin' 인 경우만 수정가능
 	// 테이블에 트리거 적용
 	@Override
 	public boolean UpdateSpace(Map<String, Object> paramMap) {
