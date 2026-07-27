@@ -19,6 +19,7 @@ public class SpaceController {
 	@Autowired
 	SpaceMemberService spaceMemberService;
 	
+	// 소속된 Space가 있을경우 Space 선택창으로 이동
 	@GetMapping("/space/select")
 	public String selectSpace(HttpSession session, Model model) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
@@ -34,7 +35,8 @@ public class SpaceController {
 	    model.addAttribute("spaceList", spaceList);
 	    return "Main_assigned";
 	}
-
+	
+	// 소속된 Space가 없거나 Space 생성 버튼을 클릭 시 Space 생성창으로 이동
 	@GetMapping("/space/create")
 	public String createSpacePage(HttpSession session) {
 		
@@ -45,19 +47,34 @@ public class SpaceController {
 	    return "CreateSpace";
 	}
 
+	// Space select 창에서 Space 선택후 Space/Board 페이지로 이동
 	@PostMapping("/space/enter")
 	public String enterSpace(@RequestParam String spaceKey, HttpSession session) {
-		
-	    if (session.getAttribute("userNo") == null) {
-	    	return "redirect:/login";
+
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
 	    }
-	    
+
+	    // 이 스페이스 멤버인지 확인
+	    boolean isMember = spaceMemberService.isSpaceMemberDuplicate(spaceKey, userNo);
+	    if (!isMember) {
+	        return "redirect:/space/select";
+	    }
+
 	    session.setAttribute("spaceKey", spaceKey);
 	    return "redirect:/board";
 	}
 	
+	// DashBoard 버튼 클릭 후 Space/DashBoard 페이지로 이동
 	@PostMapping("/space/dashBoard")
-	public String spaceDashBoard(@RequestParam String spaceKey) {
-		return "redirect:/dashBoard";
+	public String spaceDashBoard(@RequestParam String spaceKey, HttpSession session) {
+
+	    if (session.getAttribute("userNo") == null) {
+	        return "redirect:/login";
+	    }
+
+	    session.setAttribute("spaceKey", spaceKey);
+	    return "redirect:/dashBoard";
 	}
 }
