@@ -474,6 +474,12 @@
     		align-items: center;
     		gap: 5px;
 		}
+		.task_title > div {
+			cursor: pointer;
+		}
+		.task_title > div:hover{
+			text-decoration: underline;
+		}
 	</style>
 <body>
 	<header>
@@ -531,7 +537,7 @@
 					<th>기한</th>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/check.png"><a>KEY-01</a><a>상위 작업</a></div></td>
+					<td><div class="task_title"><img src="<c:url value='/resources/img/check.png'/>"><div><a>KEY-01  </a><a>상위 작업</a></div></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
 					<td><div><img src="img/user.png"><span>金成官</span></div></td>
 					<td><div class="priority"><img src="img/low.png"><span>Low</span></div></td>
@@ -541,7 +547,7 @@
 					<td><span>2026년 8월 01일 오후 2:40</span></td>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-02</a><a>하위 작업</a></div></td>
+					<td><div class="task_title"><img src="<c:url value='/resources/img/lowerTask.png'/>"><div><a>KEY-02  </a><a>하위 작업</a></div></div></td>
 					<td><div><img src="img/user.png"><span>金成官</span></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
 					<td><div class="priority"><img src="img/medium.png"><span>Medium</span></div></td>
@@ -551,7 +557,7 @@
 					<td><span>2026년 8월 01일 오후 2:40</span></td>
 				</tr>
 				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-03</a><a>하위 작업</a></div></td>
+					<td><div class="task_title"><img src="<c:url value='/resources/img/lowerTask.png'/>"><div><a>KEY-03  </a><a>하위 작업</a></div></div></td>
 					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
 					<td><div><img src="img/user.png"><span>金成官</span></div></td>
 					<td><div class="priority"><img src="img/high.png"><span>High</span></div></td>
