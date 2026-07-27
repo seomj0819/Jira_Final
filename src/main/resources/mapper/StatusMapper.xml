@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.StatusMapper">
+
+<insert id="createStatus" parameterType="com.team.dto.StatusDto">
+	<![CDATA[
+		INSERT INTO status(status_no, space_key, status_order, status_title, status_color) VALUES (seq_status_no.nextVal, #{space_key}, #{status_order}, #{status_title}, #{status_color})
+	]]>
+</insert>
+
+<update id="updateStatus" parameterType="map">
+	<![CDATA[
+		UPDATE status SET status_title = #{statusDto.status_title, jdbcType=VARCHAR}, status_color = #{statusDto.status_color, jdbcType=VARCHAR} WHERE status_no = #{status_no}
+	]]>
+</update>
+
+<update id="changeOrderUp" parameterType="map">
+	<![CDATA[
+		UPDATE status SET status_order = status_order + 1 WHERE status_order >= #{new_status_order} AND status_order < #{status_order}
+	]]>
+</update>
+
+<update id="changeOrderDown" parameterType="map">
+	<![CDATA[
+		UPDATE status SET status_order = status_order - 1 WHERE status_order <= #{new_status_order} AND status_order > #{status_order}
+	]]>
+</update>
+
+<update id="changeOrder" parameterType="map">
+	<![CDATA[
+		UPDATE status SET status_order = #{new_status_order} WHERE status_no = #{status_no}
+	]]>
+</update>
+
+<update id="updateTaskStatusFirstly" parameterType="map">
+	<![CDATA[
+		UPDATE task SET status_no = #{new_status_no} WHERE status_no = #{status_no}
+	]]>
+</update>
+
+<update id="downStatusOrderFirstly" parameterType="java.lang.Integer">
+	<![CDATA[
+		UPDATE status SET status_order = status_order - 1 WHERE status_order > (SELECT status_order FROM status WHERE status_no = #{status_no})
+	]]>
+</update>
+
+<delete id="deleteStatus" parameterType="java.lang.Integer">
+	<![CDATA[
+		DELETE FROM status WHERE status_no = #{status_no}
+	]]>
+</delete>
+
+<select id="showStatus" parameterType="java.lang.String" resultType="com.team.dto.StatusDto">
+	<![CDATA[
+		SELECT s.status_no, s.status_title, s.status_color FROM status s INNER JOIN color c ON s.status_color = c.color_name WHERE s.space_key = #{space_key} ORDER BY s.status_order ASC
+	]]>
+</select>
+
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.ReplyMapper">
+
+<insert id="writeReply" parameterType="com.team.dto.ReplyListDto">
+	<![CDATA[
+		INSERT INTO reply(reply_no, space_key, task_no, writer_no, reply_content, image_no, created_at) VALUES (seq_reply_no.nextVal, #{space_key}, #{task_no}, #{writer_no}, #{reply_content}, #{image_no}, SYSDATE)
+	]]>
+</insert>
+
+<update id="updateReply" parameterType="com.team.dto.ReplyListDto">
+	<![CDATA[
+		UPDATE reply SET reply_content = #{reply_content}, image_no = #{image_no} WHERE writer_no = #{writer_no} AND reply_no = #{reply_no}
+	]]>
+</update>
+
+<delete id="deleteReply" parameterType="com.team.dto.ReplyListDto">
+	<![CDATA[
+		DELETE FROM reply WHERE reply_no = #{reply_no} AND writer_no = #{writer_no}
+	]]>
+</delete>
+
+<select id="showReplyList" parameterType="com.team.dto.ReplyListDto" resultType="com.team.dto.ReplyListDto">
+	<![CDATA[
+		SELECT reply_no, writer_no, reply_content, image_no, created_at FROM reply WHERE space_key = #{space_key} AND task_no = #{task_no} ORDER BY created_at DESC
+	]]>
+</select>
+
+</mapper>

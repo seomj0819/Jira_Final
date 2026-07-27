@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.mapper.ImageMapper">
+
+<insert id="uploadImage" parameterType="com.team.dto.ImageDto">
+	<![CDATA[
+		INSERT INTO image(image_no, image_title, image_category) VALUES (seq_image_no.nextVal, #{image_title}, #{image_category})
+	]]>
+</insert>
+
+<update id="updateProfileImage" parameterType="map">
+	<![CDATA[
+		UPDATE image SET image_title=#{new_image_title} WHERE image_no=(SELECT image_no FROM users WHERE user_no=#{user_no})
+	]]>
+</update>
+
+<update id="deleteImageReply" parameterType="map">
+	<![CDATA[
+		UPDATE reply SET image_no = NULL WHERE reply_no = #{reply_no} AND writer_no = #{user_no}
+	]]>
+</update>
+
+<update id="deleteImageTask" parameterType="map">
+	<![CDATA[
+		UPDATE task SET image_no = NULL WHERE space_key = #{space_key} AND task_no = #{task_no} AND creator_no = #{user_no}
+	]]>
+</update>
+
+<delete id="deleteImageProfile" parameterType="java.lang.Integer">
+	<![CDATA[
+		DELETE FROM image WHERE image_no IN(SELECT image_no FROM users WHERE user_no = #{quit_user_no})
+	]]>
+</delete>
+
+</mapper>
