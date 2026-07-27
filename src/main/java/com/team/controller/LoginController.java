@@ -79,6 +79,7 @@ public class LoginController {
         }
     }
     
+    // 로그인 실패시 이메일로 회원가입 페이지로 이동
     @PostMapping("/login_fail")
     public String signUpEmail(@RequestParam String email, Model model) {
         Map<String, String> codeMap = loginService.createVerificationCode();
