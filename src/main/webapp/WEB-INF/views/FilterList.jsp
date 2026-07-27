@@ -17,6 +17,7 @@
 			    img.src = '/resources/img/up.png';
 			  }
 		}
+		
 		function changeMarkButtonImg(el) {
 		    if (el.src.match('star_black.png')) {
 		        el.src = '/resources/img/star_empty.png';
@@ -24,18 +25,36 @@
 		        el.src = '/resources/img/star_black.png';
 		    }
 		}
-		function changeStarButtonImg(el, searchCondition) {
+		
+		function changeButtonImg(el) {
+			var img = el.querySelector('img');
+			if (img.src.match('up.png')) {
+				img.src = '${pageContext.request.contextPath}/resources/img/down.png';
+			} else {
+				img.src = '${pageContext.request.contextPath}/resources/img/up.png';
+			}
+		}
+
+		function changeMarkButtonImg(el) {
+			if (el.src.match('star_black.png')) {
+				el.src = '${pageContext.request.contextPath}/resources/img/star_empty.png';
+			} else {
+				el.src = '${pageContext.request.contextPath}/resources/img/star_black.png';
+			}
+		}
+
+		function changeStarButtonImg(el, searchConditionNo) {
 			var favorite;
-			if(el.src.match('star_empty.png')) {
+			if (el.src.match('star_empty.png')) {
 				favorite = "Y";
 			} else {
 				favorite = "N";
 			}
-			
-			fetch("/filter/favorite", {
+
+			fetch("${pageContext.request.contextPath}/filter/favorite", {
 				method: "POST",
 				headers: {
-					"Content-Type": "application/multipart/form-data"
+					"Content-Type": "application/x-www-form-urlencoded"
 				},
 				body: "searchConditionNo=" + searchConditionNo + "&favorite=" + favorite
 			})
@@ -43,20 +62,22 @@
 				return res.text();
 			})
 			.then(function(data) {
-				if(data === "ok") {
-					el.src = "/resources/img/star_yellow.png";
+				if (data === "ok") {
+					if (favorite === "Y") {
+						el.src = "${pageContext.request.contextPath}/resources/img/star_yellow.png";
+					} else {
+						el.src = "${pageContext.request.contextPath}/resources/img/star_empty.png";
+					}
 				} else {
-					el.src = "/resources/img/star_empty.png";
+					alert("즐겨찾기 실패");
 				}
-			} else {
-				alert("즐겨찾기 실패");
-			}
-		})
-		.catch(function(err) {
-			console.log(err);
-			alert("통신 오류");
-		})
-			
+			})
+			.catch(function(err) {
+				console.log(err);
+				alert("통신 오류");
+			});
+		}
+		
 		function toggleDropdown() {
 			const menu = document.getElementById("dropdownMenu");
 			menu.classList.toggle("show");
@@ -251,7 +272,7 @@
 	<main>
 		<div id="search_filter">
 			<div id="search_box_container" tabindex="0">
-				<img src="/resources/img/search.png">
+				<img src="<c:url value='/resources/img/search.png'/>">
 				<input id="search_filter_by_title" placeholder="필터 검색">
 			</div>
 			<select class="dropbox">
@@ -267,61 +288,66 @@
 		<div>
 			<table>
 				<tr>
-					<th><img class="star" src="/resources/img/star_black.png" onclick="changeMarkButtonImg(this)"></th>
-					<th>이름<button class="sort" type="button" onclick="changeButtonImg(this)"><img src="resources/img/up.png"></button></th>
+					<th>
+						<img class="star"
+						     src="<c:url value='/resources/img/star_black.png'/>"
+						     onclick="changeMarkButtonImg(this)">
+					</th>
+					<th>
+						이름
+						<button class="sort" type="button" onclick="changeButtonImg(this)">
+							<img src="<c:url value='/resources/img/up.png'/>">
+						</button>
+					</th>
 					<th>소유자</th>
 					<th>조회자</th>
 					<th>별표표시</th>
 					<th></th>
 				</tr>
-				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="resources/img/star_empty.png" onclick="changeStarButtonImg(this, 8)"></button></td>
-					<td><a class="filter-title">생성 30일 이내</a></td>
-					<td><div class="owner"><img src="/resources/img/user.png"><span>金成官</span></div></td>
-					<td><div class="viewer"></div>none</td>
-					<td>2명</td>
-					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
-						<div id="dropdownMenu" class="dropdown_content">
-							<button>필터 복사</button>
-							<button>편집</button>
-							<button>소유자 변경</button>
-							<button>삭제</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="/resources/img/star_empty.png" onclick="changeStarButtonImg(this)"></button></td>
-					<td><a class="filter-title">완료</a></td>
-					<td><div class="owner"><img src="/resources/img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div class="viewer"><img src="/resources/img/user.png"><span>金成官</span></div></td>
-					<td>0명</td>
-					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
-						<div id="dropdownMenu" class="dropdown_content">
-							<button>필터 복사</button>
-							<button>편집</button>
-							<button>소유자 변경</button>
-							<button>삭제</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><button type="button" class="star-container"><img class="star" src="/resources/img/star_yellow.png" onclick="changeStarButtonImg(this)"></button></td>
-					<td><a class="filter-title">Filter for Space</a></td>
-					<td><div class="owner"><img src="/resources/img/user.png"><span>金成官</span></div></td>
-					<td><div class="viewer"><img src="/resources/img/user.png"><span>Minjae Seo</span></div></td>
-					<td>1명</td>
-					<td>
-						<button type="button" class="more_button" onclick="toggleDropdown()"><img src="/resources/img/more.png"></button>
-						<div id="dropdownMenu" class="dropdown_content">
-							<button>필터 복사</button>
-							<button>편집</button>
-							<button>소유자 변경</button>
-							<button>삭제</button>
-						</div>
-					</td>
-				</tr>
+				<c:forEach var="filter" items="${list}">
+					<tr>
+						<td>
+							<button type="button" class="star-container">
+								<c:choose>
+									<c:when test="${filter.favorite == 'Y'}">
+										<img class="star"
+										     src="<c:url value='/resources/img/star_yellow.png'/>"
+										     onclick="changeStarButtonImg(this, ${filter.searchConditionNo})">
+									</c:when>
+									<c:otherwise>
+										<img class="star"
+										     src="<c:url value='/resources/img/star_empty.png'/>"
+										     onclick="changeStarButtonImg(this, ${filter.searchConditionNo})">
+									</c:otherwise>
+								</c:choose>
+							</button>
+						</td>
+						<td>
+							<a class="filter-title"
+							   href="<c:url value='/filter/detail?searchConditionNo=${filter.searchConditionNo}'/>">
+								${filter.searchConditionTitle}
+							</a>
+						</td>
+						<td>
+							<div class="owner">-</div>
+						</td>
+						<td>
+							<div class="viewer">-</div>
+						</td>
+						<td>-</td>
+						<td>
+							<button type="button" class="more_button" onclick="toggleDropdown(this)">
+								<img src="<c:url value='/resources/img/more.png'/>">
+							</button>
+							<div class="dropdown_content">
+								<button>필터 복사</button>
+								<button>편집</button>
+								<button>소유자 변경</button>
+								<button>삭제</button>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</main>
