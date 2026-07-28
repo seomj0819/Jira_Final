@@ -89,7 +89,7 @@ public class SpaceController {
 
 	// Space select 창에서 Space 선택후 Space/Board 페이지로 이동
 	@PostMapping("/space/enter")
-	public String enterSpace(@RequestParam String spaceKey, HttpSession session) {
+	public String enterSpace(@RequestParam String spaceKey, HttpSession session, Model model) {
 
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
@@ -101,20 +101,24 @@ public class SpaceController {
 	    if (!isMember) {
 	        return "redirect:/space/select";
 	    }
+	    
+	    model.addAttribute("contentPage", "Main_board");
 
 	    session.setAttribute("spaceKey", spaceKey);
-	    return "redirect:/board";
+	    return "MainSides";
 	}
 	
 	// DashBoard 버튼 클릭 후 Space/DashBoard 페이지로 이동
 	@PostMapping("/space/dashBoard")
-	public String spaceDashBoard(@RequestParam String spaceKey, HttpSession session) {
+	public String spaceDashBoard(@RequestParam String spaceKey, HttpSession session, Model model) {
 
 	    if (session.getAttribute("userNo") == null) {
 	        return "redirect:/login";
 	    }
-
+	    
+	    model.addAttribute("contentPage", "Main_dashboard");
+	    
 	    session.setAttribute("spaceKey", spaceKey);
-	    return "redirect:/dashBoard";
+	    return "MainSides";
 	}
 }

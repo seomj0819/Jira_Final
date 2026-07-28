@@ -31,8 +31,12 @@ public class SearchConditionController {
 
 	    List<SearchConditionDto> list =
 	        searchConditionService.showSearchConditoinList(userNo);
-	    model.addAttribute("list", list);  
-	    return "FilterList";
+
+	    model.addAttribute("list", list);
+
+	    model.addAttribute("contentPage", "FilterList");
+
+	    return "MainSides";
 	}
 
 	@GetMapping("/filter/detail") 
@@ -50,11 +54,12 @@ public class SearchConditionController {
 
 	    model.addAttribute("userRoll", userRoll);
 	    model.addAttribute("list", list);
-
+	    model.addAttribute("contentPage", "FilterDetail");
+	    
 	    if ("viewer".equals(userRoll)) {
-	        return "FilterDetail_Viewer";
+	        model.addAttribute("contentPage", "FilterDetail_Viewer");
 	    }
-	    return "FilterDetail";
+	    return "MainSides";
 	}
 	
 	@PostMapping("/filter/favorite")
