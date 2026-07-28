@@ -96,7 +96,7 @@
 			justify-content: right;
 		}
 		#bell {
-			margin-right: 80px;
+			margin-right: 12px;
 			margin-bottom: 4px;
 			cursor: pointer;
 		}
@@ -275,11 +275,17 @@
 			margin-right:6px;
 		}
 		#jirasearch {
-			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
+			box-shadow: 5px 5px lightgrey;
+			position: absolute;
+			z-index: 100;
 			width: 782px;
-			height: 92%;
+			height: fit-content;
 			border:none;
-			/* border-radius: 6px; */
+			border-radius: 6px;
+			margin-left: -3px;
+		    margin-top: -239px;
+		    background-color: white;
+		    border: 1px solid lightgrey;
 		}
 		#header {
 			font-size: 18px;
@@ -362,27 +368,27 @@
 				추천 항목
 			</div>
 			<div id="saikin" class="gap">
-				<div id="tokei"><img id="clock" src="<c:url value='resources/img/clock.png'/>"/>최근</div>
+				<div id="tokei"><img id="clock" src="<c:url value='/resources/img/clock.png'/>"/>최근</div>
 				<div><svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray"><path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/></svg> </div>
 			</div>
 			<br/>
 			<br/>
-			<div id="filter" class="gap"><img id="firuta" src="resources/img/data-filter-icon.svg"/>필터</div>
+			<div id="filter" class="gap"><img id="firuta" src="<c:url value='/resources/img/data-filter-icon.svg'/>"/>필터</div>
 			<div id="filter_list">
 				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#01</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#01</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#02</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#02</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#03</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#03</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#04</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#04</a>
 				</div>
 			</div>
-			<div id="space" class="gap"><img class="menuIcon" src="resources/img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
+			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='/resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
 			<div id="space_list">
 			<%-- <c:forEach var="dto" items="${list}">
 				<div class="gap">
