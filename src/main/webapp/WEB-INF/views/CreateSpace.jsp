@@ -13,7 +13,7 @@
 		
 		emailInput.addEventListener('input', (e) => {
 			var searchEmail = e.target.value;
-			// console.log(searchEmail);
+			//console.log(searchEmail);
 			
 		});
 	});
