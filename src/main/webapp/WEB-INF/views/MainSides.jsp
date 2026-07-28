@@ -362,12 +362,12 @@
 				추천 항목
 			</div>
 			<div id="saikin" class="gap">
-				<div id="tokei"><img id="clock" src="resources/img/clock.png"/>최근</div>
+				<div id="tokei"><img id="clock" src="<c:url value='resources/img/clock.png'/>"/>최근</div>
 				<div><svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray"><path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/></svg> </div>
 			</div>
 			<br/>
 			<br/>
-			<div id="filter" class="gap"><img id="firuta" src="<c:url value='resources/img/data-filter-icon.svg'/>"/>필터</div>
+			<div id="filter" class="gap"><img id="firuta" src="resources/img/data-filter-icon.svg"/>필터</div>
 			<div id="filter_list">
 				<div class="gap">
 					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#01</a>
@@ -379,10 +379,10 @@
 					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#03</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#04</a>
+					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#04</a>
 				</div>
 			</div>
-			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
+			<div id="space" class="gap"><img class="menuIcon" src="resources/img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
 			<div id="space_list">
 			<%-- <c:forEach var="dto" items="${list}">
 				<div class="gap">
