@@ -233,7 +233,7 @@
 			display: flex;
 			flex-direction: row;
 			gap: 10px;
-			height: 30px;
+			height: 38px;
 			padding: 3px;
 		}
 		#condition_container > select {
