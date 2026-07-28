@@ -58,5 +58,10 @@ public class TaskServiceImpl implements TaskService {
 	public boolean updateTaskOrder(TaskOrderDto dto) {
 		return taskDao.updateTaskOrder(dto);
 	}
+
+	@Override
+	public TaskInfoDto showTask(TaskInfoDto dto) {
+		return taskDao.showTask(dto);
+	}
 	
 }

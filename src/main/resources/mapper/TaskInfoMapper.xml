@@ -195,4 +195,10 @@
 	</if>
 	ORDER BY task_order ASC 
 </select>
+
+<select id="showTask" resultType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		SELECT * FROM task WHERE space_key = #{spaceKey} AND task_no = #{taskNo}
+	]]>
+</select>
 </mapper>

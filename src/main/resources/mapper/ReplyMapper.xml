@@ -24,7 +24,7 @@
 
 <select id="showReplyList" parameterType="com.team.dto.ReplyListDto" resultType="com.team.dto.ReplyListDto">
 	<![CDATA[
-		SELECT reply_no, writer_no, reply_content, image_no, created_at FROM reply WHERE space_key = #{space_key} AND task_no = #{task_no} ORDER BY created_at DESC
+		SELECT reply_no, writer_no, reply_content, image_no, TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS') AS created_at FROM reply WHERE space_key = #{space_key} AND task_no = #{task_no} ORDER BY created_at DESC
 	]]>
 </select>
 

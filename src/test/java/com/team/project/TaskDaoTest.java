@@ -207,4 +207,18 @@ public class TaskDaoTest {
 		}
 	}
 	
+	// 9. 테스크 정보 조회 테스트
+	@Test
+	public void testShowTask() {
+		// Given
+		TaskInfoDto dto = new TaskInfoDto();
+		dto.setSpaceKey("ABCD");
+		dto.setTaskNo(1);
+		
+		// When
+		dto = taskDao.showTask(dto);
+		
+		// Then
+		System.out.println(dto.getSpaceKey()+dto.getTaskNo()+dto.getTaskTitle()+dto.getTaskDescription()+dto.getStatusNo()+dto.getDueDate()+dto.getCreatorNo());
+	}
 }
