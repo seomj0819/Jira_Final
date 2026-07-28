@@ -92,6 +92,34 @@
 			    }
 			}
 		});
+		
+		document.addEventListener('click', function(event) {
+			var a = event.target.closest("a.filter-title");
+			
+			e.preventDefault();
+			
+			fetch(a.href, {
+				headers: {
+					"Content-Type": "application/json",
+				}
+			})
+			.then(function(result) { return result.text(); })
+			.then(function(html) {
+				document.getElementById("content").innerHTML = html;
+				history.pushState(null, "", a.href));
+			}
+		})
+		
+		window.addEventListener("popstate", function() {
+			fetch(location.href, {
+				headers: { "X-Requested-With": "XMLHttpRequest" }
+			})
+			.then(function(res) { return res.text(); })
+			.then(function(html) {
+				document.getElementById("content").innerHTML = html;
+			});
+		});
+		
 	</script>
 	<style>
 		body {
@@ -304,7 +332,7 @@
 					<th>별표표시</th>
 					<th></th>
 				</tr>
-				<c:forEach var="filter" items="${list}">
+				<c:forEach var="filter" items="${filterList}">
 					<tr>
 						<td>
 							<button type="button" class="star-container">
@@ -324,7 +352,7 @@
 						</td>
 						<td>
 							<a class="filter-title"
-							   href="<c:url value='/filter/detail?searchConditionNo=${filter.searchConditionNo}'/>">
+							   href="<c:url value='/filter/list/detail?searchConditionNo=${filter.searchConditionNo}'/>">
 								${filter.searchConditionTitle}
 							</a>
 						</td>

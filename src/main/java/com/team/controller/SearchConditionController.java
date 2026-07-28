@@ -33,7 +33,7 @@ public class SearchConditionController {
 	        searchConditionService.showSearchConditoinList(userNo);
 
 	    model.addAttribute("list", list);
-
+	    model.addAttribute("filterList", list);
 	    model.addAttribute("contentPage", "FilterList");
 
 	    return "MainSides";

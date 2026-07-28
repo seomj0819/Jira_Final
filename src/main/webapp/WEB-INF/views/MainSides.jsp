@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Main Side</title>
 	<style>
-		* { box-sizing: border-box;}
+		* { box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 		html, body {
 		 	margin: 0;
 		 	height: 100%;
@@ -66,7 +66,7 @@
 			width: 780px;
 			border-radius: 6px;
 			border: 1px solid gray;
-			background-image: url('resources/img/search.png');
+			background-image: url('<c:url value="/resources/img/search.png"/>');
  			background-repeat: no-repeat;
  			background-size: 20px;
  			background-position: 3px center;
@@ -307,8 +307,11 @@
 		.taskimage {
 			margin-right: 50px;
 		}
+		#content {
+			padding: 15px 30px;
+		}
 	</style>
-	<script src="resources/js/jquery-4.0.0.min.js"></script>
+	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
 		$(function() {
 			
@@ -341,7 +344,7 @@
   				</button>
   			</div>
   			<div id="area3">
-				<div id="bell"><a><img id="beru" src="resources/img/bell.svg"/></a></div>
+				<div id="bell"><a><img id="beru" src="<c:url value='/resources/img/bell.svg'/>"/></a></div>
 				<div id="profile">
 					<a>
 						<img src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
@@ -364,28 +367,28 @@
 			</div>
 			<br/>
 			<br/>
-			<div id="filter" class="gap"><img id="firuta" src="resources/img/data-filter-icon.svg"/>필터</div>
+			<div id="filter" class="gap"><img id="firuta" src="<c:url value='resources/img/data-filter-icon.svg'/>"/>필터</div>
 			<div id="filter_list">
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#01</a>
+					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#01</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#02</a>
+					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#02</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#03</a>
+					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#03</a>
 				</div>
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>(사용가능한 필터목록)#04</a>
+					<a><img class="menuIcon" src="<c:url value='resources/img/space_sample.png'/>"/>(사용가능한 필터목록)#04</a>
 				</div>
 			</div>
-			<div id="space" class="gap"><img class="menuIcon" src="resources/img/KakaoTalk_20260619_143529999.png"/>스페이스</div>
+			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
 			<div id="space_list">
-			<c:forEach var="dto" items="${list}">
+			<%-- <c:forEach var="dto" items="${list}">
 				<div class="gap">
 					<a><img class="menuIcon" src="resources/img/space_sample.png"/>${dto.spaceTitle}</a>
 				</div>
-			</c:forEach>
+			</c:forEach> --%>
 			</div>
 			<br/>
 			<div id="submit" class="gap">
