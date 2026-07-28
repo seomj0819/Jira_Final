@@ -87,4 +87,16 @@
 			AND invite_code IS NULL
 		]]>
 	</select>
+	<select id="searchUser" resultType="com.team.dto.UserInfoDto">
+		<![CDATA[
+			SELECT
+				user_no AS userNo,
+				user_name AS userName,
+				email,
+				image_no AS imageNo
+			FROM users
+			WHERE email LIKE '%' || #{emailInput} || '%'
+   			OR user_name LIKE '%' || #{emailInput} || '%'
+		]]>
+</select>
 </mapper>

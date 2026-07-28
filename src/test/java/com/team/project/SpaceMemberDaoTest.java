@@ -175,4 +175,24 @@ public class SpaceMemberDaoTest {
 		}
 	}
 	
+	// 10. 이메일을 통해 유저 리스트 검색 테스트
+	@Test
+	public void testSearchUser() {
+		// Given
+		String emailInput = "seomj08";
+		
+		// When
+		List<UserInfoDto> list = spaceMemberDao.searchUser(emailInput);
+		
+		// Then
+		assertNotNull(list);
+		System.out.println(list.isEmpty());
+		for(UserInfoDto dto : list) {
+			System.out.print("[" + dto.getUserNo() + ", ");
+			System.out.print(dto.getUserName() + ", ");
+			System.out.print(dto.getEmail() + ", ");
+			System.out.println(dto.getImageNo() + "]");
+		}
+	}
+	
 }

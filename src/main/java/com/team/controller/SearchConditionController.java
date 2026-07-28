@@ -59,7 +59,7 @@ public class SearchConditionController {
 	
 	@PostMapping("/filter/favorite")
 	@ResponseBody
-	public String favocite(@RequestParam int searchConditionNo, 
+	public String favorite(@RequestParam int searchConditionNo, 
 						   @RequestParam String favorite, 
 						   HttpSession session) {
 		Integer userNo = (Integer) session.getAttribute("userNo");

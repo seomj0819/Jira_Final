@@ -66,4 +66,9 @@ public class SpaceMemberServiceImpl implements SpaceMemberService{
 		return spaceMemberDao.getSpacesByUserNo(userNo);
 	}
 
+	@Override
+	public List<UserInfoDto> searchUser(String emailInput) {
+		return spaceMemberDao.searchUser(emailInput);
+	}
+
 }

@@ -60,4 +60,9 @@ public class SpaceMemberDaoImpl implements SpaceMemberDao {
 		return sqlSession.selectList("com.team.mapper.SpaceMemberMapper.getSpacesByUserNo", userNo);
 	}
 
+	@Override
+	public List<UserInfoDto> searchUser(String emailInput) {
+		return sqlSession.selectList("com.team.mapper.SpaceMemberMapper.searchUser", emailInput);
+	}
+
 }
