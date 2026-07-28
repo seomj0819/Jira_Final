@@ -32,14 +32,13 @@ public class SearchConditionController {
 	    List<SearchConditionDto> list =
 	        searchConditionService.showSearchConditoinList(userNo);
 
-	    model.addAttribute("list", list);
 	    model.addAttribute("filterList", list);
 	    model.addAttribute("contentPage", "FilterList");
 
 	    return "MainSides";
 	}
 
-	@GetMapping("/filter/detail") 
+	@GetMapping("/filter/list/detail") 
 	public String filterDetail(@RequestParam int searchConditionNo,
 	                           HttpSession session, Model model) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
@@ -54,11 +53,10 @@ public class SearchConditionController {
 
 	    model.addAttribute("userRoll", userRoll);
 	    model.addAttribute("list", list);
-	    model.addAttribute("contentPage", "FilterDetail");
 	    
-	    if ("viewer".equals(userRoll)) {
-	        model.addAttribute("contentPage", "FilterDetail_Viewer");
-	    }
+	    String page = "viewer".equals(userRoll) ? "FilterDetail_Viewer" : "FilterDetail";
+	    
+	    model.addAttribute("contentPage", page);
 	    return "MainSides";
 	}
 	

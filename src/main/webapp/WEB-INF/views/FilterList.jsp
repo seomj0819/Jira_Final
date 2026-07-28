@@ -100,7 +100,7 @@
 			
 			fetch(a.href, {
 				headers: {
-					"Content-Type": "application/json",
+					"X-Requested-With": "XMLHttpRequest",
 				}
 			})
 			.then(function(result) { return result.text(); })
