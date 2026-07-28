@@ -96,8 +96,8 @@
 		document.addEventListener('click', function(event) {
 			var a = event.target.closest("a.filter-title");
 			
-			e.preventDefault();
-			
+			event.preventDefault();
+			// a 태그 기능 막기
 			fetch(a.href, {
 				headers: {
 					"X-Requested-With": "XMLHttpRequest",
@@ -106,15 +106,15 @@
 			.then(function(result) { return result.text(); })
 			.then(function(html) {
 				document.getElementById("content").innerHTML = html;
-				history.pushState(null, "", a.href));
-			}
+				history.pushState(null, "", a.href);
+			})
 		})
 		
 		window.addEventListener("popstate", function() {
 			fetch(location.href, {
 				headers: { "X-Requested-With": "XMLHttpRequest" }
 			})
-			.then(function(res) { return res.text(); })
+			.then(function(result) { return result.text(); })
 			.then(function(html) {
 				document.getElementById("content").innerHTML = html;
 			});
@@ -351,6 +351,7 @@
 							</button>
 						</td>
 						<td>
+						<!-- a태그에 href 없애야 함? 페이지 이동하는거 막긴 해야하는데 -->
 							<a class="filter-title"
 							   href="<c:url value='/filter/list/detail?searchConditionNo=${filter.searchConditionNo}'/>">
 								${filter.searchConditionTitle}
