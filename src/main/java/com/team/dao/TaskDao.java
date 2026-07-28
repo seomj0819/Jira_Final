@@ -12,6 +12,7 @@ public interface TaskDao {
 	List<TaskInfoDto> showTaskList(String currentSpaceKey);	// 해당 스페이스의 테스크 리스트
 	List<TaskInfoDto> showUpperTaskList(String currentSpaceKey);	// 해당 스페이스의 상위 테스트 리스트
 	List<TaskInfoDto> showLowerTaskList(TaskInfoDto dto);	// 해당 스페이스 상위 작업에 하위 테스크 리스트
+	TaskInfoDto showTask(TaskInfoDto dto);	// 테스크 정보 조회
 	void updateTask(TaskInfoDto dto);	// 테스크 업데이트
 	boolean updateTaskOrder(TaskOrderDto dto);	// 테스크 순서 업데이트
 	List<TaskInfoDto> searchTask(TaskSearchDto dto);	// 테스크 필터링

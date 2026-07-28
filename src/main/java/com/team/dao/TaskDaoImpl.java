@@ -57,5 +57,10 @@ public class TaskDaoImpl implements TaskDao{
 	public List<TaskInfoDto> searchTask(TaskSearchDto dto) {
 		return sqlSession.selectList("com.team.mapper.TaskInfoMapper.searchTaskBySearchCondition", dto);
 	}
+
+	@Override
+	public TaskInfoDto showTask(TaskInfoDto dto) {
+		return sqlSession.selectOne("com.team.mapper.TaskInfoMapper.showTask", dto);
+	}
 	
 }

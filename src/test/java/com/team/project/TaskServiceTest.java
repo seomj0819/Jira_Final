@@ -207,4 +207,19 @@ public class TaskServiceTest {
 		// Then
 		assertTrue(chk);
 	}
+	
+	// 9. 테스트 정보 조회 테스트
+	@Test
+	public void testShowTask() {
+		// Given
+		TaskInfoDto dto = new TaskInfoDto();
+		dto.setSpaceKey("ABCD");
+		dto.setTaskNo(1);
+		
+		// When
+		dto = taskService.showTask(dto);
+		
+		// Then
+		System.out.println(dto.getSpaceKey()+dto.getTaskNo()+dto.getTaskTitle());
+	}
 }

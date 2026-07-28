@@ -12,6 +12,7 @@ public interface TaskService {
 	List<TaskInfoDto> showTaskList(String currentSpaceKey);	// 해당 스페이스 TaskList 조회
 	List<TaskInfoDto> showUpperTaskList(String currentSpaceKey);	// 해당 스페이스에 상위 TaskList 조회
 	List<TaskInfoDto> showLowerTaskList(TaskInfoDto dto);	// 해당 스페이스에 하위 TaskList 조회
+	TaskInfoDto showTask(TaskInfoDto dto);	// 테스크 정보 조회
 	void updateTask(TaskInfoDto dto);	// 테스크 업데이트
 	List<TaskInfoDto> searchTask(TaskSearchDto dto);	// 조건에 맞는 테스크 조회
 	boolean updateTaskOrder(TaskOrderDto dto);	// 테스크 순서 업데이트

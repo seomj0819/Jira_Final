@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -344,6 +345,9 @@
 		.history_detail {
 			margin-left: 44px;
 		}
+		.deleteReply {
+			display:none;
+		}
 	</style>
 	<script>
 		$(function() {
@@ -383,6 +387,15 @@
 				$(this).parent().parent().parent().parent().find("#replycontentarea").show();
 				$(this).parent().parent().find("#TaskHistory").css("display", "none");
 			});
+			$(".replycontent").hover(function() {
+				$(this).find(".deleteReply").toggle();
+			});
+			$(".deleteReply").click(function() {
+				if(confirm("댓글이 삭제 됩니다.")) {
+					$(this).parent().hide();
+					$(this).parent().prev(".writer").hide();
+				}
+			});
 		});
 	</script>
 </head>
@@ -391,7 +404,7 @@
 		<div id="header">
 			<div id="taskId">
 				<img id="taskmark" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium"/>
-				ABCD-4
+				${dto.getSpaceKey()}-${dto.getTaskNo()}
 			</div>
 			<div id="btns">
 				<div id="delete">
@@ -408,7 +421,7 @@
 		</div>
 		<div id="header2">
 			<div id="title">
-				작업4
+				${dto.getTaskTitle()}
 			</div>
 			<div id="status">
 				<select id="selectStatus">
@@ -469,7 +482,7 @@
 					</tr>
 					<tr>
 						<td>보고자</td>
-						<td><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>shangus</td>
+						<td><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>${creatorDto.getUserName()}</td>
 					</tr>
 				</table>
 			</div>
@@ -557,6 +570,10 @@
 			</div>
 			<div class="replycontent">
 				content1
+				<br/>
+				<button class="deleteReply">
+				댓글 삭제
+				</button>
 			</div>
 			<div class="writer">
 				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
@@ -564,6 +581,10 @@
 			</div>
 			<div class="replycontent">
 				프로젝트 진행중.
+				<br/>
+				<button class="deleteReply">
+				댓글 삭제
+				</button>
 			</div>
 			<div class="writer">
 				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
@@ -571,6 +592,10 @@
 			</div>
 			<div class="replycontent">
 				content2
+				<br/>
+				<button class="deleteReply">
+				댓글 삭제
+				</button>
 			</div>
 			<div class="writer">
 				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
@@ -578,6 +603,10 @@
 			</div>
 			<div class="replycontent">
 				content3
+				<br/>
+				<button class="deleteReply">
+				댓글 삭제
+				</button>
 			</div>
 		</div>
 	</div>
