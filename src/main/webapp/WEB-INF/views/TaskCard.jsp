@@ -564,50 +564,19 @@
 			</div>
 		</div>
 		<div id="replycontentarea">
+			<c:forEach var="replyDto" items="${replyList}" varStatus="status">
 			<div class="writer">
 				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-				<div class="replyinfo"><b>username1</b><br/><span class="grayletter">writedate1</span></div>
+				<div class="replyinfo"><b>${writerList[status.index].userName}</b><br/><span class="grayletter">${replyDto.createdAt}</span></div>
 			</div>
 			<div class="replycontent">
-				content1
+				${replyDto.replyContent}
 				<br/>
 				<button class="deleteReply">
 				댓글 삭제
 				</button>
 			</div>
-			<div class="writer">
-				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-				<div class="replyinfo"><b>Minjea Seo</b><br/><span class="grayletter">2026년 5월 14일</span></div>
-			</div>
-			<div class="replycontent">
-				프로젝트 진행중.
-				<br/>
-				<button class="deleteReply">
-				댓글 삭제
-				</button>
-			</div>
-			<div class="writer">
-				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-				<div class="replyinfo"><b>username2</b><br/><span class="grayletter">writedate2</span></div>
-			</div>
-			<div class="replycontent">
-				content2
-				<br/>
-				<button class="deleteReply">
-				댓글 삭제
-				</button>
-			</div>
-			<div class="writer">
-				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-				<div class="replyinfo"><b>username3</b><br/><span class="grayletter">writedate3</span></div>
-			</div>
-			<div class="replycontent">
-				content3
-				<br/>
-				<button class="deleteReply">
-				댓글 삭제
-				</button>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>

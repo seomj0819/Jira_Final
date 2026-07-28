@@ -18,7 +18,7 @@ public class ReplyListDto {
 		this.image_no = image_no;
 		this.created_at = created_at;
 	}
-	
+	public ReplyListDto(){}
 	public int getReplyNo() {
 		return reply_no;
 	}
@@ -49,7 +49,7 @@ public class ReplyListDto {
 	}
 
 
-	public int getWriter_no() {
+	public int getWriterNo() {
 		return writer_no;
 	}
 
@@ -87,8 +87,6 @@ public class ReplyListDto {
 	public void setCreatedAt(String created_at) {
 		this.created_at = created_at;
 	}
-	
-	public ReplyListDto(){}
 	
 	@Override
 	public String toString() {

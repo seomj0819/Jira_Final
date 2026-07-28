@@ -13,140 +13,200 @@
 		
 		emailInput.addEventListener('input', (e) => {
 			var searchEmail = e.target.value;
-			// console.log(searchEmail);
+			 console.log(searchEmail);
 			
 		});
 	});
 </script>
 <style>
+	/* 1. 기본 초기화 및 Box-Sizing 설정 */
+	* {
+		box-sizing: border-box;
+	}
+
 	html, body {
 		margin: 0;
 		padding: 0;
+		width: 100%;
 		height: 100vh;
+		overflow: hidden;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	}
-	
+
 	body {
 		display: flex;
-		flex-direction: row-reverse;
+		flex-direction: row-reverse; /* 오른쪽: container, 왼쪽: preview */
+		min-width: 900px; /* 화면이 너무 줄어들어 레이아웃이 깨지는 것을 방지 */
 	}
-	
+
+	/* 2. 좌측 그래픽 영역 (Preview) - 화면 절반 항상 꽉 채우기 */
+	#preview {
+		width: 50%;
+		height: 100%;
+		flex-shrink: 0;
+		background-color: #f4f5f7;
+		overflow: hidden; /* SVG가 영역 밖으로 튀어나가지 않도록 설정 */
+	}
+
+	/* SVG 내부 크기 고정 및 꽉 채우기 설정 */
+	#preview svg {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	/* 3. 우측 입력 영역 (Container) - 글씨 줄바꿈 방지 */
 	#container {
 		width: 50%;
 		height: 100vh;
 		position: relative;
-		overflow: hidden;
-		margin: 30px 40px;
+		padding: 40px 60px 80px 60px; /* 하단 버튼 영역 공간(80px) 확보 */
+		overflow-y: auto;
+		white-space: nowrap; /* 글씨가 좁아져서 다음 줄로 넘어가는 현상 방지 */
 	}
-	
+
+	/* 내부 요소들은 블록/인라인 블록 성질에 맞춰 다시 정상 정렬 유지 */
+	#container * {
+		max-width: 100%;
+	}
+
+	/* 4. 헤더 및 타이틀 스타일링 */
 	.main-title {
-		font-size: 28px;
-		font-weight: 653;
-	}
-	
-	.header-subtitle {
-		color: rgb(107, 110, 118);
-		font-size: 14px;
-		font-weight: 400;
-	}
-	
-	.necessary {
-		color: rgb(174, 46, 36);
-		font-size: 12px;
-		font-weight: 653;
-		margin-left: -6px;
+		font-size: 24px;
+		font-weight: 600;
+		color: #172b4d;
+		margin: 0 0 6px 0;
 		display: inline-block;
-		transform: translateY(-2px);
 	}
-	
-	.title {
-		color: rgb(80, 82, 88);
+
+	.header-subtitle {
+		color: #6b778c;
+		font-size: 13px;
+		font-weight: 400;
+		line-height: 1.4;
+		display: inline-block;
+		margin-bottom: 20px;
+		white-space: normal; /* 서브타이틀처럼 긴 문장은 필요시 줄바꿈 허용 */
+	}
+
+	.necessary {
+		color: #de350b;
 		font-size: 12px;
-		font-weight: 653;
+		font-weight: 600;
+		margin-left: 2px;
+		display: inline-block;
 	}
-	
-	#email-input {
-		border: 1px solid rgba(11, 18, 14, 0.19);
-		padding: 5px;
-		border-radius: 3px;
-		width: 70%;
-		max-width: 478px;
-		height: 36px;
+
+	.title {
+		color: #42526e;
+		font-size: 12px;
+		font-weight: 700;
+		display: inline-block;
+		margin-bottom: 6px;
 	}
-	
-	#email-input>input {
-		border: none;
-		outline: none;
-		font-size: 14px;
-		width: 70%;
-		max-width: 478px;
-	}
-	
-	#user-roll {
-		padding: 5px;
-		width: 70%;
-		max-width: 478px;
-		height: 36px;
-		border: 1px solid rgba(11, 18, 14, 0.19);
-		border-radius: 3px;
-	}
-	
-	#button-container {
-		border-top: 1px solid #ccc;
-		padding: 10px;
-		position: absolute;
-		width: 100%;
-		bottom: 0px;
-		right: 20px;
-		display: flex;
-		gap: 10px;
-		justify-content: flex-end;
-	}
-	
-	#title-container>input {
-		width: 70%;
-		max-width: 478px;
-		height: 36px;
-		border: 1px solid rgba(11, 18, 14, 0.19);
-		border-radius: 3px;
-	}
-	
-	#key-container>input {
-		width: 70%;
-		max-width: 211px;
-		height: 36px;
-		border: 1px solid rgba(11, 18, 14, 0.19);
-		border-radius: 3px;
-	}
-	
+
+	/* 5. 폼 및 입력 요소 간격 설정 */
 	#input-container {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
+		gap: 20px;
+		white-space: normal; /* 입력 폼 영역 내부 글씨/요소는 정상 작동 */
 	}
-	
-	input:focus {
-		border-color: rgb(70, 136, 236);
-		border-radius: 3px;
-		outline: none;
+
+	#createSpaceForm {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
 	}
-	
-	#button-container>input {
-		background-color: rgb(24, 104, 219);
-		color: white;
-		border: none;
+
+	/* Input 및 Select 기본 스타일 */
+	input[type="text"], #user-roll {
+		width: 100%;
+		max-width: 480px;
+		height: 40px;
+		padding: 8px 12px;
+		border: 1px solid #dfe1e6;
 		border-radius: 3px;
 		font-size: 14px;
-		padding: 6px;
+		color: #091e42;
+		background-color: #fafbfc;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
-	
+
+	/* Key 입력창 특화 크기 */
+	#key-container input[type="text"] {
+		max-width: 220px;
+	}
+
+	/* 이메일 입력창 세부 스타일 */
+	#email-input {
+		width: 100%;
+		max-width: 480px;
+	}
+
+	#email-input > input {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	/* Focus & Hover 효과 */
+	input[type="text"]:hover, #user-roll:hover {
+		background-color: #ebecf0;
+	}
+
+	input[type="text"]:focus, #user-roll:focus {
+		background-color: #ffffff;
+		border-color: #4c9aff;
+		outline: none;
+		box-shadow: 0 0 0 1px #4c9aff;
+	}
+
+	/* 6. 하단 고정 버튼 영역 */
 	#button-container {
-		column-gap: 14px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 64px;
+		padding: 12px 60px;
+		background-color: #ffffff;
+		border-top: 1px solid #ebecf0;
+		display: flex;
+		gap: 12px;
+		justify-content: flex-end;
+		align-items: center;
 	}
-	
-	#preview {
-		height: 100vh;
-		width: 50%;
-		flex-shrink: 0;
+
+	#button-container > input {
+		height: 36px;
+		padding: 0 16px;
+		font-size: 14px;
+		font-weight: 500;
+		border-radius: 3px;
+		cursor: pointer;
+		transition: background-color 0.15s ease;
+	}
+
+	/* 제출 버튼 (파란색) */
+	#submit-button {
+		background-color: #0052cc;
+		color: #ffffff;
+		border: none;
+	}
+
+	#submit-button:hover {
+		background-color: #0065ff;
+	}
+
+	/* 이전/취소 버튼 (회색) */
+	#cancle-button {
+		background-color: rgba(9, 30, 66, 0.04);
+		color: #42526e;
+		border: none;
+	}
+
+	#cancle-button:hover {
+		background-color: rgba(9, 30, 66, 0.08);
 	}
 </style>
 </head>

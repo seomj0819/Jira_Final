@@ -77,7 +77,7 @@ public class ReplyDaoTest {
 		List<ReplyListDto> list = replyDao.ShowReplyList(dto);
 		// Then
 		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getReplyNo()+"/"+list.get(i).getWriter_no()+"/"+list.get(i).getReplyContent()+"/"+list.get(i).getImageNo()+"/"+list.get(i).getCreatedAt());
+			System.out.println(list.get(i).getReplyNo()+"/"+list.get(i).getWriterNo()+"/"+list.get(i).getReplyContent()+"/"+list.get(i).getImageNo()+"/"+list.get(i).getCreatedAt());
 		}
 	}
 }
