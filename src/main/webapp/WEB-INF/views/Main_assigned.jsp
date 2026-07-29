@@ -117,6 +117,7 @@
 	.task-detail {
 		font-size: 12px;
 		flex-grow: 1;
+		height: fit-content;
 	}
 	.status-styled {
   		flex-shrink: 0;
@@ -128,6 +129,7 @@
 	.task-title {
 		font-size: 14px;
 		margin: 3px 0px;
+		height: fit-content;
 	}
 	.status-txt {
 		font-size: 12px;

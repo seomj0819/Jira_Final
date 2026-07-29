@@ -178,11 +178,13 @@
 		}
 		.task-title {
 			font-size: 14px;
+			height: fit-content;
 		}
 		.task-header {
 			height: 16px;
 			display: flex;
 			padding: 5px;
+			height: fit-content;
 		}
 		.duration > span > img{
 			width: 16px;
