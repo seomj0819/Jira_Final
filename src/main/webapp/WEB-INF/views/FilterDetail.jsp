@@ -2,12 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-	<head>
 		<meta charset="UTF-8">
 		<title>Filter Detail</title>
-	</head>
 	<script src="js/jquery-4.0.0.min.js"></script>
 	<script>
 		$(function() {
@@ -481,7 +477,6 @@
 			text-decoration: underline;
 		}
 	</style>
-<body>
 	<header>
 		<h1>
 			<span>생성 30일 이내</span>
@@ -667,7 +662,6 @@
 			</div>
 		</div>
 	</div>
-</body>
 <script>
 	const priorityTags = document.querySelectorAll('.task_status');
 	
@@ -683,4 +677,3 @@
 	  }
 	});
 </script>
-</html>
