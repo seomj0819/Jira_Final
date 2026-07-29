@@ -29,7 +29,9 @@
 				$(this).parent().parent().find("#inputexp").val("");
 			});
 			$("#deletebtn").click(function() {
-				confirm("테스크를 삭제 하시겠습니까?");
+				if(confirm("테스크를 삭제 하시겠습니까?")) {
+					
+				}
 			});
 			$("#exitbtn").click(function() {
 				$(this).parent().parent().parent().parent().parent().parent().hide();
@@ -50,10 +52,40 @@
 				$(this).find(".deleteReply").toggle();
 			});
 			$(".deleteReply").click(function() {
-				if(confirm("댓글이 삭제 됩니다.")) {
-					$(this).parent().hide();
-					$(this).parent().prev(".writer").hide();
-				}
+			    if(confirm("댓글이 삭제 됩니다.")) {
+			        const $contentDiv = $(this).parent(); 
+			        const replyNo = $contentDiv.data("rno"); 
+			        const $writerDiv = $contentDiv.prev(".writer"); 
+
+			        // 서버 통신 (Fetch API)
+			        fetch("deleteReply.do", {
+			            method: "POST",
+			            headers: {
+			                "Content-Type": "application/x-www-form-urlencoded",
+			            },
+			            body: "replyNo=" + replyNo // 댓글 번호만 전송 (로그인 유저는 서버 세션에서 처리)
+			        })
+			        .then(response => response.text())
+			        .then(result => {
+			            const res = result.trim();
+			            if(res === "success") {
+			                // 본인 글이 맞아서 정상 삭제된 경우
+			                $writerDiv.fadeOut(200, function() { $(this).remove(); });
+			                $contentDiv.fadeOut(200, function() { $(this).remove(); });
+			            } else if(res === "fail_auth") {
+			                alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
+			            } else if(res === "fail_login") {
+			                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+			                location.href = "login";
+			            } else {
+			                alert("댓글 삭제에 실패했습니다.");
+			            }
+			        })
+			        .catch(error => {
+			            console.error("통신 에러:", error);
+			            alert("통신 오류가 발생했습니다.");
+			        });
+			    }
 			});
 		});
 	</script>
@@ -228,7 +260,7 @@
 				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
 				<div class="replyinfo"><b>${writerList[status.index].userName}</b><br/><span class="grayletter">${replyDto.createdAt}</span></div>
 			</div>
-			<div class="replycontent">
+			<div class="replycontent" data-rno="${replyDto.replyNo}">
 				${replyDto.replyContent}
 				<br/>
 				<button class="deleteReply">
