@@ -476,7 +476,7 @@
 			text-decoration: underline;
 		}
 	</style>
-<div class="filter-list">
+<div class="filter-detail">
 	<header>
 		<h1>
 			<span>생성 30일 이내</span>
