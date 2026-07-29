@@ -62,19 +62,11 @@
 		width: 780px;
 		border-radius: 6px;
 		border: 1px solid gray;
-<<<<<<< HEAD
 		    background-image: url("../img/search.png");
 			background-repeat: no-repeat;
 			background-size: 20px;
 			background-position: 3px center;
 			padding-left: 25px;
-=======
-		background-image: url('../img/search.png');
-		background-repeat: no-repeat;
-		background-size: 20px;
-		background-position: 3px center;
-		padding-left: 25px;
->>>>>>> c20e44bbe0658c0c0ae6788d46d9c2a31edfa78b
 	}
 	#create {
 		background-color: #1868db;
