@@ -175,7 +175,7 @@ public class SearchConditionServiceTest {
 		// Given
 		SearchCriteriaDto dto = new SearchCriteriaDto();
 		dto.setCurrentUserNo(2);
-		dto.setSearchUserNo(2);
+		dto.setSearchCreatorNo(2);
 		
 		// When
 		List<SearchConditionDto> list = searchConditionService.searchCriteriaByOwner(dto);
