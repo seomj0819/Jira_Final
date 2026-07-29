@@ -11,7 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SearchCriteriaDto {
 	int currentUserNo;
-	int searchUserNo;
 	String searchSpaceKey;
 	String searchKeyWord;
+	int searchCreatorNo;
+	int searchWorkerNo;
+	String searchPriority;
+	String searchStatus;
+	String searchDueDate;
 }
