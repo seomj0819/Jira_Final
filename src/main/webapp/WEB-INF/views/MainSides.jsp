@@ -80,11 +80,11 @@
 			</div>
 			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='/resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
 			<div id="space_list">
-			<%-- <c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${spaceList}">
 				<div class="gap">
-					<a><img class="menuIcon" src="resources/img/space_sample.png"/>${dto.spaceTitle}</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/space_sample.png'/>"/>${dto.spaceTitle}</a>
 				</div>
-			</c:forEach> --%>
+			</c:forEach>
 			</div>
 			<br/>
 			<div id="submit" class="gap">

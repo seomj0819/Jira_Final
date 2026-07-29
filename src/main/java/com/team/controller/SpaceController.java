@@ -102,6 +102,7 @@ public class SpaceController {
 	        return "redirect:/space/select";
 	    }
 	    
+	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("contentPage", "Main_board");
 
 	    session.setAttribute("spaceKey", spaceKey);
