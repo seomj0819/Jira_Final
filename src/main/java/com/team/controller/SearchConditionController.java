@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.dto.SearchConditionDto;
+import com.team.dto.SearchCriteriaDto;
 import com.team.service.SearchConditionService;
 
 @Controller
@@ -86,6 +87,33 @@ public class SearchConditionController {
 		
 		searchConditionService.favoriteSearchCondition(map);
 		return "ok";
+	}
+	
+	@GetMapping("filter/list/search")
+	public String searchByTitle(@RequestParam(required = false) String keyword, 
+								@RequestParam(required = false) String spaceKey,
+								@RequestParam(required = false) int creatorNo,
+								@RequestParam(required = false) int workerNo,
+								@RequestParam(required = false) String priority,
+								@RequestParam(required = false) String status,
+								@RequestParam(required = false) String dueDate,
+								HttpSession session, Model model) {
+		
+		Integer userNo = (Integer) session.getAttribute("userNo");
+		if(userNo == null) {
+			return "redirect:/login";
+		}
+		
+		SearchCriteriaDto dto = new SearchCriteriaDto();
+		dto.setCurrentUserNo(userNo);
+		dto.setSearchSpaceKey(spaceKey);
+		dto.setSearchKeyWord(keyword);
+		dto.setSearchCreatorNo(creatorNo);
+		
+		List<SearchConditionDto> list = searchConditionService.searchCriteriaByTitle(dto);
+		
+		model.addAttribute("list", list);
+		return "FilterSearchResult";
 	}
 	
 }
