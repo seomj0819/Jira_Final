@@ -34,7 +34,7 @@
 				location.href = "<c:url value='/filter/detail'/>?searchConditionNo=" + no;
 			});
 			$("#osusume").click(function() {
-				location.href = "select";
+				location.href = "/project/space/select";
 			});
 		});
 	</script>
@@ -44,7 +44,7 @@
 		<div id="area1">
 			<div id="closer"><button id="close"><img src="https://www.svgrepo.com/show/347842/sidebar-expand.svg"/></button></div>
 			<div id="opener"><button id="open"><img src="https://www.svgrepo.com/show/347841/sidebar-collapse.svg"/></button></div>
-			<div id="logo"><a href="select"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
+			<div id="logo"><a href="/project/space/select"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
 		</div>
 		<div id="area2">
 			<div><input id="searchBar" name="searchKeyWord" type="text" placeholder="검색"/></div>
