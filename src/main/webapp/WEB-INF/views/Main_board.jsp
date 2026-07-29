@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="<c:url value='/resources/css/Main_board.css'/>"/>
 
-<!DOCTYPE html>
-<html>
-<head>
 	<meta charset="UTF-8">
 	<title>Jira Main Board Page</title>
-	<link rel="stylesheet" href="<c:url value='/resources/css/Main_board.css'/>"/>
-</head>
-<body>
 	<form>
 		<header id="header">
 			<div id="title-container">
@@ -22,12 +17,12 @@
 				<button class="button"><img src="../resources/img/more.png"></button>
 			</div>
 			<div id="menu-container">
-				<button class="menu-button">
+				<button type="button" class="menu-button">
 					<span><img src="../resources/img/dashboard.png"></span>
 					<span>대시보드</span>
 				</button>
 				
-				<button class="menu-button-on">
+				<button type="button" class="menu-button-on">
 					<span><img src="../resources/img/clipboard.png"></span>
 					<span>보드</span>
 				</button>
@@ -234,5 +229,3 @@
 			</div>
 		</main>
 	</form>
-</body>
-</html>
