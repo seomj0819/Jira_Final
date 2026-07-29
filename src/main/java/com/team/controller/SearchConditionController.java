@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class SearchConditionController {
 	SearchConditionService searchConditionService;
 	
 	@GetMapping("/filter/list")
-	public String filterList(HttpSession session, Model model) {
+	public String filterList(HttpSession session, Model model,
+	                         HttpServletRequest request) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
 	        return "redirect:/login";
@@ -31,16 +33,20 @@ public class SearchConditionController {
 
 	    List<SearchConditionDto> list =
 	        searchConditionService.showSearchConditoinList(userNo);
-
 	    model.addAttribute("filterList", list);
-	    model.addAttribute("contentPage", "FilterList");
 
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "FilterList";
+	    }
+
+	    model.addAttribute("contentPage", "FilterList");
 	    return "MainSides";
 	}
 
-	@GetMapping("/filter/list/detail") 
+	@GetMapping("/filter/list/detail")
 	public String filterDetail(@RequestParam int searchConditionNo,
-	                           HttpSession session, Model model) {
+	                           HttpSession session, Model model,
+	                           HttpServletRequest request) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
 	        return "redirect:/login";
@@ -53,9 +59,13 @@ public class SearchConditionController {
 
 	    model.addAttribute("userRoll", userRoll);
 	    model.addAttribute("list", list);
-	    
+
 	    String page = "viewer".equals(userRoll) ? "FilterDetail_Viewer" : "FilterDetail";
-	    
+
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return page;
+	    }
+
 	    model.addAttribute("contentPage", page);
 	    return "MainSides";
 	}
