@@ -86,9 +86,8 @@
 			}
 	</script>
 	<style>
-		body {
+		.filter-detail {
 			padding: 10px;
-			margin: 8px;
 		}
 		table, tr, td, th {
 			padding: 10px;
@@ -477,6 +476,7 @@
 			text-decoration: underline;
 		}
 	</style>
+<div class="filter-list">
 	<header>
 		<h1>
 			<span>생성 30일 이내</span>
@@ -662,6 +662,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 <script>
 	const priorityTags = document.querySelectorAll('.task_status');
 	
