@@ -85,41 +85,13 @@
 		window.addEventListener('click', function(event) {
 			const menu = document.getElementById("dropdownMenu");
 			const button = document.querySelector(".more_button");
-
+													// 이부분도 null로 떨어지는 문제가 있음
 			if (!button.contains(event.target) && !menu.contains(event.target)) {
 				if (menu.classList.contains('show')) {
 					menu.classList.remove('show');
 			    }
 			}
 		});
-		
-		document.addEventListener('click', function(event) {
-			var a = event.target.closest("a.filter-title");
-			
-			event.preventDefault();
-			// a 태그 기능 막기
-			fetch(a.href, {
-				headers: {
-					"X-Requested-With": "XMLHttpRequest",
-				}
-			})
-			.then(function(result) { return result.text(); })
-			.then(function(html) {
-				document.getElementById("content").innerHTML = html;
-				history.pushState(null, "", a.href);
-			})
-		})
-		
-		window.addEventListener("popstate", function() {
-			fetch(location.href, {
-				headers: { "X-Requested-With": "XMLHttpRequest" }
-			})
-			.then(function(result) { return result.text(); })
-			.then(function(html) {
-				document.getElementById("content").innerHTML = html;
-			});
-		});
-		
 	</script>
 	<style>
 		body {
