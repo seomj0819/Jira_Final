@@ -19,6 +19,17 @@
 				$("#mainArea").click(function() {
 					$(this).find("#various").find("#jiraSearch").hide();
 				});
+				$("#filter").click(function() {
+					var url = "<c:url value='/filter/list'/>";
+				    fetch(url, {
+				        headers: { "X-Requested-With": "XMLHttpRequest" }
+				    })
+				    .then(function(res) { return res.text(); })
+				    .then(function(html) {
+				        document.getElementById("content").innerHTML = html;
+				        history.pushState(null, "", url);
+				    });
+				});
 		});
 	</script>
 </head>
