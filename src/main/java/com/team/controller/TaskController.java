@@ -18,6 +18,7 @@ import com.team.dto.TaskInfoDto;
 import com.team.dto.UserInfoDto;
 import com.team.service.LoginService;
 import com.team.service.ReplyService;
+import com.team.service.SpaceService;
 import com.team.service.TaskService;
 
 @Controller
@@ -28,6 +29,8 @@ public class TaskController {
 	LoginService loginService;
 	@Autowired
 	ReplyService replyService;
+	@Autowired
+	SpaceService spaceService;
 	
 	@GetMapping("/board")
 	public String board(HttpSession session, Model model) {
@@ -42,7 +45,9 @@ public class TaskController {
 	    }
 
 	    model.addAttribute("taskList", taskService.showTaskList(spaceKey));
-	    return "Main_board";
+	    model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
+	    model.addAttribute("contentPage", "Main_board");
+	    return "MainSides";
 	}
 	
 	@GetMapping("/dashBoard")
@@ -57,8 +62,11 @@ public class TaskController {
 	        return "redirect:/space/select";
 	    }
 
+	    model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
+	    model.addAttribute("contentPage", "Main_dashboard");
+	    
 	    // FETCH...
-	    return "Main_dashboard";
+	    return "MainSides";
 	}
 	
 	@GetMapping("/taskCard")
