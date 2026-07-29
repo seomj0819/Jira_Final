@@ -16,4 +16,5 @@ public interface TaskDao {
 	void updateTask(TaskInfoDto dto);	// 테스크 업데이트
 	boolean updateTaskOrder(TaskOrderDto dto);	// 테스크 순서 업데이트
 	List<TaskInfoDto> searchTask(TaskSearchDto dto);	// 테스크 필터링
+	List<TaskInfoDto> showTaskListByStatus(TaskInfoDto dto); // 스테이터스 별 테스크 조회
 }

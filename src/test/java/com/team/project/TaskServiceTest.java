@@ -222,4 +222,19 @@ public class TaskServiceTest {
 		// Then
 		System.out.println(dto.getSpaceKey()+dto.getTaskNo()+dto.getTaskTitle());
 	}
+	
+	// 10. 스테이터스 별 테스크 조회 테스트
+		@Test
+		public void testShowTaskListByStatus() {
+			// Given
+			TaskInfoDto dto = new TaskInfoDto();
+			dto.setSpaceKey("ABCD");
+			dto.setStatusNo(1);
+			// When
+			List<TaskInfoDto> list = taskService.showTaskListByStatus(dto);
+			// Then
+			for(int i=0; i<list.size(); i++) {
+				System.out.println(list.get(i).getTaskTitle()+list.size());
+			}
+		}
 }

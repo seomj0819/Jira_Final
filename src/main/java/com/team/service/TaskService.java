@@ -16,4 +16,5 @@ public interface TaskService {
 	void updateTask(TaskInfoDto dto);	// 테스크 업데이트
 	List<TaskInfoDto> searchTask(TaskSearchDto dto);	// 조건에 맞는 테스크 조회
 	boolean updateTaskOrder(TaskOrderDto dto);	// 테스크 순서 업데이트
+	List<TaskInfoDto> showTaskListByStatus(TaskInfoDto dto); // 스테이터스 별 테스크 조회
 }

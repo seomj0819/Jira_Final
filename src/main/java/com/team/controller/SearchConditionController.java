@@ -32,7 +32,7 @@ public class SearchConditionController {
 	    }
 
 	    List<SearchConditionDto> list =
-	        searchConditionService.showSearchConditoinList(userNo);
+	        searchConditionService.showSearchConditionList(userNo);
 	    model.addAttribute("filterList", list);
 
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {

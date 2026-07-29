@@ -26,7 +26,7 @@
 			#{workerNo},
 			#{taskTitle},
 			#{taskDescription},
-			TO_DATE(#{dueDate}, 'YYYY-MM-DD HH24:MI:SS'),
+			TO_DATE(#{dueDate}, 'YYYY-MM-DD'),
 			#{labelTitle},
 			#{statusNo},
 			#{priority},
@@ -198,7 +198,41 @@
 
 <select id="showTask" resultType="com.team.dto.TaskInfoDto">
 	<![CDATA[
-		SELECT * FROM task WHERE space_key = #{spaceKey} AND task_no = #{taskNo}
+		SELECT space_key,
+			task_no,
+			creator_no,
+			worker_no,
+			task_title,
+			task_description,
+			TO_CHAR(due_date, 'YYYY-MM-DD') AS due_date,
+			label_title,
+			status_no,
+			priority,
+			upper_space_key,
+			upper_task_no,
+			task_order,
+			image_no,
+			summary FROM task WHERE space_key = #{spaceKey} AND task_no = #{taskNo}
+	]]>
+</select>
+
+<select id="showTaskListByStatus" resultType="com.team.dto.TaskInfoDto">
+	<![CDATA[
+		SELECT space_key, 
+			task_no,
+			creator_no,
+			worker_no,
+			task_title,
+			task_description,
+			TO_CHAR(due_date, 'YYYY-MM-DD') AS due_date,
+			label_title,
+			status_no,
+			priority,
+			upper_space_key,
+			upper_task_no,
+			task_order,
+			image_no,
+			summary FROM task WHERE space_key = #{spaceKey} AND status_no = #{statusNo}
 	]]>
 </select>
 </mapper>

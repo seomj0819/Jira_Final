@@ -59,8 +59,8 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 	}
 
 	@Override
-	public List<SearchConditionDto> showSearchConditoinList(int currentUserNo) {
-		return searchConditionDao.showSearchConditoinList(currentUserNo);
+	public List<SearchConditionDto> showSearchConditionList(int currentUserNo) {
+		return searchConditionDao.showSearchConditionList(currentUserNo);
 	}
 
 	@Override
