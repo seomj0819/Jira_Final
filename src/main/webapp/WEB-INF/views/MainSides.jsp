@@ -463,12 +463,39 @@
 			$("#jiraSearch").css("display","none");
 			$("#various").css("width","100%");
 		});
+		
 		$("#open").click(function() {
 			/* $("#closer").html("<button id='close'><img src='https://www.svgrepo.com/show/347842/sidebar-expand.svg'/></button>"); */
 			$("#opener").css("display","none");
 			$("#closer").css("display","block");
 			$("#sideBarArea").css("display","block");
 			$("#various").css("width","87.5%");
+		});
+		
+		document.addEventListener("click", function(event) {
+			var a = event.target.closest("a.filter-title");
+			if (!a) return;
+
+			event.preventDefault();
+
+			fetch(a.href, {
+				headers: { "X-Requested-With": "XMLHttpRequest" }
+			})
+			.then(function(res) { return res.text(); })
+			.then(function(html) {
+				document.getElementById("content").innerHTML = html;
+				history.pushState(null, "", a.href);
+			});
+		});
+
+		window.addEventListener("popstate", function() {
+			fetch(location.href, {
+				headers: { "X-Requested-With": "XMLHttpRequest" }
+			})
+			.then(function(res) { return res.text(); })
+			.then(function(html) {
+				document.getElementById("content").innerHTML = html;
+			});
 		});
 	</script>
 </body>
