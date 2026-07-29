@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Main Side</title>
+	<title>Jira</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/MainSides.css'/>"/>
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
