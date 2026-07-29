@@ -10,17 +10,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskSearchDto {
-	int searchConditionNo;
+	Integer searchConditionNo;
 	String accessType;
 	String searchConditionTitle;
 	String searchConditionDescription;
-	int currentUserNo;
+	Integer currentUserNo;
 	String searchKeyWord;
-	int searchWorkerNo;
+	Integer searchWorkerNo;
 	String operatorWorkerNo;
-	int searchCreatorNo;
+	Integer searchCreatorNo;
 	String operatorCreatorNo;
-	int searchStatusNo;
+	Integer searchStatusNo;
 	String operatorStatusNo;
 	String searchSpaceKey;
 	String operatorSpceKey;

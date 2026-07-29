@@ -313,19 +313,19 @@
 			</if>
 	
 			<!-- 상태: = / != -->
-			<if test="searchStatus != null">
-				<if test='operatorStatus == null or operatorStatus == "="'>
+			<if test="searchStatusNo != null">
+				<if test='operatorStatusNo == null or operatorStatusNo == "="'>
 					AND EXISTS (
 						SELECT 1 FROM sc_detail_status d
 						WHERE d.search_condition_no = sc.search_condition_no
-						AND d.status_no = #{searchStatus}
+						AND d.status_no = #{searchStatusNo}
 					)
 				</if>
 				<if test='operatorStatus == "!="'>
 					AND NOT EXISTS (
 						SELECT 1 FROM sc_detail_status d
 						WHERE d.search_condition_no = sc.search_condition_no
-						AND d.status_no = #{searchStatus}
+						AND d.status_no = #{searchStatusNo}
 					)
 				</if>
 			</if>
