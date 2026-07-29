@@ -18,7 +18,7 @@
 			</div>
 			<div id="body-row">
 				<div id="space-card-list">
-					<c:forEach var="space" items="${spaceList}">
+					<c:forEach var="space" items="${spaceMemberList}">
 						<form action="<c:url value='/space/enter'/>" method="post">
 							<input type="hidden" name="spaceKey" value="${space.spaceKey}">
      							<button type="submit" class="space-card" style="background:none;">
@@ -49,7 +49,7 @@
 						</div>
 						<div class="task">
 							<div class="task-img">
-								<img src="img/check.png">									
+								<img src="../resources/img/check.png">									
 							</div>
 							<div class="task-detail">
 								<p class="task-title">TASK TITLE</p>
@@ -64,7 +64,7 @@
 						</div>
 						<div class="task">
 							<div class="task-img">
-								<img src="img/check.png">									
+								<img src="../resources/img/check.png">									
 							</div>
 							<div class="task-detail">
 								<p class="task-title">TASK TITLE</p>
