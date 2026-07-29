@@ -3,6 +3,7 @@ package com.team.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,19 +41,25 @@ public class SpaceController {
 	
 	// 소속된 Space가 있을경우 Space 선택창으로 이동
 	@GetMapping("/space/select")
-	public String selectSpace(HttpSession session, Model model) {
+	public String selectSpace(HttpSession session, Model model, HttpServletRequest request) {
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    
 	    if (userNo == null) {
 	    	return "redirect:/login";
 	    }
 
-	    List<SpaceMemberDto> spaceList = spaceMemberService.getSpacesByUserNo(userNo);
-	    if (spaceList == null || spaceList.isEmpty()) {
+	    List<SpaceMemberDto> spaceMemberList = spaceMemberService.getSpacesByUserNo(userNo);
+	    if (spaceMemberList == null || spaceMemberList.isEmpty()) {
 	        return "redirect:/space/create";
 	    }
-	    model.addAttribute("spaceList", spaceList);
-	    return "Main_assigned";
+	    model.addAttribute("spaceMemberList", spaceMemberList);
+	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
+	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "Main_assigned";
+	    }
+	    model.addAttribute("contentPage", "Main_assigned");
+	    return "MainSides";
 	}
 	
 	// 소속된 Space가 없거나 Space 생성 버튼을 클릭 시 Space 생성창으로 이동
