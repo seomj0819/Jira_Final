@@ -92,11 +92,17 @@ public class SearchConditionController {
 	@GetMapping("/filter/list/search")
 	public String searchByTitle(@RequestParam(required = false) String keyword, 
 								@RequestParam(required = false) String spaceKey,
+								@RequestParam(required = false) String operatorSpaceKey,
 								@RequestParam(required = false) Integer creatorNo,
+								@RequestParam(required = false) String operatorCreatorNo,
 								@RequestParam(required = false) Integer workerNo,
+								@RequestParam(required = false) String operatorWorkerNo,
 								@RequestParam(required = false) String priority,
+								@RequestParam(required = false) String operatorPriority,
 								@RequestParam(required = false) Integer statusNo,
+								@RequestParam(required = false) String operatorStatusNo,
 								@RequestParam(required = false) String dueDate,
+								@RequestParam(required = false) String operatorDueDate,
 								HttpSession session, Model model) {
 		
 		Integer userNo = (Integer) session.getAttribute("userNo");
@@ -107,16 +113,22 @@ public class SearchConditionController {
 		SearchCriteriaDto dto = new SearchCriteriaDto();
 		dto.setCurrentUserNo(userNo);
 		dto.setSearchSpaceKey(spaceKey);
+		dto.setOperatorSpace(operatorSpaceKey);
 		dto.setSearchKeyWord(keyword);
 		dto.setSearchCreatorNo(creatorNo);
+		dto.setOperatorCreator(operatorCreatorNo);
 		dto.setSearchWorkerNo(workerNo);
+		dto.setOperatorWorker(operatorWorkerNo);
 		dto.setSearchPriority(priority);
+		dto.setOperatorPriority(operatorPriority);
 		dto.setSearchStatusNo(statusNo);
+		dto.setOperatorStatusNo(operatorStatusNo);
 		dto.setSearchDueDate(dueDate);
+		dto.setOperatorDueDate(operatorDueDate);
 		
-		List<SearchConditionDto> list = searchConditionService.searchCriteriaByTitle(dto);
+		List<SearchConditionDto> list = searchConditionService.searchCriteria(dto);
 		
-		model.addAttribute("list", list);
+		model.addAttribute("filterList", list);
 		return "FilterSearchResult";
 	}
 	
