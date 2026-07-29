@@ -62,7 +62,7 @@ public class TaskController {
 	}
 	
 	@GetMapping("/taskCard")
-	public String taskCard(@RequestParam(value = "taskNo", defaultValue = "1") int taskNo, HttpSession session, Model model) {
+	public String taskCard(@RequestParam("taskNo") int taskNo, HttpSession session, Model model) {
 		// 1. 로그인 체크
 		Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
