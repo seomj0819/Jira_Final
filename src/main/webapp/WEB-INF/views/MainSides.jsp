@@ -10,26 +10,29 @@
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
 		$(function() {
-			
-				$("#searchBar").click(function() {
-					if( $("#sideBarArea").css("display") != "none" ) {
-						$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#jiraSearch").toggle();
-					}
-				});
-				$("#mainArea").click(function() {
-					$(this).find("#various").find("#jiraSearch").hide();
-				});
-				$("#filter").click(function() {
-					var url = "<c:url value='/filter/list'/>";
-				    fetch(url, {
-				        headers: { "X-Requested-With": "XMLHttpRequest" }
-				    })
-				    .then(function(res) { return res.text(); })
-				    .then(function(html) {
-				        document.getElementById("content").innerHTML = html;
-				        history.pushState(null, "", url);
-				    });
-				});
+			$("#searchBar").click(function() {
+				if( $("#sideBarArea").css("display") != "none" ) {
+					$(this).parent().parent().parent().parent().find("#mainArea").find("#various").find("#jiraSearch").toggle();
+				}
+			});
+			$("#mainArea").click(function() {
+				$(this).find("#various").find("#jiraSearch").hide();
+			});
+			$("#filter").click(function() {
+				var url = "<c:url value='/filter/list'/>";
+			    fetch(url, {
+			        headers: { "X-Requested-With": "XMLHttpRequest" }
+			    })
+			    .then(function(res) { return res.text(); })
+			    .then(function(html) {
+			        document.getElementById("content").innerHTML = html;
+			        history.pushState(null, "", url);
+			    });
+			});
+			$("#filter_list .gap").click(function() {
+				var no = $(this).data("no");
+				location.href = "<c:url value='/filter/detail'/>?searchConditionNo=" + no;
+			})
 		});
 	</script>
 </head>
