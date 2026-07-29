@@ -6,52 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Jira Search</title>
 	<script src="resources/js/jquery-4.0.0.min.js"></script>
-	<style>
-		* { box-sizing: border-box;}
-		html, body {
-		 	margin: 0;
-		 	border:none;
-		 	height: 100%;
-		 	width: 100%;
-		 	display: flex;
-		 	justify-content: center;
-		 	/* align-items: center; */
-		}
-		*{ font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
-		#jirasearch {
-			/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
-			width: 782px;
-			height: 92%;
-			border:none;
-			/* border-radius: 6px; */
-		}
-		#header {
-			font-size: 18px;
-			font-weight: 600;
-			color: #1868db;
-			display-flex;
-			align-items: center;
-			padding-top: 5px;
-			padding-left: 15px;
-			padding-bottom: 3px;
-		}
-		#span {
-			font-size: 14px;
-			margin:12px;
-		}
-		
-		.list {
-			padding: 12px;
-			cursor: pointer;
-		}
-		.list:hover {
-			background-color: #f5f5f5;
-			
-		}
-		.taskimage {
-			margin-right: 50px;
-		}
-	</style>
+	<link rel="stylesheet" href="<c:url value='/resources/css/JiraSearch.css'/>"/>
 </head>
 <body>
 	<div id="jirasearch">

@@ -5,30 +5,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Task History</title>
+	<link rel="stylesheet" href="<c:url value='/resources/css/TaskHistory.css'/>"/>
 	<script src="js/jquery-4.0.0.min.js"></script>
-	<style>
-		* { box-sizing: border-box;}
-		*{ font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
-		.profile {
-			height: 32px;
-			margin-right: 12px;
-			margin-top: 3px;
-			cursor: pointer;
-		}
-		.header {
-			display: flex;
-		}
-		.history_usernametitle {
-			
-		}
-		.history_date {
-			font-size: 12px;
-			color: gray;
-		}
-		.history_detail {
-			margin-left: 44px;
-		}
-	</style>
 </head>
 <body>
 	<div id="task_history">

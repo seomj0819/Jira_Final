@@ -1,0 +1,108 @@
+@charset "UTF-8";
+	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
+	body {
+		background-color: rgb(250, 251, 252);
+		background-image: url(https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/default_left.558fbf68.svg), url(https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/default_right.f8462257.svg);
+    	background-repeat: no-repeat, no-repeat;
+    	background-attachment: fixed, fixed;
+    	background-size: 368px, 368px;
+    	background-position: left bottom, right bottom;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		gap: 15px;
+	}
+	#whiteBoxContainer {
+		width: 400px;
+		padding: 32px 40px;
+		background: transparent;
+		border-radius: 3px;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+		box-sizing: border-box;
+		color: var(--ds-text-subtle);
+	}
+	#logo {
+		display: flex;
+		justify-content: center;
+	}
+	#notice {
+		display: block;
+		color: rgb(41, 42, 46);
+		font-size: 16px;
+		font-weight: 653;
+		height: 20px;
+		line-height: 20px;
+		width: 291.297px;
+		margin-left: 25px;
+	}
+	#google-login > div> span> img {
+		margin: 0px 6px 0px 0px;
+		height: 24px;
+   		width: 24px;
+	}
+	#login-txt {
+		color: white;
+		margin-left: 125px;
+	}
+	#login-option{
+		margin-top: 24px; 
+		color: rgb(80, 82, 88); 
+		font-size: 14px; 
+		text-align: center;
+	}
+	#google-login {
+		text-align: center; 
+		justify-content: center;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+		border-radius: 4px;
+		padding: 12px;
+		row-gap: 8px;
+		width: 320px;
+		height: 96px;
+	}
+	#google-login-button {
+		border: 1px solid rgb(193, 199, 208); 
+		width: 284px; 
+		height: 40px; 
+		border-radius: 3px; 
+		background-color: rgb(24, 104, 219);
+		cursor: pointer;
+		margin-top: 7px;
+	}
+	.signIn-signUp {
+		color: rgb(24, 104, 219); 
+		font-size: 14px; 
+		font-weight: 400; 
+		cursor: pointer; 
+		text-decoration-line: underline;
+	}
+	.dot {
+		margin: 0px 20px;
+	}
+	#other-option {
+		text-align: center; 
+		margin: 13px
+	}
+	#button-txt {
+		color: rgb(255, 255, 255);
+		font-size: 14px;
+		font-weight: 500;
+		height: 40px;
+		line-height: 40px;
+		margin: 0px 2px;
+		width: 270px;
+	}
+	#user-id {
+		color: rgb(41, 42, 46);
+		font-size : 14px;
+		font-weight: 600;
+		height: 20px;
+	}
+	#user-info {
+		width: 294px;
+		height: 24px;
+		display: flex;
+		justify-content: center;
+	}

@@ -1,0 +1,147 @@
+@charset "UTF-8";
+	*{ box-sizing: border-box; font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
+	body {
+		background-color: rgb(250, 251, 252);
+		background-image: url(https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/default_left.558fbf68.svg), url(https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/default_right.f8462257.svg);
+    	background-repeat: no-repeat, no-repeat;
+    	background-attachment: fixed, fixed;
+    	background-size: 368px, 368px;
+    	background-position: left bottom, right bottom;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		gap: 15px;
+	}
+	#whiteBoxContainer {
+		width: 400px;
+		padding: 32px 40px;
+		background: transparent;
+		border-radius: 3px;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+		box-sizing: border-box;
+		color: var(--ds-text-subtle);
+	}
+	#logo {
+		display: flex;
+		justify-content: center;
+	}
+	#notice {
+		display: block;
+		color: rgb(41, 42, 46);
+		font-size: 16px;
+		font-weight: 653;
+		height: 20px;
+		line-height: 20px;
+		width: 184.75px;
+		margin-left: 70px; 
+		margin-top: 35px;
+	}
+	#small_txt {
+		color: rgb(80, 82, 88);
+		cursor: default;
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 653;
+		line-height: 16px;
+		padding-inline-start: 2px;
+		margin-top: 8px;
+	}
+	#required {
+		color: rgb(174, 46, 36);
+		display: inline-block;
+		font-weight: 653
+		paddint-inline-start: 2px;
+	}
+	#useremail-container {
+		align-items: center;
+		background-color: rgb(255, 255, 255);
+		width: 288px; 
+		height: 40px; 
+		margin-top: 2px;
+	}
+	#email_input {
+		background-color: rgba(0, 0, 0, 0);
+		color: rgb(41, 42, 46);
+		cursor: text;
+		display: block;
+		font-size: 14px;
+		font-stretch: 100%;
+		font-weight: 400;
+		line-height: 20px;
+		outline-width: 3px;
+		box-sizing: border-box;
+		padding: 10px;
+		width: 320px; 
+		height: 40px;
+		border-radius: 3px;
+		border: 1px solid rgb(193, 199, 208);
+	}
+	#login-submit {
+		background-color: rgb(24, 104, 219);
+		cursor: pointer;
+		display: inline-flex;font-size: 14px;
+		height: 40px;
+		font-weight: 500;
+		line-height: 40px;
+		width: 320px;
+		border: none;
+		border-radius: 3px;
+		margin-top: 22px;
+		text-align: center; 
+	}
+	#google-login > span> img {
+		margin: 0px 6px 0px 0px;
+		height: 24px;
+   		width: 24px;
+	}
+	#login-txt {
+		color: white;
+		margin-left: 134px;
+	}
+	#login-option{
+		margin-top: 24px; 
+		color: rgb(80, 82, 88); 
+		font-size: 14px; 
+		text-align: center;
+	}
+	#google-login {
+		text-align: center; 
+		justify-content: center;
+	}
+	#google-login-button {
+		border: 1px solid rgb(193, 199, 208); 
+		width: 320px; 
+		height: 40px; 
+		border-radius: 3px; 
+		background: rgb(255, 255, 255); 
+		cursor: pointer;
+	}
+	#google-login-button > span > img {
+		height: 24px; 
+		width: 24px; 
+		position: absolute; 
+		margin-top: -3px;
+	}
+	#google-txt {
+		color: rgb(23, 43, 77); 
+		font-size: 14px; 
+		font-weight: 700; 
+		position: relative; 
+		margin-left: 33px;
+	}
+	.signIn-signUp {
+		color: rgb(24, 104, 219); 
+		font-size: 14px; 
+		font-weight: 400; 
+		cursor: pointer; 
+		text-decoration-line: underline;
+	}
+	.dot {
+		margin: 0px 20px;
+	}
+	#other-option {
+		text-align: center; 
+		margin: 13px
+	}

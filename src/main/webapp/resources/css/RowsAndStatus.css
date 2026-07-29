@@ -1,0 +1,583 @@
+@charset "UTF-8";
+	* { box-sizing: border-box;}
+	html, body {
+	 	margin: 0;
+	 	height: 100%;
+	 	width: 100%;
+	}
+	*{ font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
+	#topArea {
+		height: 48px;
+		width:100%;
+		display:flex;
+		align-items:center;
+		border-bottom: 1px solid lightgray;
+	}
+	#area1 {
+		display:flex;
+		align-items:center;
+		width: 12.5%;
+	}
+	#logo {
+		margin-left: 50px;
+	}
+	#logo > a > img {
+		cursor: pointer;
+		height: 24px;
+	}
+	#closer > button {
+		background-color: white;
+		margin-left: 20px;
+		border: 1px solid white;
+	}
+	#closer > button > img {
+		height: 20px;
+		cursor: pointer;
+	}
+	#opener {
+		display: none;
+	}
+	#opener > button {
+		background-color: white;
+		border: 1px solid white;
+		margin-left: 20px; 
+	}
+	#opener > button > img {
+		height: 20px;
+		cursor: pointer;
+	}
+	#area2 {
+		width: 60.5%;
+		display: flex;
+		align-items:center;
+		justify-content: right;
+		gap: 10px;
+	}
+	#searchBar {
+		height: 34px;
+		width: 780px;
+		border-radius: 6px;
+		border: 1px solid gray;
+		background-image: url('resources/img/search.png');
+			background-repeat: no-repeat;
+			background-size: 20px;
+			background-position: 3px center;
+			padding-left: 25px;
+	}
+	#create {
+		background-color: #1868db;
+		color: white;
+		font-size: 16px;
+		width: 90px;
+		height: 33px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		border: 1px solid #1868db;
+		border-radius: 4px;
+	}
+	#plus {
+		width: 26px;
+		height: 26px;
+	}
+	#area3 {
+		width: 27%;
+		display: flex;
+		align-items: center;
+		justify-content: right;
+	}
+	#bell {
+		margin-right: 80px;
+		margin-bottom: 4px;
+		cursor: pointer;
+	}
+	#profile {
+		height: 24px;
+		margin-right: 15px;
+		margin-bottom: 1px;
+		cursor: pointer;
+	}
+	#profile > a > img {
+		height: 24px;
+	}
+	#mainArea {
+		display: flex;
+		width: 100%;
+	}
+	#sideBarArea {
+		width: 12.5%;
+		height: 910px;
+		border-right: 1px solid lightgray;
+	}
+	.gap {
+		width: 100%;
+		height: 32px;
+		display: flex;
+		align-items: center;
+	}
+	.gap > a {
+		margin-left: 15px;
+	}
+	.bold {
+		margin-right: 10px;
+		height: 12px;
+		width: 18px;
+		margin-top: 5.2px;
+	}
+	#osusume {
+		margin-top: 15px;
+		cursor: pointer;
+	}
+	#osusume:hover {
+		background-color: #f5f5f5;
+		color: gray;
+	}
+	#osusume:active {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#osusume:focus-within {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#hito {
+		height: 24px;
+		margin-left: 15px;
+	}
+	#saikin {
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+	}
+	#saikin:hover {
+		background-color: #f5f5f5;
+		color: gray;
+	}
+	#saikin:active {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#saikin:focus-within {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#tokei {
+		margin-left: 15px;
+	}
+	#filter {
+		margin-left:15px;
+	}
+	#filter_list > div {
+		cursor: pointer;
+	}
+	#filter_list > .gap:hover {
+		background-color: #f5f5f5;
+		color: gray;
+	}
+	#filter_list > .gap:active {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#filter_list > .gap:focus-within {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#space {
+		margin-left: 15px;
+	}
+	#space_list > div {
+		cursor: pointer;	
+	}
+	#space_list > .gap:hover {
+		background-color: #f5f5f5;
+		color: gray;
+	}
+	#space_list > .gap:active {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#space_list > .gap:focus-within {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#submit {
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+	}
+	#submit:hover {
+		background-color: #f5f5f5;
+		color: gray;
+	}
+	#submit:active {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#submit:focus-within {
+		color: #1868db;
+		border-right: 2px solid #1868db;
+		background-color: rgb(233, 242, 254);
+	}
+	#upload {
+		display: flex;
+	}
+	#plusdocu {
+		height: 20px;
+		width: 20px;
+		margin-left: 15px;
+	}
+	#various {
+		width: 87.5%;
+	}
+	.menuIcon {
+		width: 20px;
+	}
+	#beru {
+		width: 20px;
+		margin-top: 6px;
+	}
+	#clock {
+		width: 16px;
+		margin-right: 6px;
+		margin-left: 4px;
+		margin-top: 3px;
+	}
+	#firuta {
+		width: 18px;
+		margin-right:6px;
+	}
+	#greencheck {
+		width: 12px;
+		height: 12px;
+	}
+	#rowsandstatus {
+		margin: 35px;
+	}
+	#headerR {
+		color: gray;
+		font-size: 14px;
+	}
+	#headerR > a {
+		color: gray;
+		font-size: 14px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	#headerR > a:hover {
+		text-decoration: underline;
+	}
+	#titleR > b {
+		font-size: 25px;
+		margin: 10px;
+	}
+	#headerR2 {
+		display: flex;
+		justify-content: space-between;
+	}
+	#btnsR {
+		gap: 4px;
+		padding-top: 10px;
+	}
+	#changeSave {
+		height: 32px;
+		width: 115px;
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		border: 1px solid rgba(5, 21, 36, 0.06);
+		color: rgba(8, 15, 33, 0.29);
+		cursor: not-allowed;
+	}
+	#quit {
+		border: none;
+		background-color: white;
+		cousor: pointer;
+		height: 32px;
+		width: 67px;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	#quit:hover {
+		background-color: rgba(5, 21, 36, 0.06);
+	}
+	#describe {
+		font-size: 13px;
+		margin-bottom: 10px;
+	}
+	#mainR {
+		display: flex;
+		gap: 25px;
+	}
+	#undifined {
+		width: 270px;
+		height: 720px;
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		padding: 10px;
+	}
+	#undifined > b {
+		font-size: 13px;
+	}
+	#undifined > div {
+		font-size: 13px;
+		height: 94%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#todo {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		padding: 10px;
+		width: 270px;
+		height: 175px;
+	}
+	#todo > b {
+		font-size: 12px;
+		color: gray;
+	}
+	#todo > b:hover {
+		cursor: grab;
+	}
+	#todo > .hsform {
+		margin-left: 190px;
+	}
+	#doing {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		padding: 10px;
+		width: 270px;
+		height: 175px;
+	}
+	#doing > b {
+		font-size: 12px;
+		color: gray;
+	}
+	#doing > b:hover {
+		cursor: grab;
+	}
+	#check {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		padding: 10px;
+		width: 270px;
+		height: 175px;
+	}
+	#check > b {
+		font-size: 12px;
+		color: gray;
+	}
+	#check > b:hover {
+		cursor: grab;
+	}
+	#clear {
+		background-color: rgba(5, 21, 36, 0.06);
+		border-radius: 4px;
+		padding: 10px;
+		width: 270px;
+		height: 175px;
+	}
+	#clear > b {
+		font-size: 12px;
+		color: gray;
+	}
+	#clear > b:hover {
+		cursor: grab;
+	}
+	.hsform {
+		margin-left: 190px;
+	}
+	.hs {
+		width: 32px;
+		height: 32px;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+		border-radius: 4px;
+		display: none;
+		cursor: pointer;
+	}
+	.hs:hover {
+		background-color: rgb(183, 185, 190);
+	}
+	.card {
+		border-radius: 4px;
+		background-color: white;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+		display: flex;
+		align-items: center;
+		height: 32px;
+		gap: 10px;
+		padding: 8px;
+		cursor: grab;
+		margin-top: 10px;
+	}
+	.status {
+		font-size: 10px;
+		border-radius: 4px;
+		display: inline;
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+	.taskqty {
+		font-size: 13px;
+		padding-bottom: 2px;
+	}
+	#todo > .card > .status {
+		border: 1px solid rgb(183, 185, 190);
+	}
+	#doing > .card > .status {
+		border: 1px solid rgb(102, 157, 241);
+	}
+	#check > .card > .status {
+		border: 1px solid rgb(102, 157, 241);
+	}
+	#clear > .card > .status {
+		border: 1px solid rgb(148, 199, 72);
+	}
+	#plusbtn {
+		font-size: 30px;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+		color: rgb(80, 82, 88);
+		border-radius: 6px;
+		padding-left: 14px;
+		padding-right: 14px;
+		padding-bottom: 5px;
+		background-color: white;
+		cursor: pointer;
+	}
+	#plusbtn:hover {
+		background-color: rgb(183, 185, 190);
+	}
+	.hsbtn {
+		display: none;
+		width: 32px;
+		height: 32px;
+		border: none;
+	}
+	#hsframe {
+		display: none;
+		margin-left: 30%;
+	 	height: 320px;
+	 	min-width: 382px;
+	 	width: 603px;
+	}
+	#editcard {
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+		border-radius: 4px;
+		padding: 20px;
+	}
+	#cardheader {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 35px;
+	}
+	#cardheader > b {
+		font-size: 20px;
+	}
+	#exit {
+		font-size: 24px;
+		color: gray;
+		border: none;
+		background-color: white;
+		cursor: pointer;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 6px;
+	}
+	#exit:hover {
+		background-color: rgba(5,21,36,0.06);
+	}
+	#iptrname {
+		height: 34px;
+		width: 95%;
+		margin-top: 6px;
+		margin-bottom: 10px;
+	}
+	#delete {
+		background-color: white;
+		border: 1px solid rgba(11, 18, 14, 0.14);
+		font-size: 16px;
+		width: 71px;
+		height: 33px;
+		cursor: pointer;
+		margin-top: 100px;
+		border-radius: 4px;
+	}
+	#delete:hover {
+		background-color: rgba(11,18,14,0.14);
+	}
+	#cancel {
+		background-color: white;
+		border: none;
+		border-radius: 4px;
+		font-size: 16px;
+		height: 33px;
+		cursor: pointer;
+		margin-left: 330px;
+	}
+	#cancel:hover {
+		background-color: rgba(5,21,36,0.06);
+	}
+	#update {
+		background-color: rgba(5, 21, 36, 0.06);
+		border: 1px solid rgba(118, 118, 118, 0.3);
+		font-size: 16px;
+		color: rgba(8, 15, 33, 0.29);
+		height: 33px;
+		border-radius: 4px;
+		cursor: not-allowed;
+	}
+	#jiraSearch {
+		width: 782px;
+		height: 92%;
+		margin-left: 271px;
+		border: none;
+		display: none;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
+		border-radius: 6px;
+	 	justify-content: center;
+	}
+	#jirasearch {
+		/* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; */
+		width: 782px;
+		height: 92%;
+		border:none;
+		/* border-radius: 6px; */
+	}
+	#header {
+		font-size: 18px;
+		font-weight: 600;
+		color: #1868db;
+		display-flex;
+		align-items: center;
+		padding-top: 5px;
+		padding-left: 15px;
+		padding-bottom: 3px;
+	}
+	#span {
+		font-size: 14px;
+		margin:12px;
+	}
+	
+	.list {
+		padding: 12px;
+		cursor: pointer;
+	}
+	.list:hover {
+		background-color: #f5f5f5;
+		
+	}
+	.taskimage {
+		margin-right: 50px;
+	}
