@@ -6,28 +6,40 @@
 	<meta charset="UTF-8">
 	<title>Jira Main Board Page</title>
 	<script>
+	// 중복 이벤트 정리 후 아래 구조로 통합
 	$(function() {
-		$("#add-status-container").click(function() {
-			
-		});
-	    $("#add-status-container").click(function() { 
-	        // 서버 통신 (Fetch API)
+	    // 1. + 버튼 클릭 시 입력창 열기/닫기
+	    $("#add-status-container").click(function() {
+	        $("#createStasusIpt").toggle();
+	    });
+
+	    // 2. 확인 버튼 클릭 시 input 값을 읽어서 Fetch 전송
+	    $("#btnCreateStatus").click(function(e) {
+	        const statusTitle = $("input[name='statusTitle']").val().trim();
+	        const statusColor = $("input[name='statusColor']").val().trim() || "#333333";
+	        const statusOrder = $(".status-container").length + 1;
+
+	        if(!statusTitle) {
+	            alert("상태 제목을 입력해주세요.");
+	            return;
+	        }
+
 	        fetch("createStatus.do", {
 	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/x-www-form-urlencoded",
-	            },
-	            body: "statusTitle=" + statusTitle + "&statusOrder=" + statusOrder + "&statusColor=" + statusColor
+	            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+	            body: "statusTitle=" + encodeURIComponent(statusTitle) + 
+	                  "&statusOrder=" + statusOrder + 
+	                  "&statusColor=" + encodeURIComponent(statusColor)
 	        })
 	        .then(response => response.text())
 	        .then(result => {
 	            const res = result.trim();
 	            if(res === "success") {
 	                alert("상태가 추가되었습니다.");
-	                location.reload(); // 추가 후 보드 화면 갱신
+	                location.reload();
 	            } else if(res === "fail_login") {
 	                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
-	                location.href = "login";
+	                location.href = "<c:url value='/login'/>";
 	            } else {
 	                alert("상태 추가에 실패했습니다.");
 	            }
@@ -119,18 +131,18 @@
 							<span>+</span>
 							<span>만들기</span>
 						</button>
-					</div>
-					<div id="createStasusIpt">
-						<form>
-							상태 제목:<br/>
-							<input type="text" name="statusTitle"/> <br/>
-							상태 색상
-						</form>
-					</div>
+					</div>	
 				</div>
 				</c:forEach>
 				<div id="add-status-container">
 					<button type="button" id="add-status">+</button>
+				</div>
+				<div id="createStasusIpt" style="display: none;">
+    				상태 제목:<br/>
+    				<input type="text" name="statusTitle" placeholder="제목 입력"/> <br/>
+    				상태 색상: <br/>
+    				<input type="text" name="statusColor" placeholder="색상 입력"/> <br/>
+    				<button type="button" id="btnCreateStatus">확인</button>
 				</div>
 			</div>
 		</main>

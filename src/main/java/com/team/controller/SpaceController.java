@@ -152,7 +152,7 @@ public class SpaceController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/createStatus.do")
+	@PostMapping("/space/createStatus.do")
 	public String createStatus(@RequestParam("statusOrder") int statusOrder, @RequestParam("statusTitle") String statusTitle, @RequestParam("statusColor") String statusColor, HttpSession session) {
 	    
 	    // 1. 세션에서 현재 로그인한 유저 번호 가져오기
@@ -163,7 +163,7 @@ public class SpaceController {
 	    
 	    // 2. XML 쿼리에 맞게 DTO 생성 및 값 세팅
 	    StatusDto statusDto = new StatusDto();
-	    statusDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+	    statusDto.setSpaceKey((String) session.getAttribute("spaceKey"));
 	    statusDto.setStatusTitle(statusTitle);
 	    statusDto.setStatusOrder(statusOrder);
 	    statusDto.setStatusColor(statusColor);
