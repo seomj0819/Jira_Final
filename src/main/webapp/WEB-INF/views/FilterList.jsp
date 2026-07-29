@@ -2,12 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
 	<meta charset="UTF-8">
 	<title>Filter</title>
-</head>
 	<script>
 		function changeButtonImg(el) {
 			const img = el.querySelector('img');
@@ -264,7 +260,6 @@
 			font-size: 24px;
 		}
 		</style>
-<body>
 	<header>
 		<h1>필터</h1>
 		<button>필터 만들기</button>
@@ -352,5 +347,3 @@
 			</table>
 		</div>
 	</main>
-</body>
-</html>
