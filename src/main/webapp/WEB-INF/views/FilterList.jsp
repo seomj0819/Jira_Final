@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="<c:url value='/resources/css/FilterList.css'/>"/>
 	<title>Filter</title>
 	<script>
 		function changeButtonImg(el) {
@@ -75,7 +76,7 @@
 		}
 		
 		function toggleDropdown() {
-			const menu = document.getElementById("dropdownMenu");
+			const menu = document.getElementById(".dropdown_content");
 			menu.classList.toggle("show");
 		}
 		window.addEventListener('click', function(event) {
@@ -93,7 +94,6 @@
 	<header>
 		<h1>필터</h1>
 		<button>필터 만들기</button>
-		<link rel="stylesheet" href="<c:url value='/resources/css/FilterList.css'/>"/>
 	</header>
 	<main>
 		<div id="search_filter">

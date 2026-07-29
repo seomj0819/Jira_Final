@@ -6,19 +6,24 @@
 
 <insert id="createAlarmCheck" parameterType="com.team.dto.AlarmChkDto">
 	<![CDATA[
-		INSERT INTO alarmchk(history_no, user_no) VALUES (#{history_no}, #{user_no})
+		INSERT INTO alarmchk(history_no, user_no) 
+		VALUES (#{history_no}, #{user_no})
 	]]>
 </insert>
 
 <delete id="deleteAlarmCheck" parameterType="com.team.dto.AlarmChkDto">
 	<![CDATA[
-		DELETE FROM alarmchk WHERE history_no = #{history_no} AND user_no = #{user_no}
+		DELETE FROM alarmchk 
+		WHERE history_no = #{history_no} 
+		AND user_no = #{user_no}
 	]]>
 </delete>
 
 <select id="countAlarmCheck" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 	<![CDATA[
-		SELECT COUNT(*) AS cnt FROM alarmchk WHERE user_no = #{user_no}
+		SELECT COUNT(*) AS cnt 
+		FROM alarmchk 
+		WHERE user_no = #{user_no}
 	]]>
 </select>
 
