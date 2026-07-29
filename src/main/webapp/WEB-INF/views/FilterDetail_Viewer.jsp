@@ -101,7 +101,7 @@
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
 				<img src="img/search.png">
-				<input id="search_filter_by_title" placeholder="업무 검색">
+				<input id="search_task_by_title" placeholder="업무 검색">
 			</div>
 		<select>
 			<option value="" selected disabled hidden>스페이스</option>
