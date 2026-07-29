@@ -14,7 +14,7 @@ public interface SearchConditionDao {
 	void insertSearchConditionAccess(SearchConditionAccessDto dto);			// 필터 권한 추가
 	void deleteSearchConditionAccess(SearchConditionAccessDto dto);			// 필터 권한 삭제
 	List<SearchConditionDto> showSearchConditionList(int currentUserNo);	// 해당 유저가 접속 가능한 필터 리스트 출력
-	void favoriteSearchCondition(Map<String, Object> map);					//즐겨찾기 추가
+	void favoriteSearchCondition(Map<String, Object> map);					// 즐겨찾기 추가
 	boolean isFavorite(int searchConditionNo);								// 필터가 즐겨찾기 되어있는지 조회
 	List<SearchConditionDto> searchCriteriaByOwner(SearchCriteriaDto dto);	// 생성자로 필터 검색
 	List<SearchConditionDto> searchCriteriaBySpace(SearchCriteriaDto dto);	// 스페이스별로 필터 검색
