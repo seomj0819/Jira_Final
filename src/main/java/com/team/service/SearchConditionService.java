@@ -16,7 +16,7 @@ public interface SearchConditionService {
 	void updateSearchConditionAccess(SearchConditionAccessDto dto);
 	void favoriteSearchCondition(Map<String, Object> map);
 	boolean isFavorite(int searchConditionNo);
-	List<SearchConditionDto> showSearchConditoinList(int currentUserNo);
+	List<SearchConditionDto> showSearchConditionList(int currentUserNo);
 	List<SearchConditionDto> searchCriteriaByOwner(SearchCriteriaDto dto);
 	List<SearchConditionDto> searchCriteriaBySpace(SearchCriteriaDto dto);
 	List<SearchConditionDto> searchCriteriaByTitle(SearchCriteriaDto dto);

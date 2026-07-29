@@ -1,5 +1,6 @@
 package com.team.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team.dto.SpaceListDto;
 import com.team.dto.SpaceMemberDto;
+import com.team.dto.TaskInfoDto;
+import com.team.service.SearchConditionService;
 import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
+import com.team.service.StatusService;
+import com.team.service.TaskService;
 
 @Controller
 public class SpaceController {
@@ -23,6 +28,15 @@ public class SpaceController {
 	
 	@Autowired
 	SpaceService spaceService;
+	
+	@Autowired
+	StatusService statusService;
+	
+	@Autowired
+	TaskService taskService;
+	
+	@Autowired
+	SearchConditionService searchConditionService;
 	
 	// 소속된 Space가 있을경우 Space 선택창으로 이동
 	@GetMapping("/space/select")
@@ -102,10 +116,29 @@ public class SpaceController {
 	        return "redirect:/space/select";
 	    }
 	    
+	    List<List<TaskInfoDto>> taskListGroup = new ArrayList<>();
+	    List<TaskInfoDto> taskListByStatus = new ArrayList<>();
+	    List<Integer> taskQty = new ArrayList<>();
+	    
+	    for(int i=0; i<statusService.ShowStatus(spaceKey).size(); i++) {
+	    	TaskInfoDto dto = new TaskInfoDto();
+	    	dto.setSpaceKey(spaceKey);
+	    	dto.setStatusNo(statusService.ShowStatus(spaceKey).get(i).getStatusNo());
+	    	taskListByStatus = taskService.showTaskListByStatus(dto);
+	    	taskQty.add(taskListByStatus.size());
+	    	taskListGroup.add(taskListByStatus);
+	    }
+	    
 	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("contentPage", "Main_board");
-
+	    model.addAttribute("spaceDto", spaceService.showSpaceProfile(spaceKey));
+	    model.addAttribute("statusList", statusService.ShowStatus(spaceKey));
+	    model.addAttribute("taskQty", taskQty);
+	    model.addAttribute("taskListGroup", taskListGroup);
+	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    
 	    session.setAttribute("spaceKey", spaceKey);
+	    
 	    return "MainSides";
 	}
 	

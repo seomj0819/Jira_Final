@@ -79,18 +79,11 @@
 			<br/>
 			<div id="filter" class="gap"><img id="firuta" src="<c:url value='/resources/img/data-filter-icon.svg'/>"/>필터</div>
 			<div id="filter_list">
+				<c:forEach var="searchConditionDto" items="${searchConditionList}">
 				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#01</a>
+					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>${searchConditionDto.searchConditionTitle}</a>
 				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#02</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#03</a>
-				</div>
-				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>(사용가능한 필터목록)#04</a>
-				</div>
+				</c:forEach>
 			</div>
 			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='/resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
 			<div id="space_list">

@@ -63,5 +63,10 @@ public class TaskServiceImpl implements TaskService {
 	public TaskInfoDto showTask(TaskInfoDto dto) {
 		return taskDao.showTask(dto);
 	}
+
+	@Override
+	public List<TaskInfoDto> showTaskListByStatus(TaskInfoDto dto) {
+		return taskDao.showTaskListByStatus(dto);
+	}
 	
 }

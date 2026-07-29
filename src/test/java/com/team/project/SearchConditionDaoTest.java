@@ -98,7 +98,7 @@ public class SearchConditionDaoTest {
 		int currentUserNo = 2;
 		
 		// When
-		List<SearchConditionDto> list = searchDao.showSearchConditoinList(currentUserNo);
+		List<SearchConditionDto> list = searchDao.showSearchConditionList(currentUserNo);
 		
 		// Then
 		assertNotNull(list);

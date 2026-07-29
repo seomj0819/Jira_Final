@@ -162,7 +162,7 @@ public class SearchConditionServiceTest {
 		int currentUserNo = 2;
 		
 		// When
-		List<SearchConditionDto> list = searchConditionService.showSearchConditoinList(currentUserNo);
+		List<SearchConditionDto> list = searchConditionService.showSearchConditionList(currentUserNo);
 		
 		// Then
 		assertNotNull(list);

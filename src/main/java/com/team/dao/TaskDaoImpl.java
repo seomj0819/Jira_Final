@@ -62,5 +62,10 @@ public class TaskDaoImpl implements TaskDao{
 	public TaskInfoDto showTask(TaskInfoDto dto) {
 		return sqlSession.selectOne("com.team.mapper.TaskInfoMapper.showTask", dto);
 	}
+
+	@Override
+	public List<TaskInfoDto> showTaskListByStatus(TaskInfoDto dto) {
+		return sqlSession.selectList("com.team.mapper.TaskInfoMapper.showTaskListByStatus", dto);
+	}
 	
 }

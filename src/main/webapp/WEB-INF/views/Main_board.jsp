@@ -12,7 +12,7 @@
 			</div>
 			<div id="space-title-container">
 				<span><img src="../resources/img/space_sample.png"></span>
-				<span id="space-title">Project Title</span>
+				<span id="space-title">${spaceDto.spaceTitle}</span>
 				<button class="button"><img src="../resources/img/add_user.png"></button>
 				<button class="button"><img src="../resources/img/more.png"></button>
 			</div>
@@ -49,26 +49,28 @@
 				</div>
 			</div>
 			<div id="task-container">
+				<c:forEach var="statusDto" items="${statusList}" varStatus="status">
 				<div class="status-container">
 					<div class="status-title-container">
-						<span class="status-title">status</span>
-						<span class="task-cnt">cnt</span>
+						<span class="status-title">${statusDto.statusTitle}</span>
+						<span class="task-cnt">${taskQty[status.index]}</span>
 					</div>
+					<c:forEach var="taskDto" items="${taskListGroup[status.index]}">
 					<div class="task-card-container">
 						<button type="button" class="task-card">
 							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
+								<span class="task-title">${taskDto.taskTitle}</span>
 							</div>
 							<div class="task-body">
 								<div class="duration">
 									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
+									<span>${taskDto.dueDate}</span>
 								</div>
 							</div>
 							<div class="task-footer">
 								<div class="task-id-container">
 									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
+									<span>${taskDto.spaceKey}-${taskDto.taskNo}</span>
 								</div>
 								<div class="task-info-container">
 									<span><img src=""></span>
@@ -77,87 +79,7 @@
 							</div>
 						</button>
 					</div>
-					<div class="task-card-container">
-						<button type="button" class="task-card">
-							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
-							</div>
-							<div class="task-body">
-								<div class="duration">
-									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
-								</div>
-							</div>
-							<div class="task-footer">
-								<div class="task-id-container">
-									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
-								</div>
-								<div class="task-info-container">
-									<span><img src="../resources/img/lowerTask.png"></span>
-									<span><img src="../resources/img/user.png"></span>
-								</div>
-							</div>
-						</button>
-					</div>
-					<div class="create-task-container">
-						<button class="create-task">
-							<span>+</span>
-							<span>만들기</span>
-						</button>
-					</div>
-				</div> 
-				<div class="status-container">
-					<div class="status-title-container">
-						<span class="status-title">status</span>
-						<span class="task-cnt">cnt</span>
-					</div>
-					<div class="task-card-container">
-						<button type="button" class="task-card">
-							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
-							</div>
-							<div class="task-body">
-								<div class="duration">
-									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
-								</div>
-							</div>
-							<div class="task-footer">
-								<div class="task-id-container">
-									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
-								</div>
-								<div class="task-info-container">
-									<span><img src="../resources/img/lowerTask.png"></span>
-									<span><img src="../resources/img/user.png"></span>
-								</div>
-							</div>
-						</button>
-					</div>
-					<div class="task-card-container">
-						<button type="button" class="task-card">
-							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
-							</div>
-							<div class="task-body">
-								<div class="duration">
-									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
-								</div>
-							</div>
-							<div class="task-footer">
-								<div class="task-id-container">
-									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
-								</div>
-								<div class="task-info-container">
-									<span><img src=""></span>
-									<span><img src="../resources/img/user.png"></span>
-								</div>
-							</div>
-						</button>
-					</div>
+					</c:forEach>
 					<div class="create-task-container">
 						<button class="create-task">
 							<span>+</span>
@@ -165,64 +87,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="status-container">
-					<div class="status-title-container">
-						<span class="status-title">status</span>
-						<span class="task-cnt">cnt</span>
-					</div>
-					<div class="task-card-container">
-						<button type="button" class="task-card">
-							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
-							</div>
-							<div class="task-body">
-								<div class="duration">
-									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
-								</div>
-							</div>
-							<div class="task-footer">
-								<div class="task-id-container">
-									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
-								</div>
-								<div class="task-info-container">
-									<span><img src="../resources/img/lowerTask.png"></span>
-									<span><img src="../resources/img/user.png"></span>
-								</div>
-							</div>
-						</button>
-					</div>
-					<div class="task-card-container">
-						<button type="button" class="task-card">
-							<div class="task-header">
-								<span class="task-title">TASK TITLE</span>
-							</div>
-							<div class="task-body">
-								<div class="duration">
-									<span><img src="../resources/img/calendar.png"></span>
-									<span>YYYY-MM-DD</span>
-								</div>
-							</div>
-							<div class="task-footer">
-								<div class="task-id-container">
-									<span><img src="../resources/img/check.png"></span>
-									<span>TASK NO</span>
-								</div>
-								<div class="task-info-container">
-									<span><img src="../resources/img/lowerTask.png"></span>
-									<span><img src="../resources/img/user.png"></span>
-								</div>
-							</div>
-						</button>
-					</div>
-					<div class="create-task-container">
-						<button class="create-task">
-							<span>+</span>
-							<span>만들기</span>
-						</button>
-					</div>
-				</div>
+				</c:forEach>
 				<div id="add-status-container">
 					<button type="button" id="add-status">+</button>
 				</div>

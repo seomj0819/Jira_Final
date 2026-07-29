@@ -122,7 +122,7 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	}
 
 	@Override
-	public List<SearchConditionDto> showSearchConditoinList(int currentUserNo) {
+	public List<SearchConditionDto> showSearchConditionList(int currentUserNo) {
 		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showSearchConditionList", currentUserNo);
 	}
 
