@@ -90,7 +90,7 @@
 		});
 	</script>
 	<style>
-		body {
+		.filter-list {
 			padding: 10px;
 		}
 		header {
@@ -260,6 +260,7 @@
 			font-size: 24px;
 		}
 		</style>
+	<div class="filter-list">
 	<header>
 		<h1>필터</h1>
 		<button>필터 만들기</button>
@@ -347,3 +348,4 @@
 			</table>
 		</div>
 	</main>
+	</div>
