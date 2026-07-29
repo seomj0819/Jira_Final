@@ -24,29 +24,29 @@
 </head>
 <body>
 	<div id="topArea">
-			<div id="area1">
-				<div id="closer"><button id="close"><img src="https://www.svgrepo.com/show/347842/sidebar-expand.svg"/></button></div>
-				<div id="opener"><button id="open"><img src="https://www.svgrepo.com/show/347841/sidebar-collapse.svg"/></button></div>
-				<div id="logo"><a href="Main.html"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
+		<div id="area1">
+			<div id="closer"><button id="close"><img src="https://www.svgrepo.com/show/347842/sidebar-expand.svg"/></button></div>
+			<div id="opener"><button id="open"><img src="https://www.svgrepo.com/show/347841/sidebar-collapse.svg"/></button></div>
+			<div id="logo"><a href="Main.html"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
+		</div>
+		<div id="area2">
+			<div><input id="searchBar" name="searchKeyWord" type="text" placeholder="검색"/></div>
+			<button id="create">
+				<svg id="plus" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-plus" viewBox="0 0 16 16">
+ 						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4">
+ 						</path>
+ 					</svg>
+ 					만들기
+ 				</button>
+ 			</div>
+ 			<div id="area3">
+			<div id="bell"><a><img id="beru" src="<c:url value='/resources/img/bell.svg'/>"/></a></div>
+			<div id="profile">
+				<a>
+					<img src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
+				</a>
 			</div>
-			<div id="area2">
-				<div><input id="searchBar" name="searchKeyWord" type="text" placeholder="검색"/></div>
-				<button id="create">
-					<svg id="plus" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-plus" viewBox="0 0 16 16">
-  						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4">
-  						</path>
-  					</svg>
-  					만들기
-  				</button>
-  			</div>
-  			<div id="area3">
-				<div id="bell"><a><img id="beru" src="<c:url value='/resources/img/bell.svg'/>"/></a></div>
-				<div id="profile">
-					<a>
-						<img src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-					</a>
-				</div>
-			</div>
+		</div>
 	</div>
 	<div id="mainArea">
 		<div id="sideBarArea">

@@ -111,7 +111,7 @@
 							<span>만들기</span>
 						</button>
 					</div>
-				</div>
+				</div> 
 				<div class="status-container">
 					<div class="status-title-container">
 						<span class="status-title">status</span>

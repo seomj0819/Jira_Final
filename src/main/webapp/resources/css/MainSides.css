@@ -58,11 +58,11 @@
 		width: 780px;
 		border-radius: 6px;
 		border: 1px solid gray;
-		background-image: url('<c:url value="/resources/img/search.png"/>');
-			background-repeat: no-repeat;
-			background-size: 20px;
-			background-position: 3px center;
-			padding-left: 25px;
+		background-image: url('../img/search.png');
+		background-repeat: no-repeat;
+		background-size: 20px;
+		background-position: 3px center;
+		padding-left: 25px;
 	}
 	#create {
 		background-color: #1868db;
