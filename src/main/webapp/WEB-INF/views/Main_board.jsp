@@ -5,6 +5,40 @@
 
 	<meta charset="UTF-8">
 	<title>Jira Main Board Page</title>
+	<script>
+	$(function() {
+		$("#add-status-container").click(function() {
+			
+		});
+	    $("#add-status-container").click(function() { 
+	        // 서버 통신 (Fetch API)
+	        fetch("createStatus.do", {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/x-www-form-urlencoded",
+	            },
+	            body: "statusTitle=" + statusTitle + "&statusOrder=" + statusOrder + "&statusColor=" + statusColor
+	        })
+	        .then(response => response.text())
+	        .then(result => {
+	            const res = result.trim();
+	            if(res === "success") {
+	                alert("상태가 추가되었습니다.");
+	                location.reload(); // 추가 후 보드 화면 갱신
+	            } else if(res === "fail_login") {
+	                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+	                location.href = "login";
+	            } else {
+	                alert("상태 추가에 실패했습니다.");
+	            }
+	        })
+	        .catch(error => {
+	            console.error("통신 에러:", error);
+	            alert("통신 오류가 발생했습니다.");
+	        });
+	    });
+	});
+	</script>
 	<form>
 		<header id="header">
 			<div id="title-container">
@@ -85,6 +119,13 @@
 							<span>+</span>
 							<span>만들기</span>
 						</button>
+					</div>
+					<div id="createStasusIpt">
+						<form>
+							상태 제목:<br/>
+							<input type="text" name="statusTitle"/> <br/>
+							상태 색상
+						</form>
 					</div>
 				</div>
 				</c:forEach>
