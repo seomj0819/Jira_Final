@@ -226,6 +226,129 @@
 			AND sc.search_condition_title LIKE '%' || #{searchKeyWord} || '%'
 		]]>
 	</select>
+	<select id="searchCriteria" parameterType="com.team.dto.SearchCriteriaDto"
+	        resultType="com.team.dto.SearchConditionDto">
+		SELECT DISTINCT sc.*
+		FROM search_condition sc
+		INNER JOIN search_condition_access my_acc
+			ON sc.search_condition_no = my_acc.search_condition_no
+		<where>
+			my_acc.user_no = #{currentUserNo}
+	
+			<!-- 제목 -->
+			<if test="searchKeyWord != null and searchKeyWord != ''">
+				AND sc.search_condition_title LIKE '%' || #{searchKeyWord} || '%'
+			</if>
+	
+			<!-- 스페이스: = / != -->
+			<if test="searchSpaceKey != null and searchSpaceKey != ''">
+				<if test='operatorSpace == null or operatorSpace == "="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_space d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.space_key = #{searchSpaceKey}
+					)
+				</if>
+				<if test='operatorSpace == "!="'>
+					AND NOT EXISTS (
+						SELECT 1 FROM sc_detail_space d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.space_key = #{searchSpaceKey}
+					)
+				</if>
+			</if>
+	
+			<!-- 담당자(worker): = / != -->
+			<if test="searchWorkerNo != null">
+				<if test='operatorWorker == null or operatorWorker == "="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_worker d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.worker_no = #{searchWorkerNo}
+					)
+				</if>
+				<if test='operatorWorker == "!="'>
+					AND NOT EXISTS (
+						SELECT 1 FROM sc_detail_worker d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.worker_no = #{searchWorkerNo}
+					)
+				</if>
+			</if>
+	
+			<!-- 생성자(creator 조건): = / != -->
+			<if test="searchCreatorNo != null">
+				<if test='operatorCreator == null or operatorCreator == "="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_creator d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.creator_no = #{searchCreatorNo}
+					)
+				</if>
+				<if test='operatorCreator == "!="'>
+					AND NOT EXISTS (
+						SELECT 1 FROM sc_detail_creator d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.creator_no = #{searchCreatorNo}
+					)
+				</if>
+			</if>
+	
+			<!-- 우선순위: = / != -->
+			<if test="searchPriority != null and searchPriority != ''">
+				<if test='operatorPriority == null or operatorPriority == "="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_priority d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.priority = #{searchPriority}
+					)
+				</if>
+				<if test='operatorPriority == "!="'>
+					AND NOT EXISTS (
+						SELECT 1 FROM sc_detail_priority d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.priority = #{searchPriority}
+					)
+				</if>
+			</if>
+	
+			<!-- 상태: = / != -->
+			<if test="searchStatus != null">
+				<if test='operatorStatus == null or operatorStatus == "="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_status d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.status_no = #{searchStatus}
+					)
+				</if>
+				<if test='operatorStatus == "!="'>
+					AND NOT EXISTS (
+						SELECT 1 FROM sc_detail_status d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.status_no = #{searchStatus}
+					)
+				</if>
+			</if>
+	
+			<!-- 마감일: >= / <= -->
+			<if test="searchDueDate != null and searchDueDate != ''">
+				<if test='operatorDueDate == "&gt;="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_due_date d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.due_date &gt;= #{searchDueDate}
+					)
+				</if>
+				<if test='operatorDueDate == "&lt;="'>
+					AND EXISTS (
+						SELECT 1 FROM sc_detail_due_date d
+						WHERE d.search_condition_no = sc.search_condition_no
+						AND d.due_date &lt;= #{searchDueDate}
+					)
+				</if>
+			</if>
+		</where>
+	</select>
 	<select id="showAccessTypeByUserNo" parameterType="com.team.dto.SearchConditionAccessDto" resultType="String">
 		<![CDATA[
 			SELECT access_type

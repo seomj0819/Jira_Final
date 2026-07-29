@@ -23,4 +23,5 @@ public interface SearchConditionService {
 	List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo);
 	String showAccessTypeByUserNo (int searchConditionNo, int userNo);	
 	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);
+	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);
 }

@@ -181,4 +181,9 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showAccessTypeList", searchConditionNo);
 	}
 
+	@Override
+	public List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto) {
+		return sqlSession.selectList("con.team.mapper.SearchConditionMapper.searchCriteria", dto);
+	}
+
 }

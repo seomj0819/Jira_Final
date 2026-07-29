@@ -89,13 +89,13 @@ public class SearchConditionController {
 		return "ok";
 	}
 	
-	@GetMapping("filter/list/search")
+	@GetMapping("/filter/list/search")
 	public String searchByTitle(@RequestParam(required = false) String keyword, 
 								@RequestParam(required = false) String spaceKey,
-								@RequestParam(required = false) int creatorNo,
-								@RequestParam(required = false) int workerNo,
+								@RequestParam(required = false) Integer creatorNo,
+								@RequestParam(required = false) Integer workerNo,
 								@RequestParam(required = false) String priority,
-								@RequestParam(required = false) String status,
+								@RequestParam(required = false) Integer statusNo,
 								@RequestParam(required = false) String dueDate,
 								HttpSession session, Model model) {
 		
@@ -111,7 +111,7 @@ public class SearchConditionController {
 		dto.setSearchCreatorNo(creatorNo);
 		dto.setSearchWorkerNo(workerNo);
 		dto.setSearchPriority(priority);
-		dto.setSearchStatus(status);
+		dto.setSearchStatusNo(statusNo);
 		dto.setSearchDueDate(dueDate);
 		
 		List<SearchConditionDto> list = searchConditionService.searchCriteriaByTitle(dto);

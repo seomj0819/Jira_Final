@@ -22,5 +22,5 @@ public interface SearchConditionDao {
 	List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo);	// 필터 번호로 검색
 	String showAccessTypeByUserNo (int searchConditionNo, int userNo);		// 현재 유저의 access_type 조회
 	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);	// 해당 필터에 접근 가능 사용자 조회
-	
+	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);			// 필터 검색
 }

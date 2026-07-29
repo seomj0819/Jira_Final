@@ -93,4 +93,9 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 		return searchConditionDao.showAccessTypeList(searchConditionNo);
 	}
 
+	@Override
+	public List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto) {
+		return searchConditionDao.searchCriteria(dto);
+	}
+
 }
