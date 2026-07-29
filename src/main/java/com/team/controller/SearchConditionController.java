@@ -109,6 +109,10 @@ public class SearchConditionController {
 		dto.setSearchSpaceKey(spaceKey);
 		dto.setSearchKeyWord(keyword);
 		dto.setSearchCreatorNo(creatorNo);
+		dto.setSearchWorkerNo(workerNo);
+		dto.setSearchPriority(priority);
+		dto.setSearchStatus(status);
+		dto.setSearchDueDate(dueDate);
 		
 		List<SearchConditionDto> list = searchConditionService.searchCriteriaByTitle(dto);
 		
