@@ -42,6 +42,32 @@
 			$("#space").click(function() {
 				location.href = "/project/space/select";
 			});
+			$("#space_list .gap").click(function() {
+				var spaceKey = $(this).data("key"); // 또는 $(this).data("space-key")
+			    if (!spaceKey) return;
+
+			    fetch("<c:url value='/space/enter'/>", {
+			        method: "POST",
+			        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			        body: "spaceKey=" + encodeURIComponent(spaceKey)
+			    })
+			    .then(res => res.text()) // 통째로 리턴된 MainSides HTML을 받아옴
+			    .then(html => {
+			        // 1. 받아온 HTML 문자열을 임시 문서(doc)로 변환
+			        const parser = new DOMParser();
+			        const doc = parser.parseFromString(html, "text/html");
+			        
+			        // 2. 그 임시 문서 안에서 #content 내부 내용만 알맹이로 추출!
+			        const newContent = doc.getElementById("content").innerHTML;
+			        
+			        // 3. 현재 내 화면의 #content에 해당 알맹이만 덮어쓰기
+			        document.getElementById("content").innerHTML = newContent;
+			        
+			        var newUrl = "<c:url value='/space/enter'/>?spaceKey=" + encodeURIComponent(spaceKey);
+			        history.pushState({ spaceKey: spaceKey }, "", newUrl);
+			    })
+			    .catch(err => console.error("스페이스 전환 에러:", err));
+			});
 		});
 	</script>
 </head>
@@ -97,7 +123,7 @@
 			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='/resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
 			<div id="space_list">
 			<c:forEach var="dto" items="${spaceList}">
-				<div class="gap">
+				<div class="gap" data-key="${dto.spaceKey}">
 					<a><img class="menuIcon" src="<c:url value='/resources/img/space_sample.png'/>"/>${dto.spaceTitle}</a>
 				</div>
 			</c:forEach>
