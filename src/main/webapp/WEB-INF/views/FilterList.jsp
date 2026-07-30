@@ -190,10 +190,18 @@
 								</a>
 							</td>
 							<td>
-								<div class="owner">-</div>
+								<div class="owner">
+									<c:forEach var="owner" items="${ownerNo}">
+										<option value=""></option>
+									</c:forEach>
+								</div>
 							</td>
 							<td>
-								<div class="viewer">-</div>
+								<div class="viewer">
+									<c:forEach var="viewer" items="${viewerNo}">
+										<option value=""></option>
+									</c:forEach>
+								</div>
 							</td>
 							<td>-</td>
 							<td>
