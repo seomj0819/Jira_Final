@@ -39,6 +39,9 @@
 			$("#saikin").click(function() {
 				$("#saikinPopUp").toggle();
 			});
+			$("#space").click(function() {
+				location.href = "/project/space/select";
+			});
 		});
 	</script>
 </head>
