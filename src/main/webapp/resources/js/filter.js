@@ -1,7 +1,9 @@
 function changeStarButtonImg(el, searchConditionNo) {
 	var favorite = el.src.match("star_empty.png") ? "Y" : "N";
 	
-	fetch("${pageContext.request.contextPath}/filter/favorite", {
+	fetch(ctx + "/filter/favorite", {
+		el.src = ctx + "/resources/img/star_yellow.png";
+		el.src = ctx + "/resources/img/star_empty.png";
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"
