@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -117,7 +119,7 @@ public class SpaceController {
 	}
 
 	// Space select 창에서 Space 선택후 Space/Board 페이지로 이동
-	@PostMapping("/space/enter")
+	@RequestMapping(value = "/space/enter", method = {RequestMethod.GET, RequestMethod.POST})
 	public String enterSpace(@RequestParam String spaceKey, HttpSession session, Model model) {
 
 	    Integer userNo = (Integer) session.getAttribute("userNo");
