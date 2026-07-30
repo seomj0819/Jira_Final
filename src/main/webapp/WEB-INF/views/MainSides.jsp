@@ -69,10 +69,15 @@
 			    .catch(err => console.error("스페이스 전환 에러:", err));
 			});
 		});
-		document.getElementById("content").addEventListener("click", function(e) {
-			if(e.target && e.target.classList.contains("star_")) {
-				var searchConditionNo = e.target.dataset.no;
-				changeStarButtonImg(e.target, searchConditionNo);
+		document.addEventListener("DOMContentLoaded", function() {
+			var contentEl = document.getElemebtById("content");
+			if(contentEl) {
+				document.getElementById("content").addEventListener("click", function(e) {
+					if(e.target && e.target.classList.contains("star_")) {
+						var searchConditionNo = e.target.dataset.no;
+						changeStarButtonImg(e.target, searchConditionNo);
+					}
+				});
 			}
 		});
 	</script>
