@@ -57,7 +57,7 @@
 			        const parser = new DOMParser();
 			        const doc = parser.parseFromString(html, "text/html");
 			        
-			        // 2. 그 임시 문서 안에서 #content 내부 내용만 알맹이로 추출!
+			        // 2. 그 임시 문서 안에서 #content 내부 내용만 알맹이로 추출
 			        const newContent = doc.getElementById("content").innerHTML;
 			        
 			        // 3. 현재 내 화면의 #content에 해당 알맹이만 덮어쓰기
@@ -68,6 +68,12 @@
 			    })
 			    .catch(err => console.error("스페이스 전환 에러:", err));
 			});
+		});
+		document.getElementById("content").addEventListener("click", function(e) {
+			if(e.target && e.target.classList.contains("star_")) {
+				var searchConditionNo = e.target.dataset.no;
+				changeStarButtonImg(e.target, searchConditionNo);
+			}
 		});
 	</script>
 </head>
@@ -158,7 +164,7 @@
 				</div>
 			</div>
 			<div id="content">
-				<jsp:include page="${contentPage}.jsp" />
+				<jsp:include page="${contentPage}.jsp"/>
 			</div>
 			
 			<div id="jiraSearch">

@@ -257,4 +257,6 @@ public class SearchConditionServiceTest {
 		// Then
 		assertNotNull(list);
 	}
+	
+
 }

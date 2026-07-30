@@ -17,6 +17,7 @@ import com.team.dao.SearchConditionDao;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.UserInfoDto;
 
 @RunWith(SpringJUnit4ClassRunner.class) //	테스트를 스프링과 함께 실행 함
 @ContextConfiguration(locations= {
@@ -239,6 +240,21 @@ public class SearchConditionDaoTest {
 		
 		// Then
 		assertNotNull(list);
+	}
+	
+	// 
+	@Test
+	public void testShowOwnerListByUserNo() {
+		// Given
+		int currentUserNo = 2;
+		
+		// When
+		List<UserInfoDto> list = searchDao.showOwnerListByUserNo(currentUserNo);
+		
+		// Then
+		assertNotNull(2);
+	
+		
 	}
 	
 }

@@ -39,7 +39,6 @@
 				el.src = '${pageContext.request.contextPath}/resources/img/star_black.png';
 			}
 		}
-
 		function changeStarButtonImg(el, searchConditionNo) {
 			var favorite;
 			if (el.src.match('star_empty.png')) {
