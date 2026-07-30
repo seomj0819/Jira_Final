@@ -86,6 +86,7 @@ public class SearchConditionController {
 		return "ok";
 	}
 
+	// Filter 검색
 	@GetMapping("/filter/list/search")
 	public String searchFilter(@RequestParam(required = false) String keyword,
 					           @RequestParam(required = false) String spaceKey, @RequestParam(required = false) String operatorSpaceKey,
