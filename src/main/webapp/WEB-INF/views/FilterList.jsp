@@ -191,9 +191,7 @@
 							</td>
 							<td>
 								<div class="owner">
-									<c:forEach var="owner" items="${ownerNo}">
-										<option value=""></option>
-									</c:forEach>
+									
 								</div>
 							</td>
 							<td>
