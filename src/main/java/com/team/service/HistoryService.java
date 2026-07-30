@@ -6,6 +6,6 @@ import com.team.dto.HistoryDto;
 
 public interface HistoryService {
 	boolean CreateHistory(HistoryDto historyDto);
-	List<HistoryDto> ShowHistory(int user_no);
+	List<HistoryDto> ShowHistory(int userNo);
 	List<HistoryDto> ShowTaskHistory(HistoryDto historyDto);
 }

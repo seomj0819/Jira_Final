@@ -36,6 +36,9 @@
 			$("#osusume").click(function() {
 				location.href = "/project/space/select";
 			});
+			$("#saikin").click(function() {
+				$("#saikinPopUp").toggle();
+			});
 		});
 	</script>
 </head>
@@ -112,9 +115,23 @@
 			</div>
 		</div>
 		<div id="various">
+			<div id="saikinPopUp">
+				<h2>최근</h2>
+				<hr/>
+				<div class="saikinList">
+					<c:forEach var="historyDto" items="${historyList}">
+						<div class="saikinHistory">
+							<b>・　${historyDto.spaceKey}-${historyDto.taskNo}</b> ${historyDto.actionType}
+							<br/>
+							<span style="color: gray;">${historyDto.createdAt}</span>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 			<div id="content">
 				<jsp:include page="${contentPage}.jsp" />
 			</div>
+			
 			<div id="jiraSearch">
 				<div id="jirasearch">
 					<div id="header">

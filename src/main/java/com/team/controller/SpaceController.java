@@ -18,6 +18,7 @@ import com.team.dto.SpaceListDto;
 import com.team.dto.SpaceMemberDto;
 import com.team.dto.StatusDto;
 import com.team.dto.TaskInfoDto;
+import com.team.service.HistoryService;
 import com.team.service.SearchConditionService;
 import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
@@ -42,6 +43,9 @@ public class SpaceController {
 	@Autowired
 	SearchConditionService searchConditionService;
 	
+	@Autowired
+	HistoryService historyService;
+	
 	// 소속된 Space가 있을경우 Space 선택창으로 이동
 	@GetMapping("/space/select")
 	public String selectSpace(HttpSession session, Model model, HttpServletRequest request) {
@@ -58,6 +62,7 @@ public class SpaceController {
 	    model.addAttribute("spaceMemberList", spaceMemberList);
 	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    model.addAttribute("historyList", historyService.ShowHistory(userNo));
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "Main_assigned";
 	    }
@@ -146,6 +151,7 @@ public class SpaceController {
 	    model.addAttribute("taskQty", taskQty);
 	    model.addAttribute("taskListGroup", taskListGroup);
 	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    model.addAttribute("historyList", historyService.ShowHistory(userNo));
 	    model.addAttribute("colorList", RandomCodeUtil.getColorCode());
 	    
 	    session.setAttribute("spaceKey", spaceKey);
@@ -182,12 +188,15 @@ public class SpaceController {
 	// DashBoard 버튼 클릭 후 Space/DashBoard 페이지로 이동
 	@PostMapping("/space/dashBoard")
 	public String spaceDashBoard(@RequestParam String spaceKey, HttpSession session, Model model) {
-
-	    if (session.getAttribute("userNo") == null) {
+		Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
 	        return "redirect:/login";
 	    }
 	    
+	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("contentPage", "Main_dashboard");
+	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    model.addAttribute("historyList", historyService.ShowHistory(userNo));
 	    
 	    session.setAttribute("spaceKey", spaceKey);
 	    return "MainSides";

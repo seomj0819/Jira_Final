@@ -38,11 +38,11 @@ public class HistoryDaoImpl implements HistoryDao {
 	// input : user_no
 	// output : List<HistoryDto>
 	@Override
-	public List<HistoryDto> ShowHistory(int user_no) {
+	public List<HistoryDto> ShowHistory(int userNo) {
 		List<HistoryDto> list = null;
 
 		try {
-			list = sqlSession.selectList("com.team.mapper.HistoryMapper.showHistory", user_no);
+			list = sqlSession.selectList("com.team.mapper.HistoryMapper.showHistory", userNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

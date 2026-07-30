@@ -19,8 +19,8 @@ public class HistoryServiceImpl implements HistoryService {
 	}
 
 	@Override
-	public List<HistoryDto> ShowHistory(int user_no) {
-		return historyDao.ShowHistory(user_no);
+	public List<HistoryDto> ShowHistory(int userNo) {
+		return historyDao.ShowHistory(userNo);
 	}
 
 	@Override

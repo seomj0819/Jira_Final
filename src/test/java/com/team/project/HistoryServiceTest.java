@@ -27,14 +27,14 @@ public class HistoryServiceTest {
 	public void testCreateHistory() {
 		// Given
 		HistoryDto dto = new HistoryDto();
-		dto.setSpace_key("ABCD");
-		dto.setTask_no(1);
-		dto.setReply_no(null);
-		dto.setUser_no(1);
-		dto.setField_name("task");
-		dto.setAction_type("create");
-		dto.setOld_value(null);
-		dto.setNew_value("new1111");
+		dto.setSpaceKey("ABCD");
+		dto.setTaskNo(1);
+		dto.setReplyNo(null);
+		dto.setUserNo(1);
+		dto.setFieldName("task");
+		dto.setActionType("create");
+		dto.setOldValue(null);
+		dto.setNewValue("new1111");
 		// When
 		boolean isCreated = hSvc.CreateHistory(dto);
 		// Then
@@ -45,12 +45,12 @@ public class HistoryServiceTest {
 	@Test
 	public void testShowHistory() {
 		// Given
-		int user_no = 1;
+		int userNo = 1;
 		// When
-		List<HistoryDto> list = hSvc.ShowHistory(user_no);
+		List<HistoryDto> list = hSvc.ShowHistory(userNo);
 		// Then
 		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getHistory_no()+"/"+list.get(i).getSpace_key()+"/"+list.get(i).getTask_no()+"/"+list.get(i).getReply_no()+"/"+list.get(i).getUser_no()+"/"+list.get(i).getField_name()+"/"+list.get(i).getAction_type()+"/"+list.get(i).getCreated_at()+"/"+list.get(i).getOld_value()+"/"+list.get(i).getNew_value());
+			System.out.println(list.get(i).getHistoryNo()+"/"+list.get(i).getSpaceKey()+"/"+list.get(i).getTaskNo()+"/"+list.get(i).getReplyNo()+"/"+list.get(i).getUserNo()+"/"+list.get(i).getFieldName()+"/"+list.get(i).getActionType()+"/"+list.get(i).getCreatedAt()+"/"+list.get(i).getOldValue()+"/"+list.get(i).getNewValue());
 		}
 	}
 	
@@ -59,13 +59,13 @@ public class HistoryServiceTest {
 	public void testShowTaskHistory() {
 		// Given
 		HistoryDto dto = new HistoryDto();
-		dto.setSpace_key("ABCD");
-		dto.setTask_no(1);
+		dto.setSpaceKey("ABCD");
+		dto.setTaskNo(1);
 		// When
 		List<HistoryDto> list = hSvc.ShowTaskHistory(dto);
 		// Then
 		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getHistory_no()+"/"+list.get(i).getReply_no()+"/"+list.get(i).getUser_no()+"/"+list.get(i).getField_name()+"/"+list.get(i).getAction_type()+"/"+list.get(i).getCreated_at()+"/"+list.get(i).getOld_value()+"/"+list.get(i).getNew_value());
+			System.out.println(list.get(i).getHistoryNo()+"/"+list.get(i).getReplyNo()+"/"+list.get(i).getUserNo()+"/"+list.get(i).getFieldName()+"/"+list.get(i).getActionType()+"/"+list.get(i).getCreatedAt()+"/"+list.get(i).getOldValue()+"/"+list.get(i).getNewValue());
 		}
 	}
 	
