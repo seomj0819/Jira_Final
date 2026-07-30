@@ -293,7 +293,27 @@
 					)
 				</if>
 			</if>
-	
+			<!-- 소유자(access owner): = / != -->
+			<if test="searchUserNo != null">
+				<if test='operatorOwner == null or operatorOwner == "="'>
+					AND EXISTS (
+						SELECT 1
+						FROM search_condition_access owner_acc
+						WHERE owner_acc.search_condition_no = sc.search_condition_no
+						AND owner_acc.access_type = 'owner'
+						AND owner_acc.user_no = #{searchUserNo}
+					)
+				</if>
+				<if test='operatorOwner == "!="'>
+					AND NOT EXISTS (
+						SELECT 1
+						FROM search_condition_access owner_acc
+						WHERE owner_acc.search_condition_no = sc.search_condition_no
+						AND owner_acc.access_type = 'owner'
+						AND owner_acc.user_no = #{searchUserNo}
+					)
+				</if>
+			</if>
 			<!-- 우선순위: = / != -->
 			<if test="searchPriority != null and searchPriority != ''">
 				<if test='operatorPriority == null or operatorPriority == "="'>
@@ -321,7 +341,7 @@
 						AND d.status_no = #{searchStatusNo}
 					)
 				</if>
-				<if test='operatorStatus == "!="'>
+				<if test='operatorStatusNo == "!="'>
 					AND NOT EXISTS (
 						SELECT 1 FROM sc_detail_status d
 						WHERE d.search_condition_no = sc.search_condition_no
