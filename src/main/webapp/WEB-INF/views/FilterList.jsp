@@ -90,16 +90,30 @@
 			}
 		});
 		
-		$("#search_filter_by_title").on("input", function() {
-	        var keyword = $(this).val();
-	        var url = "<c:url value='/filter/list/search'/>"
-	                + "?keyword=" + encodeURIComponent(keyword);
-	        fetch(url)
-	            .then(function(res) { return res.text(); })
-	            .then(function(html) {
-	                $("#filter_result_body").html(html);
-	        });
-	    });
+		function searchFilterList() {
+		    var keyword = $("#search_filter_by_title").val() || "";
+		    var ownerNo = $("#search_owner").val() || "";
+		    var spaceKey = $("#search_space").val() || "";
+
+		    var url = "<c:url value='/filter/list/search'/>"
+		        + "?keyword=" + encodeURIComponent(keyword)
+		        + "&ownerNo=" + encodeURIComponent(ownerNo)
+		        + "&operatorOwnerNo=" + encodeURIComponent("=")
+		        + "&spaceKey=" + encodeURIComponent(spaceKey)
+		        + "&operatorSpaceKey=" + encodeURIComponent("=");
+
+		    fetch(url)
+		        .then(function(res) { return res.text(); })
+		        .then(function(html) {
+		            $("#filter_result_body").html(html);
+		        });
+		}
+
+		$(function() {
+		    $("#search_filter_by_title").on("input", searchFilterList);
+		    $("#search_owner").on("change", searchFilterList);
+		    $("#search_space").on("change", searchFilterList);
+		});
 	</script>
 	<div class="filter-list">
 	<header>
@@ -113,13 +127,13 @@
 				<input id="search_filter_by_title" placeholder="필터 검색">
 			</div>
 			<select id="search_owner" class="dropbox">
-				<option value="">전체 소유자</option>
+				<option value="">소유자</option>
 				<c:forEach var="owner" items="${ownerList}">
 					<option value="${owner.userNo}">${owner.userName}</option>
 				</c:forEach>
 			</select>
 			<select id="search_space" class="dropbox">
-				<option value="">전체 프로젝트</option>
+				<option value="">스페이스</option>
 				<c:forEach var="space" items="${spaceList}">
 					<option value="${space.spaceKey}">${space.spaceTitle}</option>
 				</c:forEach>
