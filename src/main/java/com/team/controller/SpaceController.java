@@ -23,6 +23,7 @@ import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
 import com.team.service.StatusService;
 import com.team.service.TaskService;
+import com.team.util.RandomCodeUtil;
 
 @Controller
 public class SpaceController {
@@ -145,6 +146,7 @@ public class SpaceController {
 	    model.addAttribute("taskQty", taskQty);
 	    model.addAttribute("taskListGroup", taskListGroup);
 	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
+	    model.addAttribute("colorList", RandomCodeUtil.getColorCode());
 	    
 	    session.setAttribute("spaceKey", spaceKey);
 	    
