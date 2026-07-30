@@ -16,9 +16,8 @@
 	    // 2. 확인 버튼 클릭 시 input 값을 읽어서 Fetch 전송
 	    $("#btnCreateStatus").click(function(e) {
 	        const statusTitle = $("input[name='statusTitle']").val().trim();
-	        const statusColor = $("input[name='statusColor']").val().trim() || "#333333";
+	        const statusColor = $("input[name='statusColor']").val().trim();
 	        const statusOrder = $(".status-container").length + 1;
-
 	        if(!statusTitle) {
 	            alert("상태 제목을 입력해주세요.");
 	            return;

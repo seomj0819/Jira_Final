@@ -154,7 +154,6 @@ public class SpaceController {
 	@ResponseBody
 	@PostMapping("/space/createStatus.do")
 	public String createStatus(@RequestParam("statusOrder") int statusOrder, @RequestParam("statusTitle") String statusTitle, @RequestParam("statusColor") String statusColor, HttpSession session) {
-	    
 	    // 1. 세션에서 현재 로그인한 유저 번호 가져오기
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
