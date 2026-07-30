@@ -9,6 +9,41 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/MainSides.css'/>"/>
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
+		function changeStarButtonImg(el, searchConditionNo) {
+			var favorite;
+			if (el.src.match('star_empty.png')) {
+				favorite = "Y";
+			} else {
+				favorite = "N";
+			}
+	
+			fetch("${pageContext.request.contextPath}/filter/favorite", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				},
+				body: "searchConditionNo=" + searchConditionNo + "&favorite=" + favorite
+			})
+			.then(function(res) {
+				return res.text();
+			})
+			.then(function(data) {
+				if (data === "ok") {
+					if (favorite === "Y") {
+						el.src = "${pageContext.request.contextPath}/resources/img/star_yellow.png";
+					} else {
+						el.src = "${pageContext.request.contextPath}/resources/img/star_empty.png";
+					}
+				} else {
+					alert("즐겨찾기 실패");
+				}
+			})
+			.catch(function(err) {
+				console.log(err);
+				alert("통신 오류");
+			});
+		}
+		
 		$(function() {
 			$("#searchBar").click(function() {
 				if( $("#sideBarArea").css("display") != "none" ) {
@@ -68,17 +103,6 @@
 			    })
 			    .catch(err => console.error("스페이스 전환 에러:", err));
 			});
-		});
-		document.addEventListener("DOMContentLoaded", function() {
-			var contentEl = document.getElemebtById("content");
-			if(contentEl) {
-				document.getElementById("content").addEventListener("click", function(e) {
-					if(e.target && e.target.classList.contains("star_")) {
-						var searchConditionNo = e.target.dataset.no;
-						changeStarButtonImg(e.target, searchConditionNo);
-					}
-				});
-			}
 		});
 	</script>
 </head>
