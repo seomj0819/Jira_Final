@@ -11,6 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SearchCriteriaDto {
 	Integer currentUserNo;
+	
+	Integer searchUserNo;
+	String operatorOwner;	   // "=" or "!="
 
 	String searchKeyWord;
 
