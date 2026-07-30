@@ -96,11 +96,16 @@
 		    var spaceKey = $("#search_space").val() || "";
 
 		    var url = "<c:url value='/filter/list/search'/>"
-		        + "?keyword=" + encodeURIComponent(keyword)
-		        + "&ownerNo=" + encodeURIComponent(ownerNo)
-		        + "&operatorOwnerNo=" + encodeURIComponent("=")
-		        + "&spaceKey=" + encodeURIComponent(spaceKey)
-		        + "&operatorSpaceKey=" + encodeURIComponent("=");
+		        + "?keyword=" + encodeURIComponent(keyword);
+
+		    if (ownerNo !== "") {
+		        url += "&ownerNo=" + encodeURIComponent(ownerNo)
+		            + "&operatorOwnerNo=" + encodeURIComponent("=");
+		    }
+		    if (spaceKey !== "") {
+		        url += "&spaceKey=" + encodeURIComponent(spaceKey)
+		            + "&operatorSpaceKey=" + encodeURIComponent("=");
+		    }
 
 		    fetch(url)
 		        .then(function(res) { return res.text(); })
