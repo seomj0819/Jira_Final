@@ -57,6 +57,12 @@
 	            alert("통신 오류가 발생했습니다.");
 	        });
 	    });
+	    
+	    $(".task-card-container").click(function() {
+	    	var taskId = $(this).find(".showTaskId").html().trim();
+	    	var taskNo = taskId.split("-")[1];
+	    	location.href = "/project/taskCard?taskNo="+taskNo;
+	    });
 	});
 	</script>
 	<form>
@@ -124,7 +130,7 @@
 							<div class="task-footer">
 								<div class="task-id-container">
 									<span><img src="../resources/img/check.png"></span>
-									<span>${taskDto.spaceKey}-${taskDto.taskNo}</span>
+									<span class="showTaskId">${taskDto.spaceKey}-${taskDto.taskNo}</span>
 								</div>
 								<div class="task-info-container">
 									<span><img src=""></span>
