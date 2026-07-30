@@ -12,17 +12,26 @@
 	    $("#add-status-container").click(function() {
 	        $("#createStasusIpt").toggle();
 	    });
-
+	    
+		// 1.5 색상 선택 시
+		$(".selectStatusColor").click(function() {
+   			 $(".selectStatusColor").css("border", "none").removeClass("active");
+   			 $(this).css("border", "2px solid black").addClass("active");
+		});
+		
 	    // 2. 확인 버튼 클릭 시 input 값을 읽어서 Fetch 전송
 	    $("#btnCreateStatus").click(function(e) {
 	        const statusTitle = $("input[name='statusTitle']").val().trim();
-	        const statusColor = $("input[name='statusColor']").val().trim();
+	        const statusColor = $(".selectStatusColor.active").val();
 	        const statusOrder = $(".status-container").length + 1;
 	        if(!statusTitle) {
 	            alert("상태 제목을 입력해주세요.");
 	            return;
 	        }
-
+	        if(!statusColor) {
+	            alert("상태 색상을 선택해주세요.");
+	            return;
+	        }
 	        fetch("createStatus.do", {
 	            method: "POST",
 	            headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -140,7 +149,9 @@
     				상태 제목:<br/>
     				<input type="text" name="statusTitle" placeholder="제목 입력"/> <br/>
     				상태 색상: <br/>
-    				<input type="text" name="statusColor" placeholder="색상 입력"/> <br/>
+    				<c:forEach var="colorDto" items="${colorList}">
+    					<button type="button" class="selectStatusColor" value="${colorDto.colorName}" style="background-color: ${colorDto.colorCode}; width: 15px; height: 15px; border: none; cursor: pointer"></button>
+    				</c:forEach> <br/>
     				<button type="button" id="btnCreateStatus">확인</button>
 				</div>
 			</div>
