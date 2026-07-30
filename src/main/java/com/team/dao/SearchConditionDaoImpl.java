@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.UserInfoDto;
 
 @Repository
 public class SearchConditionDaoImpl implements SearchConditionDao {
@@ -184,6 +185,11 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	@Override
 	public List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto) {
 		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.searchCriteria", dto);
+	}
+
+	@Override
+	public List<UserInfoDto> showOwnerListByUserNo(int currentUserNo) {
+		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showOwnerListByUserNo", currentUserNo);
 	}
 
 }

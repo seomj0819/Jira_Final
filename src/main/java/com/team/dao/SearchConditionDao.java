@@ -6,6 +6,7 @@ import java.util.Map;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.UserInfoDto;
 
 public interface SearchConditionDao {
 	void createSearchCondition(SearchConditionDto dto);						// 필터 생성
@@ -23,4 +24,5 @@ public interface SearchConditionDao {
 	String showAccessTypeByUserNo (int searchConditionNo, int userNo);		// 현재 유저의 access_type 조회
 	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);	// 해당 필터에 접근 가능 사용자 조회
 	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);			// 필터 검색
+	List<UserInfoDto> showOwnerListByUserNo(int currentUserNo);				// 현재 접속중인 유저가 접근 가능한 Filter들의 ownerList 조회
 }

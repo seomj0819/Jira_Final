@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
 import com.team.service.SearchConditionService;
+import com.team.service.SpaceService;
 import com.team.service.TaskService;
 
 @Controller
@@ -25,6 +26,9 @@ public class SearchConditionController {
 	@Autowired
 	SearchConditionService searchConditionService;
 
+	@Autowired
+	SpaceService spaceService;
+	
 	@Autowired
 	TaskService taskService;
 
@@ -38,12 +42,22 @@ public class SearchConditionController {
 		List<SearchConditionDto> list = searchConditionService.showSearchConditionList(userNo);
 		model.addAttribute("filterList", list);
 
-		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-			return "FilterList";
-		}
-
-		model.addAttribute("contentPage", "FilterList");
-		return "MainSides";
+	    model.addAttribute("filterList",
+	        searchConditionService.showSearchConditionList(userNo));
+	    
+	    // 현재 접속중인 유저가 속한 스페이스
+	    model.addAttribute("spaceList",
+	        spaceService.showSpaceList(userNo));
+	    
+	    // 현재 접속중인 유저가 접근 가능한 필터의 소유자 List
+	    model.addAttribute("ownerList", searchConditionService.showOwnerListByUserNo(userNo));
+	    
+	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+	        return "FilterList";
+	    }
+	    model.addAttribute("contentPage", "FilterList");
+	    
+	    return "MainSides";
 	}
 
 	@GetMapping("/filter/list/detail")

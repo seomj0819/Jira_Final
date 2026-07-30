@@ -11,6 +11,7 @@ import com.team.dao.SearchConditionDao;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.UserInfoDto;
 
 @Service
 public class SearchConditionServiceImpl implements SearchConditionService {
@@ -96,6 +97,11 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 	@Override
 	public List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto) {
 		return searchConditionDao.searchCriteria(dto);
+	}
+
+	@Override
+	public List<UserInfoDto> showOwnerListByUserNo(int currentUserNo) {
+		return searchConditionDao.showOwnerListByUserNo(currentUserNo);
 	}
 
 }

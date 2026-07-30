@@ -112,14 +112,17 @@
 				<img src="<c:url value='/resources/img/search.png'/>">
 				<input id="search_filter_by_title" placeholder="필터 검색">
 			</div>
-			<select class="dropbox">
-				<option value="" selected disabled>소유자</option>
-				<option></option>
-				<option></option>
+			<select id="search_owner" class="dropbox">
+				<option value="">전체 소유자</option>
+				<c:forEach var="owner" items="${ownerList}">
+					<option value="${owner.userNo}">${owner.userName}</option>
+				</c:forEach>
 			</select>
-			<select class="dropbox">
-				<option value="" selected disabled>프로젝트</option>
-				<option></option>
+			<select id="search_space" class="dropbox">
+				<option value="">전체 프로젝트</option>
+				<c:forEach var="space" items="${spaceList}">
+					<option value="${space.spaceKey}">${space.spaceTitle}</option>
+				</c:forEach>
 			</select>
 		</div>
 		<div>

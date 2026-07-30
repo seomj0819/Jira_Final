@@ -369,6 +369,20 @@
 			</if>
 		</where>
 	</select>
+	<select id="showOwnerListByUserNo" resultType="com.team.dto.UserInfoDto">
+		<![CDATA[
+			SELECT DISTINCT u.user_no AS userNo,
+			                u.user_name AS userName
+			FROM search_condition_access my_acc
+			INNER JOIN search_condition_access owner_acc
+				ON my_acc.search_condition_no = owner_acc.search_condition_no
+			INNER JOIN users u
+				ON owner_acc.user_no = u.user_no
+			WHERE my_acc.user_no = #{currentUserNo}
+			AND owner_acc.access_type = 'owner'
+			ORDER BY u.user_name
+		]]>
+	</select>
 	<select id="showAccessTypeByUserNo" parameterType="com.team.dto.SearchConditionAccessDto" resultType="String">
 		<![CDATA[
 			SELECT access_type

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.UserInfoDto;
 
 public interface SearchConditionService {
 	void createSearchCondition(SearchConditionDto dto);
@@ -24,4 +25,5 @@ public interface SearchConditionService {
 	String showAccessTypeByUserNo (int searchConditionNo, int userNo);	
 	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);
 	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);
+	List<UserInfoDto> showOwnerListByUserNo(int currentUserNo);
 }
