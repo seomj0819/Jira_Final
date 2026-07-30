@@ -89,6 +89,17 @@
 			    }
 			}
 		});
+		
+		$("#search_filter_by_title").on("input", function() {
+	        var keyword = $(this).val();
+	        var url = "<c:url value='/filter/list/search'/>"
+	                + "?keyword=" + encodeURIComponent(keyword);
+	        fetch(url)
+	            .then(function(res) { return res.text(); })
+	            .then(function(html) {
+	                $("#filter_result_body").html(html);
+	        });
+	    });
 	</script>
 	<div class="filter-list">
 	<header>
