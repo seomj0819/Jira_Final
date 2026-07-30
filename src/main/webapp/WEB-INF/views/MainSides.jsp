@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/MainSides.css'/>"/>
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
+	  var ctx = "${pageContext.request.contextPath}";
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/filter.js"></script>
+	<script>
 		function changeStarButtonImg(el, searchConditionNo) {
 			var favorite;
 			if (el.src.match('star_empty.png')) {
