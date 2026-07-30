@@ -110,8 +110,23 @@ public class TaskController {
 	 		writerList.add(loginService.getUserProfile(replyList.get(i).getWriterNo()));
 	 	}
 	 	model.addAttribute("writerList", writerList);
-	 		
+	 	session.setAttribute("spaceKey", spaceKey);	
 	 	return "TaskCard";
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteTask.do")
+	public String deleteTask(@RequestParam("taskNo") int taskNo, HttpSession session) {
+		 Integer userNo = (Integer) session.getAttribute("userNo");
+		 if (userNo == null) {
+		     return "fail_login"; // 로그인 세션이 만료된 경우
+		 }
+		 
+		 String spaceKey = (String) session.getAttribute("spaceKey");
+		 
+		 taskService.deleteTask(spaceKey, taskNo);
+		 
+		 return "deleted";
 	}
 	
 	@ResponseBody
