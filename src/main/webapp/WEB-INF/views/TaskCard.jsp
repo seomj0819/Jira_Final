@@ -30,11 +30,47 @@
 			});
 			$("#deletebtn").click(function() {
 				if(confirm("테스크를 삭제 하시겠습니까?")) {
-					
+					// 1. 현재 주소의 파라미터 분석 객체 생성
+					var urlParams = new URLSearchParams(window.location.search);
+
+					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
+					var taskNo = urlParams.get("taskNo");
+					var spaceKey = "${sessionScope.spaceKey}";
+					 fetch("deleteTask.do", {
+				            method: "POST",
+				            headers: {
+				                "Content-Type": "application/x-www-form-urlencoded",
+				            },
+				            body: "taskNo=" + taskNo
+				        })
+				        .then(response => response.text())
+				        .then(result => {
+				            const res = result.trim();
+				            if(res === "deleted") {
+				            	alert("삭제되었습니다!");
+				            	// 세션에서 가져온 spaceKey를 쿼리스트링에 붙여서 이동합니다.
+				                if(spaceKey) {
+				                    location.href = "<c:url value='/space/enter'/>?spaceKey=" + encodeURIComponent(spaceKey);
+				                } else {
+				                    location.href = "<c:url value='/space/select'/>";
+				                }
+
+				            }  else if(res === "fail_login") {
+				                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+				                location.href = "login";
+				            } else {
+				                alert("댓글 삭제에 실패했습니다.");
+				            }
+				        })
+				        .catch(error => {
+				            console.error("통신 에러:", error);
+				            alert("통신 오류가 발생했습니다.");
+				        });
 				}
 			});
 			$("#exitbtn").click(function() {
 				$(this).parent().parent().parent().parent().parent().parent().hide();
+				history.back();
 			});
 			$("#historybtn").click(function() {
 				$(this).parent().parent().find("#inputreply").css("display", "none");
