@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<title>Filter Detail</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/FilterDetail.css'/>"/>
-	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>>
+	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
 		$(function() {
 			let layerPopUp = $("#popup_overlay");
