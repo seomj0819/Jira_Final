@@ -65,6 +65,7 @@ public class SpaceController {
 	    model.addAttribute("spaceList", spaceService.showSpaceList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("searchConditionList", searchConditionService.showSearchConditionList((Integer) session.getAttribute("userNo")));
 	    model.addAttribute("historyList", historyService.ShowHistory(userNo));
+	    
 	    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 	        return "Main_assigned";
 	    }
