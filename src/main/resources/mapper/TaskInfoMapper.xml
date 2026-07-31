@@ -235,11 +235,20 @@
 			summary FROM task WHERE space_key = #{spaceKey} AND status_no = #{statusNo}
 	]]>
 </select>
-<select id="searchUpperTaskNo" parameterType="" resultType="java.lang.Integer">
+<select id="isUpperTask" parameterType="com.team.dto.SearchDto" resultType="String">
 	<![CDATA[
-		SELECT upper_task_no
-		FROM task
-		WHERE 
+		SELECT CASE
+			WHEN t.upper_task_no IS NOT NULL THEN 'Y'
+			ELSE 'N'
+		END
+		FROM task t
+		WHERE t.task_no = #{searchTaskNo}
+		AND t.space_key = #{searchSpaceKey}
+		AND t.space_key IN (
+			SELECT sm.space_key
+			FROM space_members sm
+			WHERE sm.user_no = #{currentUserNo}
+		)
 	]]>
 </select>
 </mapper>

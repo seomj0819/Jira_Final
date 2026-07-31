@@ -12,5 +12,5 @@ import lombok.Setter;
 public class SearchDto {
 	int currentUserNo;
 	String spaceKey;
-	
+	Integer TaskNo;
 }
