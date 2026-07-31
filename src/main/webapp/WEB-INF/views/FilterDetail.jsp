@@ -131,7 +131,9 @@
 	<main>
 		<div class="table_container">
 			<table>
-				
+				<tbody id="task_result_body">
+					<%@ include file="TaskSearchResult.jsp" %>
+				</tbody>
 			</table>
 		</div>
 	</main>
