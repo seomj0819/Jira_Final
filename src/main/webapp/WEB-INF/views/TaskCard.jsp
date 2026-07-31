@@ -148,7 +148,7 @@
 			        $(this).parent().parent().find("#inputexp").val("");
 			    });
 
-			    // 2. 하위작업 등록 (DB 연동)
+			    //  하위작업 등록 (DB 연동)
 			    $("#ltsubmit").click(function() {
 			        var ltContent = $("#inputlt").val();
 			        var urlParams = new URLSearchParams(window.location.search);
@@ -175,7 +175,7 @@
 			        });
 			    });
 
-			    // 3. 댓글 등록 (DB 연동)
+			    //  댓글 등록 (DB 연동)
 			    $("#replysubmit").click(function() {
 			        var replyContent = $("#replybox").val();
 			        var urlParams = new URLSearchParams(window.location.search);
@@ -201,7 +201,7 @@
 			        });
 			    });
 
-			    // 4. 댓글 ... 메뉴 토글
+			    //  댓글 ... 메뉴 토글
 			    $(document).on("click", ".menu-btn", function(e) {
 			        e.stopPropagation();
 			        $(".menu-dropdown").not($(this).next(".menu-dropdown")).hide();
@@ -211,7 +211,7 @@
 			        $(".menu-dropdown").hide();
 			    });
 
-			    // 5. 댓글 수정 모드 전환
+			    //  댓글 수정 모드 전환
 			    $(document).on("click", ".editReplyBtn", function() {
 			        const $item = $(this).closest(".reply-item");
 			        $item.find(".text-content").hide();
@@ -219,14 +219,14 @@
 			        $(".menu-dropdown").hide();
 			    });
 
-			    // 6. 댓글 수정 취소
+			    //  댓글 수정 취소
 			    $(document).on("click", ".editCancelBtn", function() {
 			        const $item = $(this).closest(".reply-item");
 			        $item.find(".text-content").show();
 			        $item.find(".edit-reply-box, .edit-btns").hide();
 			    });
 
-			    // 7. 댓글 수정 저장 (DB 연동)
+			    //  댓글 수정 저장 (DB 연동)
 			    $(document).on("click", ".editSaveBtn", function() {
 			        const $item = $(this).closest(".reply-item");
 			        const replyNo = $item.data("rno");
@@ -255,7 +255,7 @@
 			        });
 			    });
 
-			    // 8. 기존 삭제 버튼 연동 수정 (.deleteReplyBtn 클래스 사용)
+
 			    $(document).on("click", ".deleteReplyBtn", function() {
 			        const $item = $(this).closest(".reply-item");
 			        const replyNo = $item.data("rno");
@@ -428,7 +428,7 @@
 			</div>
 		</div>
 
-<!-- 댓글 리스트 영역 (... 메뉴 및 수정 폼 반영) -->
+<!-- 댓글 리스트 영역 -->
 <div id="replycontentarea">
     <c:forEach var="replyDto" items="${replyList}" varStatus="status">
     <div class="reply-item" data-rno="${replyDto.replyNo}">
@@ -437,7 +437,7 @@
                 <img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
                 <div class="replyinfo"><b>${writerList[status.index].userName}</b><br/><span class="grayletter">${replyDto.createdAt}</span></div>
             </div>
-            <!-- 우측 상단 ... 버튼 및 메뉴 -->
+            
             <div class="reply-menu-wrap">
                 <button class="menu-btn">...</button>
                 <div class="menu-dropdown">
@@ -448,7 +448,7 @@
         </div>
         <div class="replycontent">
             <span class="text-content">${replyDto.replyContent}</span>
-            <!-- 수정 시 보여질 textarea와 버튼 -->
+            
             <textarea class="edit-reply-box" style="display:none; width:100%; min-height:60px;">${replyDto.replyContent}</textarea>
             <div class="edit-btns" style="display:none; margin-top:5px;">
                 <button class="editSaveBtn" style="background:#1868db; color:white; border:none; padding:4px 10px; border-radius:3px; cursor:pointer;">저장</button>
