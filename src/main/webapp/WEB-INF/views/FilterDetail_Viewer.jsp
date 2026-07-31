@@ -93,7 +93,7 @@
 <body>
 	<header>
 		<h1>
-			<span>생성 30일 이내</span>
+			<span>${filterTitle}</span>
 			<img id="mark" src="<c:url value='/resources/img/star_yellow.png'/>">
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>
@@ -175,14 +175,14 @@
 						<!-- 담당자(생성자) -->
 							<div>
 								<img src="<c:url value='/resources/img/user.png'/>">
-								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span>
+<%-- 								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span> --%>
 							</div>
 						</td>
 						<td>
 						<!-- 작업자 -->
 							<div>
 								<img src="<c:url value='/resources/img/user.png'/>">
-								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span>
+<%-- 								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span> --%>
 							</div>
 						</td>
 						<td>
@@ -193,7 +193,7 @@
 							</div>
 						</td>
 						<td>
-							<span class="task_status">${TaskInfoDto.status == 0 이면 Low, 1 이면 Medium, 2 이면 High}</span>
+<%-- 							<span class="task_status">${TaskInfoDto.status == 0 이면 Low, 1 이면 Medium, 2 이면 High}</span> --%>
 						</td>
 						<td>
 							<!-- History에 만든 날짜 -->
