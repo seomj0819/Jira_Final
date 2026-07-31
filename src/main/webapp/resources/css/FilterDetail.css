@@ -211,6 +211,7 @@
 		background-color: white;
 	    top: 84px;
    		left: 220px;
+   		margin-top: 54px;
 	}
 	.popup-overlay.show {
 		display: block;
