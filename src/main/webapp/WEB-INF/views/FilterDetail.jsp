@@ -84,6 +84,101 @@
 						subSel.disabled = false;
 					}
 				});
+				
+				// 1) 버튼 클릭 → 그 드롭다운만 열기/닫기
+				$(".filter-dropdown-btn").on("click", function(e) {
+					e.stopPropagation();
+					var $panel = $(this).siblings(".filter-dropdown-panel");
+					var alreadyOpen = $panel.is(":visible");
+					closeAllFilterDropdowns();
+					if (!alreadyOpen) {
+						$panel.show();
+					}
+				});
+				
+				// 2) 연산자 버튼 (=, !=, >=, <=)
+				$(".op-btn").on("click", function(e) {
+					e.stopPropagation();
+					var $dropdown = $(this).closest(".filter-dropdown");
+					var op = $(this).attr("data-op");
+					var name = $dropdown.attr("data-name"); // space, creator, ...
+					$dropdown.find(".op-btn").removeClass("active");
+					$(this).addClass("active");
+					$("#op_" + name).val(op);
+					refreshFilterButtonText($dropdown);
+				});
+				
+				// 3) 목록에서 값 선택
+				$(".filter-op-list li").on("click", function(e) {
+					e.stopPropagation();
+					var $dropdown = $(this).closest(".filter-dropdown");
+					var name = $dropdown.attr("data-name");
+					var value = $(this).attr("data-value");
+					var text = $(this).text();
+					if (value === undefined) {
+						value = "";
+					}
+					$("#search_" + name).val(value);
+					refreshFilterButtonText($dropdown, text);
+					$dropdown.find(".filter-dropdown-panel").hide();
+				});
+				
+				// 4) 기한(date)
+				$("#due_date").on("change", function() {
+					var $dropdown = $(this).closest(".filter-dropdown");
+					var value = $(this).val() || "";
+					$("#search_due").val(value);
+					refreshFilterButtonText($dropdown, value);
+				});
+				
+				// 5) 기한 지우기
+				$(".due-clear-btn").on("click", function(e) {
+					e.stopPropagation();
+					var $dropdown = $(this).closest(".filter-dropdown");
+					$("#due_date").val("");
+					$("#search_due").val("");
+					refreshFilterButtonText($dropdown);
+					$dropdown.find(".filter-dropdown-panel").hide();
+				});
+				
+				// 6) 화면 다른 곳 클릭 → 전부 닫기
+				$(document).on("click", function() {
+					closeAllFilterDropdowns();
+				});
+				
+				$(".filter-dropdown-panel").on("click", function(e) {
+					e.stopPropagation();
+				});
+				
+			}
+			
+			function closeAllFilterDropdowns() {
+				$(".filter-dropdown-panel").hide();
+			}
+			// 버튼에 보이는 글자 바꾸기
+			function refreshFilterButtonText($dropdown, selectedText) {
+				var name = $dropdown.attr("data-name");
+				var op = $("#op_" + name).val();
+				var value = $("#search_" + name).val();
+				var $btn = $dropdown.find(".filter-dropdown-btn");
+				var titles = {
+					space: "스페이스",
+					creator: "담당자",
+					worker: "작업자",
+					priority: "우선 순위",
+					status: "상태",
+					due: "기한"
+				};
+				// 값 없으면 원래 이름만
+				if (!value) {
+					$btn.text(titles[name]);
+					return;
+				}
+				// 목록에서 고른 글자가 있으면 그걸 쓰고, 없으면 value 사용
+				if (!selectedText) {
+					selectedText = value;
+				}
+				$btn.text(op + " " + selectedText);
 			}
 	</script>
 	<div class="filter-detail">
@@ -113,7 +208,7 @@
 				</div>
 				<ul class="filter-op-list" id="list_space">
 					<li data-value="">(전체)</li>
-					<%-- 3단계: spaceList forEach --%>
+					<%-- spaceList forEach --%>
 				</ul>
 			</div>
 			<input type="hidden" id="op_space" value="=">
@@ -130,7 +225,7 @@
 				</div>
 				<ul class="filter-op-list" id="list_creator">
 					<li data-value="">(전체)</li>
-					<%-- 3단계: userList forEach --%>
+					<%-- userList forEach --%>
 				</ul>
 			</div>
 			<input type="hidden" id="op_creator" value="=">
@@ -147,7 +242,7 @@
 				</div>
 				<ul class="filter-op-list" id="list_worker">
 					<li data-value="">(전체)</li>
-					<%-- 3단계: userList forEach --%>
+					<%-- userList forEach --%>
 				</ul>
 			</div>
 			<input type="hidden" id="op_worker" value="=">

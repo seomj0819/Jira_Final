@@ -86,8 +86,9 @@
 				});
 			}
 	</script>
-<div class="filter-detail">
+	<div class="filter-detail">
 	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
+
 	<header>
 		<h1>
 			<span>${filterTitle}</span>
@@ -97,38 +98,60 @@
 	</header>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
-				<img src="<c:url value='/resources/img/search.png'/>">
-				<input id="search_task_by_title" placeholder="업무 검색">
+			<img src="<c:url value='/resources/img/search.png'/>">
+			<input id="search_task_by_title" placeholder="업무 검색">
+		</div>
+
+		<!-- 스페이스 -->
+		<div class="filter-dropdown" data-name="space">
+			<button type="button" class="filter-dropdown-btn" id="btn_space">스페이스</button>
+			<div class="filter-dropdown-panel" id="panel_space" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_space">
+					<li data-value="">(전체)</li>
+					<%-- spaceList forEach --%>
+				</ul>
 			</div>
-		<select>
-			<option value="" selected disabled hidden readonly>스페이스</option>
-			<option></option>
-			<option></option>
-		</select>
-		<select>
-			<option value="" selected disabled hidden readonly>담당자</option>
-			<option></option>
-			<option></option>
-		</select>
-		<select>
-			<option value="" selected disabled hidden readonly>작업자</option>
-			<option></option>
-			<option></option>
-		</select>
-		<select>
-			<option value="" selected disabled hidden readonly>우선 순위</option>
-			<option></option>
-			<option></option>
-		</select>
-		<select>
-			<option value="" selected disabled hidden readonly>상태</option>
-			<option></option>
-			<option></option>
-		</select>
-			<input type="date" id="due_date" class="search_due_date" max="2099-12-31" min="2000-01-01" placeholder="기한 선택">
-			<button type="reset">필터 지우기</button>
-			<button type="submit">필터 저장</button>
-	</div>
+			<input type="hidden" id="op_space" value="=">
+			<input type="hidden" id="search_space" value="">
+		</div>
+
+		<!-- 담당자 = creator -->
+		<div class="filter-dropdown" data-name="creator">
+			<button type="button" class="filter-dropdown-btn" id="btn_creator">담당자</button>
+			<div class="filter-dropdown-panel" id="panel_creator" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_creator">
+					<li data-value="">(전체)</li>
+					<%-- userList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_creator" value="=">
+			<input type="hidden" id="search_creator" value="">
+		</div>
+
+		<!-- 작업자 = worker -->
+		<div class="filter-dropdown" data-name="worker">
+			<button type="button" class="filter-dropdown-btn" id="btn_worker">작업자</button>
+			<div class="filter-dropdown-panel" id="panel_worker" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_worker">
+					<li data-value="">(전체)</li>
+					<%-- userList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_worker" value="=">
+			<input type="hidden" id="search_worker" value="">
+		</div>
 	<main>
 		<div class="table_container">
 			<table>
