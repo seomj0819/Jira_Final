@@ -11,9 +11,14 @@
 </insert>
 
 <update id="updateReply" parameterType="com.team.dto.ReplyListDto">
-	<![CDATA[
-		UPDATE reply SET reply_content = #{reply_content}, image_no = #{image_no} WHERE writer_no = #{writer_no} AND reply_no = #{reply_no}
-	]]>
+	
+		UPDATE reply
+		SET reply_content = #{replyContent}
+		<if test="imageNo != null and imageNo != ''">
+    	, image_no = #{imageNo}
+		</if>
+		WHERE reply_no = #{replyNo}
+
 </update>
 
 <delete id="deleteReply" parameterType="com.team.dto.ReplyListDto">
