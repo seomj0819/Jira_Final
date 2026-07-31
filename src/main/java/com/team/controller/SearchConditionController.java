@@ -43,10 +43,10 @@ public class SearchConditionController {
 
 		List<SearchConditionDto> list = searchConditionService.showSearchConditionList(userNo);
 		model.addAttribute("filterList", list);
+		model.addAttribute("searchConditionList", list);
 	    
 	    // 현재 접속중인 유저가 속한 스페이스
-	    model.addAttribute("spaceList",
-	        spaceService.showSpaceList(userNo));
+	    model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
 	    
 	    // 현재 접속중인 유저가 접근 가능한 필터의 소유자 List
 	    model.addAttribute("ownerList", searchConditionService.showOwnerListByUserNo(userNo));
