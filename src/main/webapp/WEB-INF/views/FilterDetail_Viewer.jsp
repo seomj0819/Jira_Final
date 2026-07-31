@@ -2,13 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-	<head>
 		<meta charset="UTF-8">
 		<title>Filter Detail</title>
-		<link rel="stylesheet" href="<c:url value='/resources/css/FilterDetail_Viewer.css'/>"/>
-	</head>
+		<link rel="stylesheet" href="<c:url value='/resources/css/FilterDetail.css'/>"/>
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script>
 		$(function() {
@@ -90,7 +86,7 @@
 				});
 			}
 	</script>
-<body>
+<div class="filter-detail">
 	<header>
 		<h1>
 			<span>${filterTitle}</span>
@@ -239,7 +235,7 @@
 			</div>
 		</div>
 	</div>
-</body>
+</div>
 <script>
 	const priorityTags = document.querySelectorAll('.task_status');
 	
@@ -255,4 +251,3 @@
 	  }
 	});
 </script>
-</html>
