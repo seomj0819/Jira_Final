@@ -230,48 +230,25 @@
 				</div>
 				<div id="TaskHistory">
 					<div id="task_history">
+						<c:forEach var="historyDto" items="${historyList}" varStatus="historyStatus">
 						<div class="history_content">
 							<div class="header">
 								<div class="pimg">
 									<img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
 								</div>
 								<div class="header_content">
-									<div class="history_usernametitle"><b>金成官</b> 상태 변경됨</div>
-									<div class="history_date">2026년 7월 3일 오후 4:38</div>
+									<div class="history_usernametitle">
+									    <b>${historyUserList[historyStatus.index].userName}</b>
+									    ${historyDto.fieldName}, ${historyDto.actionType}
+									</div>
+									<div class="history_date">${historyDto.createdAt}</div>
 								</div>
 							</div>
 							<br/>
-							<div class="history_detail">해야 할 일 → 진행중</div>
+							<div class="history_detail">${historyDto.oldValue} -> ${historyDto.newValue}</div>
 							<br/>
 						</div>
-						<div class="history_content">
-							<div class="header">
-								<div class="pimg">
-									<img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-								</div>
-								<div class="header_content">
-									<div class="history_usernametitle"><b>username1</b> history title1</div>
-									<div class="history_date">YYYY년 MM월 DD일 오전/오후 HH:MM</div>
-								</div>
-							</div>
-							<br/>
-							<div class="history_detail">history detail1</div>
-							<br/>
-						</div>
-						<div class="history_content">
-							<div class="header">
-								<div class="pimg">
-									<img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-								</div>
-								<div class="header_content">
-									<div class="history_usernametitle"><b>username2</b> history title2</div>
-									<div class="history_date">YYYY년 MM월 DD일 오전/오후 HH:MM</div>
-								</div>
-							</div>
-							<br/>
-							<div class="history_detail">history detail2</div>
-							<br/>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div id="btns">

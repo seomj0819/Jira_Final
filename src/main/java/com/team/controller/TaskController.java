@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team.dto.HistoryDto;
 import com.team.dto.ReplyListDto;
 import com.team.dto.TaskInfoDto;
 import com.team.dto.UserInfoDto;
+import com.team.service.HistoryService;
 import com.team.service.LoginService;
 import com.team.service.ReplyService;
 import com.team.service.SpaceService;
@@ -31,6 +33,8 @@ public class TaskController {
 	ReplyService replyService;
 	@Autowired
 	SpaceService spaceService;
+	@Autowired
+	HistoryService historyService;
 	
 	@GetMapping("/board")
 	public String board(HttpSession session, Model model) {
@@ -98,7 +102,7 @@ public class TaskController {
 	 	replyDto.setTaskNo(taskNo);
 	 		
 	 	List<ReplyListDto> replyList = replyService.ShowReplyList(replyDto);
-	 		
+
 	 	// 5. 모델에 데이터 담기
 	 	model.addAttribute("dto", task);
 	 	model.addAttribute("creatorDto", loginService.getUserProfile(task.getCreatorNo()));
@@ -110,7 +114,22 @@ public class TaskController {
 	 		writerList.add(loginService.getUserProfile(replyList.get(i).getWriterNo()));
 	 	}
 	 	model.addAttribute("writerList", writerList);
-	 	session.setAttribute("spaceKey", spaceKey);	
+	 	
+	 	HistoryDto historyDto = new HistoryDto();
+	 	historyDto.setSpaceKey(spaceKey);
+	 	historyDto.setTaskNo(taskNo);
+	 	
+	 	List<HistoryDto> historyList = historyService.ShowTaskHistory(historyDto);
+	 	model.addAttribute("historyList", historyList);
+
+	 	List<UserInfoDto> historyUserList = new ArrayList<>();
+	 	for(int i = 0; i < historyList.size(); i++) {
+	 		historyUserList.add(loginService.getUserProfile(historyList.get(i).getUserNo()));
+	 	}
+	 	model.addAttribute("historyUserList", historyUserList);
+
+	 	session.setAttribute("spaceKey", spaceKey);
+	 	
 	 	return "TaskCard";
 	}
 	
