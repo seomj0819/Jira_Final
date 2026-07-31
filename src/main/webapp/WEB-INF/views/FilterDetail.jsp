@@ -86,48 +86,80 @@
 				});
 			}
 	</script>
-<div class="filter-detail">
-	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
-	<header>
-		<h1>
-			<span>${filterTitle}</span>
-			<img id="mark" src="img/star_yellow.png">
-			<button id="filter_detail_button">필터 세부 정보</button>
-		</h1>
-	</header>
-	<div id="condition_container">
-		<div id="search_box_container" tabindex="0">
-				<img src="<c:url value='/resources/img/search.png'/>">
-				<input id="search_task_by_title" placeholder="업무 검색">
-			</div>
-		<select>
-			<option value="" selected disabled hidden>스페이스</option>
-			<option></option>
-			<option></option>
+	<div class="filter-detail">
+		<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
+		<header>
+			<h1>
+				<span>${filterTitle}</span>
+				<img id="mark" src="img/star_yellow.png">
+				<button id="filter_detail_button">필터 세부 정보</button>
+			</h1>
+		</header>
+		<div id="condition_container">
+		 	<div id="search_box_container" tabindex="0">
+		   	<img src="<c:url value='/resources/img/search.png'/>">
+		  	<input id="search_task_by_title" placeholder="업무 검색">
+		</div>
+		
+		<!-- 스페이스 -->
+		<select id="op_space">
+		  	<option value="=" selected>=</option>
+		  	<option value="!=">!=</option>
 		</select>
-		<select>
-			<option value="" selected disabled hidden>담당자</option>
-			<option></option>
-			<option></option>
+		<select id="search_space">
+		  	<option value="">스페이스</option>
+		  	<%-- spaceList forEach --%>
 		</select>
-		<select>
-			<option value="" selected disabled hidden>작업자</option>
-			<option></option>
-			<option></option>
+		
+		<!-- 담당자 = creator -->
+		<select id="op_creator">
+		  	<option value="=" selected>=</option>
+		  	<option value="!=">!=</option>
 		</select>
-		<select>
-			<option value="" selected disabled hidden>우선 순위</option>
-			<option></option>
-			<option></option>
+		<select id="search_creator">
+		  	<option value="">담당자</option>
 		</select>
-		<select>
-			<option value="" selected disabled hidden>상태</option>
-			<option></option>
-			<option></option>
+		
+		<!-- 작업자 = worker -->
+		<select id="op_worker">
+		  	<option value="=" selected>=</option>
+		  	<option value="!=">!=</option>
 		</select>
-			<input type="date" id="due_date" class="search_due_date" max="2099-12-31" min="2000-01-01" placeholder="기한 선택">
-			<button type="reset">필터 지우기</button>
-			<button type="submit">필터 저장</button>
+		<select id="search_worker">
+		  	<option value="">작업자</option>
+		</select>
+		
+		<!-- 우선순위 -->
+		<select id="op_priority">
+		  	<option value="=" selected>=</option>
+		  	<option value="!=">!=</option>
+		</select>
+		<select id="search_priority">
+		  	<option value="">우선 순위</option>
+		  	<option value="High">High</option>
+		  	<option value="Medium">Medium</option>
+		  	<option value="Low">Low</option>
+		</select>
+		
+		<!-- 상태 (옵션은 3단계) -->
+		<select id="op_status">
+		  	<option value="=" selected>=</option>
+		  	<option value="!=">!=</option>
+		</select>
+		<select id="search_status">
+		  	<option value="">상태</option>
+		</select>
+		
+		<!-- 기한 -->
+		<select id="op_due">
+		  	<option value=">=" selected>>=</option>
+		  	<option value="<="><=</option>
+		</select>
+		<input type="date" id="due_date" class="search_due_date"
+		       max="2099-12-31" min="2000-01-01">
+		
+		<button type="button" id="btn_delete_filter">필터 지우기</button>
+		<button type="button" id="btn_save_filter">필터 저장</button>
 	</div>
 	<main>
 		<div class="table_container">
