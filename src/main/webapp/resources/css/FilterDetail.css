@@ -1,10 +1,7 @@
 @charset "UTF-8";
-	* { box-sizing: border-box; 
-		white-space: nowrap; 
-		overflow: hidden; 
-		text-overflow: ellipsis; 
-		font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; }
-	.filter-detail {
+	.filter-detail { 
+		box-sizing: border-box; 
+		font-family: "Atlassian Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif; 
 		padding: 10px;
 	}
 	table, tr, td, th {
@@ -16,9 +13,13 @@
 		width: 100%;
 		margin-top: 25px;
 	}
-	td, th {
+	.filter-detail td, 
+	.filter-detail th {
 		border: 1px solid rgba(11, 18, 14, 0.14);
 		border-collapse: collapse;
+		white-space: nowrap; 
+		overflow: hidden; 
+		text-overflow: ellipsis; 
 	} 
 	th {
 		font-size: 12px;
