@@ -129,7 +129,7 @@ public class TaskController {
 	 	model.addAttribute("historyUserList", historyUserList);
 
 	 	session.setAttribute("spaceKey", spaceKey);
-	 	
+	 	session.setAttribute("userNo", userNo);
 	 	return "TaskCard";
 	}
 	
