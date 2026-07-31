@@ -145,7 +145,7 @@
 					<th>업데이트</th>
 					<th>기한</th>
 				</tr>
-				<c:forEach var="task" items="${TaskList}">
+				<c:forEach var="task" items="${taskList}">
 					<tr>
 						<td>
 							<div class="task_title">
@@ -156,7 +156,7 @@
 											<span>${task.spaceKey}</span>
 											<span>-</span>
 											<span>${task.taskNo}</span>
-											<span> 상위작업</span>
+											<span> ${taskTitle}</span>
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -165,7 +165,7 @@
 											<span>${task.spaceKey}</span>
 											<span>-</span>
 											<span>${task.taskNo}</span>
-											<span> 하위작업</span>
+											<span> ${taskTitle}</span>
 										</div>
 									</c:otherwise>
 								</c:choose>
