@@ -159,22 +159,22 @@ public class TaskController {
 	    if (userNo == null) {
 	        return "fail_login"; // 로그인 세션이 만료된 경우
 	    }
-	    
+
 	    // 2. XML 쿼리(parameterType="com.team.dto.ReplyListDto")에 맞게 DTO 생성 및 값 세팅
 	    ReplyListDto replyDto = new ReplyListDto();
 	    replyDto.setReplyNo(replyNo);   // 뷰에서 넘어온 댓글 번호
 	    replyDto.setWriterNo(userNo);   // 세션에 있는 로그인 유저 번호 (작성자 본인 검증용)
-	    
+
 	    // 3. 서비스 호출 (실제 delete 쿼리 실행)
 	    boolean result = replyService.DeleteReply(replyDto); // 파라미터로 DTO 전달
-	    
+
 	    if(result) {
 	        return "success"; 
 	    } else {
 	        return "fail_auth"; // 본인이 아니거나 삭제 실패 시
 	    }
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/createLowerTask.do")
 	public String createLowerTask(@RequestParam("taskTitle") String taskTitle, 
