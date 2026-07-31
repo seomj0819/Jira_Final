@@ -89,7 +89,7 @@
 <div class="filter-detail">
 	<header>
 		<h1>
-			<span>생성 30일 이내</span>
+			<span>${filter.searchConditionTitle}</span>
 			<img id="mark" src="img/star_yellow.png">
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>

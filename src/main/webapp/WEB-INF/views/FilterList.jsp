@@ -40,10 +40,6 @@
 			}
 		}
 		
-		function toggleDropdown() {
-			const menu = document.getElementById(".dropdown_content");
-			menu.classList.toggle("show");
-		}
 		window.addEventListener('click', function(event) {
 			const menu = document.getElementById("dropdownMenu");
 			const button = document.querySelector(".more_button");

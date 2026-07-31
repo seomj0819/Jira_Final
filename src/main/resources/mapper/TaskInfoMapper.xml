@@ -235,4 +235,11 @@
 			summary FROM task WHERE space_key = #{spaceKey} AND status_no = #{statusNo}
 	]]>
 </select>
+<select id="searchUpperTaskNo" parameterType="" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT upper_task_no
+		FROM task
+		WHERE 
+	]]>
+</select>
 </mapper>

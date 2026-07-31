@@ -14,18 +14,26 @@ public class TaskSearchDto {
 	String accessType;
 	String searchConditionTitle;
 	String searchConditionDescription;
+	
 	Integer currentUserNo;
+	
 	String searchKeyWord;
+	
 	Integer searchWorkerNo;
 	String operatorWorkerNo;
+	
 	Integer searchCreatorNo;
 	String operatorCreatorNo;
+	
 	Integer searchStatusNo;
 	String operatorStatusNo;
+	
 	String searchSpaceKey;
 	String operatorSpceKey;
+	
 	String searchPriority;
 	String operatorPriority;
+	
 	String searchDueDate;
 	String operatorDueDate;
 }

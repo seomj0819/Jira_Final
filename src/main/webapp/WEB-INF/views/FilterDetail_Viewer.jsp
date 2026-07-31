@@ -94,37 +94,37 @@
 	<header>
 		<h1>
 			<span>생성 30일 이내</span>
-			<img id="mark" src="img/star_yellow.png">
+			<img id="mark" src="<c:url value='/resources/img/star_yellow.png'/>">
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>
 	</header>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
-				<img src="img/search.png">
+				<img src="<c:url value='/resources/img/search.png'/>">
 				<input id="search_task_by_title" placeholder="업무 검색">
 			</div>
 		<select>
-			<option value="" selected disabled hidden>스페이스</option>
+			<option value="" selected disabled hidden readonly>스페이스</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>담당자</option>
+			<option value="" selected disabled hidden readonly>담당자</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>작업자</option>
+			<option value="" selected disabled hidden readonly>작업자</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>우선 순위</option>
+			<option value="" selected disabled hidden readonly>우선 순위</option>
 			<option></option>
 			<option></option>
 		</select>
 		<select>
-			<option value="" selected disabled hidden>상태</option>
+			<option value="" selected disabled hidden readonly>상태</option>
 			<option></option>
 			<option></option>
 		</select>
@@ -145,36 +145,28 @@
 					<th>업데이트</th>
 					<th>기한</th>
 				</tr>
-				<tr>
-					<td><div class="task_title"><img src="img/check.png"><a>KEY-01</a><a>상위 작업</a></div></td>
-					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
-					<td><div class="priority"><img src="img/low.png"><span>Low</span></div></td>
-					<td><span class="task_status">진행 중</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
-				</tr>
-				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-02</a><a>하위 작업</a></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
-					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div class="priority"><img src="img/medium.png"><span>Medium</span></div></td>
-					<td><span class="task_status">해야 할 일</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
-				</tr>
-				<tr>
-					<td><div class="task_title"><img src="img/lowerTask.png"><a>KEY-03</a><a>하위 작업</a></div></td>
-					<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-					<td><div><img src="img/user.png"><span>金成官</span></div></td>
-					<td><div class="priority"><img src="img/high.png"><span>High</span></div></td>
-					<td><span class="task_status">완료</span></td>
-					<td><span>2026년 6월 19일 오후 2:40</span></td>
-					<td><span>2026년 7월 03일 오후 4:38</span></td>
-					<td><span>2026년 8월 01일 오후 2:40</span></td>
-				</tr>
+				<c:forEach var="TaskInfoDto" items="${TaskList}">
+					<tr>
+						<div class="task_title">
+							<c:choose>
+								<c:when test="">
+									<img src="<c:url value='/resources/img/check.png'/>">
+								</c:when>
+								<c:otherwise class="lowerTask">
+									<img src="<c:url value='/resources/img/lowerTask.png'/>">
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<td><div class="task_title"><img src="<c:url value='/resources/img/check.png'/>"><div><a>KEY-01  </a><a>상위 작업</a></div></div></td>
+						<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
+						<td><div><img src="img/user.png"><span>金成官</span></div></td>
+						<td><div class="priority"><img src="img/low.png"><span>Low</span></div></td>
+						<td><span class="task_status">진행 중</span></td>
+						<td><span>2026년 6월 19일 오후 2:40</span></td>
+						<td><span>2026년 7월 03일 오후 4:38</span></td>
+						<td><span>2026년 8월 01일 오후 2:40</span></td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</main>
