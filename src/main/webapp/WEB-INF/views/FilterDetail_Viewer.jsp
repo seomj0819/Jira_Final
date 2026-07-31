@@ -147,24 +147,64 @@
 				</tr>
 				<c:forEach var="TaskInfoDto" items="${TaskList}">
 					<tr>
-						<div class="task_title">
-							<c:choose>
-								<c:when test="">
-									<img src="<c:url value='/resources/img/check.png'/>">
-								</c:when>
-								<c:otherwise class="lowerTask">
-									<img src="<c:url value='/resources/img/lowerTask.png'/>">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<td><div class="task_title"><img src="<c:url value='/resources/img/check.png'/>"><div><a>KEY-01  </a><a>상위 작업</a></div></div></td>
-						<td><div><img src="img/user.png"><span>Minjae Seo</span></div></td>
-						<td><div><img src="img/user.png"><span>金成官</span></div></td>
-						<td><div class="priority"><img src="img/low.png"><span>Low</span></div></td>
-						<td><span class="task_status">진행 중</span></td>
-						<td><span>2026년 6월 19일 오후 2:40</span></td>
-						<td><span>2026년 7월 03일 오후 4:38</span></td>
-						<td><span>2026년 8월 01일 오후 2:40</span></td>
+						<td>
+							<div class="task_title">
+								<c:choose>
+									<c:when test="${TaskInfoDto.upperTaskNo == null}">
+										<div>
+											<img src="<c:url value='/resources/img/check.png'/>">
+											<span>${TaskInfoDto.spaceKey}</span>
+											<span>-</span>
+											<span>${TaskInfoDto.taskNo}</span>
+											<span> 상위작업</span>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div>
+											<img src="<c:url value='/resources/img/lowerTask.png'/>">
+											<span>${TaskInfoDto.spaceKey}</span>
+											<span>-</span>
+											<span>${TaskInfoDto.taskNo}</span>
+											<span> 하위작업</span>
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</td>
+						<td>
+						<!-- 담당자(생성자) -->
+							<div>
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span>
+							</div>
+						</td>
+						<td>
+						<!-- 작업자 -->
+							<div>
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span>${TaskInfoDto. ??? LoginService에 getUserProfile에 userName}</span>
+							</div>
+						</td>
+						<td>
+						<!-- 우선순위 -->
+							<div class="priority">
+								<img src="<c:url value='/resources/img/low.png'/>">
+								<span>${TaskInfoDto.priority}</span>
+							</div>
+						</td>
+						<td>
+							<span class="task_status">${TaskInfoDto.status == 0 이면 Low, 1 이면 Medium, 2 이면 High}</span>
+						</td>
+						<td>
+							<!-- History에 만든 날짜 -->
+						</td>
+						<td>
+							<!-- History에 업데이트한 날짜 -->
+						</td>
+						<td>
+							<!-- 기한 -->
+							<span>${TaskIinfoDto.dueDate}</span>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
