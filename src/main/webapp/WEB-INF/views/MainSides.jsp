@@ -32,9 +32,11 @@
 			    });
 			});
 			$("#filter_list .gap").click(function() {
-				var no = $(this).data("no");
-				location.href = "<c:url value='/filter/detail'/>?searchConditionNo=" + no;
-			});
+				  var no = $(this).data("no");
+				  if (!no) return;
+
+				  location.href = "<c:url value='/filter/list/detail'/>?searchConditionNo=" + no;
+				});
 			$("#osusume").click(function() {
 				location.href = "/project/space/select";
 			});
@@ -117,9 +119,12 @@
 			<div id="filter" class="gap"><img id="firuta" src="<c:url value='/resources/img/data-filter-icon.svg'/>"/>필터</div>
 			<div id="filter_list">
 				<c:forEach var="searchConditionDto" items="${searchConditionList}">
-				<div class="gap">
-					<a><img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>${searchConditionDto.searchConditionTitle}</a>
-				</div>
+					<div class="gap" data-no="${searchConditionDto.searchConditionNo}">
+						<a>
+							<img class="menuIcon" src="<c:url value='/resources/img/filter.png'/>"/>
+							${searchConditionDto.searchConditionTitle}
+						</a>
+					</div>
 				</c:forEach>
 			</div>
 			<div id="space" class="gap"><img class="menuIcon" src="<c:url value='/resources/img/KakaoTalk_20260619_143529999.png'/>"/>스페이스</div>
