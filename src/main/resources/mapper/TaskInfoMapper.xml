@@ -138,9 +138,15 @@
 	AND space_key = #{spaceKey}
 </update>
 <select id="searchTaskBySearchCondition" parameterType="com.team.dto.TaskSearchDto" resultType="com.team.dto.TaskInfoDto">
-	SELECT * 
-	FROM task 
-	WHERE space_key IN (SELECT space_key FROM space_members WHERE user_no = #{currentUserNo}) 
+	SELECT t.*,
+	       c.user_name AS creatorName,
+	       w.user_name AS workerName
+	FROM task t
+	LEFT JOIN users c ON t.creator_no = c.user_no
+	LEFT JOIN users w ON t.worker_no = w.user_no
+	WHERE t.space_key IN (
+	  SELECT space_key FROM space_members WHERE user_no = #{currentUserNo}
+	)
 	<if test="searchKeyWord != null and searchKeyWord != ''">
 		AND (task_title LIKE '%' || #{searchKeyWord} || '%' OR (space_key || '-' || task_no) LIKE '%' || #{searchKeyWord} || '%') 
 	</if>

@@ -12,8 +12,13 @@ import lombok.Setter;
 public class TaskInfoDto {
 	String spaceKey;
 	int taskNo;
+	
 	int creatorNo;
+	String creatorName;
+	
 	Integer workerNo;
+	String workerName;
+	
 	String taskTitle;
 	String taskDescription;
 	String dueDate;
