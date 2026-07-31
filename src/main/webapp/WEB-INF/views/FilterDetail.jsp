@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<title>Filter Detail</title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/FilterDetail.css'/>"/>
-	<script src="js/jquery-4.0.0.min.js"></script>
+	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>>
 	<script>
 		$(function() {
 			let layerPopUp = $("#popup_overlay");
@@ -96,7 +96,7 @@
 	</header>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
-				<img src="img/search.png">
+				<img src="<c:url value='/resources/img/search.png'/>">
 				<input id="search_task_by_title" placeholder="업무 검색">
 			</div>
 		<select>
@@ -155,7 +155,7 @@
 			</div>
 			<hr>
 			<div id="popup_owner">
-				<img src="img/user.png">
+				<img src="<c:url value='/resources/img/user.png'/>">
 				<span class="user-info">소유자: </span>
 				<span class="user-info">Minjae Seo</span>
 			</div>
@@ -172,7 +172,7 @@
 				<br/>
 				<p class="sub-text">편집 가능한 대상:</p>
 				<div class="user-profile">
-					<img src="img/user.png">
+					<img src="<c:url value='/resources/img/user.png'/>">
 					<span class="text">金成官</span>
 				</div>
 			</div>
@@ -209,8 +209,8 @@
 					<button type="button" class="add-button">추가</button>
 				</div>
 				<div id="viewer_list" class="add-user-roll">
-					<a><img src="img/user.png">金成官</a>
-					<button type="button" class="delete-user"><img src="img/close.png"></button>
+					<a><img src="<c:url value='/resources/img/user.png'/>">金成官</a>
+					<button type="button" class="delete-user"><img src="<c:url value='/resources/img/close.png'/>"></button>
 				</div>
 				<div class="selection_container">
 					<span class="sub-title">편집자</span><br/>
@@ -225,8 +225,8 @@
 					<button type="button" class="add-button">추가</button>
 				</div>
 				<div id="editor_list" class="add-user-roll">
-					<a><img src="img/user.png">Minjae Seo</a>
-					<button type="button" class="delete-user"><img src="img/close.png"></button>
+					<a><img src="<c:url value='/resources/img/user.png'/>">Minjae Seo</a>
+					<button type="button" class="delete-user"><img src="<c:url value='/resources/img/close.png'/>"></button>
 				</div>
 				<div id="button_container">
 					<button type="reset" id="cancle_button">취소</button>

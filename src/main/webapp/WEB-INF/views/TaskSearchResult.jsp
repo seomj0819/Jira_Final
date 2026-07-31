@@ -18,21 +18,21 @@
 			<div class="task_title">
 				<c:choose>
 					<c:when test="${task.upperTaskNo == null}">
-						<div>
+						<div class="lowerTask">
 							<img src="<c:url value='/resources/img/check.png'/>">
 							<span>${task.spaceKey}</span>
 							<span>-</span>
 							<span>${task.taskNo}</span>
-							<span> 상위작업</span>
+							<span>  ${task.taskTitle}</span>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div>
+						<div class="upperTask">
 							<img src="<c:url value='/resources/img/lowerTask.png'/>">
 							<span>${task.spaceKey}</span>
 							<span>-</span>
 							<span>${task.taskNo}</span>
-							<span> 하위작업</span>
+							<span>  ${task.taskTitle}</span>
 						</div>
 					</c:otherwise>
 				</c:choose>

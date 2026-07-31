@@ -100,6 +100,20 @@
 	.priority > img {
 		filter: invert(41%) sepia(99%) saturate(1633%) hue-rotate(15deg) brightness(97%) contrast(105%);
 	}
+	.upperTask {
+		display: flex;
+		display: flex;
+    	align-items: center;
+	}
+	.lowerTask {
+		display: flex;
+		display: flex;
+    	align-items: center;
+	}
+	.lowerTask > img{
+		filter: invert(41%) sepia(99%) saturate(1633%) hue-rotate(15deg) brightness(97%) contrast(105%);
+		padding: 2px;
+	}
 	.task_status {
 		font-size: 13px;
 		font-weight: 400;
@@ -138,9 +152,6 @@
 	    display: inline-flex;
 	    align-items: center;
 	    gap: 6px;
-	}
-	.task_title > img {
-		filter: invert(30%) sepia(87%) saturate(3015%) hue-rotate(218deg) brightness(101%) contrast(101%);
 	}
 	#condition_container {
 		display: flex;
