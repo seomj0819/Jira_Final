@@ -123,6 +123,162 @@
 			        });
 			    }
 			});
+			
+			    // 하위작업 인풋 클릭 시 저장/취소 버튼 노출 (설명 편집과 동일한 방식)
+			    $("#inputlt").click(function() {
+			        $("#ltsubmit").show();
+			        $("#ltcancel").show();
+			    });
+			    
+			    // 취소 버튼 클릭 시 숨김 및 초기화
+			    $("#ltcancel").click(function() {
+			        $("#ltsubmit").hide();
+			        $("#ltcancel").hide();
+			        $(this).parent().parent().find("#inputlt").val("");
+			    });
+
+			    // 기존 설명 편집 이벤트
+			    $("#inputexp").click(function() {
+			        $("#expsubmit").show();
+			        $("#expcancel").show();
+			    });
+			    $("#expcancel").click(function() {
+			        $("#expsubmit").hide();
+			        $("#expcancel").hide();
+			        $(this).parent().parent().find("#inputexp").val("");
+			    });
+
+			    // 2. 하위작업 등록 (DB 연동)
+			    $("#ltsubmit").click(function() {
+			        var ltContent = $("#inputlt").val();
+			        var urlParams = new URLSearchParams(window.location.search);
+			        var taskNo = urlParams.get("taskNo");
+
+			        if(!ltContent.trim()) {
+			            alert("하위작업 내용을 입력해주세요.");
+			            return;
+			        }
+
+			        fetch("createLowerTask.do", {
+			            method: "POST",
+			            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			            body: "taskTitle=" + encodeURIComponent(ltContent) + "&upperTaskNo=" + taskNo
+			        })
+			        .then(response => response.text())
+			        .then(result => {
+			            if(result.trim() === "success") {
+			                alert("하위작업이 등록되었습니다!");
+			                location.reload();
+			            } else {
+			                alert("하위작업 등록에 실패했습니다.");
+			            }
+			        });
+			    });
+
+			    // 3. 댓글 등록 (DB 연동)
+			    $("#replysubmit").click(function() {
+			        var replyContent = $("#replybox").val();
+			        var urlParams = new URLSearchParams(window.location.search);
+			        var taskNo = urlParams.get("taskNo");
+
+			        if(!replyContent.trim()) {
+			            alert("댓글 내용을 입력해주세요.");
+			            return;
+			        }
+
+			        fetch("writeReply.do", {
+			            method: "POST",
+			            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			            body: "task_no=" + taskNo + "&reply_content=" + encodeURIComponent(replyContent)
+			        })
+			        .then(response => response.text())
+			        .then(result => {
+			            if(result.trim() === "success") {
+			                location.reload();
+			            } else {
+			                alert("댓글 등록에 실패했습니다.");
+			            }
+			        });
+			    });
+
+			    // 4. 댓글 ... 메뉴 토글
+			    $(document).on("click", ".menu-btn", function(e) {
+			        e.stopPropagation();
+			        $(".menu-dropdown").not($(this).next(".menu-dropdown")).hide();
+			        $(this).next(".menu-dropdown").toggle();
+			    });
+			    $(document).click(function() {
+			        $(".menu-dropdown").hide();
+			    });
+
+			    // 5. 댓글 수정 모드 전환
+			    $(document).on("click", ".editReplyBtn", function() {
+			        const $item = $(this).closest(".reply-item");
+			        $item.find(".text-content").hide();
+			        $item.find(".edit-reply-box, .edit-btns").show();
+			        $(".menu-dropdown").hide();
+			    });
+
+			    // 6. 댓글 수정 취소
+			    $(document).on("click", ".editCancelBtn", function() {
+			        const $item = $(this).closest(".reply-item");
+			        $item.find(".text-content").show();
+			        $item.find(".edit-reply-box, .edit-btns").hide();
+			    });
+
+			    // 7. 댓글 수정 저장 (DB 연동)
+			    $(document).on("click", ".editSaveBtn", function() {
+			        const $item = $(this).closest(".reply-item");
+			        const replyNo = $item.data("rno");
+			        const newContent = $item.find(".edit-reply-box").val();
+
+			        if(!newContent.trim()) {
+			            alert("댓글 내용을 입력해주세요.");
+			            return;
+			        }
+
+			        fetch("updateReply.do", {
+			            method: "POST",
+			            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			            body: "reply_no=" + replyNo + "&reply_content=" + encodeURIComponent(newContent)
+			        })
+			        .then(response => response.text())
+			        .then(result => {
+			            if(result.trim() === "success") {
+			                alert("댓글이 수정되었습니다.");
+			                location.reload();
+			            } else if(result.trim() === "fail_auth") {
+			                alert("본인이 작성한 댓글만 수정할 수 있습니다.");
+			            } else {
+			                alert("댓글 수정에 실패했습니다.");
+			            }
+			        });
+			    });
+
+			    // 8. 기존 삭제 버튼 연동 수정 (.deleteReplyBtn 클래스 사용)
+			    $(document).on("click", ".deleteReplyBtn", function() {
+			        const $item = $(this).closest(".reply-item");
+			        const replyNo = $item.data("rno");
+
+			        if(confirm("댓글을 삭제하시겠습니까?")) {
+			            fetch("deleteReply.do", {
+			                method: "POST",
+			                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			                body: "replyNo=" + replyNo
+			            })
+			            .then(response => response.text())
+			            .then(result => {
+			                if(result.trim() === "success") {
+			                    alert("삭제되었습니다.");
+			                    location.reload();
+			                } else if(result.trim() === "fail_auth") {
+			                    alert("본인이 작성한 댓글만 삭제할 수 있습니다.");
+			                } else {
+			                    alert("댓글 삭제에 실패했습니다.");
+			                }
+			            });
+			        }
+			    });
 		});
 	</script>
 </head>
@@ -174,11 +330,15 @@
 				<br/>
 				<br/>
 				<br/>
+				<!-- 하위작업 영역 -->
 				<div id="lowertask">
-					하위작업
-					<br/>
-					<br/>
-					<input id="inputlt" type="text" name="inputlt" placeholder="하위작업 추가"/>
+				    하위작업
+				    <br/><br/>
+				    <input id="inputlt" type="text" name="inputlt" placeholder="하위작업 추가"/>
+				    <div id="ltbtns">
+				        <button id="ltsubmit">저장</button>
+				        <button id="ltcancel">취소</button>
+				    </div>
 				</div>
 			</div>
 			<div id="main_right">
@@ -267,21 +427,37 @@
 				</table>
 			</div>
 		</div>
-		<div id="replycontentarea">
-			<c:forEach var="replyDto" items="${replyList}" varStatus="status">
-			<div class="writer">
-				<img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
-				<div class="replyinfo"><b>${writerList[status.index].userName}</b><br/><span class="grayletter">${replyDto.createdAt}</span></div>
-			</div>
-			<div class="replycontent" data-rno="${replyDto.replyNo}">
-				${replyDto.replyContent}
-				<br/>
-				<button class="deleteReply">
-				댓글 삭제
-				</button>
-			</div>
-			</c:forEach>
-		</div>
+
+<!-- 댓글 리스트 영역 (... 메뉴 및 수정 폼 반영) -->
+<div id="replycontentarea">
+    <c:forEach var="replyDto" items="${replyList}" varStatus="status">
+    <div class="reply-item" data-rno="${replyDto.replyNo}">
+        <div class="writer">
+            <div style="display:flex; align-items:center;">
+                <img class="replyprofile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>
+                <div class="replyinfo"><b>${writerList[status.index].userName}</b><br/><span class="grayletter">${replyDto.createdAt}</span></div>
+            </div>
+            <!-- 우측 상단 ... 버튼 및 메뉴 -->
+            <div class="reply-menu-wrap">
+                <button class="menu-btn">...</button>
+                <div class="menu-dropdown">
+                    <button class="editReplyBtn">수정</button>
+                    <button class="deleteReplyBtn">삭제</button>
+                </div>
+            </div>
+        </div>
+        <div class="replycontent">
+            <span class="text-content">${replyDto.replyContent}</span>
+            <!-- 수정 시 보여질 textarea와 버튼 -->
+            <textarea class="edit-reply-box" style="display:none; width:100%; min-height:60px;">${replyDto.replyContent}</textarea>
+            <div class="edit-btns" style="display:none; margin-top:5px;">
+                <button class="editSaveBtn" style="background:#1868db; color:white; border:none; padding:4px 10px; border-radius:3px; cursor:pointer;">저장</button>
+                <button class="editCancelBtn" style="background:white; color:gray; border:1px solid #ccc; padding:4px 10px; border-radius:3px; cursor:pointer;">취소</button>
+            </div>
+        </div>
+    </div>
+    </c:forEach>
+</div>
 	</div>
 </body>
 </html>
