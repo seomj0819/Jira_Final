@@ -172,4 +172,60 @@ public class TaskController {
 	        return "fail_auth"; // 본인이 아니거나 삭제 실패 시
 	    }
 	}
+	
+	@ResponseBody
+	@PostMapping("/createLowerTask.do")
+	public String createLowerTask(@RequestParam("taskTitle") String taskTitle, 
+	                              @RequestParam("upperTaskNo") int upperTaskNo, 
+	                              HttpSession session) {
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    String spaceKey = (String) session.getAttribute("spaceKey");
+	    if (userNo == null) return "fail_login";
+
+	    TaskInfoDto dto = new TaskInfoDto();
+	    dto.setSpaceKey(spaceKey);
+	    dto.setTaskTitle(taskTitle);
+	    dto.setCreatorNo(userNo);
+	    dto.setUpperTaskNo(upperTaskNo);
+	    dto.setStatusNo(1); // 기본 상태값 설정
+
+	    taskService.createTask(dto);
+	    return "success";
+	}
+
+	@ResponseBody
+	@PostMapping("/writeReply.do")
+	public String writeReply(@RequestParam("task_no") int taskNo, 
+	                         @RequestParam("reply_content") String replyContent, 
+	                         HttpSession session) {
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    String spaceKey = (String) session.getAttribute("spaceKey");
+	    if (userNo == null) return "fail_login";
+
+	    ReplyListDto dto = new ReplyListDto();
+	    dto.setSpaceKey(spaceKey);
+	    dto.setTaskNo(taskNo);
+	    dto.setWriterNo(userNo);
+	    dto.setReplyContent(replyContent);
+
+	    boolean result = replyService.WriteReply(dto);
+	    return result ? "success" : "fail";
+	}
+
+	@ResponseBody
+	@PostMapping("/updateReply.do")
+	public String updateReply(@RequestParam("reply_no") int replyNo, 
+	                          @RequestParam("reply_content") String replyContent, 
+	                          HttpSession session) {
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) return "fail_login";
+
+	    ReplyListDto dto = new ReplyListDto();
+	    dto.setReplyNo(replyNo);
+	    dto.setWriterNo(userNo);
+	    dto.setReplyContent(replyContent);
+
+	    boolean result = replyService.UpdateReply(dto);
+	    return result ? "success" : "fail_auth";
+	}
 }
