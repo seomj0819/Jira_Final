@@ -87,77 +87,127 @@
 			}
 	</script>
 	<div class="filter-detail">
-		<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
-		<header>
-			<h1>
-				<span>${filterTitle}</span>
-				<img id="mark" src="img/star_yellow.png">
-				<button id="filter_detail_button">필터 세부 정보</button>
-			</h1>
-		</header>
-		<div id="condition_container">
-		 	<div id="search_box_container" tabindex="0">
-		   	<img src="<c:url value='/resources/img/search.png'/>">
-		  	<input id="search_task_by_title" placeholder="업무 검색">
+	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
+
+	<header>
+		<h1>
+			<span>${filterTitle}</span>
+			<img id="mark" src="<c:url value='/resources/img/star_yellow.png'/>">
+			<button id="filter_detail_button">필터 세부 정보</button>
+		</h1>
+	</header>
+
+	<div id="condition_container">
+		<div id="search_box_container" tabindex="0">
+			<img src="<c:url value='/resources/img/search.png'/>">
+			<input id="search_task_by_title" placeholder="업무 검색">
 		</div>
-		
+
 		<!-- 스페이스 -->
-		<select id="op_space">
-		  	<option value="=" selected>=</option>
-		  	<option value="!=">!=</option>
-		</select>
-		<select id="search_space">
-		  	<option value="">스페이스</option>
-		  	<%-- spaceList forEach --%>
-		</select>
-		
+		<div class="filter-dropdown" data-name="space">
+			<button type="button" class="filter-dropdown-btn" id="btn_space">스페이스</button>
+			<div class="filter-dropdown-panel" id="panel_space" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_space">
+					<li data-value="">(전체)</li>
+					<%-- 3단계: spaceList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_space" value="=">
+			<input type="hidden" id="search_space" value="">
+		</div>
+
 		<!-- 담당자 = creator -->
-		<select id="op_creator">
-		  	<option value="=" selected>=</option>
-		  	<option value="!=">!=</option>
-		</select>
-		<select id="search_creator">
-		  	<option value="">담당자</option>
-		</select>
-		
+		<div class="filter-dropdown" data-name="creator">
+			<button type="button" class="filter-dropdown-btn" id="btn_creator">담당자</button>
+			<div class="filter-dropdown-panel" id="panel_creator" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_creator">
+					<li data-value="">(전체)</li>
+					<%-- 3단계: userList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_creator" value="=">
+			<input type="hidden" id="search_creator" value="">
+		</div>
+
 		<!-- 작업자 = worker -->
-		<select id="op_worker">
-		  	<option value="=" selected>=</option>
-		  	<option value="!=">!=</option>
-		</select>
-		<select id="search_worker">
-		  	<option value="">작업자</option>
-		</select>
-		
+		<div class="filter-dropdown" data-name="worker">
+			<button type="button" class="filter-dropdown-btn" id="btn_worker">작업자</button>
+			<div class="filter-dropdown-panel" id="panel_worker" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_worker">
+					<li data-value="">(전체)</li>
+					<%-- 3단계: userList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_worker" value="=">
+			<input type="hidden" id="search_worker" value="">
+		</div>
+
 		<!-- 우선순위 -->
-		<select id="op_priority">
-		  	<option value="=" selected>=</option>
-		  	<option value="!=">!=</option>
-		</select>
-		<select id="search_priority">
-		  	<option value="">우선 순위</option>
-		  	<option value="High">High</option>
-		  	<option value="Medium">Medium</option>
-		  	<option value="Low">Low</option>
-		</select>
-		
-		<!-- 상태 (옵션은 3단계) -->
-		<select id="op_status">
-		  	<option value="=" selected>=</option>
-		  	<option value="!=">!=</option>
-		</select>
-		<select id="search_status">
-		  	<option value="">상태</option>
-		</select>
-		
+		<div class="filter-dropdown" data-name="priority">
+			<button type="button" class="filter-dropdown-btn" id="btn_priority">우선 순위</button>
+			<div class="filter-dropdown-panel" id="panel_priority" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_priority">
+					<li data-value="">(전체)</li>
+					<li data-value="High">High</li>
+					<li data-value="Medium">Medium</li>
+					<li data-value="Low">Low</li>
+				</ul>
+			</div>
+			<input type="hidden" id="op_priority" value="=">
+			<input type="hidden" id="search_priority" value="">
+		</div>
+
+		<!-- 상태 -->
+		<div class="filter-dropdown" data-name="status">
+			<button type="button" class="filter-dropdown-btn" id="btn_status">상태</button>
+			<div class="filter-dropdown-panel" id="panel_status" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op="=">=</button>
+					<button type="button" class="op-btn" data-op="!=">!=</button>
+				</div>
+				<ul class="filter-op-list" id="list_status">
+					<li data-value="">(전체)</li>
+					<%-- 3단계: statusList forEach --%>
+				</ul>
+			</div>
+			<input type="hidden" id="op_status" value="=">
+			<input type="hidden" id="search_status" value="">
+		</div>
+
 		<!-- 기한 -->
-		<select id="op_due">
-		  	<option value=">=" selected>>=</option>
-		  	<option value="<="><=</option>
-		</select>
-		<input type="date" id="due_date" class="search_due_date"
-		       max="2099-12-31" min="2000-01-01">
-		
+		<div class="filter-dropdown" data-name="due">
+			<button type="button" class="filter-dropdown-btn" id="btn_due">기한</button>
+			<div class="filter-dropdown-panel" id="panel_due" style="display:none;">
+				<div class="filter-op-bar">
+					<button type="button" class="op-btn active" data-op=">=">>=</button>
+					<button type="button" class="op-btn" data-op="<="><=</button>
+				</div>
+				<div class="filter-due-body">
+					<input type="date" id="due_date" class="search_due_date"
+					       max="2099-12-31" min="2000-01-01">
+					<button type="button" class="due-clear-btn">지우기</button>
+				</div>
+			</div>
+			<input type="hidden" id="op_due" value=">=">
+			<input type="hidden" id="search_due" value="">
+		</div>
+
 		<button type="button" id="btn_delete_filter">필터 지우기</button>
 		<button type="button" id="btn_save_filter">필터 저장</button>
 	</div>
