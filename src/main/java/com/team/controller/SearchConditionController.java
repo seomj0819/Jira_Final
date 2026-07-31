@@ -160,7 +160,7 @@ public class SearchConditionController {
 		List<SearchConditionDto> list = searchConditionService.searchCriteria(dto);
 
 		model.addAttribute("filterList", list);
-		return "FilterSearchResult";
+		return "TaskSearchResult";
 	}
 
 }

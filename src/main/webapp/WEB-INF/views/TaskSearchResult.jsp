@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<tr>
-	<th>업무</th>
-	<th>담당자</th>
-	<th>작업자</th>
-	<th>우선순위</th>
-	<th>상태</th>
-	<th>만듦</th>
-	<th>업데이트</th>
-	<th>기한</th>
-</tr>
 <c:forEach var="task" items="${taskList}">
 	<tr>
 		<td>

@@ -87,6 +87,7 @@
 			}
 	</script>
 <div class="filter-detail">
+	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
 	<header>
 		<h1>
 			<span>${filterTitle}</span>
@@ -131,6 +132,18 @@
 	<main>
 		<div class="table_container">
 			<table>
+				<thead>
+					<tr>
+						<th>업무</th>
+						<th>담당자</th>
+						<th>작업자</th>
+						<th>우선순위</th>
+						<th>상태</th>
+						<th>만듦</th>
+						<th>업데이트</th>
+						<th>기한</th>
+					</tr>
+				</thead>
 				<tbody id="task_result_body">
 					<%@ include file="TaskSearchResult.jsp" %>
 				</tbody>
