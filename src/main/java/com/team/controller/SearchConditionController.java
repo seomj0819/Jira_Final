@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
+import com.team.dto.TaskInfoDto;
+import com.team.dto.TaskSearchDto;
 import com.team.service.SearchConditionService;
 import com.team.service.SpaceService;
 import com.team.service.TaskService;
@@ -71,6 +73,16 @@ public class SearchConditionController {
 		model.addAttribute("userRoll", userRoll);
 		model.addAttribute("list", list);
 
+		TaskSearchDto searchDto = new TaskSearchDto();
+		searchDto.setCurrentUserNo(userNo);
+		List<TaskInfoDto> taskList = taskService.searchTask(searchDto);
+
+		model.addAttribute("taskList", taskList);
+
+		if (list != null && !list.isEmpty()) {
+		    model.addAttribute("filterTitle", list.get(0).getSearchConditionTitle());
+		}
+		
 		String page = "viewer".equals(userRoll) ? "FilterDetail_Viewer" : "FilterDetail";
 
 		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
