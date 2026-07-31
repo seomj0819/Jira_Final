@@ -17,7 +17,7 @@
 		<if test="imageNo != null and imageNo != ''">
     	, image_no = #{imageNo}
 		</if>
-		WHERE reply_no = #{replyNo}
+		WHERE reply_no = #{replyNo} AND writer_no = #{writer_no}
 
 </update>
 
