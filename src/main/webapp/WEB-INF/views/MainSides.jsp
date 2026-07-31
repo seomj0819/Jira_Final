@@ -173,30 +173,12 @@
 						최근에 조회
 					</div>
 					<div id="tasklist">
+						<c:forEach var="historyDto" items="${historyList}">
 						<div class="list">
 							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							ABCD-4 작업4
+							${historyDto.spaceKey}-${historyDto.taskNo} <span style="color: gray; font-size: 12px;">${historyDto.createdAt}</span>
 						</div>
-						<div class="list">
-							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							ABCD-3 작업3
-						</div>
-						<div class="list">
-							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							ABCD-2 작업2
-						</div>
-						<div class="list">
-							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							ABCD-1 작업1
-						</div>
-						<div class="list">
-							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							taskId title
-						</div>
-						<div class="list">
-							<img class="taskimage" src="https://koreait.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium">
-							taskId title
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
