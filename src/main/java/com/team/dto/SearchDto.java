@@ -10,12 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchDto {
-	int userNo;
-	String email;
-	String pw;
-	String googleApi;
-	String userName;
-	int imageNo;
-	String verificationCode;
-	String expireDate;
+	int currentUserNo;
+	String spaceKey;
+	
 }
