@@ -86,6 +86,7 @@
 				});
 			}
 	</script>
+	<main>
 	<div class="filter-detail">
 	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
 
@@ -152,7 +153,6 @@
 			<input type="hidden" id="op_worker" value="=">
 			<input type="hidden" id="search_worker" value="">
 		</div>
-	<main>
 		<div class="table_container">
 			<table>
 				<thead>
