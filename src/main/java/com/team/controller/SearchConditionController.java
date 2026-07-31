@@ -73,6 +73,11 @@ public class SearchConditionController {
 		model.addAttribute("userRoll", userRoll);
 		model.addAttribute("list", list);
 
+		List<SearchConditionDto> sideFilters = searchConditionService.showSearchConditionList(userNo);
+		
+		model.addAttribute("searchConditionList", sideFilters);
+		model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
+		
 		TaskSearchDto searchDto = new TaskSearchDto();
 		searchDto.setCurrentUserNo(userNo);
 		List<TaskInfoDto> taskList = taskService.searchTask(searchDto);
