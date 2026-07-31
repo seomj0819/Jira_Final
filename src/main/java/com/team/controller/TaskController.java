@@ -127,7 +127,9 @@ public class TaskController {
 	 		historyUserList.add(loginService.getUserProfile(historyList.get(i).getUserNo()));
 	 	}
 	 	model.addAttribute("historyUserList", historyUserList);
-
+	 	
+	 	model.addAttribute("lowerTaskList", taskService.showLowerTaskList(dto));
+	 	
 	 	session.setAttribute("spaceKey", spaceKey);
 	 	session.setAttribute("userNo", userNo);
 	 	return "TaskCard";

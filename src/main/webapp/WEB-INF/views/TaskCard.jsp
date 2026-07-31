@@ -334,6 +334,16 @@
 				<div id="lowertask">
 				    하위작업
 				    <br/><br/>
+				    <div class="lowerTaskCard">
+				    	<table>
+				    		<c:forEach var="lowerTaskDto" items="${lowerTaskList}">
+				    			<tr>
+				    				<td>${lowerTaskDto.spaceKey}-${lowerTaskDto.taskNo}</td>
+				    				<td>${lowerTaskDto.taskTitle}</td>
+				    			</tr>
+				    		</c:forEach>
+				    	</table>
+				    </div>
 				    <input id="inputlt" type="text" name="inputlt" placeholder="하위작업 추가"/>
 				    <div id="ltbtns">
 				        <button id="ltsubmit">저장</button>
