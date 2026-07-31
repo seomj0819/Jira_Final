@@ -235,19 +235,17 @@
 			summary FROM task WHERE space_key = #{spaceKey} AND status_no = #{statusNo}
 	]]>
 </select>
-<select id="isUpperTask" parameterType="com.team.dto.SearchDto" resultType="String">
+<select id="searchUpperTask" parameterType="com.team.dto.SearchDto" resultType="String">
 	<![CDATA[
 		SELECT CASE
-			WHEN t.upper_task_no IS NOT NULL THEN 'Y'
-			ELSE 'N'
+			   WHEN t.upper_task_no IS NOT NULL THEN 'Y'
+			   ELSE 'N'
 		END
 		FROM task t
-		WHERE t.task_no = #{searchTaskNo}
-		AND t.space_key = #{searchSpaceKey}
+		WHERE t.task_no = #{taskNo}
 		AND t.space_key IN (
-			SELECT sm.space_key
-			FROM space_members sm
-			WHERE sm.user_no = #{currentUserNo}
+			SELECT sm.space_key FROM space_members sm
+		 	WHERE sm.user_no = #{currentUserNo}
 		)
 	]]>
 </select>
