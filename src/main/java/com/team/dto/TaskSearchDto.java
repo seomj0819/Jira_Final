@@ -29,7 +29,7 @@ public class TaskSearchDto {
 	String operatorStatusNo;
 	
 	String searchSpaceKey;
-	String operatorSpceKey;
+	String operatorSpaceKey;
 	
 	String searchPriority;
 	String operatorPriority;
