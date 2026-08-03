@@ -5,9 +5,9 @@
 <mapper namespace="com.team.mapper.ReplyMapper">
 
 <insert id="writeReply" parameterType="com.team.dto.ReplyListDto">
-	<![CDATA[
-		INSERT INTO reply(reply_no, space_key, task_no, writer_no, reply_content, image_no, created_at) VALUES (seq_reply_no.nextVal, #{space_key}, #{task_no}, #{writer_no}, #{reply_content}, #{image_no}, SYSDATE)
-	]]>
+	
+		INSERT INTO reply(reply_no, space_key, task_no, writer_no, reply_content <if test="imageNo != null and imageNo != ''">, image_no</if>, created_at) VALUES (seq_reply_no.nextVal, #{space_key}, #{task_no}, #{writer_no}, #{reply_content} <if test="imageNo != null and imageNo != ''">, #{image_no}</if>, SYSDATE)
+	
 </insert>
 
 <update id="updateReply" parameterType="com.team.dto.ReplyListDto">
