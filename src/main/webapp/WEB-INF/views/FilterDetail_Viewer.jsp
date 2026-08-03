@@ -97,6 +97,7 @@
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>
 	</header>
+	</div>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
 			<img src="<c:url value='/resources/img/search.png'/>">
@@ -172,6 +173,7 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
 	</main>
 	<div class="shadow"></div>
 	<div id="popup_overlay" class="popup-overlay">

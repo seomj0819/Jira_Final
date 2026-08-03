@@ -181,6 +181,7 @@
 				$btn.text(op + " " + selectedText);
 			}
 	</script>
+	<main>
 	<div class="filter-detail">
 	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
 
@@ -191,7 +192,7 @@
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>
 	</header>
-
+	</div>
 	<div id="condition_container">
 		<div id="search_box_container" tabindex="0">
 			<img src="<c:url value='/resources/img/search.png'/>">
@@ -306,7 +307,6 @@
 		<button type="button" id="btn_delete_filter">필터 지우기</button>
 		<button type="button" id="btn_save_filter">필터 저장</button>
 	</div>
-	<main>
 		<div class="table_container">
 			<table>
 				<thead>
@@ -425,7 +425,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 <script>
 	const priorityTags = document.querySelectorAll('.task_status');
 	
