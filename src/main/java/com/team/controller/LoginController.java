@@ -49,7 +49,7 @@ public class LoginController {
         
         boolean exist = loginService.emailDuplicateCheck(email);
         if(!exist) {
-        	return "login_Fail";
+        	return "Login_Fail";
         }
         
         return "Login_PassWord";
@@ -65,7 +65,7 @@ public class LoginController {
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
-            return "login_fail";
+            return "Login_Fail";
         }
 
         session.setAttribute("userNo", userNo);
