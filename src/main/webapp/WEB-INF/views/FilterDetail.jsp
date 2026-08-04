@@ -262,7 +262,9 @@
 				</div>
 				<ul class="filter-op-list" id="list_space">
 					<li data-value="">(전체)</li>
-					<%-- spaceList forEach --%>
+					<c:forEach var="space" items="${spaceList}">
+			  			<li data-value="${space.spaceKey}">${space.spaceTitle}</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<input type="hidden" id="op_space" value="=">
@@ -279,7 +281,9 @@
 				</div>
 				<ul class="filter-op-list" id="list_creator">
 					<li data-value="">(전체)</li>
-					<%-- userList forEach --%>
+					<c:forEach var="user" items="${userList}">
+						<li data-value="${user.userNo}">${user.userName}</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<input type="hidden" id="op_creator" value="=">
@@ -296,7 +300,9 @@
 				</div>
 				<ul class="filter-op-list" id="list_worker">
 					<li data-value="">(전체)</li>
-					<%-- userList forEach --%>
+					<c:forEach var="user" items="${userList}">
+						<li data-value="${user.userNo}">${user.userName}</li>
+					</c:forEach>
 				</ul>
 			</div>
 			<input type="hidden" id="op_worker" value="=">
