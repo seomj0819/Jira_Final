@@ -65,7 +65,7 @@ public class LoginController {
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
-            return "login_Fail";
+            return "login_fail";
         }
 
         session.setAttribute("userNo", userNo);
