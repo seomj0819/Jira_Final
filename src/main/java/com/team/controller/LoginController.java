@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team.dto.SpaceMemberDto;
+import com.team.dto.UserInfoDto;
 import com.team.service.LoginService;
 import com.team.service.SpaceMemberService;
 
@@ -64,12 +65,12 @@ public class LoginController {
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
-            return "Login_Fail";
+            return "login_Fail";
         }
 
         session.setAttribute("userNo", userNo);
         session.setAttribute("email", email);
-
+        
         List<SpaceMemberDto> list = spaceMemberService.getSpacesByUserNo(userNo);
 
         if (!list.isEmpty()) {
