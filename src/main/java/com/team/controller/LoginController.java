@@ -65,7 +65,7 @@ public class LoginController {
         Integer userNo = loginService.loginCheck(email, pw);
 
         if (userNo == null) {
-            return "Login_Fail";
+            return "Jira_SignUp";
         }
 
         session.setAttribute("userNo", userNo);
