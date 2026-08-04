@@ -35,10 +35,10 @@
 			    }
 			});
 			
-			$("#search_task_by_title").oninput(function() {
+/* 			$("#search_task_by_title").oninput(function() {
 				console.log();
 			});
-			
+			 */
 			$(document).mouseup(function(e) {
 				let temp1 = layerPopUp.has(e.target).length;
 				let temp2 = editPopUp.has(e.target).length;
