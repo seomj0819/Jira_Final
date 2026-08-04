@@ -20,6 +20,7 @@ import com.team.dto.SearchCriteriaDto;
 import com.team.dto.TaskInfoDto;
 import com.team.dto.TaskSearchDto;
 import com.team.service.SearchConditionService;
+import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
 import com.team.service.TaskService;
 
@@ -33,6 +34,9 @@ public class SearchConditionController {
 	
 	@Autowired
 	TaskService taskService;
+	
+	@Autowired
+	SpaceMemberService spaceMemberService;
 
 	@GetMapping("/filter/list")
 	public String filterList(HttpSession session, Model model, HttpServletRequest request) {
@@ -181,6 +185,7 @@ public class SearchConditionController {
 	    dto.setOperatorDueDate(operatorDueDate);
 
 	    model.addAttribute("taskList", taskService.searchTask(dto));
+	    model.addAttribute("userList", spaceMemberService.getSpaceMembers(userNo));
 	    return "TaskSearchResult";
 	}
 

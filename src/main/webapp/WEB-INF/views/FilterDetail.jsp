@@ -195,34 +195,34 @@
 			            + "&operatorSpaceKey=" + encodeURIComponent($("#op_space").val() || "=");
 			    }
 
-				var creator = $("#search_creator").val();
-				if (creator) {
-					url += "&creator=" + encodeURIComponent(creator)
-						+ "&operatorCreator=" + encodeURICompopnent($("#op_creator").val() || "=");
+				var creatorNo = $("#search_creator").val();
+				if (creatorNo) {
+					url += "&creatorNo=" + encodeURIComponent(creator)
+						+ "&operatorCreatorNo=" + encodeURIComponent($("#op_creatorNo").val() || "=");
 				}
 				
-				var worker = $("#search_worker").val();
-				if (worker) {
-					url += "&worker=" + encodeURIComponent(worker)
-						+ "&operatorWorker=" + encodeURICompopnent($("#op_worker").val() || "=");
+				var workerNo = $("#search_worker").val();
+				if (workerNo) {
+					url += "&workerNo=" + encodeURIComponent(worker)
+						+ "&operatorWorkerNo=" + encodeURIComponent($("#op_workerNo").val() || "=");
 				}
 				
 				var priority = $("#search_priority").val();
 				if (priority) {
 					url += "&priority=" + encodeURIComponent(priority)
-						+ "&operatorPriority=" + encodeURICompopnent($("#op_priority").val() || "=");
+						+ "&operatorPriority=" + encodeURIComponent($("#op_priority").val() || "=");
 				}
 				
-				var status = $("#search_status").val();
-				if (status) {
-					url += "&status=" + encodeURIComponent(status)
-						+ "&operatorStatus=" + encodeURICompopnent($("#op_status").val() || "=");
+				var statusNo = $("#search_status").val();
+				if (statusNo) {
+					url += "&statusNo=" + encodeURIComponent(status)
+						+ "&operatorStatusNo=" + encodeURIComponent($("#op_statusNo").val() || "=");
 				}
 				
-				var dueDate = $("#search_dueDate").val();
+				var dueDate = $("#search_due").val();
 				if (dueDate) {
 					url += "&dueDate=" + encodeURIComponent(dueDate)
-						+ "&operatorDueDate=" + encodeURICompopnent($("#op_dueDate").val() || "=");
+						+ "&operatorDueDate=" + encodeURIComponent($("#op_due").val() || "<=");
 				}
 				 
 			    fetch(url)	

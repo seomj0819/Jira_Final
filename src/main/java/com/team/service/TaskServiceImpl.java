@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.dao.TaskDao;
-import com.team.dto.SearchCriteriaDto;
 import com.team.dto.TaskInfoDto;
 import com.team.dto.TaskOrderDto;
 import com.team.dto.TaskSearchDto;
