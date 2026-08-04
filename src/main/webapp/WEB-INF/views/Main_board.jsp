@@ -61,13 +61,53 @@
 	    $(".task-card-container").click(function() {
 	    	var taskId = $(this).find(".showTaskId").html().trim();
 	    	var taskNo = taskId.split("-")[1];
+	    	
 	    	location.href = "/project/taskCard?taskNo="+taskNo;
+	    });
+	    
+	    $(".create-task").click(function() {
+	    	$(this).parent().parent().find(".create-task-form").toggle();
+	    });
+	    $(".createTaskBtn").click(async function() {
+	    	const newTitle = $(this).parent().find(".newTitle").val().trim();
+	    	const statusOrder = $(this).closest(".create-task-form").data("statusorder");
+	    	var spaceKey = $("#title-container").data("spacekey");
+	    	if(newTitle === "") {
+	    		alert("제목을 입력하세요");
+	    		$(this).parent().find(".newTitle").focus();
+	    		return;
+	    	}
+	    	
+	    	try {
+	    		const reqData = {"taskTitle": newTitle, "statusNo": statusOrder};
+	    		
+	    		const response = await fetch("<c:url value='/space/createTask.do'/>", {
+	    			method: "POST",
+	    			headers: {
+	    				"Content-Type":"application/json",
+	    			},
+	    			body: JSON.stringify(reqData)
+	    		});
+	    		const resp = await response.text();
+	    		const res = resp.trim();
+	    		if(res === "success") {
+	    			alert("태스크 생성됨");
+	    			$(this).parent().find(".newTitle").val("");
+	    			
+	    			location.href="/project/space/enter?spaceKey="+spaceKey;
+	    		} else {
+	    			alert("등록 실패");
+	    			return;
+	    		}
+	    	}  catch(error) {
+    			console.error("error",error);
+    		}
 	    });
 	});
 	</script>
 	<form>
 		<header id="header">
-			<div id="title-container">
+			<div id="title-container" data-spacekey="${spaceDto.spaceKey}">
 				<span id="title">스페이스</span>
 			</div>
 			<div id="space-title-container">
@@ -141,11 +181,16 @@
 					</div>
 					</c:forEach>
 					<div class="create-task-container">
-						<button class="create-task">
+						<button type="button" class="create-task">
 							<span>+</span>
 							<span>만들기</span>
 						</button>
-					</div>	
+					</div>
+					<div class="create-task-form" data-statusorder="${status.count}">
+						<label for="newTitle">제목:</label>
+						<input type="text" name="newTitle" class="newTitle" placeholder="작업의 제목을 입력"/>
+						<button type="button" class="createTaskBtn">확인</button>
+					</div>
 				</div>
 				</c:forEach>
 				<div id="add-status-container">
