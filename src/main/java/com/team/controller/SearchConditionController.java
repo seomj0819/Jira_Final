@@ -185,6 +185,7 @@ public class SearchConditionController {
 	    dto.setOperatorDueDate(operatorDueDate);
 
 	    model.addAttribute("taskList", taskService.searchTask(dto));
+	    model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
 	    model.addAttribute("userList", spaceMemberService.getSpaceMembers(userNo));
 	    return "TaskSearchResult";
 	}
