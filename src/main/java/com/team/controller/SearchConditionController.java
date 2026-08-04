@@ -145,6 +145,7 @@ public class SearchConditionController {
 	@GetMapping("/filter/list/detail/search")
 	public String searchTasj(@RequestParam(required = false) String keyword,
 			@RequestParam(required = false) String spaceKey, @RequestParam(required = false) Integer ownerNo,
+			@RequestParam int searchConditonNo,
 			HttpSession session, Model model) {
 
 		Integer userNo = (Integer) session.getAttribute("userNo");
@@ -152,12 +153,12 @@ public class SearchConditionController {
 			return "redirect:/login";
 		}
 
-		SearchCriteriaDto dto = new SearchCriteriaDto();
+		TaskSearchDto dto = new TaskSearchDto();
 		dto.setCurrentUserNo(userNo);
 		dto.setSearchSpaceKey(spaceKey);
 		dto.setSearchKeyWord(keyword);
 
-		List<SearchConditionDto> list = searchConditionService.searchCriteria(dto);
+		List<TaskInfoDto> list = taskService.searchTask(dto);
 
 		model.addAttribute("filterList", list);
 		return "TaskSearchResult";
