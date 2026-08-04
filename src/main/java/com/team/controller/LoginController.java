@@ -49,7 +49,7 @@ public class LoginController {
         
         boolean exist = loginService.emailDuplicateCheck(email);
         if(!exist) {
-        	return "Login_Fail";
+        	return "login_Fail";
         }
         
         return "Login_PassWord";
