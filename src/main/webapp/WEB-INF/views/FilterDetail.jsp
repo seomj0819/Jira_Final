@@ -184,6 +184,55 @@
 				}
 				$btn.text(op + " " + selectedText);
 			}
+			
+			function searchTaskList() {
+			    var url = ctx + "/filter/list/detail/search?keyword="
+			        + encodeURIComponent($("#search_task_by_title").val() || "");
+
+			    var spaceKey = $("#search_space").val();
+			    if (spaceKey) {
+			        url += "&spaceKey=" + encodeURIComponent(spaceKey)
+			            + "&operatorSpaceKey=" + encodeURIComponent($("#op_space").val() || "=");
+			    }
+
+				var creator = $("#search_creator").val();
+				if (creator) {
+					url += "&creator=" + encodeURIComponent(creator)
+						+ "&operatorCreator=" + encodeURICompopnent($("#op_creator").val() || "=");
+				}
+				
+				var worker = $("#search_worker").val();
+				if (worker) {
+					url += "&worker=" + encodeURIComponent(worker)
+						+ "&operatorWorker=" + encodeURICompopnent($("#op_worker").val() || "=");
+				}
+				
+				var priority = $("#search_priority").val();
+				if (priority) {
+					url += "&priority=" + encodeURIComponent(priority)
+						+ "&operatorPriority=" + encodeURICompopnent($("#op_priority").val() || "=");
+				}
+				
+				var status = $("#search_status").val();
+				if (status) {
+					url += "&status=" + encodeURIComponent(status)
+						+ "&operatorStatus=" + encodeURICompopnent($("#op_status").val() || "=");
+				}
+				
+				var dueDate = $("#search_dueDate").val();
+				if (dueDate) {
+					url += "&dueDate=" + encodeURIComponent(dueDate)
+						+ "&operatorDueDate=" + encodeURICompopnent($("#op_dueDate").val() || "=");
+				}
+				 
+			    fetch(url)	
+			        .then(function(res) { return res.text(); })
+			        .then(function(html) {
+			            $("#task_result_body").html(html);
+			        });
+			}
+
+			$("#search_task_by_title").on("input", searchTaskList);
 	</script>
 	<main>
 	<div class="filter-detail">
