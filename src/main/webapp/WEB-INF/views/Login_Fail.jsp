@@ -23,7 +23,7 @@
 				<span id="small_txt">이메일</span>
 				<span id="required">*</span><br/>
 				<div id="useremail-container">
-					<input id="email_input" placeholder="이메일을 입력하세요"><br/><br/>
+					<input id="email_input" placeholder="이메일을 입력하세요"><br/>
 				</div>
 				<button id="login-submit">
 					<span id="login-txt">계속</span>
