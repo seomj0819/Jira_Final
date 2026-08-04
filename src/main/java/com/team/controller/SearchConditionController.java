@@ -143,25 +143,45 @@ public class SearchConditionController {
 
 	// Task 검색
 	@GetMapping("/filter/list/detail/search")
-	public String searchTasj(@RequestParam(required = false) String keyword,
-			@RequestParam(required = false) String spaceKey, @RequestParam(required = false) Integer ownerNo,
-			@RequestParam int searchConditonNo,
-			HttpSession session, Model model) {
+	public String searchTask(
+	        @RequestParam(required = false) String keyword,
+	        @RequestParam(required = false) String spaceKey,
+	        @RequestParam(required = false) String operatorSpaceKey,
+	        @RequestParam(required = false) Integer creatorNo,
+	        @RequestParam(required = false) String operatorCreatorNo,
+	        @RequestParam(required = false) Integer workerNo,
+	        @RequestParam(required = false) String operatorWorkerNo,
+	        @RequestParam(required = false) String priority,
+	        @RequestParam(required = false) String operatorPriority,
+	        @RequestParam(required = false) Integer statusNo,
+	        @RequestParam(required = false) String operatorStatusNo,
+	        @RequestParam(required = false) String dueDate,
+	        @RequestParam(required = false) String operatorDueDate,
+	        HttpSession session, Model model) {
 
-		Integer userNo = (Integer) session.getAttribute("userNo");
-		if (userNo == null) {
-			return "redirect:/login";
-		}
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
 
-		TaskSearchDto dto = new TaskSearchDto();
-		dto.setCurrentUserNo(userNo);
-		dto.setSearchSpaceKey(spaceKey);
-		dto.setSearchKeyWord(keyword);
+	    TaskSearchDto dto = new TaskSearchDto();
+	    dto.setCurrentUserNo(userNo);
+	    dto.setSearchKeyWord(keyword);
+	    dto.setSearchSpaceKey(spaceKey);
+	    dto.setOperatorSpaceKey(operatorSpaceKey);
+	    dto.setSearchCreatorNo(creatorNo);
+	    dto.setOperatorCreatorNo(operatorCreatorNo);
+	    dto.setSearchWorkerNo(workerNo);
+	    dto.setOperatorWorkerNo(operatorWorkerNo);
+	    dto.setSearchPriority(priority);
+	    dto.setOperatorPriority(operatorPriority);
+	    dto.setSearchStatusNo(statusNo);
+	    dto.setOperatorStatusNo(operatorStatusNo);
+	    dto.setSearchDueDate(dueDate);
+	    dto.setOperatorDueDate(operatorDueDate);
 
-		List<TaskInfoDto> list = taskService.searchTask(dto);
-
-		model.addAttribute("filterList", list);
-		return "TaskSearchResult";
+	    model.addAttribute("taskList", taskService.searchTask(dto));
+	    return "TaskSearchResult";
 	}
 
 }
