@@ -92,9 +92,12 @@
 				// 1) 버튼 클릭 → 그 드롭다운만 열기/닫기
 				$(".filter-dropdown-btn").on("click", function(e) {
 					e.stopPropagation();
+					
 					var $panel = $(this).siblings(".filter-dropdown-panel");
 					var alreadyOpen = $panel.is(":visible");
+					
 					closeAllFilterDropdowns();
+					
 					if (!alreadyOpen) {
 						$panel.show();
 					}
@@ -103,45 +106,62 @@
 				// 2) 연산자 버튼 (=, !=, >=, <=)
 				$(".op-btn").on("click", function(e) {
 					e.stopPropagation();
+					
 					var $dropdown = $(this).closest(".filter-dropdown");
 					var op = $(this).attr("data-op");
 					var name = $dropdown.attr("data-name"); // space, creator, ...
+					
 					$dropdown.find(".op-btn").removeClass("active");
+					
 					$(this).addClass("active");
+					
 					$("#op_" + name).val(op);
+					
 					refreshFilterButtonText($dropdown);
+					searchTaskList();
 				});
 				
 				// 3) 목록에서 값 선택
 				$(".filter-op-list li").on("click", function(e) {
 					e.stopPropagation();
+					
 					var $dropdown = $(this).closest(".filter-dropdown");
 					var name = $dropdown.attr("data-name");
 					var value = $(this).attr("data-value");
 					var text = $(this).text();
+					
 					if (value === undefined) {
 						value = "";
 					}
+					
 					$("#search_" + name).val(value);
+					
 					refreshFilterButtonText($dropdown, text);
 					$dropdown.find(".filter-dropdown-panel").hide();
+					searchTaskList();
 				});
 				
 				// 4) 기한(date)
 				$("#due_date").on("change", function() {
 					var $dropdown = $(this).closest(".filter-dropdown");
 					var value = $(this).val() || "";
+					
 					$("#search_due").val(value);
+					
 					refreshFilterButtonText($dropdown, value);
 				});
 				
 				// 5) 기한 지우기
 				$(".due-clear-btn").on("click", function(e) {
 					e.stopPropagation();
+					
 					var $dropdown = $(this).closest(".filter-dropdown");
+					
 					$("#due_date").val("");
 					$("#search_due").val("");
+					
 					refreshFilterButtonText($dropdown);
+					
 					$dropdown.find(".filter-dropdown-panel").hide();
 				});
 				
@@ -195,36 +215,38 @@
 			            + "&operatorSpaceKey=" + encodeURIComponent($("#op_space").val() || "=");
 			    }
 
-				var creatorNo = $("#search_creator").val();
-				if (creatorNo) {
-					url += "&creatorNo=" + encodeURIComponent(creator)
-						+ "&operatorCreatorNo=" + encodeURIComponent($("#op_creatorNo").val() || "=");
-				}
-				
-				var workerNo = $("#search_worker").val();
-				if (workerNo) {
-					url += "&workerNo=" + encodeURIComponent(worker)
-						+ "&operatorWorkerNo=" + encodeURIComponent($("#op_workerNo").val() || "=");
-				}
-				
-				var priority = $("#search_priority").val();
-				if (priority) {
-					url += "&priority=" + encodeURIComponent(priority)
-						+ "&operatorPriority=" + encodeURIComponent($("#op_priority").val() || "=");
-				}
-				
-				var statusNo = $("#search_status").val();
-				if (statusNo) {
-					url += "&statusNo=" + encodeURIComponent(status)
-						+ "&operatorStatusNo=" + encodeURIComponent($("#op_statusNo").val() || "=");
-				}
-				
-				var dueDate = $("#search_due").val();
-				if (dueDate) {
-					url += "&dueDate=" + encodeURIComponent(dueDate)
-						+ "&operatorDueDate=" + encodeURIComponent($("#op_due").val() || "<=");
-				}
-				 
+			    var creatorNo = $("#search_creator").val();
+			    if (creatorNo) {
+			    	url += "&creatorNo=" + encodeURIComponent(creatorNo)
+			    		+ "&operatorCreatorNo=" + encodeURIComponent($("#op_creator").val() || "=");
+			    }
+
+			    var workerNo = $("#search_worker").val();
+			    if (workerNo) {
+			    	url += "&workerNo=" + encodeURIComponent(workerNo)
+			    		+ "&operatorWorkerNo=" + encodeURIComponent($("#op_worker").val() || "=");
+			    }
+
+			    var priority = $("#search_priority").val();
+			    if (priority) {
+			    	url += "&priority=" + encodeURIComponent(priority)
+			    		+ "&operatorPriority=" + encodeURIComponent($("#op_priority").val() || "=");
+			    }
+
+			    var statusNo = $("#search_status").val();
+			    if (statusNo) {
+			    	url += "&statusNo=" + encodeURIComponent(statusNo)
+			    		+ "&operatorStatusNo=" + encodeURIComponent($("#op_status").val() || "=");
+			    }
+
+			    var dueDate = $("#search_due").val();
+			    if (dueDate) {
+			    	url += "&dueDate=" + encodeURIComponent(dueDate)
+			    		+ "&operatorDueDate=" + encodeURIComponent($("#op_due").val() || ">=");
+			    }
+			    
+			    searchTaskList();
+			    
 			    fetch(url)	
 			        .then(function(res) { return res.text(); })
 			        .then(function(html) {
