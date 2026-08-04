@@ -2,6 +2,7 @@ package com.team.dao;
 
 import java.util.List;
 
+import com.team.dto.SearchCriteriaDto;
 import com.team.dto.TaskInfoDto;
 import com.team.dto.TaskOrderDto;
 import com.team.dto.TaskSearchDto;
