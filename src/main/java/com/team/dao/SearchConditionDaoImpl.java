@@ -198,12 +198,12 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	}
 
 	@Override
-	public String showDetailCreatorNos(int searchConditionNo) {
+	public Integer showDetailCreatorNos(int searchConditionNo) {
 		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailCreatorNos", searchConditionNo);
 	}
 
 	@Override
-	public String showDetailWorkerNos(int searchConditionNo) {
+	public Integer showDetailWorkerNos(int searchConditionNo) {
 		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailWorkerNos", searchConditionNo);
 	}
 
@@ -213,7 +213,7 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	}
 
 	@Override
-	public String showDetailStatusNos(int searchConditionNo) {
+	public Integer showDetailStatusNos(int searchConditionNo) {
 		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailStatusNos", searchConditionNo);
 	}
 

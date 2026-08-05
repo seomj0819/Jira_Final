@@ -258,5 +258,88 @@ public class SearchConditionServiceTest {
 		assertNotNull(list);
 	}
 	
+	// 16. 검색 조건중 스페이스키 조회 테스트
+	@Test
+	public void testShowDetailSpaceKeys() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		String spaceKey = searchConditionService.showDetailSpaceKeys(searcnConditionNo);
+		
+		// Then
+		assertNotNull(spaceKey);
+		System.out.println(spaceKey);
+	}
+	
+	// 17. 검색 조건중 소유자 조회 테스트
+	@Test
+	public void testShowDetailCreatorNos() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		Integer creatorNo = searchConditionService.showDetailCreatorNos(searcnConditionNo);
+		
+		// Then
+		assertNotNull(creatorNo);
+		System.out.println(creatorNo);
+	}
+	
+	// 18. 검색 조건중 작업자 조회 테스트
+	@Test
+	public void testShowDetailWorkerNos() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		Integer workerNo = searchConditionService.showDetailWorkerNos(searcnConditionNo);
+		
+		// Then
+		assertNotNull(workerNo);
+		System.out.println(workerNo);
+	}
+	
+	// 19. 검색 조건중 우선순위 조회 테스트
+	@Test
+	public void testShowDetailPriorities() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		String priority = searchConditionService.showDetailPriorities(searcnConditionNo);
+		
+		// Then
+		assertNotNull(priority);
+		System.out.println(priority);
+	}
+	
+	// 20. 검색 조건중 상태 조회 테스트
+	@Test
+	public void testShowDetailStatusNos() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		Integer statusNo = searchConditionService.showDetailStatusNos(searcnConditionNo);
+		
+		// Then
+		assertNotNull(statusNo);
+		System.out.println(statusNo);
+	}
+	
+	// 21. 검색 조건중 우선순위 조회 테스트
+	@Test
+	public void testShowDetailDueDates() {
+		// Given
+		int searcnConditionNo = 8;
+		
+		// When
+		String dueDate = searchConditionService.showDetailDueDates(searcnConditionNo);
+		
+		// Then
+		assertNotNull(dueDate);
+		System.out.println(dueDate);
+	}
 
 }

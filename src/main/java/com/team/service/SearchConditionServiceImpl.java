@@ -105,32 +105,32 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 
 	@Override
 	public String showDetailSpaceKeys(int searchConditionNo) {
-		return null;
+		return searchConditionDao.showDetailSpaceKeys(searchConditionNo);
 	}
 
 	@Override
-	public String showDetailCreatorNos(int searchConditionNo) {
-		return null;
+	public Integer showDetailCreatorNos(int searchConditionNo) {
+		return searchConditionDao.showDetailCreatorNos(searchConditionNo);
 	}
 
 	@Override
-	public String showDetailWorkerNos(int searchConditionNo) {
-		return null;
+	public Integer showDetailWorkerNos(int searchConditionNo) {
+		return searchConditionDao.showDetailWorkerNos(searchConditionNo);
 	}
 
 	@Override
 	public String showDetailPriorities(int searchConditionNo) {
-		return null;
+		return searchConditionDao.showDetailPriorities(searchConditionNo);
 	}
 
 	@Override
-	public String showDetailStatusNos(int searchConditionNo) {
-		return null;
+	public Integer showDetailStatusNos(int searchConditionNo) {
+		return searchConditionDao.showDetailStatusNos(searchConditionNo);
 	}
 
 	@Override
 	public String showDetailDueDates(int searchConditionNo) {
-		return null;
+		return searchConditionDao.showDetailDueDates(searchConditionNo);
 	}
 
 }

@@ -27,9 +27,9 @@ public interface SearchConditionService {
 	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);
 	List<UserInfoDto> showOwnerListByUserNo(int currentUserNo);
 	String showDetailSpaceKeys(int searchConditionNo);						// 검색 조건중 스페이스키 조회
-	String showDetailCreatorNos(int searchConditionNo);						// 검색 조건중 소유자 조회
-	String showDetailWorkerNos(int searchConditionNo);						// 검색 조건중 작업자 조회
+	Integer showDetailCreatorNos(int searchConditionNo);						// 검색 조건중 소유자 조회
+	Integer showDetailWorkerNos(int searchConditionNo);						// 검색 조건중 작업자 조회
 	String showDetailPriorities(int searchConditionNo);						// 검색 조건중 우선순위 조회
-	String showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
+	Integer showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
 	String showDetailDueDates(int searchConditionNo);						// 검색 조건중 기한 조회
 }
