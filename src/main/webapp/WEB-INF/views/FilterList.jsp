@@ -74,6 +74,8 @@
 		            $("#filter_result_body").html(html);
 		        });
 		}
+		
+		
 
 		$(function() {
 		    $("#search_filter_by_title").on("input", searchFilterList);
