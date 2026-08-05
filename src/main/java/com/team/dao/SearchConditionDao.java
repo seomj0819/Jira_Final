@@ -31,4 +31,5 @@ public interface SearchConditionDao {
 	String showDetailPriorities(int searchConditionNo);						// 검색 조건중 우선순위 조회
 	Integer showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
 	String showDetailDueDates(int searchConditionNo);						// 검색 조건중 기한 조회
+	void updateSearchConditionInfo(SearchConditionDto dto);					// 필터 편집
 }

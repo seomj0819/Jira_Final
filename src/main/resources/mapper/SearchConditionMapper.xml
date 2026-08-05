@@ -445,4 +445,12 @@
 			WHERE search_condition_no = #{searchConditionNo}
 		]]>
 	</select>
+	<update id="updateSearchConditionInfo">
+		<![CDATA[
+			UPDATE search_condition
+			SET search_condition_title = #{searchConditionTitle},
+			search_condition_description = #{searchConditionDescription}
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</update>
 </mapper>

@@ -341,5 +341,22 @@ public class SearchConditionServiceTest {
 		assertNotNull(dueDate);
 		System.out.println(dueDate);
 	}
+	
+	// 22. 필터 편집 테스트
+	@Test
+	public void testUpdateSearchConditionInfo() {
+		// Given
+		SearchConditionDto dto = new SearchConditionDto();
+		dto.setSearchConditionTitle("EditedTitle");
+		dto.setSearchConditionDescription("Filter Description");
+		dto.setAccessUserNo(5);
+		dto.setAccessType("editor");
+		
+		// When
+		searchConditionService.updateSearchConditionInfo(dto);
+		
+		// Then
+		
+	}
 
 }

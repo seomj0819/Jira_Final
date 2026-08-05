@@ -133,4 +133,9 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 		return searchConditionDao.showDetailDueDates(searchConditionNo);
 	}
 
+	@Override
+	public void updateSearchConditionInfo(SearchConditionDto dto) {
+		searchConditionDao.updateSearchConditionInfo(dto);
+	}
+
 }

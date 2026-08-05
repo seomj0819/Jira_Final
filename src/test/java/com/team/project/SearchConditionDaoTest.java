@@ -345,4 +345,21 @@ public class SearchConditionDaoTest {
 		System.out.println(dueDate);
 	}
 	
+	// 21. 필터 편집 테스트
+	@Test
+	public void testUpdateSearchConditionInfo() {
+		// Given
+		SearchConditionDto dto = new SearchConditionDto();
+		dto.setSearchConditionTitle("EditedTitle");
+		dto.setSearchConditionDescription("Filter Description");
+		dto.setAccessUserNo(1);
+		dto.setAccessType("viewer");
+		
+		// When
+		searchDao.updateSearchConditionInfo(dto);
+		
+		// Then
+		
+	}
+	
 }

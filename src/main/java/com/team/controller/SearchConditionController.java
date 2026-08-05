@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
 import com.team.dto.TaskInfoDto;
@@ -189,5 +190,93 @@ public class SearchConditionController {
 	    model.addAttribute("userList", spaceMemberService.getSpaceMembers(userNo));
 	    return "TaskSearchResult";
 	}
-
+	
+	@PostMapping("/filter/list/detail/editInfo")
+	public String filterInfoEdit(
+	        @RequestParam int searchConditionNo,
+	        @RequestParam(required = false) String searchConditionTitle,
+	        @RequestParam(required = false) String searchConditionDescription,
+	        @RequestParam(required = false) List<Integer> viewerUserNos,
+	        @RequestParam(required = false) List<Integer> editorUserNos,
+	        @RequestParam(required = false) List<String> viewerSpaceKeys,
+	        @RequestParam(required = false) List<String> editorSpaceKeys,
+	        HttpSession session) {
+		Integer currentUserNo = (Integer) session.getAttribute("userNo");
+		if (currentUserNo == null) {
+	        return "redirect:/login";
+	    }
+		
+	    // 1) 제목/설명
+	    SearchConditionDto dto = new SearchConditionDto();
+	    dto.setSearchConditionNo(searchConditionNo);
+	    dto.setSearchConditionTitle(searchConditionTitle);
+	    dto.setSearchConditionDescription(searchConditionDescription);
+	    
+	    searchConditionService.updateSearchConditionInfo(dto);
+	    
+	    if (viewerUserNos == null) viewerUserNos = java.util.Collections.emptyList();
+	    if (editorUserNos == null) editorUserNos = java.util.Collections.emptyList();
+	    if (viewerSpaceKeys == null) viewerSpaceKeys = java.util.Collections.emptyList();
+	    if (editorSpaceKeys == null) editorSpaceKeys = java.util.Collections.emptyList();
+	    
+	    // 2) 기존 조회자/편집자 권한 삭제 (owner는 남김)
+	    
+	    List<SearchConditionAccessDto> oldList =
+	            searchConditionService.showAccessTypeList(searchConditionNo);
+	    for (SearchConditionAccessDto old : oldList) {
+	        if ("owner".equals(old.getAccessType())) {
+	            continue;
+	        }
+	        SearchConditionAccessDto del = new SearchConditionAccessDto();
+	        del.setSearchConditionNo(searchConditionNo);
+	        // 사용자 권한
+	        if (old.getAccessUserNo() != 0) {
+	            del.setAccessUserNo(old.getAccessUserNo());
+	            searchConditionService.deleteSearchConditionAccess(del);
+	        }
+	        // 스페이스 권한
+	        else if (old.getAccessSpaceKey() != null && !old.getAccessSpaceKey().isEmpty()) {
+	            del.setAccessSpaceKey(old.getAccessSpaceKey());
+	            searchConditionService.deleteSearchConditionAccess(del);
+	        }
+	    }
+	    
+	    // 3) 조회자(user) 추가
+	    for (Integer userNo : viewerUserNos) {
+	        SearchConditionAccessDto access = new SearchConditionAccessDto();
+	        access.setSearchConditionNo(searchConditionNo);
+	        access.setAccessUserNo(userNo);
+	        access.setAccessType("viewer");
+	        searchConditionService.insertSearchConditionAccess(access);
+	    }
+	    
+	    // 4) 편집자(user) 추가
+	    for (Integer userNo : editorUserNos) {
+	        SearchConditionAccessDto access = new SearchConditionAccessDto();
+	        access.setSearchConditionNo(searchConditionNo);
+	        access.setAccessUserNo(userNo);
+	        access.setAccessType("editor");
+	        searchConditionService.insertSearchConditionAccess(access);
+	    }
+	    
+	    // 5) 조회자(space) 추가
+	    for (String spaceKey : viewerSpaceKeys) {
+	        SearchConditionAccessDto access = new SearchConditionAccessDto();
+	        access.setSearchConditionNo(searchConditionNo);
+	        access.setAccessSpaceKey(spaceKey);
+	        access.setAccessType("viewer");
+	        searchConditionService.insertSearchConditionAccess(access);
+	    }
+	    
+	    // 6) 편집자(space) 추가
+	    for (String spaceKey : editorSpaceKeys) {
+	        SearchConditionAccessDto access = new SearchConditionAccessDto();
+	        access.setSearchConditionNo(searchConditionNo);
+	        access.setAccessSpaceKey(spaceKey);
+	        access.setAccessType("editor");
+	        searchConditionService.insertSearchConditionAccess(access);
+	    }
+	    
+	    return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
+	}
 }

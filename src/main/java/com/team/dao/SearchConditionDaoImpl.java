@@ -222,4 +222,9 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailDueDates", searchConditionNo);
 	}
 
+	@Override
+	public void updateSearchConditionInfo(SearchConditionDto dto) {
+		sqlSession.update("com.team.mapper.SearchConditionMapper.updateSearchConditionInfo", dto);
+	}
+
 }
