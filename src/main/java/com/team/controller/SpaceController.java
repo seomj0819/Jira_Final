@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -158,8 +159,33 @@ public class SpaceController {
 	    model.addAttribute("colorList", RandomCodeUtil.getColorCode());
 	    
 	    session.setAttribute("spaceKey", spaceKey);
-	    
+	    session.setAttribute("userNo", userNo);
 	    return "MainSides";
+	}
+	
+	@ResponseBody
+	@PostMapping("/space/createTask.do")
+	public String createTask(@RequestBody TaskInfoDto dto, HttpSession session) {
+		Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "fail_login"; // 로그인 세션이 만료된 경우
+	    }
+	   dto.setCreatorNo(userNo);
+	   List<StatusDto> list = statusService.ShowStatus((String) session.getAttribute("spaceKey"));
+	   dto.setStatusNo(list.get(dto.getStatusNo()-1).getStatusNo());
+	   dto.setSpaceKey((String) session.getAttribute("spaceKey"));
+	   System.out.println(dto.getSpaceKey());
+	   System.out.println(dto.getCreatorNo());
+	   System.out.println(dto.getStatusNo());
+	   try {
+		   taskService.createTask(dto);
+	   } catch(Exception e) {
+		   e.getStackTrace();
+		   return "fail";
+	   }
+	   session.setAttribute("spaceKey", (String) session.getAttribute("spaceKey"));
+	   session.setAttribute("userNo", userNo);
+	   return "success";
 	}
 	
 	@ResponseBody
