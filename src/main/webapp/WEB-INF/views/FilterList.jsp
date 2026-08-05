@@ -76,7 +76,7 @@
 		}
 		
 		var $container = $(this).closest(".selection_container");
-		var mainType = $container.find(".mainCategory").val(); // user / space
+		var mainType = $container.find(".mainCategory").val();
 		var $sub = $container.find(".subCategory");
 		var value = $sub.val();
 		var text = $sub.find("option:selected").text();
