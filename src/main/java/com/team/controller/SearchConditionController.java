@@ -276,7 +276,6 @@ public class SearchConditionController {
 	        access.setAccessType("editor");
 	        searchConditionService.insertSearchConditionAccess(access);
 	    }
-	    
 	    return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
 	}
 }
