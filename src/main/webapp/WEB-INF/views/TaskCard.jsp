@@ -168,7 +168,7 @@
 			        .then(result => {
 			            if(result.trim() === "success") {
 			                alert("하위작업이 등록되었습니다!");
-			                location.reload();
+			                
 			            } else {
 			                alert("하위작업 등록에 실패했습니다.");
 			            }
@@ -279,6 +279,66 @@
 			            });
 			        }
 			    });
+			    
+			    $("#expsubmit").click(async function() {
+			    	
+			    	const $btn = $(this);
+			        const $parent = $btn.parent().parent();
+			        
+			    	// 1. 현재 주소의 파라미터 분석 객체 생성
+					var urlParams = new URLSearchParams(window.location.search);
+
+					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
+					var taskNo = urlParams.get("taskNo");
+					var spaceKey = "${sessionScope.spaceKey}";
+					const $exp = $parent.find("#inputexp").val().trim();
+			    	
+			    	if(!$exp) {	//$exp===""
+			    		alert("설명을 입력하세요.");
+			    		$parent.find("#inputexp").focus();
+			    		return;
+			    	}
+			    	
+			    	try {
+			    		const reqData = { "taskNo" : taskNo, "spaceKey" : spaceKey, "taskDescription" : $exp };
+			    		
+			    		const response = await fetch("<c:url value='/updateExp.do'/>", {
+			    			method:"POST",
+			    			headers: {
+			    				"Content-Type":"application/json",
+			    			},
+			    			body:JSON.stringify(reqData)
+			    		});
+			    		
+			    		if(!response.ok) {
+			    			alert("Error!!");
+			    			return;
+			    		}
+			    		
+			    		const result = await response.text();
+			    		const res = result.trim();
+			    		console.log("【取得した値】:", JSON.stringify(res));
+			    		if(res === "success") {
+			    			alert("설명이 등록되었습니다.");
+			    			$parent.find("#inputexp").val("");
+			    			
+			    			const newExp = $("<div>", {
+			    				class: "task-exp",
+			    				text: $exp
+			    			});
+			    			
+			    			$parent.find("#expArea").empty().append(newExp);
+			    			
+			    		} else {
+			    			alert("설명 등록 실패.");
+			    			return;
+			    		}
+			    	} catch(error) {
+			    		console.error("error", error);
+			    		alert("오류 발생");
+			    	}  
+			    	
+			    });
 		});
 	</script>
 </head>
@@ -306,7 +366,7 @@
 			<div id="title">
 				${dto.getTaskTitle()}
 			</div>
-			<div id="status">
+			<div id="status" data-statusNo="${dto.getStatusNo()}">
 				<select id="selectStatus">
 					<option id="todo" value="todo" selected>해야 할 일</option>
 					<option id="now" value="now">진행중</option>
@@ -319,7 +379,7 @@
 				<div id="explain">
 					설명
 					<br/>
-					<br/>
+					<div id="expArea"></div>
 					<input id="inputexp" type="text" name="inputExp" placeholder="설명 편집"/>
 					<div id="expbtns">
 						<button id="expsubmit">저장</button>
