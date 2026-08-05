@@ -75,7 +75,22 @@
 		        });
 		}
 		
-		
+		var $container = $(this).closest(".selection_container");
+		var mainType = $container.find(".mainCategory").val();
+		var $sub = $container.find(".subCategory");
+		var value = $sub.val();
+		var text = $sub.find("option:selected").text();
+		if (!value) return;
+
+		var $row = $('<div class="added-item"></div>');
+		if (mainType === "user") {
+		  $row.attr("data-user-no", value);
+		} else if (mainType === "space") {
+		  $row.attr("data-space-key", value);
+		}
+		$row.append('<span>' + text + '</span>');
+		$row.append('<button type="button" class="delete-user">X</button>');
+		$("#viewer_list").append($row);
 
 		$(function() {
 		    $("#search_filter_by_title").on("input", searchFilterList);
