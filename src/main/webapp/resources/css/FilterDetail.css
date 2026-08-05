@@ -37,6 +37,7 @@
 		height: auto;
 		padding: 3px;
 		overflow: visible;
+		white-space:  nowrap;
 	}
 	.filter-dropdown {
 		position: relative;
