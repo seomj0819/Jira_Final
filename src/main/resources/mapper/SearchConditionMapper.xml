@@ -398,4 +398,51 @@
 			WHERE search_condition_no = #{searchConditionNo}
 		]]>
 	</select>
+	<select id="showDetailSpaceKeys" resultType="string">
+		<![CDATA[
+			SELECT space_key
+			FROM sc_detail_space
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="showDetailCreatorNos" resultType="int">
+		<![CDATA[
+			SELECT creator_no
+			FROM sc_detail_creator
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="showDetailWorkerNos" resultType="int">
+		<![CDATA[
+			SELECT worker_no
+			FROM sc_detail_worker
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="showDetailPriorities" resultType="string">
+		<![CDATA[
+			SELECT priority
+			FROM sc_detail_priority
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="showDetailStatusNos" resultType="int">
+		<![CDATA[
+			SELECT status_no
+			FROM sc_detail_status
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
+	
+	<select id="showDetailDueDates" resultType="string">
+		<![CDATA[
+			SELECT TO_CHAR(due_date, 'YYYY-MM-DD')
+			FROM sc_detail_due_date
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</select>
 </mapper>

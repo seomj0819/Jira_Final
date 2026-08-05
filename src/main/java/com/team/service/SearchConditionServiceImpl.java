@@ -103,4 +103,34 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 		return searchConditionDao.showOwnerListByUserNo(currentUserNo);
 	}
 
+	@Override
+	public String showDetailSpaceKeys(int searchConditionNo) {
+		return null;
+	}
+
+	@Override
+	public String showDetailCreatorNos(int searchConditionNo) {
+		return null;
+	}
+
+	@Override
+	public String showDetailWorkerNos(int searchConditionNo) {
+		return null;
+	}
+
+	@Override
+	public String showDetailPriorities(int searchConditionNo) {
+		return null;
+	}
+
+	@Override
+	public String showDetailStatusNos(int searchConditionNo) {
+		return null;
+	}
+
+	@Override
+	public String showDetailDueDates(int searchConditionNo) {
+		return null;
+	}
+
 }

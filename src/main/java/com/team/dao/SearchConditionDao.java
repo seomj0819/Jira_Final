@@ -21,8 +21,14 @@ public interface SearchConditionDao {
 	List<SearchConditionDto> searchCriteriaBySpace(SearchCriteriaDto dto);	// 스페이스별로 필터 검색
 	List<SearchConditionDto> searchCriteriaByTitle(SearchCriteriaDto dto);	// 제목으로 필터 검색
 	List<SearchConditionDto> showSearchConditionDetailByNo(int searchConditionNo);	// 필터 번호로 검색
-	String showAccessTypeByUserNo (int searchConditionNo, int userNo);		// 현재 유저의 access_type 조회
+	String showAccessTypeByUserNo(int searchConditionNo, int userNo);		// 현재 유저의 access_type 조회
 	List<SearchConditionAccessDto> showAccessTypeList(int searchConditionNo);	// 해당 필터에 접근 가능 사용자 조회
 	List<SearchConditionDto> searchCriteria(SearchCriteriaDto dto);			// 필터 검색
 	List<UserInfoDto> showOwnerListByUserNo(int currentUserNo);				// 현재 접속중인 유저가 접근 가능한 Filter들의 ownerList 조회
+	String showDetailSpaceKeys(int searchConditionNo);						// 검색 조건중 스페이스키 조회
+	String showDetailCreatorNos(int searchConditionNo);						// 검색 조건중 소유자 조회
+	String showDetailWorkerNos(int searchConditionNo);						// 검색 조건중 작업자 조회
+	String showDetailPriorities(int searchConditionNo);						// 검색 조건중 우선순위 조회
+	String showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
+	String showDetailDueDates(int searchConditionNo);						// 검색 조건중 기한 조회
 }

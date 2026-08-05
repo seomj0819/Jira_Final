@@ -192,4 +192,34 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 		return sqlSession.selectList("com.team.mapper.SearchConditionMapper.showOwnerListByUserNo", currentUserNo);
 	}
 
+	@Override
+	public String showDetailSpaceKeys(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailSpaceKeys", searchConditionNo);
+	}
+
+	@Override
+	public String showDetailCreatorNos(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailCreatorNos", searchConditionNo);
+	}
+
+	@Override
+	public String showDetailWorkerNos(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailWorkerNos", searchConditionNo);
+	}
+
+	@Override
+	public String showDetailPriorities(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailPriorities", searchConditionNo);
+	}
+
+	@Override
+	public String showDetailStatusNos(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailStatusNos", searchConditionNo);
+	}
+
+	@Override
+	public String showDetailDueDates(int searchConditionNo) {
+		return sqlSession.selectOne("com.team.mapper.SearchConditionMapper.showDetailDueDates", searchConditionNo);
+	}
+
 }
