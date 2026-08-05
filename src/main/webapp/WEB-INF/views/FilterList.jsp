@@ -76,7 +76,7 @@
 		}
 		
 		var $container = $(this).closest(".selection_container");
-		var mainType = $container.find(".mainCategory").val();
+		var mainType = $container.find(".mainCategory").val(); // user / space
 		var $sub = $container.find(".subCategory");
 		var value = $sub.val();
 		var text = $sub.find("option:selected").text();
@@ -94,7 +94,7 @@
 
 		$(function() {
 		    $("#search_filter_by_title").on("input", searchFilterList);
-		    $("#search_owner").on("change", searchFilterList);
+		    $("#search_owner").on("change", search		FilterList);
 		    $("#search_space").on("change", searchFilterList);
 		});
 	</script>
