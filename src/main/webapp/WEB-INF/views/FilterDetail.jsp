@@ -63,13 +63,30 @@
 			});
 			
 			$("#mark").click(function() {
-			    let currentSrc = $(this).attr('src');
+			    var $img = $(this);
+			    var currentSrc = $img.attr("src") || "";
+			    var searchConditionNo = $("#searchConditionNo").val();
 
-			    if (currentSrc.match('star_empty.png')) {
-			        $(this).attr('src', 'img/star_yellow.png');
-			    } else {
-			        $(this).attr('src', 'img/star_empty.png');
-			    }
+			    var favorite = currentSrc.indexOf("star_empty.png") >= 0 ? "Y" : "N";
+
+			    fetch(ctx + "/filter/favorite", {
+			        method: "POST",
+			        headers: {
+			            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+			        },
+			        body: "searchConditionNo=" + searchConditionNo + "&favorite=" + favorite
+			    })
+			    .then(function(res) { return res.text(); })
+			    .then(function(result) {
+			        if (result !== "ok") return;
+
+			        $img.attr(
+			            "src",
+			            favorite === "Y"
+			                ? ctx + "/resources/img/star_yellow.png"
+			                : ctx + "/resources/img/star_empty.png"
+			        );
+			    });
 			});
 			
 /* 			$("#search_task_by_title").oninput(function() {
@@ -291,7 +308,7 @@
 
 			$("#search_task_by_title").on("input", searchTaskList);
 	</script>
-	<main>
+<main>
 	<div class="filter-detail">
 	<input type="hidden" id="searchConditionNo" value="${list[0].searchConditionNo}">
 
@@ -442,7 +459,7 @@
 				</tbody>
 			</table>
 		</div>
-	</main>
+</main>
 	<div class="shadow"></div>
 	<div id="popup_overlay" class="popup-overlay">
 		<div class="popup-content">
