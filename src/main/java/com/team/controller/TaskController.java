@@ -6,10 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -230,4 +232,20 @@ public class TaskController {
 	    boolean result = replyService.UpdateReply(dto);
 	    return result ? "success" : "fail_auth";
 	}
+	
+	@ResponseBody
+	@PostMapping("/updateExp.do")
+	public ResponseEntity<String> updateExp(@RequestBody TaskInfoDto taskDto, HttpSession session) {
+		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+		try {
+			taskService.updateTask(taskDto);
+			return ResponseEntity.ok("success");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.ok("fail");
+		}
+		
+	}
+	
 }
