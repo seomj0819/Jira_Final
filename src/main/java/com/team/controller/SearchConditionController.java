@@ -205,7 +205,6 @@ public class SearchConditionController {
 		if (currentUserNo == null) {
 	        return "redirect:/login";
 	    }
-		
 	    // 1) 제목/설명
 	    SearchConditionDto dto = new SearchConditionDto();
 	    dto.setSearchConditionNo(searchConditionNo);

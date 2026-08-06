@@ -30,14 +30,13 @@
 	}
 	#condition_container {
 		display: flex;
-		flex-wrap: wrap;
 		align-items: center;
 		gap: 10px;
 		min-height: 38px;
 		height: auto;
 		padding: 3px;
 		overflow: visible;
-		white-space:  nowrap;
+		white-space: nowrap;
 	}
 	.filter-dropdown {
 		position: relative;

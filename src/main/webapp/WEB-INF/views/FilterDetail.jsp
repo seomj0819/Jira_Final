@@ -20,9 +20,46 @@
 				editPopUp.show();
 			});
 			
-			$("#cancle_button, #submit_button").click(function() {
-				$(".shadow").hide();
-				editPopUp.css("display", "none");
+			$("#submit_button").off("click").on("click", function(e) {
+			    e.preventDefault();
+
+			    var params = new URLSearchParams();
+			    params.append("searchConditionNo", $("#searchConditionNo").val());
+			    params.append("searchConditionTitle", $("#new_title").val() || "");
+			    params.append("searchConditionDescription", $("#new_description").val() || "");
+
+			    // 조회자
+			    $("#viewer_list .added-item").each(function() {
+			        var userNo = $(this).attr("data-user-no");
+			        var spaceKey = $(this).attr("data-space-key");
+			        if (userNo) params.append("viewerUserNos", userNo);
+			        if (spaceKey) params.append("viewerSpaceKeys", spaceKey);
+			    });
+
+			    // 편집자
+			    $("#editor_list .added-item").each(function() {
+			        var userNo = $(this).attr("data-user-no");
+			        var spaceKey = $(this).attr("data-space-key");
+			        if (userNo) params.append("editorUserNos", userNo);
+			        if (spaceKey) params.append("editorSpaceKeys", spaceKey);
+			    });
+
+			    fetch(ctx + "/filter/list/detail/editInfo", {
+			        method: "POST",
+			        headers: {
+			            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+			        },
+			        body: params.toString()
+			    })
+			    .then(function() {
+			        location.href = ctx + "/filter/list/detail?searchConditionNo="
+			            + $("#searchConditionNo").val();
+			    });
+			});
+			
+			$("#cancle_button").on("click", function() {
+			    $(".shadow").hide();
+			    $("#edit_filter_popup").hide();
 			});
 			
 			$("#mark").click(function() {
@@ -244,8 +281,6 @@
 			    	url += "&dueDate=" + encodeURIComponent(dueDate)
 			    		+ "&operatorDueDate=" + encodeURIComponent($("#op_due").val() || ">=");
 			    }
-			    
-			    searchTaskList();
 			    
 			    fetch(url)	
 			        .then(function(res) { return res.text(); })
