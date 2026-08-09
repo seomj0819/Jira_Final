@@ -153,7 +153,8 @@
 			        var ltContent = $("#inputlt").val();
 			        var urlParams = new URLSearchParams(window.location.search);
 			        var taskNo = urlParams.get("taskNo");
-
+					var lowertask = $("#lowertask").html();
+			        
 			        if(!ltContent.trim()) {
 			            alert("하위작업 내용을 입력해주세요.");
 			            return;
@@ -168,6 +169,7 @@
 			        .then(result => {
 			            if(result.trim() === "success") {
 			                alert("하위작업이 등록되었습니다!");
+			                location.reload();
 			                
 			            } else {
 			                alert("하위작업 등록에 실패했습니다.");

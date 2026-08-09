@@ -77,40 +77,40 @@ public class TaskController {
 	
 	@GetMapping("/taskCard")
 	public String taskCard(@RequestParam("taskNo") int taskNo, HttpSession session, Model model) {
-		// 1. 로그인 체크
+		// 1. �｡懋ｷｸ�攤 �ｲｴ增ｬ
 		Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
 	        return "redirect:/login";
 	    }
-	    // 2. 세션에서 스페이스 키 가져오기
+	    // 2. �┷��們乱��� �侃寬們擽�侃 墲､ �ｰ���ｸ�丶�ｸｰ
 	    String spaceKey = (String) session.getAttribute("spaceKey");
 	    if (spaceKey == null) {
 	        return "redirect:/space/select";
 	    }
 	    
-	    // 3. 복합키(spaceKey + taskNo) 조건 세팅
+	    // 3. �ｳｵ﨑ｩ墲､(spaceKey + taskNo) �｡ｰ�ｱｴ �┷甯�
 	 	TaskInfoDto dto = new TaskInfoDto();
 	 	dto.setSpaceKey(spaceKey);
 	 	dto.setTaskNo(taskNo);
-	 		
+	 	
 	 	TaskInfoDto task = taskService.showTask(dto);
 	 	if (task == null) {
-	 		return "redirect:/board"; // 잘못된 접근 시 보드로 리다이렉트
+	 		return "redirect:/board"; // �椈�ｪｻ�頗 ��滝ｷｼ �亨 �ｳｴ�糖�｡� �ｦｬ�共�擽��駕敢
 	 	}
 	 		
-	 	// 4. 댓글 조회 조건 세팅
+	 	// 4. �兼�ｸ� �｡ｰ巐� �｡ｰ�ｱｴ �┷甯�
 	 	ReplyListDto replyDto = new ReplyListDto();
 	 	replyDto.setSpaceKey(spaceKey);
 	 	replyDto.setTaskNo(taskNo);
 	 		
 	 	List<ReplyListDto> replyList = replyService.ShowReplyList(replyDto);
 
-	 	// 5. 모델에 데이터 담기
+	 	// 5. �ｪｨ�査�乱 �魂�擽奓ｰ �橋�ｸｰ
 	 	model.addAttribute("dto", task);
 	 	model.addAttribute("creatorDto", loginService.getUserProfile(task.getCreatorNo()));
 	 	model.addAttribute("replyList", replyList);
 	 		
-	 	// 댓글 작성자 목록 매핑
+	 	// �兼�ｸ� �梠�┳�梵 �ｪｩ�｡� �ｧ､﨑�
 	 	List<UserInfoDto> writerList = new ArrayList<>();
 	 	for(int i = 0; i < replyList.size(); i++) {
 	 		writerList.add(loginService.getUserProfile(replyList.get(i).getWriterNo()));
@@ -130,7 +130,12 @@ public class TaskController {
 	 	}
 	 	model.addAttribute("historyUserList", historyUserList);
 	 	
-	 	model.addAttribute("lowerTaskList", taskService.showLowerTaskList(dto));
+	 	TaskInfoDto ltdto = new TaskInfoDto();
+	 	ltdto.setSpaceKey(spaceKey);
+	 	ltdto.setUpperTaskNo(taskNo);
+	 	List<TaskInfoDto> lowerTaskList = taskService.showLowerTaskList(ltdto);
+	 	System.out.println("★ lowerTaskListの件数: " + (lowerTaskList != null ? lowerTaskList.size() : "null"));
+	 	model.addAttribute("lowerTaskList", taskService.showLowerTaskList(ltdto));
 	 	
 	 	session.setAttribute("spaceKey", spaceKey);
 	 	session.setAttribute("userNo", userNo);
@@ -142,7 +147,7 @@ public class TaskController {
 	public String deleteTask(@RequestParam("taskNo") int taskNo, HttpSession session) {
 		 Integer userNo = (Integer) session.getAttribute("userNo");
 		 if (userNo == null) {
-		     return "fail_login"; // 로그인 세션이 만료된 경우
+		     return "fail_login"; // �｡懋ｷｸ�攤 �┷��們擽 �ｧ誤｣誤頗 �ｲｽ�垈
 		 }
 		 
 		 String spaceKey = (String) session.getAttribute("spaceKey");
@@ -156,24 +161,24 @@ public class TaskController {
 	@PostMapping("/deleteReply.do")
 	public String deleteReply(@RequestParam("replyNo") int replyNo, HttpSession session) {
 	    
-	    // 1. 세션에서 현재 로그인한 유저 번호 가져오기
+	    // 1. �┷��們乱��� 嶸�椪 �｡懋ｷｸ�攤﨑� �悛��� �ｲ逸从 �ｰ���ｸ�丶�ｸｰ
 	    Integer userNo = (Integer) session.getAttribute("userNo");
 	    if (userNo == null) {
-	        return "fail_login"; // 로그인 세션이 만료된 경우
+	        return "fail_login"; // �｡懋ｷｸ�攤 �┷��們擽 �ｧ誤｣誤頗 �ｲｽ�垈
 	    }
 
-	    // 2. XML 쿼리(parameterType="com.team.dto.ReplyListDto")에 맞게 DTO 생성 및 값 세팅
+	    // 2. XML �ｿｼ�ｦｬ(parameterType="com.team.dto.ReplyListDto")�乱 �ｧ樓ｲ� DTO ��晧┳ �ｰ� �ｰ� �┷甯�
 	    ReplyListDto replyDto = new ReplyListDto();
-	    replyDto.setReplyNo(replyNo);   // 뷰에서 넘어온 댓글 번호
-	    replyDto.setWriterNo(userNo);   // 세션에 있는 로그인 유저 번호 (작성자 본인 검증용)
+	    replyDto.setReplyNo(replyNo);   // �ｷｰ�乱��� ��們牟�乖 �兼�ｸ� �ｲ逸从
+	    replyDto.setWriterNo(userNo);   // �┷��們乱 �梭�株 �｡懋ｷｸ�攤 �悛��� �ｲ逸从 (�梠�┳�梵 �ｳｸ�攤 �ｲ��ｦ晧圸)
 
-	    // 3. 서비스 호출 (실제 delete 쿼리 실행)
-	    boolean result = replyService.DeleteReply(replyDto); // 파라미터로 DTO 전달
+	    // 3. ��罹ｹ�侃 嶸ｸ�ｶ� (�共��� delete �ｿｼ�ｦｬ �共嵂�)
+	    boolean result = replyService.DeleteReply(replyDto); // 甯誤攵�ｯｸ奓ｰ�｡� DTO ���峡
 
 	    if(result) {
 	        return "success"; 
 	    } else {
-	        return "fail_auth"; // 본인이 아니거나 삭제 실패 시
+	        return "fail_auth"; // �ｳｸ�攤�擽 �符�笈�ｱｰ�ｘ �く��� �共甯ｨ �亨
 	    }
 	}
 
@@ -191,7 +196,7 @@ public class TaskController {
 	    dto.setTaskTitle(taskTitle);
 	    dto.setCreatorNo(userNo);
 	    dto.setUpperTaskNo(upperTaskNo);
-	    dto.setStatusNo(1); // 기본 상태값 설정
+	    dto.setStatusNo(1); // �ｸｰ�ｳｸ �メ夋懋ｰ� �└���
 
 	    taskService.createTask(dto);
 	    return "success";
