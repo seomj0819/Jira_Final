@@ -696,13 +696,13 @@
 						<c:if test="${acc.accessType == 'viewer'}">
 							<c:if test="${acc.accessUserNo != 0}">
 								<div class="added-item" data-user-no="${acc.accessUserNo}">
-									<span>${acc.accessUserNo}</span>
+									<span>${acc.userName}</span>
 									<button type="button" class="delete-user">X</button>
 								</div>
 							</c:if>
 							<c:if test="${not empty acc.accessSpaceKey}">
 								<div class="added-item" data-space-key="${acc.accessSpaceKey}">
-									<span>${acc.accessSpaceKey}</span>
+									<span>${acc.spaceTitle}</span>
 									<button type="button" class="delete-user">X</button>
 								</div>
 							</c:if>
@@ -726,13 +726,13 @@
 						<c:if test="${acc.accessType == 'editor'}">
 							<c:if test="${acc.accessUserNo != 0}">
 								<div class="added-item" data-user-no="${acc.accessUserNo}">
-									<span>${acc.accessUserNo}</span>
+									<span>${acc.userName}</span>
 									<button type="button" class="delete-user">X</button>
 								</div>
 							</c:if>
 							<c:if test="${not empty acc.accessSpaceKey}">
 								<div class="added-item" data-space-key="${acc.accessSpaceKey}">
-									<span>${acc.accessSpaceKey}</span>
+									<span>${acc.spaceTitle}</span>
 									<button type="button" class="delete-user">X</button>
 								</div>
 							</c:if>

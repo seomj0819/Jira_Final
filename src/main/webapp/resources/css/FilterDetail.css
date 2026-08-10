@@ -485,6 +485,9 @@
    		background-color: white;
    		border-radius: 3px;
    		border: 1px solid rgba(30, 31, 33, 0.15);
+   		width: 100%;
+	    display: flex;
+	    justify-content: space-between;
 	}
 	.delete-user {
 		border: none;
