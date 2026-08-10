@@ -277,7 +277,7 @@ public class SearchConditionController {
 		if (currentUserNo == null) {
 	        return "redirect:/login";
 	    }
-	    // 1) 제목/설명
+	    // 제목/설명
 	    SearchConditionDto dto = new SearchConditionDto();
 	    dto.setSearchConditionNo(searchConditionNo);
 	    dto.setSearchConditionTitle(searchConditionTitle);
@@ -290,7 +290,7 @@ public class SearchConditionController {
 	    if (viewerSpaceKeys == null) viewerSpaceKeys = java.util.Collections.emptyList();
 	    if (editorSpaceKeys == null) editorSpaceKeys = java.util.Collections.emptyList();
 	    
-	    // 2) 기존 조회자/편집자 권한 삭제 (owner는 남김)
+	    // 기존 조회자/편집자 권한 삭제 (owner는 남김)
 	    
 	    List<SearchConditionAccessDto> oldList =
 	            searchConditionService.showAccessTypeList(searchConditionNo);
@@ -347,6 +347,81 @@ public class SearchConditionController {
 	        access.setAccessType("editor");
 	        searchConditionService.insertSearchConditionAccess(access);
 	    }
+	    return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
+	}
+	
+	@PostMapping("/filter/list/detail/save")
+	public String saveFilterCondition(
+	        @RequestParam int searchConditionNo,
+	        @RequestParam(required = false) String spaceKey,
+	        @RequestParam(required = false) String operatorSpace,
+	        @RequestParam(required = false) Integer creatorNo,
+	        @RequestParam(required = false) String operatorCreator,
+	        @RequestParam(required = false) Integer workerNo,
+	        @RequestParam(required = false) String operatorWorker,
+	        @RequestParam(required = false) String priority,
+	        @RequestParam(required = false) String operatorPriority,
+	        @RequestParam(required = false) Integer statusNo,
+	        @RequestParam(required = false) String operatorStatus,
+	        @RequestParam(required = false) String dueDate,
+	        @RequestParam(required = false) String operatorDueDate,
+	        HttpSession session) {
+
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    List<SearchConditionDto> list =
+	            searchConditionService.showSearchConditionDetailByNo(searchConditionNo);
+	    SearchConditionDto old = list.get(0);
+
+	    SearchConditionDto dto = new SearchConditionDto();
+	    dto.setSearchConditionNo(searchConditionNo);
+	    dto.setSearchConditionTitle(old.getSearchConditionTitle());
+	    dto.setSearchConditionDescription(old.getSearchConditionDescription());
+	    dto.setFavorite(old.getFavorite());
+
+	    dto.setOperatorSpace(operatorSpace != null ? operatorSpace : "=");
+	    dto.setOperatorCreator(operatorCreator != null ? operatorCreator : "=");
+	    dto.setOperatorWorker(operatorWorker != null ? operatorWorker : "=");
+	    dto.setOperatorPriority(operatorPriority != null ? operatorPriority : "=");
+	    dto.setOperatorStatus(operatorStatus != null ? operatorStatus : "=");
+	    dto.setOperatorDueDate(operatorDueDate != null ? operatorDueDate : ">=");
+
+	    if (spaceKey != null && !spaceKey.equals("")) {
+	        List<String> spaceKeys = new java.util.ArrayList<String>();
+	        spaceKeys.add(spaceKey);
+	        dto.setSpaceKeys(spaceKeys);
+	    }
+	    if (creatorNo != null) {
+	        List<Integer> creatorNos = new java.util.ArrayList<Integer>();
+	        creatorNos.add(creatorNo);
+	        dto.setCreatorNos(creatorNos);
+	    }
+	    if (workerNo != null) {
+	        List<Integer> workerNos = new java.util.ArrayList<Integer>();
+	        workerNos.add(workerNo);
+	        dto.setWorkerNos(workerNos);
+	    }
+	    if (priority != null && !priority.equals("")) {
+	        List<String> priorities = new java.util.ArrayList<String>();
+	        priorities.add(priority);
+	        dto.setPriorities(priorities);
+	    }
+	    if (statusNo != null) {
+	        List<Integer> statusNos = new java.util.ArrayList<Integer>();
+	        statusNos.add(statusNo);
+	        dto.setStatusNos(statusNos);
+	    }
+	    if (dueDate != null && !dueDate.equals("")) {
+	        List<String> dueDates = new java.util.ArrayList<String>();
+	        dueDates.add(dueDate);
+	        dto.setDueDates(dueDates);
+	    }
+
+	    searchConditionService.updateSearchCondition(dto);
+
 	    return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
 	}
 }
