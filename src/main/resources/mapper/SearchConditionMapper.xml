@@ -456,4 +456,10 @@
 			WHERE search_condition_no = #{searchConditionNo}
 		]]>
 	</update>
+	<delete id="deleteAllSearchConditionAccess">
+		<![CDATA[
+			DELETE FROM search_condition_access
+			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</delete>
 </mapper>
