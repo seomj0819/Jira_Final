@@ -82,12 +82,84 @@ public class SearchConditionController {
 		
 		model.addAttribute("searchConditionList", sideFilters);
 		model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
+		model.addAttribute("userList", spaceMemberService.getSpaceMembers(userNo));
+
+		List<SearchConditionAccessDto> accessList =
+		        searchConditionService.showAccessTypeList(searchConditionNo);
+		model.addAttribute("accessList", accessList);
 		
+		String savedSpaceKey = searchConditionService.showDetailSpaceKeys(searchConditionNo);
+		Integer savedCreatorNo = searchConditionService.showDetailCreatorNos(searchConditionNo);
+		Integer savedWorkerNo = searchConditionService.showDetailWorkerNos(searchConditionNo);
+		String savedPriority = searchConditionService.showDetailPriorities(searchConditionNo);
+		Integer savedStatusNo = searchConditionService.showDetailStatusNos(searchConditionNo);
+		String savedDueDate = searchConditionService.showDetailDueDates(searchConditionNo);
+
+		model.addAttribute("savedSpaceKey", savedSpaceKey);
+		model.addAttribute("savedCreatorNo", savedCreatorNo);
+		model.addAttribute("savedWorkerNo", savedWorkerNo);
+		model.addAttribute("savedPriority", savedPriority);
+		model.addAttribute("savedStatusNo", savedStatusNo);
+		model.addAttribute("savedDueDate", savedDueDate);
+
+		SearchConditionDto filter = null;
+		if (list != null && !list.isEmpty()) {
+		    filter = list.get(0);
+		}
+
 		TaskSearchDto searchDto = new TaskSearchDto();
 		searchDto.setCurrentUserNo(userNo);
-		List<TaskInfoDto> taskList = taskService.searchTask(searchDto);
 
-		model.addAttribute("taskList", taskList);
+		if (savedSpaceKey != null && !savedSpaceKey.equals("")) {
+		    searchDto.setSearchSpaceKey(savedSpaceKey);
+		    if (filter != null && filter.getOperatorSpace() != null) {
+		        searchDto.setOperatorSpaceKey(filter.getOperatorSpace());
+		    } else {
+		        searchDto.setOperatorSpaceKey("=");
+		    }
+		}
+		if (savedCreatorNo != null) {
+		    searchDto.setSearchCreatorNo(savedCreatorNo);
+		    if (filter != null && filter.getOperatorCreator() != null) {
+		        searchDto.setOperatorCreatorNo(filter.getOperatorCreator());
+		    } else {
+		        searchDto.setOperatorCreatorNo("=");
+		    }
+		}
+		if (savedWorkerNo != null) {
+		    searchDto.setSearchWorkerNo(savedWorkerNo);
+		    if (filter != null && filter.getOperatorWorker() != null) {
+		        searchDto.setOperatorWorkerNo(filter.getOperatorWorker());
+		    } else {
+		        searchDto.setOperatorWorkerNo("=");
+		    }
+		}
+		if (savedPriority != null && !savedPriority.equals("")) {
+		    searchDto.setSearchPriority(savedPriority);
+		    if (filter != null && filter.getOperatorPriority() != null) {
+		        searchDto.setOperatorPriority(filter.getOperatorPriority());
+		    } else {
+		        searchDto.setOperatorPriority("=");
+		    }
+		}
+		if (savedStatusNo != null) {
+		    searchDto.setSearchStatusNo(savedStatusNo);
+		    if (filter != null && filter.getOperatorStatus() != null) {
+		        searchDto.setOperatorStatusNo(filter.getOperatorStatus());
+		    } else {
+		        searchDto.setOperatorStatusNo("=");
+		    }
+		}
+		if (savedDueDate != null && !savedDueDate.equals("")) {
+		    searchDto.setSearchDueDate(savedDueDate);
+		    if (filter != null && filter.getOperatorDueDate() != null) {
+		        searchDto.setOperatorDueDate(filter.getOperatorDueDate());
+		    } else {
+		        searchDto.setOperatorDueDate(">=");
+		    }
+		}
+
+		model.addAttribute("taskList", taskService.searchTask(searchDto));
 
 		if (list != null && !list.isEmpty()) {
 		    model.addAttribute("filterTitle", list.get(0).getSearchConditionTitle());
