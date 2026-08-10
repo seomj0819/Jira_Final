@@ -48,7 +48,7 @@
 				            const res = result.trim();
 				            if(res === "deleted") {
 				            	alert("삭제되었습니다!");
-				            	// 세션에서 가져온 spaceKey를 쿼리스트링에 붙여서 이동합니다.
+				            	// 세션에서 가져온 spaceKey를 쿼리스트링에 붙여서 이동.
 				                if(spaceKey) {
 				                    location.href = "<c:url value='/space/enter'/>?spaceKey=" + encodeURIComponent(spaceKey);
 				                } else {
@@ -59,7 +59,7 @@
 				                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
 				                location.href = "login";
 				            } else {
-				                alert("댓글 삭제에 실패했습니다.");
+				                alert("테스크 삭제에 실패했습니다.");
 				            }
 				        })
 				        .catch(error => {
@@ -381,7 +381,7 @@
 				<div id="explain">
 					설명
 					<br/>
-					<div id="expArea"></div>
+					<div id="expArea">${dto.taskDescription}</div>
 					<input id="inputexp" type="text" name="inputExp" placeholder="설명 편집"/>
 					<div id="expbtns">
 						<button id="expsubmit">저장</button>
