@@ -439,6 +439,11 @@ public class SearchConditionController {
 	    dto.setSearchConditionNo(searchConditionNo);
 	    dto.setCurrentUserNo(userNo);
 
+	    String userRoll = searchConditionService.showAccessTypeByUserNo(searchConditionNo, userNo);
+	    if (userRoll == null || !userRoll.equals("owner")) {
+	        return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
+	    }
+	    
 	    searchConditionService.deleteSearchCondition(dto);
 
 	    return "redirect:/filter/list";

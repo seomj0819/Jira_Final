@@ -13,6 +13,8 @@ public class SearchConditionAccessDto {
 	int searchConditionNo;
 	int currentUserNo;
 	int accessUserNo;
+	String userName;
 	String accessSpaceKey;
+	String spaceTitle;
 	String accessType;
 }

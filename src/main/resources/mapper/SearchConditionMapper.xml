@@ -146,18 +146,10 @@
 			</otherwise>
 		</choose>
 	</delete>
-	
 	<delete id="deleteSearchCondition" parameterType="com.team.dto.SearchConditionAccessDto">
 		<![CDATA[
 			DELETE FROM search_condition
 			WHERE search_condition_no = #{searchConditionNo}
-			AND EXISTS (
-				SELECT 1
-				FROM search_condition_access
-				WHERE search_condition_no = #{searchConditionNo}
-				AND access_type = 'owner'
-				AND user_no = #{currentUserNo}
-			)
 		]]>
 	</delete>
 	<select id="showSearchConditionList" parameterType="int" resultType="com.team.dto.SearchConditionDto">
@@ -393,12 +385,18 @@
 	</select>
 	<select id="showAccessTypeList" parameterType="int" resultType="com.team.dto.SearchConditionAccessDto">
 		<![CDATA[
-			SELECT search_condition_no AS searchConditionNo,
-			       user_no AS accessUserNo,
-			       space_key AS accessSpaceKey,
-			       access_type AS accessType
-			FROM search_condition_access
-			WHERE search_condition_no = #{searchConditionNo}
+			SELECT sca.search_condition_no AS searchConditionNo,
+			       sca.user_no AS accessUserNo,
+			       sca.space_key AS accessSpaceKey,
+			       sca.access_type AS accessType,
+			       u.user_name AS userName,
+			       s.space_title AS spaceTitle
+			FROM search_condition_access sca
+			LEFT JOIN users u
+				ON sca.user_no = u.user_no
+			LEFT JOIN space s
+				ON sca.space_key = s.space_key
+			WHERE sca.search_condition_no = #{searchConditionNo}
 		]]>
 	</select>
 	<select id="showDetailSpaceKeys" resultType="string">
