@@ -93,32 +93,48 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 		}
 		
 		if (dto.getWorkerNos() != null && !dto.getWorkerNos().isEmpty()) {
-			sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailWorker", dto);
+		    for (Integer workerNo : dto.getWorkerNos()) {
+		        Map<String, Object> param = new HashMap<>();
+		        param.put("searchConditionNo", dto.getSearchConditionNo());
+		        param.put("workerNo", workerNo);
+		        sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailWorker", param);
+		    }
 		}
-		
-		if (dto.getCreatorNos() != null && !dto.getCreatorNos().isEmpty())
-			sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailCreator", dto);
-		
+
+		if (dto.getCreatorNos() != null && !dto.getCreatorNos().isEmpty()) {
+		    for (Integer creatorNo : dto.getCreatorNos()) {
+		        Map<String, Object> param = new HashMap<>();
+		        param.put("searchConditionNo", dto.getSearchConditionNo());
+		        param.put("creatorNo", creatorNo);
+		        sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailCreator", param);
+		    }
+		}
+
 		if (dto.getPriorities() != null && !dto.getPriorities().isEmpty()) {
-			for (String priority : dto.getPriorities()) {
-				Map<String, Object> param = new HashMap<>();
-				param.put("searchConditionNo", dto.getSearchConditionNo());
-				param.put("priority", priority);
-				sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailPriority", param);
-			}
+		    for (String priority : dto.getPriorities()) {
+		        Map<String, Object> param = new HashMap<>();
+		        param.put("searchConditionNo", dto.getSearchConditionNo());
+		        param.put("priority", priority);
+		        sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailPriority", param);
+		    }
 		}
-		
+
 		if (dto.getStatusNos() != null && !dto.getStatusNos().isEmpty()) {
-			for (Integer statusNo : dto.getStatusNos()) {
-				Map<String, Object> param = new HashMap<>();
-				param.put("searchConditionNo", dto.getSearchConditionNo());
-				param.put("status", statusNo);
-				sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailStatus", param);
-			}
+		    for (Integer statusNo : dto.getStatusNos()) {
+		        Map<String, Object> param = new HashMap<>();
+		        param.put("searchConditionNo", dto.getSearchConditionNo());
+		        param.put("statusNo", statusNo);
+		        sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailStatus", param);
+		    }
 		}
-		
+
 		if (dto.getDueDates() != null && !dto.getDueDates().isEmpty()) {
-			sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailDueDate", dto);
+		    for (String dueDate : dto.getDueDates()) {
+		        Map<String, Object> param = new HashMap<>();
+		        param.put("searchConditionNo", dto.getSearchConditionNo());
+		        param.put("dueDate", dueDate);
+		        sqlSession.insert("com.team.mapper.SearchConditionMapper.createSearchConditionDetailDueDate", param);
+		    }
 		}
 	}
 
