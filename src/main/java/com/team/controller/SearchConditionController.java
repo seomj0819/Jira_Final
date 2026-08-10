@@ -424,4 +424,23 @@ public class SearchConditionController {
 
 	    return "redirect:/filter/list/detail?searchConditionNo=" + searchConditionNo;
 	}
+	
+	@PostMapping("/filter/list/detail/delete")
+	public String deleteFilter(
+	        @RequestParam int searchConditionNo,
+	        HttpSession session) {
+
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    SearchConditionAccessDto dto = new SearchConditionAccessDto();
+	    dto.setSearchConditionNo(searchConditionNo);
+	    dto.setCurrentUserNo(userNo);
+
+	    searchConditionService.deleteSearchCondition(dto);
+
+	    return "redirect:/filter/list";
+	}
 }

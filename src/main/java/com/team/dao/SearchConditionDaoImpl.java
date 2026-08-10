@@ -70,7 +70,19 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 
 	@Override
 	public void deleteSearchCondition(SearchConditionAccessDto dto) {
-		sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchCondition", dto);
+	    // 1) 검색 조건 detail 삭제
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailSpace", dto);
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailWorker", dto);
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailCreator", dto);
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailPriority", dto);
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailStatus", dto);
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchConditionDetailDueDate", dto);
+
+	    // 2) 권한 전체 삭제
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteAllSearchConditionAccess", dto);
+
+	    // 3) 필터 본문 삭제 (owner만 가능)
+	    sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteSearchCondition", dto);
 	}
 
 	@Transactional
@@ -241,6 +253,11 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	@Override
 	public void updateSearchConditionInfo(SearchConditionDto dto) {
 		sqlSession.update("com.team.mapper.SearchConditionMapper.updateSearchConditionInfo", dto);
+	}
+
+	@Override
+	public void deleteAllSearchConditionAccess(int searchConditionNo) {
+		sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteAllSearchConditionAccess", searchConditionNo);
 	}
 
 }

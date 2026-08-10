@@ -32,4 +32,5 @@ public interface SearchConditionDao {
 	Integer showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
 	String showDetailDueDates(int searchConditionNo);						// 검색 조건중 기한 조회
 	void updateSearchConditionInfo(SearchConditionDto dto);					// 필터 편집
+	void deleteAllSearchConditionAccess(int searchConditionNo);				// 필터 권한 전체 삭제
 }
