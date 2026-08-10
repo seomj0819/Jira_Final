@@ -358,5 +358,18 @@ public class SearchConditionServiceTest {
 		// Then
 		
 	}
+	
+	// 23. 필터 전체 유저권한 삭제 테스트
+	@Test
+	public void deleteAllSearchConditionAccess() {
+		// Given
+		int searchConditionNo = 8;
+		
+		// When
+		searchConditionService.deleteAllSearchConditionAccess(searchConditionNo);
+		
+		// Then
+		
+	}
 
 }

@@ -138,4 +138,9 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 		searchConditionDao.updateSearchConditionInfo(dto);
 	}
 
+	@Override
+	public void deleteAllSearchConditionAccess(int searchConditionNo) {
+		searchConditionDao.deleteAllSearchConditionAccess(searchConditionNo);
+	}
+
 }

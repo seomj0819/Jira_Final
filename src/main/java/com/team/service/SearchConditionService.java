@@ -33,4 +33,5 @@ public interface SearchConditionService {
 	Integer showDetailStatusNos(int searchConditionNo);						// 검색 조건중 상태 조회
 	String showDetailDueDates(int searchConditionNo);						// 검색 조건중 기한 조회
 	void updateSearchConditionInfo(SearchConditionDto dto);
+	void deleteAllSearchConditionAccess(int searchConditionNo);
 }
