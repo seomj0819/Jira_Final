@@ -515,12 +515,13 @@
 				</div>
 				<div class="filter-due-body">
 					<input type="date" id="due_date" class="search_due_date"
+					       value="${savedDueDate}"
 					       max="2099-12-31" min="2000-01-01">
 					<button type="button" class="due-clear-btn">지우기</button>
 				</div>
 			</div>
 			<input type="hidden" id="op_due" value="${empty list[0].operatorDueDate ? '>=' : list[0].operatorDueDate}">
-			<input type="date" id="due_date" value="${savedDueDate}" max="2099-12-31" min="2000-01-01">
+			<input type="hidden" id="search_due" value="${savedDueDate}">
 		</div>
 
 		<button type="button" id="btn_delete_filter">필터 지우기</button>
@@ -645,7 +646,7 @@
 					<select name="editorSub" class="scope_select subCategory" disabled>
 						<option value="" hidden selected>--항목을 선택해주세요--</option>
 					</select> 
-					<button type="button" class="add-button" id="btn_add_viewer">추가</button>
+					<button type="button" class="add-button" id="btn_add_editor">추가</button>
 				</div>
 				<div id="editor_list" class="add-user-roll">
 					<c:forEach var="acc" items="${accessList}">
