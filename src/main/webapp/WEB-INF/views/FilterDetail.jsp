@@ -62,6 +62,52 @@
 			    $("#edit_filter_popup").hide();
 			});
 			
+			$("#btn_add_viewer").click(function() {
+			    var $box = $(this).closest(".selection_container");
+			    var mainType = $box.find(".mainCategory").val();
+			    var value = $box.find(".subCategory").val();
+			    var text = $box.find(".subCategory option:selected").text();
+
+			    if (!value) {
+			        return;
+			    }
+
+			    var $row = $('<div class="added-item"></div>');
+			    if (mainType === "user") {
+			        $row.attr("data-user-no", value);
+			    } else if (mainType === "space") {
+			        $row.attr("data-space-key", value);
+			    }
+			    $row.append("<span>" + text + "</span>");
+			    $row.append('<button type="button" class="delete-user">X</button>');
+			    $("#viewer_list").append($row);
+			});
+
+			$("#btn_add_editor").click(function() {
+			    var $box = $(this).closest(".selection_container");
+			    var mainType = $box.find(".mainCategory").val();
+			    var value = $box.find(".subCategory").val();
+			    var text = $box.find(".subCategory option:selected").text();
+
+			    if (!value) {
+			        return;
+			    }
+
+			    var $row = $('<div class="added-item"></div>');
+			    if (mainType === "user") {
+			        $row.attr("data-user-no", value);
+			    } else if (mainType === "space") {
+			        $row.attr("data-space-key", value);
+			    }
+			    $row.append("<span>" + text + "</span>");
+			    $row.append('<button type="button" class="delete-user">X</button>');
+			    $("#editor_list").append($row);
+			});
+
+			$("#viewer_list, #editor_list").on("click", ".delete-user", function() {
+			    $(this).closest(".added-item").remove();
+			});
+			
 			$("#mark").click(function() {
 			    var $img = $(this);
 			    var currentSrc = $img.attr("src") || "";
@@ -114,9 +160,17 @@
 			
 		})
 			var selectObject = {
-				"user": ["Minjae Seo", "金成官"],
-				"space": ["space01", "space02"]
-			}
+			    "user": [
+			        <c:forEach var="user" items="${userList}" varStatus="st">
+			            { value: "${user.userNo}", text: "${user.userName}" }<c:if test="${!st.last}">,</c:if>
+			        </c:forEach>
+			    ],
+			    "space": [
+			        <c:forEach var="space" items="${spaceList}" varStatus="st">
+			            { value: "${space.spaceKey}", text: "${space.spaceTitle}" }<c:if test="${!st.last}">,</c:if>
+			        </c:forEach>
+			    ]
+			};
 			window.onload = function() {
 			var containers = document.querySelectorAll(".selection_container");
 			
@@ -136,11 +190,12 @@
 						var subObjects = selectObject[selectedValue];
 						
 						for(var i = 0 ; i < subObjects.length ; i++) {
-							subSel.options[subSel.options.length] = new Option(subObjects[i], subObjects[i]);
+							subSel.options[subSel.options.length] = new Option(subObjects[i].text, subObjects[i].value);
 						}
 						
 						subSel.disabled = false;
 					}
+					
 				});
 				
 				// 1) 버튼 클릭 → 그 드롭다운만 열기/닫기
@@ -202,6 +257,8 @@
 					
 					$("#search_due").val(value);
 					
+					searchTaskList();
+					
 					refreshFilterButtonText($dropdown, value);
 				});
 				
@@ -216,6 +273,8 @@
 					
 					refreshFilterButtonText($dropdown);
 					
+					searchTaskList();
+					
 					$dropdown.find(".filter-dropdown-panel").hide();
 				});
 				
@@ -228,6 +287,26 @@
 					e.stopPropagation();
 				});
 				
+				$(".filter-dropdown").each(function() {
+				    var $dropdown = $(this);
+				    var name = $dropdown.attr("data-name");
+				    var op = $("#op_" + name).val();
+				    var value = $("#search_" + name).val();
+
+				    $dropdown.find(".op-btn").removeClass("active");
+				    $dropdown.find('.op-btn[data-op="' + op + '"]').addClass("active");
+
+				    var text = "";
+				    if (value) {
+				        var $li = $dropdown.find('.filter-op-list li[data-value="' + value + '"]');
+				        if ($li.length > 0) {
+				            text = $li.text();
+				        } else {
+				            text = value;
+				        }
+				    }
+				    refreshFilterButtonText($dropdown, text);
+				});
 			}
 			
 			function closeAllFilterDropdowns() {
@@ -315,7 +394,14 @@
 	<header>
 		<h1>
 			<span>${filterTitle}</span>
-			<img id="mark" src="<c:url value='/resources/img/star_yellow.png'/>">
+			<c:choose>
+				<c:when test="${list[0].favorite == 'Y'}">
+					<img id="mark" src="<c:url value='/resources/img/star_yellow.png'/>">
+				</c:when>
+				<c:otherwise>
+					<img id="mark" src="<c:url value='/resources/img/star_empty.png'/>">
+				</c:otherwise>
+			</c:choose>
 			<button id="filter_detail_button">필터 세부 정보</button>
 		</h1>
 	</header>
@@ -341,8 +427,8 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<input type="hidden" id="op_space" value="=">
-			<input type="hidden" id="search_space" value="">
+			<input type="hidden" id="op_space" value="${empty list[0].operatorSpace ? '=' : list[0].operatorSpace}">
+			<input type="hidden" id="search_space" value="${savedSpaceKey}">
 		</div>
 
 		<!-- 담당자 = creator -->
@@ -360,8 +446,8 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<input type="hidden" id="op_creator" value="=">
-			<input type="hidden" id="search_creator" value="">
+			<input type="hidden" id="op_creator" value="${empty list[0].operatorCreator ? '=' : list[0].operatorCreator}">
+			<input type="hidden" id="search_creator" value="${savedCreatorNo}">
 		</div>
 
 		<!-- 작업자 = worker -->
@@ -379,8 +465,8 @@
 					</c:forEach>
 				</ul>
 			</div>
-			<input type="hidden" id="op_worker" value="=">
-			<input type="hidden" id="search_worker" value="">
+			<input type="hidden" id="op_worker" value="${empty list[0].operatorWorker ? '=' : list[0].operatorWorker}">
+			<input type="hidden" id="search_worker" value="${savedWorkerNo}">
 		</div>
 
 		<!-- 우선순위 -->
@@ -398,8 +484,8 @@
 					<li data-value="Low">Low</li>
 				</ul>
 			</div>
-			<input type="hidden" id="op_priority" value="=">
-			<input type="hidden" id="search_priority" value="">
+			<input type="hidden" id="op_priority" value="${empty list[0].operatorPriority ? '=' : list[0].operatorPriority}">
+			<input type="hidden" id="search_priority" value="${savedPriority}">
 		</div>
 
 		<!-- 상태 -->
@@ -415,8 +501,8 @@
 					<%-- 3단계: statusList forEach --%>
 				</ul>
 			</div>
-			<input type="hidden" id="op_status" value="=">
-			<input type="hidden" id="search_status" value="">
+			<input type="hidden" id="op_status" value="${empty list[0].operatorStatus ? '=' : list[0].operatorStatus}">
+			<input type="hidden" id="search_status" value="${savedStatusNo}">
 		</div>
 
 		<!-- 기한 -->
@@ -433,8 +519,8 @@
 					<button type="button" class="due-clear-btn">지우기</button>
 				</div>
 			</div>
-			<input type="hidden" id="op_due" value=">=">
-			<input type="hidden" id="search_due" value="">
+			<input type="hidden" id="op_due" value="${empty list[0].operatorDueDate ? '>=' : list[0].operatorDueDate}">
+			<input type="date" id="due_date" value="${savedDueDate}" max="2099-12-31" min="2000-01-01">
 		</div>
 
 		<button type="button" id="btn_delete_filter">필터 지우기</button>
@@ -474,7 +560,7 @@
 						</div>
 					</h3>
 				</div>
-				<span class="text">Filter Description</span>
+				<span class="text">${list[0].searchConditionDescription}</span>
 			</div>
 			<hr>
 			<div id="popup_owner">
@@ -512,12 +598,12 @@
 					<span class="sub-title">이름</span>
 					<span class="required">*</span>
 					<br/>
-					<input type="text" id="new_title" placeholder="original title">
+					<input type="text" id="new_title" value="${list[0].searchConditionTitle}">
 				</div>
 				<div id="description_container">
 					<span class="sub-title">설명</span>
 					<br/>
-					<input type="text" id="new_description">
+					<input type="text" id="new_description" value="${list[0].searchConditionDescription}">
 				</div>
 				<div class="selection_container">
 					<span class="sub-title">조회자</span><br/>
@@ -529,11 +615,25 @@
 					<select name="viewerSub" class="scope_select subCategory" disabled>
 						<option value="" hidden selected>--항목을 선택해주세요--</option>
 					</select> 
-					<button type="button" class="add-button">추가</button>
+					<button type="button" class="add-button" id="btn_add_viewer">추가</button>
 				</div>
 				<div id="viewer_list" class="add-user-roll">
-					<a><img src="<c:url value='/resources/img/user.png'/>">金成官</a>
-					<button type="button" class="delete-user"><img src="<c:url value='/resources/img/close.png'/>"></button>
+					<c:forEach var="acc" items="${accessList}">
+						<c:if test="${acc.accessType == 'viewer'}">
+							<c:if test="${acc.accessUserNo != 0}">
+								<div class="added-item" data-user-no="${acc.accessUserNo}">
+									<span>${acc.accessUserNo}</span>
+									<button type="button" class="delete-user">X</button>
+								</div>
+							</c:if>
+							<c:if test="${not empty acc.accessSpaceKey}">
+								<div class="added-item" data-space-key="${acc.accessSpaceKey}">
+									<span>${acc.accessSpaceKey}</span>
+									<button type="button" class="delete-user">X</button>
+								</div>
+							</c:if>
+						</c:if>
+					</c:forEach>
 				</div>
 				<div class="selection_container">
 					<span class="sub-title">편집자</span><br/>
@@ -545,11 +645,25 @@
 					<select name="editorSub" class="scope_select subCategory" disabled>
 						<option value="" hidden selected>--항목을 선택해주세요--</option>
 					</select> 
-					<button type="button" class="add-button">추가</button>
+					<button type="button" class="add-button" id="btn_add_viewer">추가</button>
 				</div>
 				<div id="editor_list" class="add-user-roll">
-					<a><img src="<c:url value='/resources/img/user.png'/>">Minjae Seo</a>
-					<button type="button" class="delete-user"><img src="<c:url value='/resources/img/close.png'/>"></button>
+					<c:forEach var="acc" items="${accessList}">
+						<c:if test="${acc.accessType == 'editor'}">
+							<c:if test="${acc.accessUserNo != 0}">
+								<div class="added-item" data-user-no="${acc.accessUserNo}">
+									<span>${acc.accessUserNo}</span>
+									<button type="button" class="delete-user">X</button>
+								</div>
+							</c:if>
+							<c:if test="${not empty acc.accessSpaceKey}">
+								<div class="added-item" data-space-key="${acc.accessSpaceKey}">
+									<span>${acc.accessSpaceKey}</span>
+									<button type="button" class="delete-user">X</button>
+								</div>
+							</c:if>
+						</c:if>
+					</c:forEach>
 				</div>
 				<div id="button_container">
 					<button type="reset" id="cancle_button">취소</button>
