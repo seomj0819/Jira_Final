@@ -115,6 +115,26 @@
 			    });
 			});
 			
+			$("#btn_delete_filter").click(function() {
+			    if (!confirm("이 필터를 지우시겠습니까?")) {
+			        return;
+			    }
+
+			    var params = new URLSearchParams();
+			    params.append("searchConditionNo", $("#searchConditionNo").val());
+
+			    fetch(ctx + "/filter/list/detail/delete", {
+			        method: "POST",
+			        headers: {
+			            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+			        },
+			        body: params.toString()
+			    })
+			    .then(function() {
+			        location.href = ctx + "/filter/list";
+			    });
+			});
+			
 			$("#btn_add_viewer").click(function() {
 			    var $box = $(this).closest(".selection_container");
 			    var mainType = $box.find(".mainCategory").val();
