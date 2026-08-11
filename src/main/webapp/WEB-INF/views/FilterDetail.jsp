@@ -21,7 +21,7 @@
 			    $("#condition_container").css("opacity", "0.6");
 			}
 			
-			if (userRoll !== "owner") {
+			if (userRoll !== "owner" && userRoll !== "editor") {
 			    $("#btn_delete_filter").hide();
 			}
 			
