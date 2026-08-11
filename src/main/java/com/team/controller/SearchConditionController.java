@@ -165,7 +165,7 @@ public class SearchConditionController {
 		    model.addAttribute("filterTitle", list.get(0).getSearchConditionTitle());
 		}
 		
-		String page = "viewer".equals(userRoll) ? "FilterDetail_Viewer" : "FilterDetail";
+		String page = "FilterDetail";
 
 		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 			return page;
