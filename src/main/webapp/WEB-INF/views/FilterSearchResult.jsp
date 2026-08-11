@@ -40,7 +40,7 @@
 				<button>필터 복사</button>
 				<button>편집</button>
 				<button>소유자 변경</button>
-				<button>삭제</button>
+				<button type="button" class="btn_list_delete" data-no="${filter.searchConditionNo}">삭제</button>
 			</div>
 		</td>
 	</tr>
