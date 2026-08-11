@@ -124,9 +124,15 @@ public class SearchConditionController {
 		
 		List<StatusDto> statusList = new ArrayList<StatusDto>();
 		List<SpaceListDto> mySpaces = spaceService.showSpaceList(userNo);
+		if (mySpaces == null) {
+		    mySpaces = new ArrayList<SpaceListDto>();
+		}
 		for (int i = 0; i < mySpaces.size(); i++) {
 		    String spaceKey = mySpaces.get(i).getSpaceKey();
-		    statusList.addAll(statusService.ShowStatus(spaceKey));
+		    List<StatusDto> oneSpaceStatus = statusService.ShowStatus(spaceKey);
+		    if (oneSpaceStatus != null) {
+		        statusList.addAll(oneSpaceStatus);
+		    }
 		}
 		
 		model.addAttribute("statusList", statusList);
