@@ -70,6 +70,38 @@ public class SearchConditionController {
 	    return "MainSides";
 	}
 
+	@PostMapping("/filter/create")
+	public String createFilter(
+	        @RequestParam String searchConditionTitle,
+	        @RequestParam(required = false) String searchConditionDescription,
+	        HttpSession session) {
+
+	    Integer userNo = (Integer) session.getAttribute("userNo");
+	    if (userNo == null) {
+	        return "redirect:/login";
+	    }
+
+	    SearchConditionDto dto = new SearchConditionDto();
+	    dto.setSearchConditionTitle(searchConditionTitle);
+	    dto.setSearchConditionDescription(
+	            searchConditionDescription != null ? searchConditionDescription : "");
+	    dto.setOperatorSpace("=");
+	    dto.setOperatorWorker("=");
+	    dto.setOperatorCreator("=");
+	    dto.setOperatorPriority("=");
+	    dto.setOperatorStatus("=");
+	    dto.setOperatorDueDate(">=");
+	    dto.setFavorite("N");
+
+	    // 생성한 사람을 owner로
+	    dto.setAccessUserNo(userNo);
+	    dto.setAccessType("owner");
+
+	    searchConditionService.createSearchCondition(dto);
+
+	    return "redirect:/filter/list/detail?searchConditionNo=" + dto.getSearchConditionNo();
+	}
+	
 	@GetMapping("/filter/list/detail")
 	public String filterDetail(@RequestParam int searchConditionNo, HttpSession session, Model model,
 			HttpServletRequest request) {
