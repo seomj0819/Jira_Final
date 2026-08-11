@@ -579,7 +579,7 @@
 					<button type="button" class="op-btn active" data-op="=">=</button>
 					<button type="button" class="op-btn" data-op="!=">!=</button>
 				</div>
-				<<ul class="filter-op-list" id="list_status">
+				<ul class="filter-op-list" id="list_status">
 					<li data-value="">(전체)</li>
 					<c:forEach var="status" items="${statusList}">
 						<li data-value="${status.statusNo}">${status.statusTitle}</li>
