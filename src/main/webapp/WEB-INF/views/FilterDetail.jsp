@@ -650,7 +650,11 @@
 			<div id="popup_owner">
 				<img src="<c:url value='/resources/img/user.png'/>">
 				<span class="user-info">소유자: </span>
-				<span class="user-info">Minjae Seo</span>
+				<c:forEach var="acc" items="${accessList}">
+					<c:if test="${acc.accessType == 'owner'}">
+						<span class="user-info">${acc.userName}</span>
+					</c:if>
+				</c:forEach>
 			</div>
 			<hr>
 			<div id="popup_authority">
@@ -661,13 +665,50 @@
 					</div>
 				</h3>
 				<p class="sub-text">표시 대상:</p>
-				<span class="text">비공개</span>
+				<c:set var="hasViewer" value="false" />
+				<c:forEach var="acc" items="${accessList}">
+					<c:if test="${acc.accessType == 'viewer'}">
+						<c:set var="hasViewer" value="true" />
+						<c:if test="${acc.accessUserNo != 0}">
+							<div class="user-profile">
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span class="text">${acc.userName}</span>
+							</div>
+						</c:if>
+						<c:if test="${not empty acc.accessSpaceKey}">
+							<div class="user-profile">
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span class="text">${acc.spaceTitle}</span>
+							</div>
+						</c:if>
+					</c:if>
+				</c:forEach>
+				<c:if test="${hasViewer == false}">
+					<span class="text">비공개</span>
+				</c:if>
 				<br/>
 				<p class="sub-text">편집 가능한 대상:</p>
-				<div class="user-profile">
-					<img src="<c:url value='/resources/img/user.png'/>">
-					<span class="text">金成官</span>
-				</div>
+				<c:set var="hasEditor" value="false" />
+				<c:forEach var="acc" items="${accessList}">
+					<c:if test="${acc.accessType == 'editor'}">
+						<c:set var="hasEditor" value="true" />
+						<c:if test="${acc.accessUserNo != 0}">
+							<div class="user-profile">
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span class="text">${acc.userName}</span>
+							</div>
+						</c:if>
+						<c:if test="${not empty acc.accessSpaceKey}">
+							<div class="user-profile">
+								<img src="<c:url value='/resources/img/user.png'/>">
+								<span class="text">${acc.spaceTitle}</span>
+							</div>
+						</c:if>
+					</c:if>
+				</c:forEach>
+				<c:if test="${hasEditor == false}">
+					<span class="text">없음</span>
+				</c:if>
 			</div>
 		</div>
 	</div>
