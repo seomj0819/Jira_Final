@@ -47,10 +47,11 @@
 				<img src="<c:url value='/resources/img/more.png'/>">
 			</button>
 			<div class="dropdown_content">
-				<button>필터 복사</button>
-				<button>편집</button>
-				<button>소유자 변경</button>
-				<button type="button" class="btn_list_delete" data-no="${filter.searchConditionNo}">삭제</button>
+				<c:if test="${filter.accessType == 'owner' || filter.accessType == 'editor'}">
+					<button type="button"
+					        class="btn_list_delete"
+					        data-no="${filter.searchConditionNo}">삭제</button>
+				</c:if>
 			</div>
 		</td>
 	</tr>
