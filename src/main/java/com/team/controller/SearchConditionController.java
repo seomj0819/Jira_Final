@@ -1,5 +1,6 @@
 package com.team.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.team.dto.SearchConditionAccessDto;
 import com.team.dto.SearchConditionDto;
 import com.team.dto.SearchCriteriaDto;
-import com.team.dto.TaskInfoDto;
+import com.team.dto.SpaceListDto;
+import com.team.dto.StatusDto;
 import com.team.dto.TaskSearchDto;
 import com.team.service.SearchConditionService;
 import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
+import com.team.service.StatusService;
 import com.team.service.TaskService;
 
 @Controller
@@ -38,6 +41,9 @@ public class SearchConditionController {
 	
 	@Autowired
 	SpaceMemberService spaceMemberService;
+	
+	@Autowired
+	StatusService statusService;
 
 	@GetMapping("/filter/list")
 	public String filterList(HttpSession session, Model model, HttpServletRequest request) {
@@ -83,6 +89,15 @@ public class SearchConditionController {
 		model.addAttribute("searchConditionList", sideFilters);
 		model.addAttribute("spaceList", spaceService.showSpaceList(userNo));
 		model.addAttribute("userList", spaceMemberService.getSpaceMembers(userNo));
+		
+		List<StatusDto> statusList = new ArrayList<StatusDto>();
+		List<SpaceListDto> mySpaces = spaceService.showSpaceList(userNo);
+		for (int i = 0; i < mySpaces.size(); i++) {
+		    String spaceKey = mySpaces.get(i).getSpaceKey();
+		    statusList.addAll(statusService.ShowStatus(spaceKey));
+		}
+		
+		model.addAttribute("statusList", statusList);
 
 		List<SearchConditionAccessDto> accessList =
 		        searchConditionService.showAccessTypeList(searchConditionNo);
