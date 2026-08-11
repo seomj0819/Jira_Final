@@ -26,10 +26,20 @@
 			</a>
 		</td>
 		<td>
-			<div class="owner">-</div>
+			<div class="owner">
+				<c:choose>
+					<c:when test="${not empty filter.ownerName}">${filter.ownerName}</c:when>
+					<c:otherwise>-</c:otherwise>
+				</c:choose>
+			</div>
 		</td>
 		<td>
-			<div class="viewer">-</div>
+			<div class="viewer">
+				<c:choose>
+					<c:when test="${not empty filter.viewerNames}">${filter.viewerNames}</c:when>
+					<c:otherwise>비공개</c:otherwise>
+				</c:choose>
+			</div>
 		</td>
 		<td>-</td>
 		<td>
