@@ -39,4 +39,7 @@ public class SearchConditionDto {
 	private String accessSpaceKey;
 	private String accessType;
 	private String favorite;
+	
+	private String ownerName;
+	private String viewerNames;
 }
