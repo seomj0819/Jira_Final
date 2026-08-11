@@ -253,4 +253,16 @@ public class TaskController {
 		
 	}
 	
+	@ResponseBody
+	@PostMapping("/updateDuedate.do")
+	public String updateDuedate(@RequestBody TaskInfoDto taskDto, HttpSession session) {
+		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+		try {
+			taskService.updateTask(taskDto);
+			return "success";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
 }
