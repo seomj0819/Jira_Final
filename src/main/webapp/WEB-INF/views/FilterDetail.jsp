@@ -21,6 +21,10 @@
 			    $("#condition_container").css("opacity", "0.6");
 			}
 			
+			if (userRoll !== "owner") {
+			    $("#btn_delete_filter").hide();
+			}
+			
 			$("#filter_detail_button").click(function() {
 				layerPopUp.show();
 			});
