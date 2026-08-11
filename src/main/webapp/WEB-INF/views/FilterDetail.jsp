@@ -201,7 +201,7 @@
 			    var searchConditionNo = $("#searchConditionNo").val();
 
 			    var favorite = currentSrc.indexOf("star_empty.png") >= 0 ? "Y" : "N";
-
+				console.log(favorite);
 			    fetch(ctx + "/filter/favorite", {
 			        method: "POST",
 			        headers: {
@@ -222,10 +222,6 @@
 			    });
 			});
 			
-/* 			$("#search_task_by_title").oninput(function() {
-				console.log();
-			});
-			 */
 			$(document).mouseup(function(e) {
 				let temp1 = layerPopUp.has(e.target).length;
 				let temp2 = editPopUp.has(e.target).length;

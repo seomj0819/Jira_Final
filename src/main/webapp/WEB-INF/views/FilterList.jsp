@@ -6,50 +6,46 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/FilterList.css'/>"/>
 	<title>Filter</title>
 	<script>
-		function changeButtonImg(el) {
-			const img = el.querySelector('img');
-			  if (img.src.match('up.png')) {
-			    img.src = '/resources/img/down.png'; 
-			  } else {
-			    img.src = '/resources/img/up.png';
-			  }
-		}
-		
-		function changeMarkButtonImg(el) {
-		    if (el.src.match('star_black.png')) {
-		        el.src = '/resources/img/star_empty.png';
-		    } else {
-		        el.src = '/resources/img/star_black.png';
+		function sortFilterTable() {
+		    var tbody = document.getElementById("filter_result_body");
+		    if (!tbody) return;
+	
+		    var rows = Array.prototype.slice.call(tbody.querySelectorAll("tr"));
+		    var favStar = document.getElementById("sort_favorite_star");
+		    var titleImg = document.getElementById("sort_title_img");
+	
+		    var favoriteFirst = favStar && favStar.src.indexOf("star_black.png") >= 0;
+	
+		    var titleAsc = titleImg && titleImg.src.indexOf("up.png") >= 0;
+	
+		    rows.sort(function(a, b) {
+		        var aFav = a.getAttribute("data-favorite") || "N";
+		        var bFav = b.getAttribute("data-favorite") || "N";
+	
+		        if (aFav !== bFav) {
+		            if (favoriteFirst) {
+		                // Y가 위로
+		                if (aFav === "Y") return -1;
+		                if (bFav === "Y") return 1;
+		            } else {
+		                // N이 위로
+		                if (aFav === "N") return -1;
+		                if (bFav === "N") return 1;
+		            }
+		        }
+	
+		        var aTitle = (a.getAttribute("data-title") || "").toLowerCase();
+		        var bTitle = (b.getAttribute("data-title") || "").toLowerCase();
+	
+		        if (aTitle < bTitle) return titleAsc ? -1 : 1;
+		        if (aTitle > bTitle) return titleAsc ? 1 : -1;
+		        return 0;
+		    });
+	
+		    for (var i = 0; i < rows.length; i++) {
+		        tbody.appendChild(rows[i]);
 		    }
 		}
-		
-		function changeButtonImg(el) {
-			var img = el.querySelector('img');
-			if (img.src.match('up.png')) {
-				img.src = '${pageContext.request.contextPath}/resources/img/down.png';
-			} else {
-				img.src = '${pageContext.request.contextPath}/resources/img/up.png';
-			}
-		}
-
-		function changeMarkButtonImg(el) {
-			if (el.src.match('star_black.png')) {
-				el.src = '${pageContext.request.contextPath}/resources/img/star_empty.png';
-			} else {
-				el.src = '${pageContext.request.contextPath}/resources/img/star_black.png';
-			}
-		}
-		
-		window.addEventListener('click', function(event) {
-			const menu = document.getElementById("dropdownMenu");
-			const button = document.querySelector(".more_button");
-													// 이부분도 null로 떨어지는 문제가 있음
-			if (!button.contains(event.target) && !menu.contains(event.target)) {
-				if (menu.classList.contains('show')) {
-					menu.classList.remove('show');
-			    }
-			}
-		});
 		
 		function searchFilterList() {
 		    var keyword = $("#search_filter_by_title").val() || "";
@@ -72,6 +68,7 @@
 		        .then(function(res) { return res.text(); })
 		        .then(function(html) {
 		            $("#filter_result_body").html(html);
+		            sortFilterTable();
 		        });
 		}
 
@@ -99,6 +96,28 @@
 		        document.body.appendChild(form);
 		        form.submit();
 		    });
+		    
+		    $("#sort_favorite_star").on("click", function() {
+		        var $img = $(this);
+		        if (($img.attr("src") || "").indexOf("star_black.png") >= 0) {
+		            $img.attr("src", ctx + "/resources/img/star_empty.png");
+		        } else {
+		            $img.attr("src", ctx + "/resources/img/star_black.png");
+		        }
+		        sortFilterTable();
+		    });
+
+		    $("#sort_title_btn").on("click", function() {
+		        var $img = $("#sort_title_img");
+		        if (($img.attr("src") || "").indexOf("up.png") >= 0) {
+		            $img.attr("src", ctx + "/resources/img/down.png");
+		        } else {
+		            $img.attr("src", ctx + "/resources/img/up.png");
+		        }
+		        sortFilterTable();
+		    });
+
+		    sortFilterTable();
 		});
 	</script>
 	<div class="filter-list">
@@ -129,14 +148,13 @@
 			<table>
 				<tr>
 					<th>
-						<img class="star"
-						     src="<c:url value='/resources/img/star_black.png'/>"
-						     onclick="changeMarkButtonImg(this)">
+						<img id="sort_favorite_star" class="star"
+						     src="<c:url value='/resources/img/star_black.png'/>">
 					</th>
 					<th>
 						이름
-						<button class="sort" type="button" onclick="changeButtonImg(this)">
-							<img src="<c:url value='/resources/img/up.png'/>">
+						<button id="sort_title_btn" class="sort" type="button">
+							<img id="sort_title_img" src="<c:url value='/resources/img/up.png'/>">
 						</button>
 					</th>
 					<th>소유자</th>
