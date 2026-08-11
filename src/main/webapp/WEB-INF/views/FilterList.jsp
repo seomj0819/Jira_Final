@@ -79,12 +79,32 @@
 		    $("#search_filter_by_title").on("input", searchFilterList);
 		    $("#search_owner").on("change", searchFilterList);
 		    $("#search_space").on("change", searchFilterList);
+		    
+		    $("#btn_create_filter").click(function() {
+		        var title = prompt("필터 이름을 입력하세요");
+		        if (!title) {
+		            return;
+		        }
+
+		        var form = document.createElement("form");
+		        form.method = "POST";
+		        form.action = ctx + "/filter/create";
+
+		        var input = document.createElement("input");
+		        input.type = "hidden";
+		        input.name = "searchConditionTitle";
+		        input.value = title;
+		        form.appendChild(input);
+
+		        document.body.appendChild(form);
+		        form.submit();
+		    });
 		});
 	</script>
 	<div class="filter-list">
 	<header>
 		<h1>필터</h1>
-		<button>필터 만들기</button>
+		<button type="button" id="btn_create_filter">필터 만들기</button>
 	</header>
 	<main>
 		<div id="search_filter">
