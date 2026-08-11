@@ -48,3 +48,27 @@ if (!window._filterDropdownBound) {
 		}
 	});
 }
+
+document.addEventListener("click", function(e) {
+    var btn = e.target.closest(".btn_list_delete");
+    if (!btn) return;
+
+    if (!confirm("이 필터를 지우시겠습니까?")) {
+        return;
+    }
+
+    var searchConditionNo = btn.getAttribute("data-no");
+    var params = new URLSearchParams();
+    params.append("searchConditionNo", searchConditionNo);
+
+    fetch(ctx + "/filter/list/detail/delete", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: params.toString()
+    })
+    .then(function() {
+        location.href = ctx + "/filter/list";
+    });
+});
