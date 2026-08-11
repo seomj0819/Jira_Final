@@ -11,6 +11,16 @@
 			let layerPopUp = $("#popup_overlay");
 			let editPopUp = $("#edit_filter_popup");
 			
+			var userRoll = "${userRoll}";
+
+			if (userRoll === "viewer") {
+			    $("#btn_save_filter").hide();
+			    $("#btn_delete_filter").hide();
+			    $(".edit-button").hide();
+			    $("#condition_container").css("pointer-events", "none");
+			    $("#condition_container").css("opacity", "0.6");
+			}
+			
 			$("#filter_detail_button").click(function() {
 				layerPopUp.show();
 			});
