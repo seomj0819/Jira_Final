@@ -154,13 +154,28 @@
 	</delete>
 	<select id="showSearchConditionList" parameterType="int" resultType="com.team.dto.SearchConditionDto">
 		<![CDATA[
-			SELECT sc.*
+			SELECT sc.*,
+			       (
+			           SELECT u.user_name
+			           FROM search_condition_access o
+			           INNER JOIN users u ON o.user_no = u.user_no
+			           WHERE o.search_condition_no = sc.search_condition_no
+			             AND o.access_type = 'owner'
+			             AND ROWNUM = 1
+			       ) AS ownerName,
+			       (
+			           SELECT LISTAGG(u.user_name, ', ') WITHIN GROUP (ORDER BY u.user_name)
+			           FROM search_condition_access v
+			           INNER JOIN users u ON v.user_no = u.user_no
+			           WHERE v.search_condition_no = sc.search_condition_no
+			             AND v.access_type = 'viewer'
+			       ) AS viewerNames
 			FROM search_condition sc
 			INNER JOIN search_condition_access sca
 				ON sc.search_condition_no = sca.search_condition_no
 			WHERE sca.user_no = #{currentUserNo}
 		]]>
-	</select>
+</select>
 	<select id="showSearchConditionDetailByNo" resultType="com.team.dto.SearchConditionDto">
 		<![CDATA[
 			SELECT *
@@ -218,9 +233,23 @@
 			AND sc.search_condition_title LIKE '%' || #{searchKeyWord} || '%'
 		]]>
 	</select>
-	<select id="searchCriteria" parameterType="com.team.dto.SearchCriteriaDto"
-	        resultType="com.team.dto.SearchConditionDto">
-		SELECT DISTINCT sc.*
+	<select id="searchCriteria" parameterType="com.team.dto.SearchCriteriaDto" resultType="com.team.dto.SearchConditionDto">
+		SELECT DISTINCT sc.*,
+		       (
+		           SELECT u.user_name
+		           FROM search_condition_access o
+		           INNER JOIN users u ON o.user_no = u.user_no
+		           WHERE o.search_condition_no = sc.search_condition_no
+		             AND o.access_type = 'owner'
+		             AND ROWNUM = 1
+		       ) AS ownerName,
+		       (
+		           SELECT LISTAGG(u.user_name, ', ') WITHIN GROUP (ORDER BY u.user_name)
+		           FROM search_condition_access v
+		           INNER JOIN users u ON v.user_no = u.user_no
+		           WHERE v.search_condition_no = sc.search_condition_no
+		             AND v.access_type = 'viewer'
+		       ) AS viewerNames
 		FROM search_condition sc
 		INNER JOIN search_condition_access my_acc
 			ON sc.search_condition_no = my_acc.search_condition_no
