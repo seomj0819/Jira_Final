@@ -433,6 +433,7 @@
 			SELECT space_key
 			FROM sc_detail_space
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	
@@ -441,6 +442,7 @@
 			SELECT creator_no
 			FROM sc_detail_creator
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	
@@ -449,6 +451,7 @@
 			SELECT worker_no
 			FROM sc_detail_worker
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	
@@ -457,6 +460,7 @@
 			SELECT priority
 			FROM sc_detail_priority
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	
@@ -465,6 +469,7 @@
 			SELECT status_no
 			FROM sc_detail_status
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	
@@ -473,6 +478,7 @@
 			SELECT TO_CHAR(due_date, 'YYYY-MM-DD')
 			FROM sc_detail_due_date
 			WHERE search_condition_no = #{searchConditionNo}
+			AND ROWNUM = 1
 		]]>
 	</select>
 	<update id="updateSearchConditionInfo">
