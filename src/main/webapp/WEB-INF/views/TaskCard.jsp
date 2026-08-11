@@ -341,6 +341,50 @@
 			    	}  
 			    	
 			    });
+			    
+			    $("#duedate").on("input", async function() {
+			    	const dueDate = $("#duedate").val().trim();
+			    	// 1. 현재 주소의 파라미터 분석 객체 생성
+					var urlParams = new URLSearchParams(window.location.search);
+
+					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
+					var taskNo = urlParams.get("taskNo");
+					var spaceKey = "${sessionScope.spaceKey}";
+					if(!duedate) {
+						return;
+					}
+					try {
+						const reqData = {"taskNo" : taskNo, "spaceKey" : spaceKey, "dueDate" : dueDate};
+						const response = await fetch("<c:url value='/updateDuedate.do'/>", {
+							method:"POST",
+							headers: {
+								"Content-Type":"application/json",
+							},
+							body:JSON.stringify(reqData)
+						});
+						
+						const result = await response.text();
+						const res = result.trim();
+						console.log("【取得した値】:", JSON.stringify(res));
+						
+						if(res === "success") {
+							alert("기한이 변경되었습니다.");
+							$("duedate").val("");
+							$("#dDay").empty();
+							$("#dDay").html(dueDate);
+							
+							
+						} else if(res === "fail") {
+							alert("실패.");
+							return;
+						} else{
+							return;
+						}
+					} catch {
+						
+					}
+			    	
+			    });
 		});
 	</script>
 </head>
@@ -433,7 +477,7 @@
 					</tr>
 					<tr>
 						<td>기한</td>
-						<td><input id="duedate" type="date" name="dueDate" value=""/></td>
+						<td id="datearea"><input id="duedate" type="date" name="dueDate"/><span id="dDay">: ${dto.dueDate}</span></td>
 					</tr>
 					<tr>
 						<td>우선 순위</td>
