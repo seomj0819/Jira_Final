@@ -397,30 +397,36 @@
 			function closeAllFilterDropdowns() {
 				$(".filter-dropdown-panel").hide();
 			}
-			// 버튼에 보이는 글자 바꾸기
+			
 			function refreshFilterButtonText($dropdown, selectedText) {
-				var name = $dropdown.attr("data-name");
-				var op = $("#op_" + name).val();
-				var value = $("#search_" + name).val();
-				var $btn = $dropdown.find(".filter-dropdown-btn");
-				var titles = {
-					space: "스페이스",
-					creator: "담당자",
-					worker: "작업자",
-					priority: "우선 순위",
-					status: "상태",
-					due: "기한"
-				};
-				// 값 없으면 원래 이름만
-				if (!value) {
-					$btn.text(titles[name]);
-					return;
-				}
-				// 목록에서 고른 글자가 있으면 그걸 쓰고, 없으면 value 사용
-				if (!selectedText) {
-					selectedText = value;
-				}
-				$btn.text(op + " " + selectedText);
+			    var name = $dropdown.attr("data-name");
+			    var op = $("#op_" + name).val();
+			    var value = $("#search_" + name).val();
+			    var $btn = $dropdown.find(".filter-dropdown-btn");
+			    var titles = {
+			        space: "스페이스",
+			        creator: "담당자",
+			        worker: "작업자",
+			        priority: "우선 순위",
+			        status: "상태",
+			        due: "기한"
+			    };
+
+			    if (!value) {
+			        $btn.text(titles[name]);
+			        return;
+			    }
+
+			    if (!selectedText) {
+			        var $li = $dropdown.find('.filter-op-list li[data-value="' + value + '"]');
+			        if ($li.length > 0) {
+			            selectedText = $li.text();
+			        } else {
+			            selectedText = value;
+			        }
+			    }
+
+			    $btn.text(op + " " + selectedText);
 			}
 			
 			function searchTaskList() {
