@@ -194,7 +194,7 @@
 			SELECT *
 			FROM search_condition
 			WHERE search_condition_no = #{searchConditionNo}
-		]]\>
+		]]>
 	</select> 
 	<insert id="insertFavorite">
 		INSERT INTO sc_favorite (search_condition_no, user_no)
