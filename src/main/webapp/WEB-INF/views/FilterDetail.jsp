@@ -245,7 +245,6 @@
 			$("#search_task_by_title").off("input").on("input", searchTaskList);
 		})
 			
-		})
 			var selectObject = {
 			    "user": [
 			        <c:forEach var="user" items="${userList}" varStatus="st">
