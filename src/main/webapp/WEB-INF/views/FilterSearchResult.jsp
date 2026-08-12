@@ -41,7 +41,12 @@
 				</c:choose>
 			</div>
 		</td>
-		<td>-</td>
+		<td>
+			<c:choose>
+				<c:when test="${filter.favoriteCount != null}">${filter.favoriteCount}명</c:when>
+				<c:otherwise>0명</c:otherwise>
+			</c:choose>
+		</td>
 		<td>
 			<button type="button" class="more_button" onclick="toggleDropdown(this)">
 				<img src="<c:url value='/resources/img/more.png'/>">

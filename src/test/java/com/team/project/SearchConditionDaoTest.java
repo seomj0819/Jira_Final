@@ -106,22 +106,7 @@ public class SearchConditionDaoTest {
 		System.out.println(list.isEmpty());
 		
 	}
-	
-	// 5. 필터 즐겨찾기 추가 테스트
-	@Test
-	public void testFavoriteSearchCondition() {
-		// Given
-		Map<String, Object> map = new HashMap<>();
-		map.put("favorite", "Y");
-		map.put("searchConditionNo", 7);
-		
-		// When
-		searchDao.favoriteSearchCondition(map);
-		
-		// Then
-		
-	}
-	
+
 	// 6. 생성자 이름으로 검색 테스트
 	@Test
 	public void testSearchCriteriaByOwner () {

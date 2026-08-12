@@ -239,6 +239,7 @@ public class SearchConditionController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchConditionNo", searchConditionNo);
 		map.put("favorite", favorite); // "Y" or "N"
+		map.put("userNo", userNo);
 
 		searchConditionService.favoriteSearchCondition(map);
 		return "ok";

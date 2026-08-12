@@ -156,11 +156,6 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	}
 
 	@Override
-	public void favoriteSearchCondition(Map<String, Object> map) {
-		sqlSession.update("com.team.mapper.SearchConditionMapper.favoriteSearchCondition", map);
-	}
-
-	@Override
 	public boolean isFavorite(int searchConditionNo) {
 		Boolean favorite = sqlSession.selectOne("com.team.mapper.SearchConditionMapper.isFavorite", searchConditionNo);
 		return favorite != null && favorite;
@@ -258,6 +253,16 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 	@Override
 	public void deleteAllSearchConditionAccess(int searchConditionNo) {
 		sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteAllSearchConditionAccess", searchConditionNo);
+	}
+
+	@Override
+	public void insertFavorite(Map<String, Object> map) {
+		sqlSession.insert("com.team.mapper.SearchConditionMapper.insertFavorite", map);
+	}
+
+	@Override
+	public void deleteFavorite(Map<String, Object> map) {
+		sqlSession.insert("com.team.mapper.SearchConditionMapper.deleteFavorite", map);
 	}
 
 }

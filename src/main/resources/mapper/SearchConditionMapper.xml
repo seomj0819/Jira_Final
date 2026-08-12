@@ -155,6 +155,18 @@
 	<select id="showSearchConditionList" parameterType="int" resultType="com.team.dto.SearchConditionDto">
 		<![CDATA[
 			SELECT sc.*,
+			NVL((
+		           SELECT 'Y'
+		           FROM sc_favorite f
+		           WHERE f.search_condition_no = sc.search_condition_no
+		             AND f.user_no = #{currentUserNo}
+		             AND ROWNUM = 1
+		       ), 'N') AS favorite,
+		       (
+		           SELECT COUNT(*)
+		           FROM sc_favorite f
+		           WHERE f.search_condition_no = sc.search_condition_no
+		       ) AS favoriteCount,
 				sca.access_type AS accessType,
 		       (
 		           SELECT u.user_name
@@ -176,21 +188,24 @@
 				ON sc.search_condition_no = sca.search_condition_no
 			WHERE sca.user_no = #{currentUserNo}
 		]]>
-</select>
+	</select>
 	<select id="showSearchConditionDetailByNo" resultType="com.team.dto.SearchConditionDto">
 		<![CDATA[
 			SELECT *
 			FROM search_condition
 			WHERE search_condition_no = #{searchConditionNo}
-		]]>
+		]]\>
 	</select> 
-	<update id="favoriteSearchCondition">
-		<![CDATA[
-			UPDATE search_condition
-			SET favorite = #{favorite}
-			WHERE search_condition_no = #{searchConditionNo}
-		]]>
-	</update>
+	<insert id="insertFavorite">
+		INSERT INTO sc_favorite (search_condition_no, user_no)
+		VALUES (#{searchConditionNo}, #{userNo})
+	</insert>
+
+	<delete id="deleteFavorite">
+		DELETE FROM sc_favorite
+		WHERE search_condition_no = #{searchConditionNo}
+		  AND user_no = #{userNo}
+	</delete>
 	<select id="isFavorite" resultType="boolean">
 		<![CDATA[
 			SELECT CASE WHEN TRIM(favorite) = 'Y' THEN 1 ELSE 0 END
@@ -495,6 +510,19 @@
 		<![CDATA[
 			DELETE FROM search_condition_access
 			WHERE search_condition_no = #{searchConditionNo}
+		]]>
+	</delete>
+	<insert id="insertFavorite">
+		<![CDATA[
+			INSERT INTO sc_favorite (search_condition_no, user_no)
+			VALUES (#{searchConditionNo}, #{userNo})
+		]]>
+	</insert>
+	<delete id="deleteFavorite">
+		<![CDATA[
+			DELETE FROM sc_favorite
+			WHERE search_condition_no = #{searchConditionNo}
+			AND user_no = #{userNo}
 		]]>
 	</delete>
 </mapper>

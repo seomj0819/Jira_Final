@@ -145,7 +145,6 @@
 		AND space_key = #{spaceKey}
 	]]>
 </update>
-
 <update id="decreaseTaskOrder">
 	<![CDATA[
 		UPDATE task
@@ -157,12 +156,13 @@
 		AND space_key = #{spaceKey}
 	]]>
 </update>
-
-<update id="updateTaskOrder">
-	UPDATE task
-	SET task_order = #{afterTaskOrder}
-	WHERE task_no = #{taskNo}
-	AND space_key = #{spaceKey}
+<update id="updateTaskOrder">	
+	<![CDATA[
+		UPDATE task
+		SET task_order = #{afterTaskOrder}
+		WHERE task_no = #{taskNo}
+		AND space_key = #{spaceKey}
+	]]>
 </update>
 <select id="searchTaskBySearchCondition" parameterType="com.team.dto.TaskSearchDto" resultType="com.team.dto.TaskInfoDto">
 	SELECT t.*,

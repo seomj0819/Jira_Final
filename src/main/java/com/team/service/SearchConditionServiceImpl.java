@@ -49,11 +49,6 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 	}
 
 	@Override
-	public void favoriteSearchCondition(Map<String, Object> map) {
-		searchConditionDao.favoriteSearchCondition(map);
-	}
-
-	@Override
 	public boolean isFavorite(int searchConditionNo) {
 		return searchConditionDao.isFavorite(searchConditionNo);
 	}
@@ -141,6 +136,16 @@ public class SearchConditionServiceImpl implements SearchConditionService {
 	@Override
 	public void deleteAllSearchConditionAccess(int searchConditionNo) {
 		searchConditionDao.deleteAllSearchConditionAccess(searchConditionNo);
+	}
+
+	@Override
+	public void favoriteSearchCondition(Map<String, Object> map) {
+	    String favorite = (String) map.get("favorite");
+	    if ("Y".equals(favorite)) {
+	        searchConditionDao.insertFavorite(map);
+	    } else {
+	        searchConditionDao.deleteFavorite(map);
+	    }
 	}
 
 }

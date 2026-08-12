@@ -42,4 +42,5 @@ public class SearchConditionDto {
 	
 	private String ownerName;
 	private String viewerNames;
+	private Integer favoriteCount;
 }
