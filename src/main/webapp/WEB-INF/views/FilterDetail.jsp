@@ -92,36 +92,38 @@
 
 			    add("searchConditionNo", $("#searchConditionNo").val());
 
-			    var spaceKey = $("#search_space").val();
-			    var creatorNo = $("#search_creator").val();
-			    var workerNo = $("#search_worker").val();
-			    var priority = $("#search_priority").val();
-			    var statusNo = $("#search_status").val();
-			    var dueDate = $("#search_due").val();
+			    // FilterList에도 #search_space 가 있어서, 조건 영역 안에서만 읽는다
+			    var $cond = $("#condition_container");
+			    var spaceKey = $cond.find("#search_space").val();
+			    var creatorNo = $cond.find("#search_creator").val();
+			    var workerNo = $cond.find("#search_worker").val();
+			    var priority = $cond.find("#search_priority").val();
+			    var statusNo = $cond.find("#search_status").val();
+			    var dueDate = $cond.find("#search_due").val();
 
 			    if (spaceKey) {
 			        add("spaceKey", spaceKey);
-			        add("operatorSpace", $("#op_space").val() || "=");
+			        add("operatorSpace", $cond.find("#op_space").val() || "=");
 			    }
 			    if (creatorNo) {
 			        add("creatorNo", creatorNo);
-			        add("operatorCreator", $("#op_creator").val() || "=");
+			        add("operatorCreator", $cond.find("#op_creator").val() || "=");
 			    }
 			    if (workerNo) {
 			        add("workerNo", workerNo);
-			        add("operatorWorker", $("#op_worker").val() || "=");
+			        add("operatorWorker", $cond.find("#op_worker").val() || "=");
 			    }
 			    if (priority) {
 			        add("priority", priority);
-			        add("operatorPriority", $("#op_priority").val() || "=");
+			        add("operatorPriority", $cond.find("#op_priority").val() || "=");
 			    }
 			    if (statusNo) {
 			        add("statusNo", statusNo);
-			        add("operatorStatus", $("#op_status").val() || "=");
+			        add("operatorStatus", $cond.find("#op_status").val() || "=");
 			    }
 			    if (dueDate) {
 			        add("dueDate", dueDate);
-			        add("operatorDueDate", $("#op_due").val() || ">=");
+			        add("operatorDueDate", $cond.find("#op_due").val() || ">=");
 			    }
 
 			    document.body.appendChild(form);
@@ -239,8 +241,13 @@
 				  $(this).closest('.form-row').find('select[name=' + $this +']').siblings().hide();
 				  $(this).closest('.form-row').find('select[name=' + $this +']').show();
 			});
-			
-		})
+
+			// 조건 HTML이 아래에 있으므로, DOM ready 이후에 초기화해야
+			// 저장 후 새로고침해도 버튼에 "= Project" 등이 다시 표시된다.
+			initFilterDetail();
+			$("#search_task_by_title").off("input").on("input", searchTaskList);
+		});
+
 			var selectObject = {
 			    "user": [
 			        <c:forEach var="user" items="${userList}" varStatus="st">
@@ -391,7 +398,6 @@
 				    refreshFilterButtonText($dropdown, text);
 				});
 			}
-			initFilterDetail();
 			
 			function closeAllFilterDropdowns() {
 				$(".filter-dropdown-panel").hide();
@@ -429,43 +435,44 @@
 			}
 			
 			function searchTaskList() {
+			    var $cond = $("#condition_container");
 			    var url = ctx + "/filter/list/detail/search?keyword="
 			        + encodeURIComponent($("#search_task_by_title").val() || "");
 
-			    var spaceKey = $("#search_space").val();
+			    var spaceKey = $cond.find("#search_space").val();
 			    if (spaceKey) {
 			        url += "&spaceKey=" + encodeURIComponent(spaceKey)
-			            + "&operatorSpaceKey=" + encodeURIComponent($("#op_space").val() || "=");
+			            + "&operatorSpaceKey=" + encodeURIComponent($cond.find("#op_space").val() || "=");
 			    }
 
-			    var creatorNo = $("#search_creator").val();
+			    var creatorNo = $cond.find("#search_creator").val();
 			    if (creatorNo) {
 			    	url += "&creatorNo=" + encodeURIComponent(creatorNo)
-			    		+ "&operatorCreatorNo=" + encodeURIComponent($("#op_creator").val() || "=");
+			    		+ "&operatorCreatorNo=" + encodeURIComponent($cond.find("#op_creator").val() || "=");
 			    }
 
-			    var workerNo = $("#search_worker").val();
+			    var workerNo = $cond.find("#search_worker").val();
 			    if (workerNo) {
 			    	url += "&workerNo=" + encodeURIComponent(workerNo)
-			    		+ "&operatorWorkerNo=" + encodeURIComponent($("#op_worker").val() || "=");
+			    		+ "&operatorWorkerNo=" + encodeURIComponent($cond.find("#op_worker").val() || "=");
 			    }
 
-			    var priority = $("#search_priority").val();
+			    var priority = $cond.find("#search_priority").val();
 			    if (priority) {
 			    	url += "&priority=" + encodeURIComponent(priority)
-			    		+ "&operatorPriority=" + encodeURIComponent($("#op_priority").val() || "=");
+			    		+ "&operatorPriority=" + encodeURIComponent($cond.find("#op_priority").val() || "=");
 			    }
 
-			    var statusNo = $("#search_status").val();
+			    var statusNo = $cond.find("#search_status").val();
 			    if (statusNo) {
 			    	url += "&statusNo=" + encodeURIComponent(statusNo)
-			    		+ "&operatorStatusNo=" + encodeURIComponent($("#op_status").val() || "=");
+			    		+ "&operatorStatusNo=" + encodeURIComponent($cond.find("#op_status").val() || "=");
 			    }
 
-			    var dueDate = $("#search_due").val();
+			    var dueDate = $cond.find("#search_due").val();
 			    if (dueDate) {
 			    	url += "&dueDate=" + encodeURIComponent(dueDate)
-			    		+ "&operatorDueDate=" + encodeURIComponent($("#op_due").val() || ">=");
+			    		+ "&operatorDueDate=" + encodeURIComponent($cond.find("#op_due").val() || ">=");
 			    }
 			    
 			    fetch(url)	
@@ -474,8 +481,6 @@
 			            $("#task_result_body").html(html);
 			        });
 			}
-
-			$("#search_task_by_title").off("input").on("input", searchTaskList);
 	</script>
 <main>
 	<div class="filter-detail">

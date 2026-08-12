@@ -272,12 +272,18 @@
 	    align-items: center;
 	    gap: 6px;
 	}
+	/* 아래쪽 중복 규칙이 height:38px 로 덮어쓰면 드롭다운이 잘림 */
 	#condition_container {
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		gap: 10px;
-		height: 38px;
+		min-height: 38px;
+		height: auto;
 		padding: 3px;
+		overflow: visible;
+		position: relative;
+		z-index: 100;
 	}
 	#condition_container > select {
 		padding: 0px 10px;
