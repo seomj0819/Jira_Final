@@ -272,7 +272,7 @@
 	    align-items: center;
 	    gap: 6px;
 	}
-		#condition_container {
+	#condition_container {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -334,6 +334,7 @@
 		background-color: white;
 	    top: 84px;
    		left: 220px;
+   		z-index: 300;
    		margin-top: 54px;
 	}
 	.popup-overlay.show {
