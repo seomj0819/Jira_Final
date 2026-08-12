@@ -272,12 +272,17 @@
 	    align-items: center;
 	    gap: 6px;
 	}
-	#condition_container {
+		#condition_container {
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		gap: 10px;
-		height: 38px;
+		min-height: 38px;
+		height: auto;
 		padding: 3px;
+		overflow: visible;
+		position: relative;
+		z-index: 100;
 	}
 	#condition_container > select {
 		padding: 0px 10px;

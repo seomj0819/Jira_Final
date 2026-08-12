@@ -92,36 +92,37 @@
 
 			    add("searchConditionNo", $("#searchConditionNo").val());
 
-			    var spaceKey = $("#search_space").val();
-			    var creatorNo = $("#search_creator").val();
-			    var workerNo = $("#search_worker").val();
-			    var priority = $("#search_priority").val();
-			    var statusNo = $("#search_status").val();
-			    var dueDate = $("#search_due").val();
+			    var $cond = $("#condition_container");
+			    var spaceKey = $cond.find("#search_space").val();
+			    var creatorNo = $cond.find("#search_creator").val();
+			    var workerNo = $cond.find("#search_worker").val();
+			    var priority = $cond.find("#search_priority").val();
+			    var statusNo = $cond.find("#search_status").val();
+			    var dueDate = $cond.find("#search_due").val();
 
 			    if (spaceKey) {
 			        add("spaceKey", spaceKey);
-			        add("operatorSpace", $("#op_space").val() || "=");
+			        add("operatorSpace", $cond.find("#op_space").val() || "=");
 			    }
 			    if (creatorNo) {
 			        add("creatorNo", creatorNo);
-			        add("operatorCreator", $("#op_creator").val() || "=");
+			        add("operatorCreator", $cond.find("#op_creator").val() || "=");
 			    }
 			    if (workerNo) {
 			        add("workerNo", workerNo);
-			        add("operatorWorker", $("#op_worker").val() || "=");
+			        add("operatorWorker", $cond.find("#op_worker").val() || "=");
 			    }
 			    if (priority) {
 			        add("priority", priority);
-			        add("operatorPriority", $("#op_priority").val() || "=");
+			        add("operatorPriority", $cond.find("#op_priority").val() || "=");
 			    }
 			    if (statusNo) {
 			        add("statusNo", statusNo);
-			        add("operatorStatus", $("#op_status").val() || "=");
+			        add("operatorStatus", $cond.find("#op_status").val() || "=");
 			    }
 			    if (dueDate) {
 			        add("dueDate", dueDate);
-			        add("operatorDueDate", $("#op_due").val() || ">=");
+			        add("operatorDueDate", $cond.find("#op_due").val() || ">=");
 			    }
 
 			    document.body.appendChild(form);
@@ -239,6 +240,10 @@
 				  $(this).closest('.form-row').find('select[name=' + $this +']').siblings().hide();
 				  $(this).closest('.form-row').find('select[name=' + $this +']').show();
 			});
+
+			initFilterDetail();
+			$("#search_task_by_title").off("input").on("input", searchTaskList);
+		})
 			
 		})
 			var selectObject = {
@@ -391,7 +396,6 @@
 				    refreshFilterButtonText($dropdown, text);
 				});
 			}
-			initFilterDetail();
 			
 			function closeAllFilterDropdowns() {
 				$(".filter-dropdown-panel").hide();
@@ -475,7 +479,6 @@
 			        });
 			}
 
-			$("#search_task_by_title").off("input").on("input", searchTaskList);
 	</script>
 <main>
 	<div class="filter-detail">
