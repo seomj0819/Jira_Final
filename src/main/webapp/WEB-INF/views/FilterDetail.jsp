@@ -77,20 +77,8 @@
 			});
 			
 			$("#btn_save_filter").off("click").on("click", function() {
-			    var form = document.createElement("form");
-			    form.method = "POST";
-			    form.action = ctx + "/filter/list/detail/save";
-
-			    function add(name, value) {
-			        if (value === null || value === undefined || value === "") return;
-			        var input = document.createElement("input");
-			        input.type = "hidden";
-			        input.name = name;
-			        input.value = value;
-			        form.appendChild(input);
-			    }
-
-			    add("searchConditionNo", $("#searchConditionNo").val());
+			    var params = new URLSearchParams();
+			    params.append("searchConditionNo", $("#searchConditionNo").val());
 
 			    var $cond = $("#condition_container");
 			    var spaceKey = $cond.find("#search_space").val();
@@ -101,36 +89,46 @@
 			    var dueDate = $cond.find("#search_due").val();
 
 			    if (spaceKey) {
-			        add("spaceKey", spaceKey);
-			        add("operatorSpace", $cond.find("#op_space").val() || "=");
+			        params.append("spaceKey", spaceKey);
+			        params.append("operatorSpace", $cond.find("#op_space").val() || "=");
 			    }
 			    if (creatorNo) {
-			        add("creatorNo", creatorNo);
-			        add("operatorCreator", $cond.find("#op_creator").val() || "=");
+			        params.append("creatorNo", creatorNo);
+			        params.append("operatorCreator", $cond.find("#op_creator").val() || "=");
 			    }
 			    if (workerNo) {
-			        add("workerNo", workerNo);
-			        add("operatorWorker", $cond.find("#op_worker").val() || "=");
+			        params.append("workerNo", workerNo);
+			        params.append("operatorWorker", $cond.find("#op_worker").val() || "=");
 			    }
 			    if (priority) {
-			        add("priority", priority);
-			        add("operatorPriority", $cond.find("#op_priority").val() || "=");
+			        params.append("priority", priority);
+			        params.append("operatorPriority", $cond.find("#op_priority").val() || "=");
 			    }
 			    if (statusNo) {
-			        add("statusNo", statusNo);
-			        add("operatorStatus", $cond.find("#op_status").val() || "=");
+			        params.append("statusNo", statusNo);
+			        params.append("operatorStatus", $cond.find("#op_status").val() || "=");
 			    }
 			    if (dueDate) {
-			        add("dueDate", dueDate);
-			        add("operatorDueDate", $cond.find("#op_due").val() || ">=");
+			        params.append("dueDate", dueDate);
+			        params.append("operatorDueDate", $cond.find("#op_due").val() || ">=");
 			    }
 
-			    document.body.appendChild(form);
-			    form.submit();
+			    fetch(ctx + "/filter/list/detail/save", {
+			        method: "POST",
+			        headers: {
+			            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+			        },
+			        body: params.toString()
+			    })
+			    .then(function() {
+			        alert("저장되었습니다");
+			        location.href = ctx + "/filter/list/detail?searchConditionNo="
+			            + $("#searchConditionNo").val();
+			    });
 			});
 			
 			$("#btn_delete_filter").click(function() {
-			    if (!confirm("이 필터를 지우시겠습니까?")) {
+			    if (!confirm("이 필터를 삭제하시겠습니까?")) {
 			        return;
 			    }
 
