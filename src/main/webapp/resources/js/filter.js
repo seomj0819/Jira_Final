@@ -12,6 +12,9 @@ function changeStarButtonImg(el, searchConditionNo) {
 	      el.src = favorite === "Y"
 	        ? ctx + "/resources/img/star_yellow.png"
 	        : ctx + "/resources/img/star_empty.png";
+	        var tr = el.closest("tr");
+			if (tr) tr.setAttribute("data-favorite", favorite);
+			if (typeof sortFilterTable === "function") sortFilterTable();
 	    } else {
 	      alert("즐겨찾기 실패");
 	    }
