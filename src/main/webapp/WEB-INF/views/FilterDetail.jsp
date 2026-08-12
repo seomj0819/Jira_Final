@@ -254,7 +254,8 @@
 			        </c:forEach>
 			    ]
 			};
-			window.onload = function() {
+		
+		function initFilterDetail() {
 			var containers = document.querySelectorAll(".selection_container");
 			
 				containers.forEach(function(container) {
@@ -282,7 +283,7 @@
 				});
 				
 				// 1) 버튼 클릭 → 그 드롭다운만 열기/닫기
-				$(".filter-dropdown-btn").on("click", function(e) {
+				$(".filter-dropdown-btn").off("click").on("click", function(e) {
 					e.stopPropagation();
 					
 					var $panel = $(this).siblings(".filter-dropdown-panel");
@@ -296,7 +297,7 @@
 				});
 				
 				// 2) 연산자 버튼 (=, !=, >=, <=)
-				$(".op-btn").on("click", function(e) {
+				$(".op-btn").off("click").on("click", function(e) {
 					e.stopPropagation();
 					
 					var $dropdown = $(this).closest(".filter-dropdown");
@@ -314,7 +315,7 @@
 				});
 				
 				// 3) 목록에서 값 선택
-				$(".filter-op-list li").on("click", function(e) {
+				$(".filter-op-list li").off("click").on("click", function(e) {
 					e.stopPropagation();
 					
 					var $dropdown = $(this).closest(".filter-dropdown");
@@ -334,7 +335,7 @@
 				});
 				
 				// 4) 기한(date)
-				$("#due_date").on("change", function() {
+				$("#due_date").off("change").on("change", function() {
 					var $dropdown = $(this).closest(".filter-dropdown");
 					var value = $(this).val() || "";
 					
@@ -346,7 +347,7 @@
 				});
 				
 				// 5) 기한 지우기
-				$(".due-clear-btn").on("click", function(e) {
+				$(".due-clear-btn").off("click").on("click", function(e) {
 					e.stopPropagation();
 					
 					var $dropdown = $(this).closest(".filter-dropdown");
@@ -390,6 +391,7 @@
 				    }
 				    refreshFilterButtonText($dropdown, text);
 				});
+				initFilterDetail();
 			}
 			
 			function closeAllFilterDropdowns() {
@@ -468,7 +470,7 @@
 			        });
 			}
 
-			$("#search_task_by_title").on("input", searchTaskList);
+			$("#search_task_by_title").off("input").on("input", searchTaskList);
 	</script>
 <main>
 	<div class="filter-detail">
