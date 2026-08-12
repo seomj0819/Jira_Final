@@ -76,57 +76,56 @@
 			    $("#edit_filter_popup").hide();
 			});
 			
-			$("#btn_save_filter").click(function() {
-			    var params = new URLSearchParams();
-			    params.append("searchConditionNo", $("#searchConditionNo").val());
+			$("#btn_save_filter").off("click").on("click", function() {
+			    var form = document.createElement("form");
+			    form.method = "POST";
+			    form.action = ctx + "/filter/list/detail/save";
+
+			    function add(name, value) {
+			        if (value === null || value === undefined || value === "") return;
+			        var input = document.createElement("input");
+			        input.type = "hidden";
+			        input.name = name;
+			        input.value = value;
+			        form.appendChild(input);
+			    }
+
+			    add("searchConditionNo", $("#searchConditionNo").val());
 
 			    var spaceKey = $("#search_space").val();
-			    if (spaceKey) {
-			        params.append("spaceKey", spaceKey);
-			        params.append("operatorSpace", $("#op_space").val() || "=");
-			    }
-
 			    var creatorNo = $("#search_creator").val();
-			    if (creatorNo) {
-			        params.append("creatorNo", creatorNo);
-			        params.append("operatorCreator", $("#op_creator").val() || "=");
-			    }
-
 			    var workerNo = $("#search_worker").val();
-			    if (workerNo) {
-			        params.append("workerNo", workerNo);
-			        params.append("operatorWorker", $("#op_worker").val() || "=");
-			    }
-
 			    var priority = $("#search_priority").val();
-			    if (priority) {
-			        params.append("priority", priority);
-			        params.append("operatorPriority", $("#op_priority").val() || "=");
-			    }
-
 			    var statusNo = $("#search_status").val();
-			    if (statusNo) {
-			        params.append("statusNo", statusNo);
-			        params.append("operatorStatus", $("#op_status").val() || "=");
-			    }
-
 			    var dueDate = $("#search_due").val();
+
+			    if (spaceKey) {
+			        add("spaceKey", spaceKey);
+			        add("operatorSpace", $("#op_space").val() || "=");
+			    }
+			    if (creatorNo) {
+			        add("creatorNo", creatorNo);
+			        add("operatorCreator", $("#op_creator").val() || "=");
+			    }
+			    if (workerNo) {
+			        add("workerNo", workerNo);
+			        add("operatorWorker", $("#op_worker").val() || "=");
+			    }
+			    if (priority) {
+			        add("priority", priority);
+			        add("operatorPriority", $("#op_priority").val() || "=");
+			    }
+			    if (statusNo) {
+			        add("statusNo", statusNo);
+			        add("operatorStatus", $("#op_status").val() || "=");
+			    }
 			    if (dueDate) {
-			        params.append("dueDate", dueDate);
-			        params.append("operatorDueDate", $("#op_due").val() || ">=");
+			        add("dueDate", dueDate);
+			        add("operatorDueDate", $("#op_due").val() || ">=");
 			    }
 
-			    fetch(ctx + "/filter/list/detail/save", {
-			        method: "POST",
-			        headers: {
-			            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-			        },
-			        body: params.toString()
-			    })
-			    .then(function() {
-			        location.href = ctx + "/filter/list/detail?searchConditionNo="
-			            + $("#searchConditionNo").val();
-			    });
+			    document.body.appendChild(form);
+			    form.submit();
 			});
 			
 			$("#btn_delete_filter").click(function() {
