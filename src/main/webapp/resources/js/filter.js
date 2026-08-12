@@ -8,13 +8,42 @@ function changeStarButtonImg(el, searchConditionNo) {
   	})
   	.then(function(res) { return res.text(); })
   	.then(function(data) {
-	    if (data === "ok") {
-	      el.src = favorite === "Y"
-	        ? ctx + "/resources/img/star_yellow.png"
-	        : ctx + "/resources/img/star_empty.png";
-	        var tr = el.closest("tr");
-			if (tr) tr.setAttribute("data-favorite", favorite);
-			if (typeof sortFilterTable === "function") sortFilterTable();
+	    	    if (data === "ok") {
+	      if (favorite === "Y") {
+	        el.src = ctx + "/resources/img/star_yellow.png";
+	      } else {
+	        el.src = ctx + "/resources/img/star_empty.png";
+	      }
+
+	      var tr = el.closest("tr");
+	      if (tr) {
+	        tr.setAttribute("data-favorite", favorite);
+
+	        var countTd = tr.querySelector(".favorite-count");
+	        if (countTd) {
+	          var text = countTd.innerText;
+	          var num = parseInt(text, 10);
+	          if (isNaN(num)) {
+	            num = 0;
+	          }
+
+	          // 별 켰으면 +1, 껐으면 -1
+	          if (favorite === "Y") {
+	            num = num + 1;
+	          } else {
+	            num = num - 1;
+	            if (num < 0) {
+	              num = 0;
+	            }
+	          }
+
+	          countTd.innerText = num + "명";
+	        }
+	      }
+
+	      if (typeof sortFilterTable === "function") {
+	        sortFilterTable();
+	      }
 	    } else {
 	      alert("즐겨찾기 실패");
 	    }
