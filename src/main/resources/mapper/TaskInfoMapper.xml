@@ -10,61 +10,61 @@
 			task_no,
 			creator_no
 			<if test="workerNo != null">
-			,worker_no
+				,worker_no
 			</if>
-			,task_title
+				,task_title
 			<if test="taskDescription != null and taskDescription != ''">
-			,task_description
+				,task_description
 			</if>
 			<if test="dueDate != null and dueDate != ''">
-			,due_date
+				,due_date
 			</if>
 			<if test="labelTitle != null and labelTitle != ''">
-			,label_title
+				,label_title
 			</if>
-			,status_no
+				,status_no
 			<if test="priority != null and priority != ''">
-			,priority
+				,priority
 			</if>
 			<if test="upperTaskNo != null and upperTaskNo != ''">
-			,upper_task_no
+				,upper_task_no
 			</if>
-			,task_order
+				,task_order
 			<if test="summary != null and summary != ''">
-			,summary
+				,summary
 			</if>
 		) VALUES (
 			#{spaceKey},
 			seq_task_no.nextval,
 			#{creatorNo}
 			<if test="workerNo != null">
-			,#{workerNo}
+				,#{workerNo}
 			</if>
-			,#{taskTitle}
+				,#{taskTitle}
 			<if test="taskDescription != null and taskDescription != ''">
-			,#{taskDescription}
+				,#{taskDescription}
 			</if>
 			<if test="dueDate != null and dueDate != ''">
-			,TO_DATE(#{dueDate}, 'YYYY-MM-DD')
+				,TO_DATE(#{dueDate}, 'YYYY-MM-DD')
 			</if>
 			<if test="labelTitle != null and labelTitle != ''">
-			,#{labelTitle}
+				,#{labelTitle}
 			</if>
-			,#{statusNo}
+				,#{statusNo}
 			<if test="priority != null and priority != ''">
-			,#{priority}
+				,#{priority}
 			</if>
 			<if test="upperTaskNo != null and upperTaskNo != ''">
-			,#{upperTaskNo}
+				,#{upperTaskNo}
 			</if>
-			,(
-				SELECT NVL(MAX(task_order), 0) + 1
-				FROM task
-				WHERE space_key = #{spaceKey}
-				AND status_no = #{statusNo}
-			)
+				,(
+					SELECT NVL(MAX(task_order), 0) + 1
+					FROM task
+					WHERE space_key = #{spaceKey}
+					AND status_no = #{statusNo}
+				)
 			<if test="summary != null and summary != ''">
-			,#{summary}
+				,#{summary}
 			</if>
 		)
 </insert>
@@ -178,44 +178,54 @@
 		AND (task_title LIKE '%' || #{searchKeyWord} || '%' OR (space_key || '-' || task_no) LIKE '%' || #{searchKeyWord} || '%') 
 	</if>
 	<if test="searchWorkerNo != null">
-		<if test='operatorWorkerNo == "="'>
-			AND worker_no = #{searchWorkerNo} 
-		</if>
-		<if test='operatorWorkerNo == "!="'>
-			AND worker_no != #{searchWorkerNo} 
-		</if>
+		<choose>
+			<when test='operatorWorkerNo == "!="'>
+				AND worker_no != #{searchWorkerNo}
+			</when>
+			<otherwise>
+				AND worker_no = #{searchWorkerNo}
+			</otherwise>
+		</choose>
 	</if>
 	<if test="searchCreatorNo != null">
-		<if test='operatorCreatorNo == "="'>
-			AND creator_no = #{searchCreatorNo} 
-		</if>
-		<if test='operatorCreatorNo == "!="'>
-			AND creator_no != #{searchCreatorNo} 
-		</if>
+		<choose>
+			<when test='operatorCreatorNo == "!="'>
+				AND creator_no != #{searchCreatorNo}
+			</when>
+			<otherwise>
+				AND creator_no = #{searchCreatorNo}
+			</otherwise>
+		</choose>
 	</if>
-	<if test="searchStatusNo != null and searchStatusNo != ''">
-		<if test='operatorStatusNo == "="'>
-			AND status_no = #{searchStatusNo} 			
-		</if>
-		<if test='operatorStatusNo == "!="'>
-			AND status_no != #{searchStatusNo} 
-		</if>
+	<if test="searchStatusNo != null">
+		<choose>
+			<when test='operatorStatusNo == "!="'>
+				AND status_no != #{searchStatusNo}
+			</when>
+			<otherwise>
+				AND status_no = #{searchStatusNo}
+			</otherwise>
+		</choose>
 	</if>
 	<if test="searchSpaceKey != null and searchSpaceKey != ''">
-		<if test='operatorSpaceKey == "="'>
-			AND space_key = #{searchSpaceKey} 			
-		</if>
-		<if test='operatorSpaceKey == "!="'>
-			AND space_key != #{searchSpaceKey} 
-		</if>
+		<choose>
+			<when test='operatorSpaceKey == "!="'>
+				AND space_key != #{searchSpaceKey}
+			</when>
+			<otherwise>
+				AND space_key = #{searchSpaceKey}
+			</otherwise>
+		</choose>
 	</if>
 	<if test="searchPriority != null and searchPriority != ''">
-		<if test='operatorPriority == "="'>
-			AND priority = #{searchPriority} 
-		</if>
-		<if test='operatorPriority == "!="'>
-			AND priority != #{searchPriority} 
-		</if>
+		<choose>
+			<when test='operatorPriority == "!="'>
+				AND priority != #{searchPriority}
+			</when>
+			<otherwise>
+				AND priority = #{searchPriority}
+			</otherwise>
+		</choose>
 	</if>
 	<if test="searchDueDate != null and searchDueDate != '' and operatorDueDate != null
 				and operatorDueDate != ''" >
