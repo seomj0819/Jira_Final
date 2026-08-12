@@ -391,8 +391,8 @@
 				    }
 				    refreshFilterButtonText($dropdown, text);
 				});
-				initFilterDetail();
 			}
+			initFilterDetail();
 			
 			function closeAllFilterDropdowns() {
 				$(".filter-dropdown-panel").hide();
