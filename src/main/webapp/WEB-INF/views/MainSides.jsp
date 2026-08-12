@@ -11,6 +11,26 @@
 	<script src="<c:url value='/resources/js/jquery-4.0.0.min.js'/>"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/filter.js"></script>
 	<script>
+		function setContentHtml(html) {
+		    var content = document.getElementById("content");
+		    content.innerHTML = html;
+	
+		    var scripts = content.querySelectorAll("script");
+		    for (var i = 0; i < scripts.length; i++) {
+		        var oldScript = scripts[i];
+		        var newScript = document.createElement("script");
+	
+		        if (oldScript.src) {
+		            newScript.src = oldScript.src;
+		        } else {
+		            newScript.text = oldScript.text || oldScript.textContent;
+		        }
+	
+		        document.body.appendChild(newScript);
+		        oldScript.parentNode.removeChild(oldScript);
+		    }
+		}
+	
 		$(function() {
 			$("#searchBar").click(function() {
 				if( $("#sideBarArea").css("display") != "none" ) {
@@ -27,7 +47,7 @@
 			    })
 			    .then(function(res) { return res.text(); })
 			    .then(function(html) {
-			        document.getElementById("content").innerHTML = html;
+			        setContentHtml(html);
 			        history.pushState(null, "", url);
 			    });
 			});
@@ -218,8 +238,8 @@
 			})
 			.then(function(res) { return res.text(); })
 			.then(function(html) {
-				document.getElementById("content").innerHTML = html;
-				history.pushState(null, "", a.href);
+			    setContentHtml(html);
+			    history.pushState(null, "", a.href);
 			});
 		});
 
@@ -229,7 +249,7 @@
 			})
 			.then(function(res) { return res.text(); })
 			.then(function(html) {
-				document.getElementById("content").innerHTML = html;
+			    setContentHtml(html);
 			});
 		});
 	</script>
