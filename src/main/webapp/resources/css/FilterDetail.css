@@ -29,14 +29,14 @@
 		font-size: 14px;
 	}
 	#condition_container {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		min-height: 38px;
-		height: auto;
-		padding: 3px;
-		overflow: visible;
-		white-space: nowrap;
+	    display: flex;
+	    flex-direction: row;
+	    align-items: center;
+	    gap: 10px;
+	    min-height: 38px;
+	    height: auto;
+	    padding: 3px;
+	    overflow: visible;
 	}
 	.filter-dropdown {
 		position: relative;
