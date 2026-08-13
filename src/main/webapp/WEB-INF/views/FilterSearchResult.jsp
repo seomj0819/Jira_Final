@@ -19,7 +19,6 @@
 			</button>
 		</td>
 		<td>
-		<!-- a태그에 href 없애야 함? 페이지 이동하는거 막긴 해야하는데 -->
 			<a class="filter-title"
 			   href="<c:url value='/filter/list/detail?searchConditionNo=${filter.searchConditionNo}'/>">
 				${filter.searchConditionTitle}
@@ -53,9 +52,7 @@
 			</button>
 			<div class="dropdown_content">
 				<c:if test="${filter.accessType == 'owner' || filter.accessType == 'editor'}">
-					<button type="button"
-					        class="btn_list_delete"
-					        data-no="${filter.searchConditionNo}">삭제</button>
+					<button type="button" class="btn_list_delete" data-no="${filter.searchConditionNo}">삭제</button>
 				</c:if>
 			</div>
 		</td>
