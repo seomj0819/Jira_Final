@@ -262,7 +262,7 @@ public class SearchConditionDaoImpl implements SearchConditionDao {
 
 	@Override
 	public void deleteFavorite(Map<String, Object> map) {
-		sqlSession.insert("com.team.mapper.SearchConditionMapper.deleteFavorite", map);
+		sqlSession.delete("com.team.mapper.SearchConditionMapper.deleteFavorite", map);
 	}
 
 }
