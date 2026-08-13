@@ -41,7 +41,7 @@
 				</c:choose>
 			</div>
 		</td>
-		<td>
+		<td class="favorite-count">
 			<c:choose>
 				<c:when test="${filter.favoriteCount != null}">${filter.favoriteCount}명</c:when>
 				<c:otherwise>0명</c:otherwise>

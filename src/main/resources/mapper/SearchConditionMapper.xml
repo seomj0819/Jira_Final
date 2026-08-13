@@ -197,14 +197,18 @@
 		]]>
 	</select> 
 	<insert id="insertFavorite">
-		INSERT INTO sc_favorite (search_condition_no, user_no)
-		VALUES (#{searchConditionNo}, #{userNo})
+		<![CDATA[
+			INSERT INTO sc_favorite (search_condition_no, user_no)
+			VALUES (#{searchConditionNo}, #{userNo})
+		]]>
 	</insert>
 
 	<delete id="deleteFavorite">
-		DELETE FROM sc_favorite
-		WHERE search_condition_no = #{searchConditionNo}
-		  AND user_no = #{userNo}
+		<![CDATA[
+			DELETE FROM sc_favorite
+			WHERE search_condition_no = #{searchConditionNo}
+				AND user_no = #{userNo}
+		]]>
 	</delete>
 	<select id="isFavorite" resultType="boolean">
 		<![CDATA[
@@ -251,8 +255,20 @@
 	</select>
 	<select id="searchCriteria" parameterType="com.team.dto.SearchCriteriaDto" resultType="com.team.dto.SearchConditionDto">
 		SELECT DISTINCT sc.*,
+			NVL((
+		         SELECT 'Y'
+		         FROM sc_favorite f
+		         WHERE f.search_condition_no = sc.search_condition_no
+		         	AND f.user_no = #{currentUserNo}
+		            AND ROWNUM = 1
+		        ), 'N') AS favorite,
+		        (
+		         SELECT COUNT(*)
+		         FROM sc_favorite f
+		         WHERE f.search_condition_no = sc.search_condition_no
+		        ) AS favoriteCount,
 			my_acc.access_type AS accessType,
-	       (
+	        (
 	           SELECT u.user_name
 	           FROM search_condition_access o
 	           INNER JOIN users u ON o.user_no = u.user_no
@@ -510,19 +526,6 @@
 		<![CDATA[
 			DELETE FROM search_condition_access
 			WHERE search_condition_no = #{searchConditionNo}
-		]]>
-	</delete>
-	<insert id="insertFavorite">
-		<![CDATA[
-			INSERT INTO sc_favorite (search_condition_no, user_no)
-			VALUES (#{searchConditionNo}, #{userNo})
-		]]>
-	</insert>
-	<delete id="deleteFavorite">
-		<![CDATA[
-			DELETE FROM sc_favorite
-			WHERE search_condition_no = #{searchConditionNo}
-			AND user_no = #{userNo}
 		]]>
 	</delete>
 </mapper>
