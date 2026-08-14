@@ -497,9 +497,6 @@
    		background-color: white;
    		border-radius: 3px;
    		border: 1px solid rgba(30, 31, 33, 0.15);
-   		width: 100%;
-	    display: flex;
-	    justify-content: space-between;
 	}
 	.delete-user {
 		border: none;
@@ -517,14 +514,16 @@
 	}
 	.add-user-roll {
 		font-size: 14px;
-		display: flex;
-  			align-items: center;
-  			justify-content: space-between;
+  		align-items: center;
 	}
 	.add-user-roll > a {
 		display: flex;
    		align-items: center;
    		gap: 5px;
+	}
+	.added-item {
+		display: flex;
+    	justify-content: space-between;
 	}
 	.task_title > div {
 		cursor: pointer;
