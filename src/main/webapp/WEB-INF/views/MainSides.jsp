@@ -164,28 +164,12 @@
 			        &nbsp;회의자료 등록
 			    </div>
 			    <div id="pointer">
-					<div class="meeting-popup-box">
-						<h3>회의자료 등록</h3>
-					</div>
-				</div>
-				<!-- 태스크 생성 확인 -->
-				<div id="meeting_task_popup">
-					<div class="meeting-popup-box meeting-task-box">
-						<h3>태스크 생성</h3>
-						<div id="meeting_task_forms"></div>
-						<div class="meeting-popup-btns">
-							<button type="button" id="meeting_task_cancel">취소</button>
-							<button type="button" id="meeting_task_save">확인</button>
-						</div>
-					</div>
-				</div>
+			        <svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray">
+			            <path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/>
+			        </svg>
+			    </div>
 			</div>
-			<div id="pointer">
-				<svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray">
-					<path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/>
-				</svg>
-			</div>
-			</div>
+		</div>
 			<div id="meeting_upload_popup">
 			    <div id="meeting_dropzone">
 			        메모 및 사진 업로드
@@ -241,6 +225,23 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="meeting_upload_popup">
+		    <div id="meeting_dropzone">
+		        메모 및 사진 업로드
+		        <input type="file" id="meeting_image_input" accept="image/*" hidden>
+		    </div>
+		</div>
+		
+		<div id="meeting_task_popup">
+		    <div class="meeting-popup-box meeting-task-box">
+		        <h3>태스크 생성</h3>
+		        <div id="meeting_task_forms"></div>
+		        <div class="meeting-popup-btns">
+		            <button type="button" id="meeting_task_cancel">취소</button>
+		            <button type="button" id="meeting_task_save">확인</button>
+		        </div>
+		    </div>
 		</div>
 	<script>
 		$("#close").click(function() {
