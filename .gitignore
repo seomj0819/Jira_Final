@@ -51,3 +51,8 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven
 /.metadata/
+
+# OCR / AI Key
+scripts/key.json
+**/key.json
+.env
