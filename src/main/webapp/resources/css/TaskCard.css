@@ -438,3 +438,40 @@
 }
 /* 기존 .deleteReply 숨김 처리 대체 */
 .deleteReply { display: none; }
+
+#workeript, #labelipt { 
+	display: none; 
+	margin-right: 4px;
+	padding: 3px 6px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+#workerbtn, #labelbtn { 
+	display: none; 
+	background-color: #1868db;
+	color: white;
+	border: 1px solid #1868db;
+	border-radius: 3px;
+	padding: 3px 8px;
+	cursor: pointer;
+	margin-right: 3px;
+	font-size: 12px;
+}
+#workerbtn:hover, #labelbtn:hover {
+	background-color: #1558bc;
+}
+
+#workerCbtn, #labelCbtn {
+	display: none;
+	background-color: white;
+	color: gray;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 3px 8px;
+	cursor: pointer;
+	font-size: 12px;
+}
+#workerCbtn:hover, #labelCbtn:hover {
+	background-color: #f5f5f5;
+}

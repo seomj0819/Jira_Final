@@ -350,7 +350,7 @@
 					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
 					var taskNo = urlParams.get("taskNo");
 					var spaceKey = "${sessionScope.spaceKey}";
-					if(!duedate) {
+					if(!dueDate) {
 						return;
 					}
 					try {
@@ -369,7 +369,7 @@
 						
 						if(res === "success") {
 							alert("기한이 변경되었습니다.");
-							$("duedate").val("");
+							$("#duedate").val("");
 							$("#dDay").empty();
 							$("#dDay").html(dueDate);
 							
@@ -385,6 +385,118 @@
 					}
 			    	
 			    });
+			    
+			    $("#workerarea").click(function(e) {
+			        // 클릭된 요소가 input, button 등이 아닐 때만 실행
+			        if (!$(e.target).is("input, button, select")) {
+			            $("#workeript, #workerbtn, #workerCbtn").show();
+			        }
+			    });
+
+			    $("#labelarea").click(function(e) {
+			        if (!$(e.target).is("input, button, select")) {
+			            $("#labelipt, #labelbtn, #labelCbtn").show();
+			        }
+			    });
+
+			    // 2. 취소 버튼 클릭 시 이벤트 전파(stopPropagation) 방지
+			    $("#workerCbtn").click(function(e) {
+			        e.stopPropagation(); // 부모(#workerarea)로 클릭 이벤트가 올라가는 것 방지
+			        $("#workeript, #workerbtn, #workerCbtn").hide();
+			    });
+
+			    $("#labelCbtn").click(function(e) {
+			        e.stopPropagation();
+			        $("#labelipt, #labelbtn, #labelCbtn").hide();
+			    });
+			    
+			    $("#workerbtn").click( async function() {
+			    	var worker = $("#workeript").val();
+			    	var workerNo = worker ? parseInt(worker, 10) : null;
+
+			    	var urlParams = new URLSearchParams(window.location.search);
+
+					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
+					var taskNo = urlParams.get("taskNo");
+					var spaceKey = "${sessionScope.spaceKey}";
+			    	if(!workerNo || workerNo == 0) return;
+			    	
+			    	try {
+						const reqData = {"taskNo" : taskNo, "spaceKey" : spaceKey, "workerNo" : workerNo };
+						const response = await fetch("<c:url value='/updateWorker.do'/>", {
+							method:"POST",
+							headers: {
+								"Content-Type":"application/json",
+							},
+							body:JSON.stringify(reqData)
+						});
+						
+						const result = await response.text();
+						const res = result.trim();
+						console.log("【取得した値】:", JSON.stringify(res));
+						
+						if(res === "success") {
+							alert("담당자가 할당되었습니다.");
+							$("#workeript").val("");
+							$("#wN").empty();
+							$("#workeript").hide();
+							$("#workerbtn").hide();
+							$("#workerCbtn").hide();
+							location.reload();
+							
+						} else if(res === "fail") {
+							alert("실패.");
+							return;
+						} else{
+							return;
+						}
+					} catch {
+						
+					}
+			    });
+			    $("#labelbtn").click( async function() {
+			    	var label = $("#labelipt").val().trim();
+			    	var urlParams = new URLSearchParams(window.location.search);
+
+					// 2. 원하는 파라미터 명으로 값 읽기 (.get() 사용)
+					var taskNo = urlParams.get("taskNo");
+					var spaceKey = "${sessionScope.spaceKey}";
+			    	if(!label || label == "") return;
+			    	
+			    	try {
+						const reqData = {"taskNo" : taskNo, "spaceKey" : spaceKey, "labelTitle" : label};
+						const response = await fetch("<c:url value='/updateLabel.do'/>", {
+							method:"POST",
+							headers: {
+								"Content-Type":"application/json",
+							},
+							body:JSON.stringify(reqData)
+						});
+						
+						const result = await response.text();
+						const res = result.trim();
+						console.log("【取得した値】:", JSON.stringify(res));
+						
+						if(res === "success") {
+							alert("라벨이 변경되었습니다.");
+							$("#labelipt").val("");
+							$("#lT").empty();
+							$("#lT").html(label);
+							$("#labelipt").hide();
+							$("#labelbtn").hide();
+							$("#labelCbtn").hide();
+							
+						} else if(res === "fail") {
+							alert("실패.");
+							return;
+						} else{
+							return;
+						}
+					} catch {
+						
+					}
+			    });
+			    
 		});
 	</script>
 </head>
@@ -413,7 +525,7 @@
 				${dto.getTaskTitle()}
 			</div>
 			<div id="status" data-statusNo="${dto.getStatusNo()}">
-				<select id="selectStatus">
+				<select id="selectStatus" name="status">
 					<option id="current" value="current" selected>${statusDto.statusTitle}</option>
 				</select> 
 			</div>
@@ -463,11 +575,15 @@
 					</tr>
 					<tr>
 						<td>담당자</td>
-						<td><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>${(empty dto.workerNo) ? '할당되지 않음' : workerDto.userName}</td>
+						<td id="workerarea"><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/><select id="workeript" name="worker">
+							<c:forEach var="wdto" items="${spacememberList}">
+								<option value="${wdto.userNo}">${wdto.userName}</option>
+							</c:forEach>
+						</select><button id="workerbtn">저장</button><button id="workerCbtn">취소</button> <span id="wN"> ${(empty dto.workerNo) ? '할당되지 않음' : workerDto.userName}</span></td>
 					</tr>
 					<tr>
 						<td>레이블</td>
-						<td>${(empty dto.labelTitle) ? '없음' : dto.labelTitle}</td>
+						<td id="labelarea"><input id="labelipt" type="text" name="label"/><button id="labelbtn">저장</button><button id="labelCbtn">취소</button><span id="lT"> ${(empty dto.labelTitle) ? '없음' : dto.labelTitle}</span></td>
 					</tr>
 					<tr>
 						<td>상위항목</td>

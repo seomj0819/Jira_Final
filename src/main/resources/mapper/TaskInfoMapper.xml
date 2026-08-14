@@ -114,7 +114,7 @@
 			, due_date = #{dueDate}
 		</if>
 		
-		<if test="workerNo != null and statusNo != 0">
+		<if test="workerNo != null and workerNo != 0">
 			, worker_no = #{workerNo}
 		</if>
 		
