@@ -22,6 +22,7 @@ import com.team.dto.UserInfoDto;
 import com.team.service.HistoryService;
 import com.team.service.LoginService;
 import com.team.service.ReplyService;
+import com.team.service.SpaceMemberService;
 import com.team.service.SpaceService;
 import com.team.service.StatusService;
 import com.team.service.TaskService;
@@ -40,6 +41,8 @@ public class TaskController {
 	HistoryService historyService;
 	@Autowired
 	StatusService statusService;
+	@Autowired
+	SpaceMemberService spacememberService;
 	
 	@GetMapping("/board")
 	public String board(HttpSession session, Model model) {
@@ -145,7 +148,7 @@ public class TaskController {
 	 	List<TaskInfoDto> lowerTaskList = taskService.showLowerTaskList(ltdto);
 	 	System.out.println("★ lowerTaskListの件数: " + (lowerTaskList != null ? lowerTaskList.size() : "null"));
 	 	model.addAttribute("lowerTaskList", taskService.showLowerTaskList(ltdto));
-	 	
+	 	model.addAttribute("spacememberList", spacememberService.getAllSpaceMembers(spaceKey));
 	 	session.setAttribute("spaceKey", spaceKey);
 	 	session.setAttribute("userNo", userNo);
 	 	return "TaskCard";
@@ -274,9 +277,36 @@ public class TaskController {
 			return "fail";
 		}
 	}
+	
 	@ResponseBody
 	@PostMapping("/updateTaskStatus.do")
 	public String updateTaskStatus(@RequestBody TaskInfoDto taskDto, HttpSession session) {
+		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+		try {
+			taskService.updateTask(taskDto);
+			return "success";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateWorker.do")
+	public String updateWorker(@RequestBody TaskInfoDto taskDto, HttpSession session) {
+		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+		try {
+			taskService.updateTask(taskDto);
+			return "success";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateLabel.do")
+	public String updateLabel(@RequestBody TaskInfoDto taskDto, HttpSession session) {
 		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
 		try {
 			taskService.updateTask(taskDto);
