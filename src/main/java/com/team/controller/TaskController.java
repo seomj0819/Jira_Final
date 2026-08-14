@@ -269,7 +269,6 @@ public class TaskController {
 	@PostMapping("/updateTaskStatus.do")
 	public String updateTaskStatus(@RequestBody TaskInfoDto taskDto, HttpSession session) {
 		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
-		taskDto.setStatusNo(taskService.showTask(taskDto).getStatusNo());
 		try {
 			taskService.updateTask(taskDto);
 			return "success";

@@ -5,27 +5,27 @@
 
 	<meta charset="UTF-8">
 	<title>Jira Main Board Page</title>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 	<script>
-	// 중복 이벤트 정리 후 아래 구조로 통합
 	$(function() {
 	    // 1. + 버튼 클릭 시 입력창 열기/닫기
 	    $("#add-status-container").click(function() {
 	        $("#createStasusIpt").toggle();
 	    });
 	    
-		// 1.5 색상 선택 시
-		$(".selectStatusColor").click(function() {
-   			 $(".selectStatusColor").css("border", "none").removeClass("active");
-   			 $(this).css("border", "2px solid black").addClass("active");
-		});
-		
-	    // 2. 확인 버튼 클릭 시 input 값을 읽어서 Fetch 전송
+	    // 1.5 색상 선택 시
+	    $(".selectStatusColor").click(function() {
+	        $(".selectStatusColor").css("border", "none").removeClass("active");
+	        $(this).css("border", "2px solid black").addClass("active");
+	    });
+	    
+	    // 2. 상태 생성 버튼 클릭
 	    $("#btnCreateStatus").click(function(e) {
 	        const statusTitle = $("input[name='statusTitle']").val().trim();
 	        const statusColor = $(".selectStatusColor.active").val();
 	        const statusOrder = $(".status-container").length + 1;
+	        
 	        if(!statusTitle) {
 	            alert("상태 제목을 입력해주세요.");
 	            return;
@@ -34,6 +34,7 @@
 	            alert("상태 색상을 선택해주세요.");
 	            return;
 	        }
+	        
 	        fetch("createStatus.do", {
 	            method: "POST",
 	            headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -60,94 +61,116 @@
 	        });
 	    });
 	    
-	    $(".task-card-container").click(function() {
-	    	var taskId = $(this).find(".showTaskId").html().trim();
-	    	var taskNo = taskId.split("-")[1];
-	    	
-	    	location.href = "/project/taskCard?taskNo="+taskNo;
+	    // 3. 태스크 카드 클릭 시 이동 (드래그 중 클릭 방지 처리 포함)
+	    let isDragging = false;
+	    
+	    $(".task-card-container").click(function(e) {
+	        if (isDragging) return; // 드래그 중이었다면 클릭 이동 방지
+	        
+	        var taskId = $(this).find(".showTaskId").text().trim();
+	        var taskNo = taskId.split("-")[1];
+	        
+	        location.href = "/project/taskCard?taskNo=" + taskNo;
 	    });
 	    
+	    // 4. 태스크 생성 폼 토글 및 작성
 	    $(".create-task").click(function() {
-	    	$(this).parent().parent().find(".create-task-form").toggle();
+	        $(this).parent().parent().find(".create-task-form").toggle();
 	    });
+	    
 	    $(".createTaskBtn").click(async function() {
-	    	const newTitle = $(this).parent().find(".newTitle").val().trim();
-	    	const statusOrder = $(this).closest(".create-task-form").data("statusorder");
-	    	var spaceKey = $("#title-container").data("spacekey");
-	    	if(newTitle === "") {
-	    		alert("제목을 입력하세요");
-	    		$(this).parent().find(".newTitle").focus();
-	    		return;
-	    	}
-	    	
-	    	try {
-	    		const reqData = {"taskTitle": newTitle, "statusNo": statusOrder};
-	    		
-	    		const response = await fetch("<c:url value='/space/createTask.do'/>", {
-	    			method: "POST",
-	    			headers: {
-	    				"Content-Type":"application/json",
-	    			},
-	    			body: JSON.stringify(reqData)
-	    		});
-	    		const resp = await response.text();
-	    		const res = resp.trim();
-	    		if(res === "success") {
-	    			alert("태스크 생성됨");
-	    			$(this).parent().find(".newTitle").val("");
-	    			
-	    			location.href="/project/space/enter?spaceKey="+spaceKey;
-	    		} else {
-	    			alert("등록 실패");
-	    			return;
-	    		}
-	    	}  catch(error) {
-    			console.error("error",error);
-    		}
+	        const newTitle = $(this).parent().find(".newTitle").val().trim();
+	        const statusOrder = $(this).closest(".create-task-form").data("statusorder");
+	        var spaceKey = $("#title-container").data("spacekey");
+	        
+	        if(newTitle === "") {
+	            alert("제목을 입력하세요");
+	            $(this).parent().find(".newTitle").focus();
+	            return;
+	        }
+	        
+	        try {
+	            const reqData = {"taskTitle": newTitle, "statusNo": statusOrder};
+	            
+	            const response = await fetch("<c:url value='/space/createTask.do'/>", {
+	                method: "POST",
+	                headers: { "Content-Type": "application/json" },
+	                body: JSON.stringify(reqData)
+	            });
+	            const resp = await response.text();
+	            if(resp.trim() === "success") {
+	                alert("태스크 생성됨");
+	                $(this).parent().find(".newTitle").val("");
+	                location.href = "/project/space/enter?spaceKey=" + spaceKey;
+	            } else {
+	                alert("등록 실패");
+	            }
+	        } catch(error) {
+	            console.error("error", error);
+	        }
 	    });
-	    $(init);
-	    function init() {
-		$(".task-card-container").draggable({
-			containment: document,
-			cursor: pointer
-		});
-		$(".task-card-container").droppable({
-			drop: handleDropEvent
-		});
-	    }
-		async function handleDropEvent() {
-			var taskId = $(this).find(".showTaskId").html().trim();
-	    	var taskNo = taskId.split("-")[1]; 
-			var spaceKey = "${sessionScope.spaceKey}";
-			
-			try {
-				const reqData = {"taskNo" : taskNo, "spaceKey" : spaceKey};
-				const response = await fetch("<c:url value='/updateTaskStatus.do'/>", {
-					method:"POST",
-					headers: {
-						"Content-Type":"application/json",
-					},
-					body:JSON.stringify(reqData)
-				});
-				
-				const result = await response.text();
-				const res = result.trim();
-				console.log("【取得した値】:", JSON.stringify(res));
-				
-				if(res === "success") {
-					location.reload;
-					
-				} else if(res === "fail") {
-					alert("실패.");
-					return;
-				} else{
-					alert("실패");
-					return;
-				}
-			} catch {
-				alert("실패,");
-			}
-		}
+
+	    // =========================================================
+	    // 5. 드래그 앤 드롭 (Drag & Drop) 설정
+	    // =========================================================
+
+	    // 카드를 드래그 가능하게 설정
+	 // [수정 후] 기존 드래그/드롭 코드를 아래로 대체
+	    $(".task-card-container").draggable({
+	        revert: "invalid",
+	        helper: "clone", // 드래그 시 분신을 만들어 부드럽게 이동
+	        appendTo: "body",
+	        cursor: "move",
+	        start: function() {
+	            isDragging = true;
+	        },
+	        stop: function() {
+	            setTimeout(function() { isDragging = false; }, 100);
+	        }
+	    });
+
+	    $(".status-container").droppable({
+	        accept: ".task-card-container",
+	        hoverClass: "ui-state-hover",
+	        drop: async function(event, ui) {
+	            const $droppedCard = ui.draggable;
+	            const taskId = $droppedCard.find(".showTaskId").text().trim();
+	            const taskNo = taskId.split("-")[1];
+	            
+	            const targetStatusNo = $(this).find(".create-task-form").data("statusorder");
+	            const spaceKey = $("#title-container").data("spacekey");
+
+	            // 이동한 카드를 현재 컬럼으로 이동
+	            $droppedCard.insertBefore($(this).find(".create-task-container"));
+
+	            // 서버 전송
+	            try {
+	                const reqData = {
+	                    "taskNo": taskNo,
+	                    "spaceKey": spaceKey,
+	                    "statusNo": targetStatusNo
+	                };
+	                
+	                const response = await fetch("<c:url value='/updateTaskStatus.do'/>", {
+	                    method: "POST",
+	                    headers: { "Content-Type": "application/json" },
+	                    body: JSON.stringify(reqData)
+	                });
+	                
+	                const result = await response.text();
+	                if(result.trim() === "success") {
+	                    location.reload();
+	                } else {
+	                    alert("상태 변경 실패");
+	                    location.reload();
+	                }
+	            } catch(error) {
+	                console.error("드롭 통신 에러:", error);
+	                alert("상태 업데이트 중 오류가 발생했습니다.");
+	                location.reload();
+	            }
+	        }
+	    });
 	});
 	    </script>
 	<form>
@@ -202,7 +225,7 @@
 					</div>
 					<c:forEach var="taskDto" items="${taskListGroup[status.index]}">
 					<div class="task-card-container">
-						<button type="button" class="task-card">
+						<div class="task-card">
 							<div class="task-header">
 								<span class="task-title">${taskDto.taskTitle}</span>
 							</div>
@@ -222,7 +245,7 @@
 									<span><img src="../resources/img/user.png"></span>
 								</div>
 							</div>
-						</button>
+						</div>>
 					</div>
 					</c:forEach>
 					<div class="create-task-container">
