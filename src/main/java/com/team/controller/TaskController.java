@@ -316,4 +316,9 @@ public class TaskController {
 			return "fail";
 		}
 	}
+	
+	@PostMapping("/noteUpload")
+	public String noteUpload(@RequestParam String spaceKey, HttpSession session, Model model) {
+		return "";
+	}
 }
