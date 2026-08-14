@@ -105,6 +105,8 @@
     			console.error("error",error);
     		}
 	    });
+	    $(init);
+	    function init() {
 		$(".task-card-container").draggable({
 			containment: document,
 			cursor: pointer
@@ -112,6 +114,7 @@
 		$(".task-card-container").droppable({
 			drop: handleDropEvent
 		});
+	    }
 		async function handleDropEvent(event, ui) {
 			var draggable = ui.draggable;
 			var taskId = $(this).find(".showTaskId").html().trim();
