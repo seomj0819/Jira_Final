@@ -170,24 +170,6 @@
 			    </div>
 			</div>
 		</div>
-			<div id="meeting_upload_popup">
-			    <div id="meeting_dropzone">
-			        메모 및 사진 업로드
-			        <input type="file" id="meeting_image_input" accept="image/*" hidden>
-			    </div>
-			</div>
-			
-			<div id="meeting_task_popup">
-			    <div class="meeting-popup-box meeting-task-box">
-			        <h3>태스크 생성</h3>
-			        <div id="meeting_task_forms"></div>
-			        <div class="meeting-popup-btns">
-			            <button type="button" id="meeting_task_cancel">취소</button>
-			            <button type="button" id="meeting_task_save">확인</button>
-			        </div>
-			    </div>
-			</div>
-		</div>
 		<div id="various">
 			<div id="saikinPopUp">
 				<h2>최근</h2>
@@ -232,6 +214,7 @@
 		        <input type="file" id="meeting_image_input" accept="image/*" hidden>
 		    </div>
 		</div>
+	</div>
 		
 		<div id="meeting_task_popup">
 		    <div class="meeting-popup-box meeting-task-box">
