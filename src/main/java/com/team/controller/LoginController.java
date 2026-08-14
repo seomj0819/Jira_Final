@@ -92,6 +92,11 @@ public class LoginController {
         return "Email_verification";
     }
     
+    @GetMapping("/signup")
+    public String signUp(HttpSession session) {
+    	return "redirect:/login";
+    }
+    
     // 로그인 실패시 회원가입_pw
     @PostMapping("/jira_signUp")
     public String completeSignUp(@RequestParam String email,

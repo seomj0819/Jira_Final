@@ -61,6 +61,15 @@
 				"; path=/; expires=" + todayDate.toUTCString() + ";";
 		}
 	});
+	$(function() {
+		$("#forgotPw").click(function() {
+			location.href();
+		});
+		
+		$("#signUp").click(function() {
+			
+		});
+	});
 </script>
 <body>
 	<div id="background">
@@ -98,9 +107,9 @@
 				</div>
 			</main>
 			<footer id="other-option">
-				<span class="signIn-signUp">ID찾기</span>
+				<span id="forgotPw" class="signIn-signUp">비밀번호 찾기</span>
 				<span class="dot">•</span>
-				<span class="signIn-signUp">회원가입</span>
+				<span id="signUp" class="signIn-signUp">회원가입</span>
 			</footer>
 		</div>
 	</div>
