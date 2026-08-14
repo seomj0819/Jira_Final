@@ -70,7 +70,7 @@
 	        var taskId = $(this).find(".showTaskId").text().trim();
 	        var taskNo = taskId.split("-")[1];
 	        
-	        location.href = "/project/taskCard?taskNo=" + taskNo;
+	        location.href = "/TeamProject/taskCard?taskNo=" + taskNo;
 	    });
 	    
 	    // 4. 태스크 생성 폼 토글 및 작성
@@ -101,7 +101,7 @@
 	            if(resp.trim() === "success") {
 	                alert("태스크 생성됨");
 	                $(this).parent().find(".newTitle").val("");
-	                location.href = "/project/space/enter?spaceKey=" + spaceKey;
+	                location.href = "space/enter?spaceKey=" + spaceKey;
 	            } else {
 	                alert("등록 실패");
 	            }

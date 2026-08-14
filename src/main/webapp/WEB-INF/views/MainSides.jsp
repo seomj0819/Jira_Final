@@ -58,13 +58,13 @@
 				  location.href = "<c:url value='/filter/list/detail'/>?searchConditionNo=" + no;
 				});
 			$("#osusume").click(function() {
-				location.href = "/project/space/select";
+				location.href = "/TeamProject/space/select";
 			});
 			$("#saikin").click(function() {
 				$("#saikinPopUp").toggle();
 			});
 			$("#space").click(function() {
-				location.href = "/project/space/select";
+				location.href = "/TeamProject/space/select";
 			});
 			$("#space_list .gap").click(function() {
 				var spaceKey = $(this).data("key"); // 또는 $(this).data("space-key")
@@ -100,7 +100,7 @@
 		<div id="area1">
 			<div id="closer"><button id="close"><img src="https://www.svgrepo.com/show/347842/sidebar-expand.svg"/></button></div>
 			<div id="opener"><button id="open"><img src="https://www.svgrepo.com/show/347841/sidebar-collapse.svg"/></button></div>
-			<div id="logo"><a href="/project/space/select"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
+			<div id="logo"><a href="/TeamProject/space/select"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Jira_Logo.svg"/></a></div>
 		</div>
 		<div id="area2">
 			<div><input id="searchBar" name="searchKeyWord" type="text" placeholder="검색"/></div>

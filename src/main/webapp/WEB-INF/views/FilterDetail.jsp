@@ -241,7 +241,13 @@
 
 			initFilterDetail();
 			$("#search_task_by_title").off("input").on("input", searchTaskList);
-		})
+			
+			$(".task_title").click(function() {
+				var task = $(this).data("taskno");
+				var taskNo = parseInt(task,10);
+				location.href = "/TeamProject/taskCard?taskNo=" + taskNo;
+			});
+		});
 			
 			var selectObject = {
 			    "user": [

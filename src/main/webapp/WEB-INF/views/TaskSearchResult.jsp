@@ -5,7 +5,7 @@
 <c:forEach var="task" items="${taskList}">
 	<tr>
 		<td>
-			<div class="task_title">
+			<div class="task_title" data-taskno ="${task.taskNo}">
 				<c:choose>
 					<c:when test="${task.upperTaskNo == null}">
 						<div class="lowerTask">
