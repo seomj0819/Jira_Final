@@ -157,42 +157,51 @@
 			</div>
 			<br/>
 			<div id="submit" class="gap">
-				<div id="upload">
-					<svg xmlns="http://www.w3.org/2000/svg" id="plusdocu" height="512" viewBox="0 0 24 24" width="512" fill="gray" data-name="Layer 1">
-						<path d="m16 16a1 1 0 0 1 -1 1h-2v2a1 1 0 0 1 -2 0v-2h-2a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2h2a1 1 0 0 1 1 1zm6-5.515v8.515a5.006 5.006 0 0 1 -5 5h-10a5.006 5.006 0 0 1 -5-5v-14a5.006 5.006 0 0 1 5-5h4.515a6.958 6.958 0 0 1 4.95 2.05l3.484 3.486a6.951 6.951 0 0 1 2.051 4.949zm-6.949-7.021a5.01 5.01 0 0 0 -1.051-.78v4.316a1 1 0 0 0 1 1h4.316a4.983 4.983 0 0 0 -.781-1.05zm4.949 7.021c0-.165-.032-.323-.047-.485h-4.953a3 3 0 0 1 -3-3v-4.953c-.162-.015-.321-.047-.485-.047h-4.515a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3z"/>
-					</svg>
-					&nbsp;회의자료 등록
-					<!-- 회의자료: 사진 선택 -->
-					<div id="meeting_upload_popup">
-						<div class="meeting-popup-box">
-							<h3>회의자료 등록</h3>
-							<p class="meeting-popup-desc">필기/회의 사진 1장을 올려 주세요.</p>
-							<input type="file" id="meeting_image_input" accept="image/*">
-							<div class="meeting-popup-btns">
-								<button type="button" id="meeting_upload_cancel">취소</button>
-								<button type="button" id="meeting_upload_ok">업로드</button>
-							</div>
-						</div>
+			    <div id="upload">
+			        <svg xmlns="http://www.w3.org/2000/svg" id="plusdocu" height="512" viewBox="0 0 24 24" width="512" fill="gray" data-name="Layer 1">
+			            <path d="m16 16a1 1 0 0 1 -1 1h-2v2a1 1 0 0 1 -2 0v-2h-2a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2h2a1 1 0 0 1 1 1zm6-5.515v8.515a5.006 5.006 0 0 1 -5 5h-10a5.006 5.006 0 0 1 -5-5v-14a5.006 5.006 0 0 1 5-5h4.515a6.958 6.958 0 0 1 4.95 2.05l3.484 3.486a6.951 6.951 0 0 1 2.051 4.949zm-6.949-7.021a5.01 5.01 0 0 0 -1.051-.78v4.316a1 1 0 0 0 1 1h4.316a4.983 4.983 0 0 0 -.781-1.05zm4.949 7.021c0-.165-.032-.323-.047-.485h-4.953a3 3 0 0 1 -3-3v-4.953c-.162-.015-.321-.047-.485-.047h-4.515a3 3 0 0 0 -3 3v14a3 3 0 0 0 3-3z"/>
+			        </svg>
+			        &nbsp;회의자료 등록
+			    </div>
+			    <div id="pointer">
+					<div class="meeting-popup-box">
+						<h3>회의자료 등록</h3>
 					</div>
-					<!-- 분석중 -->
-					<div id="meeting_analyzing">분석중...</div>
-					<!-- 태스크 생성 확인 -->
-					<div id="meeting_task_popup">
-						<div class="meeting-popup-box meeting-task-box">
-							<h3>태스크 생성</h3>
-							<div id="meeting_task_forms"></div>
-							<div class="meeting-popup-btns">
-								<button type="button" id="meeting_task_cancel">취소</button>
-								<button type="button" id="meeting_task_save">확인</button>
-							</div>
+				</div>
+				<!-- 태스크 생성 확인 -->
+				<div id="meeting_task_popup">
+					<div class="meeting-popup-box meeting-task-box">
+						<h3>태스크 생성</h3>
+						<div id="meeting_task_forms"></div>
+						<div class="meeting-popup-btns">
+							<button type="button" id="meeting_task_cancel">취소</button>
+							<button type="button" id="meeting_task_save">확인</button>
 						</div>
 					</div>
 				</div>
-				<div id="pointer">
-					<svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray">
-						<path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/>
-					</svg>
-				</div>
+			</div>
+			<div id="pointer">
+				<svg xmlns="http://www.w3.org/2000/svg" class="bold" viewBox="0 0 24 24" width="512" height="512" fill="gray">
+					<path d="M6.079,22.5a1.5,1.5,0,0,1,.44-1.06l7.672-7.672a2.5,2.5,0,0,0,0-3.536L6.529,2.565A1.5,1.5,0,0,1,8.65.444l7.662,7.661a5.506,5.506,0,0,1,0,7.779L8.64,23.556A1.5,1.5,0,0,1,6.079,22.5Z"/>
+				</svg>
+			</div>
+			</div>
+			<div id="meeting_upload_popup">
+			    <div id="meeting_dropzone">
+			        메모 및 사진 업로드
+			        <input type="file" id="meeting_image_input" accept="image/*" hidden>
+			    </div>
+			</div>
+			
+			<div id="meeting_task_popup">
+			    <div class="meeting-popup-box meeting-task-box">
+			        <h3>태스크 생성</h3>
+			        <div id="meeting_task_forms"></div>
+			        <div class="meeting-popup-btns">
+			            <button type="button" id="meeting_task_cancel">취소</button>
+			            <button type="button" id="meeting_task_save">확인</button>
+			        </div>
+			    </div>
 			</div>
 		</div>
 		<div id="various">
@@ -233,7 +242,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<script>
 		$("#close").click(function() {
 			/* $("#closer").html("<button id='open'><img src='https://www.svgrepo.com/show/347841/sidebar-collapse.svg'/></button>"); */
@@ -276,6 +284,67 @@
 			.then(function(html) {
 			    setContentHtml(html);
 			});
+		});
+		
+		function addEmptyTaskCard() {
+		    var html = ""
+		        + "<div class='meeting-task-card'>"
+		        +     "<div class='mt-row'>"
+		        +         "<input type='text' class='mt-title' placeholder='제목'>"
+		        +     "</div>"
+		        +     "<div class='mt-row'>"
+		        +         "<textarea class='mt-desc' rows='3' placeholder='설명'></textarea>"
+		        +     "</div>"
+		        +     "<div class='mt-row'>"
+		        +         "<input type='date' class='mt-due'>"
+		        +     "</div>"
+		        +     "<div class='mt-row'>"
+		        +         "<input type='text' class='mt-label' placeholder='라벨'>"
+		        +     "</div>"
+		        +     "<div class='mt-row'>"
+		        +         "<input type='text' class='mt-status' placeholder='상태'>"
+		        +     "</div>"
+		        + "</div>";
+
+		    $("#meeting_task_forms").append(html);
+		}
+
+		$("#upload").on("click", function (e) {
+		    e.stopPropagation();
+		    $("#meeting_upload_popup").show();
+		});
+
+		$("#meeting_upload_popup").on("click", function (e) {
+		    if (e.target === this) {
+		        $(this).hide();
+		    }
+		});
+
+		$("#meeting_dropzone").on("click", function () {
+		    $("#meeting_image_input").click();
+		});
+
+		$("#meeting_image_input").on("change", function () {
+		    if (!this.files[0]) {
+		        return;
+		    }
+
+		    $("#meeting_upload_popup").hide();
+		    $("#meeting_task_forms").empty();
+		    addEmptyTaskCard();
+		    $("#meeting_task_popup").show();
+		});
+
+		$("#meeting_task_cancel").on("click", function () {
+		    $("#meeting_task_popup").hide();
+		    $("#meeting_image_input").val("");
+		});
+
+		$("#meeting_task_popup").on("click", function (e) {
+		    if (e.target === this) {
+		        $(this).hide();
+		        $("#meeting_image_input").val("");
+		    }
 		});
 	</script>
 </body>
