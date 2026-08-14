@@ -5,6 +5,8 @@
 
 	<meta charset="UTF-8">
 	<title>Jira Main Board Page</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 	<script>
 	// 중복 이벤트 정리 후 아래 구조로 통합
 	$(function() {
@@ -103,8 +105,49 @@
     			console.error("error",error);
     		}
 	    });
+		$(".task-card-container").draggable({
+			containment: document,
+			cursor: move
+		});
+		$(".task-card-container").droppable({
+			drop: handleDropEvent
+		});
+		async function handleDropEvent(event, ui) {
+			var draggable = ui.draggable;
+			var taskId = $(this).find(".showTaskId").html().trim();
+	    	var taskNo = taskId.split("-")[1]; 
+			var spaceKey = "${sessionScope.spaceKey}";
+			
+			try {
+				const reqData = {"taskNo" : taskNo, "spaceKey" : spaceKey};
+				const response = await fetch("<c:url value='/updateTaskStatus.do'/>", {
+					method:"POST",
+					headers: {
+						"Content-Type":"application/json",
+					},
+					body:JSON.stringify(reqData)
+				});
+				
+				const result = await response.text();
+				const res = result.trim();
+				console.log("【取得した値】:", JSON.stringify(res));
+				
+				if(res === "success") {
+					location.reload;
+					
+				} else if(res === "fail") {
+					alert("실패.");
+					return;
+				} else{
+					alert("실패");
+					return;
+				}
+			} catch {
+				alert("실패,");
+			}
+		}
 	});
-	</script>
+	    </script>
 	<form>
 		<header id="header">
 			<div id="title-container" data-spacekey="${spaceDto.spaceKey}">

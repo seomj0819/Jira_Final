@@ -265,4 +265,17 @@ public class TaskController {
 			return "fail";
 		}
 	}
+	@ResponseBody
+	@PostMapping("/updateTaskStatus.do")
+	public String updateTaskStatus(@RequestBody TaskInfoDto taskDto, HttpSession session) {
+		taskDto.setSpaceKey((String)session.getAttribute("spaceKey"));
+		taskDto.setStatusNo(taskService.showTask(taskDto).getStatusNo());
+		try {
+			taskService.updateTask(taskDto);
+			return "success";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
 }
