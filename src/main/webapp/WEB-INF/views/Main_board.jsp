@@ -115,8 +115,7 @@
 			drop: handleDropEvent
 		});
 	    }
-		async function handleDropEvent(event, ui) {
-			var draggable = ui.draggable;
+		async function handleDropEvent() {
 			var taskId = $(this).find(".showTaskId").html().trim();
 	    	var taskNo = taskId.split("-")[1]; 
 			var spaceKey = "${sessionScope.spaceKey}";
