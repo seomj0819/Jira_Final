@@ -107,7 +107,7 @@
 	    });
 		$(".task-card-container").draggable({
 			containment: document,
-			cursor: move
+			cursor: pointer
 		});
 		$(".task-card-container").droppable({
 			drop: handleDropEvent
