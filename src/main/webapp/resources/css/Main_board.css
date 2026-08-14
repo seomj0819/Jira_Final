@@ -237,9 +237,6 @@
 	#add-status:hover {
 		background-color: rgba(5, 21, 36, 0.10);
 	}
-	.task-card-container > button:hover {
-		background-color: rgba(5, 21, 36, 0.10);
-	}
 	.status-title:hover {
 		background-color: rgba(5, 21, 36, 0.10);
 	}

@@ -58,4 +58,9 @@ public class StatusServiceImpl implements StatusService {
 	public List<StatusDto> ShowStatus(String space_key) {
 		return statusDao.ShowStatus(space_key);
 	}
+
+	@Override
+	public StatusDto showStatusDetail(int statusNo) {
+		return statusDao.showStatusDetail(statusNo);
+	}
 }

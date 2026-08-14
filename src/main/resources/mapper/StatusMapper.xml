@@ -57,5 +57,9 @@
 		SELECT s.status_no, s.status_title, s.status_color FROM status s INNER JOIN color c ON s.status_color = c.color_name WHERE s.space_key = #{space_key} ORDER BY s.status_order ASC
 	]]>
 </select>
-
+<select id="showStatusDetail" resultType="com.team.dto.StatusDto">
+	<![CDATA[
+		SELECT * FROM status WHERE status_no = #{status_no}
+	]]>
+</select>
 </mapper>

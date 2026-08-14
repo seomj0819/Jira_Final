@@ -149,4 +149,10 @@ public class StatusServiceTest {
 			System.out.println(list.get(i).getStatusNo()+"/"+list.get(i).getStatusTitle()+"/"+list.get(i).getStatusColor());
 		}
 	}
+	@Test
+	public void testShowStatusDetail() {
+		int status_no = 1;
+		StatusDto dto = stSvc.showStatusDetail(status_no);
+		System.out.println(dto.getSpaceKey()+dto.getStatusNo());
+	}
 }

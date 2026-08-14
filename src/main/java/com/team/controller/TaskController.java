@@ -23,6 +23,7 @@ import com.team.service.HistoryService;
 import com.team.service.LoginService;
 import com.team.service.ReplyService;
 import com.team.service.SpaceService;
+import com.team.service.StatusService;
 import com.team.service.TaskService;
 
 @Controller
@@ -37,6 +38,8 @@ public class TaskController {
 	SpaceService spaceService;
 	@Autowired
 	HistoryService historyService;
+	@Autowired
+	StatusService statusService;
 	
 	@GetMapping("/board")
 	public String board(HttpSession session, Model model) {
@@ -108,6 +111,12 @@ public class TaskController {
 	 	// 5. �ｪｨ�査�乱 �魂�擽奓ｰ �橋�ｸｰ
 	 	model.addAttribute("dto", task);
 	 	model.addAttribute("creatorDto", loginService.getUserProfile(task.getCreatorNo()));
+	 	if (task.getWorkerNo() != null) {
+	 	    model.addAttribute("workerDto", loginService.getUserProfile(task.getWorkerNo()));
+	 	} else {
+	 	    model.addAttribute("workerDto", null);
+	 	}
+	 	model.addAttribute("statusDto", statusService.showStatusDetail(task.getStatusNo()));
 	 	model.addAttribute("replyList", replyList);
 	 		
 	 	// �兼�ｸ� �梠�┳�梵 �ｪｩ�｡� �ｧ､﨑�

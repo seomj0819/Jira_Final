@@ -173,4 +173,15 @@ public class StatusDaoImpl implements StatusDao {
 		return list;
 	}
 
+	@Override
+	public StatusDto showStatusDetail(int statusNo) {
+		StatusDto dto = new StatusDto();
+		try {
+			dto = sqlSession.selectOne("com.team.mapper.StatusMapper.showStatusDetail", statusNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
 }

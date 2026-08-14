@@ -25,7 +25,7 @@ public class TaskInfoDto {
 	String labelTitle;
 	int statusNo;
 	String priority;
-	Integer UpperTaskNo;
+	Integer upperTaskNo;
 	int taskOrder;
 	Integer imageNo;
 	String summary;

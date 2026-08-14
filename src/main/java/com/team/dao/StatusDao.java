@@ -15,4 +15,5 @@ public interface StatusDao {
 	boolean DownStatusOrderFirstly(int status_no);
 	boolean DeleteStatus(int status_no);
 	List<StatusDto> ShowStatus(String space_key);
+	StatusDto showStatusDetail(int statusNo);
 }

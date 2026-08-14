@@ -414,9 +414,7 @@
 			</div>
 			<div id="status" data-statusNo="${dto.getStatusNo()}">
 				<select id="selectStatus">
-					<option id="todo" value="todo" selected>해야 할 일</option>
-					<option id="now" value="now">진행중</option>
-					<option id="over" value="over">완료	</option>	<!-- 테스크 해당 스테이터스에 selected -->
+					<option id="current" value="current" selected>${statusDto.statusTitle}</option>
 				</select> 
 			</div>
 		</div>
@@ -465,15 +463,15 @@
 					</tr>
 					<tr>
 						<td>담당자</td>
-						<td><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>할당되지 않음</td>
+						<td><img class="profile" src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1"/>${(empty dto.workerNo) ? '할당되지 않음' : workerDto.userName}</td>
 					</tr>
 					<tr>
 						<td>레이블</td>
-						<td>없음</td>
+						<td>${(empty dto.labelTitle) ? '없음' : dto.labelTitle}</td>
 					</tr>
 					<tr>
 						<td>상위항목</td>
-						<td>없음</td>
+						<td>${(empty dto.spaceKey or empty dto.upperTaskNo) ? '없음' : dto.spaceKey.concat('-').concat(dto.upperTaskNo)}</td>
 					</tr>
 					<tr>
 						<td>기한</td>
@@ -481,7 +479,7 @@
 					</tr>
 					<tr>
 						<td>우선 순위</td>
-						<td>Medium</td>
+						<td>${dto.priority}</td>
 					</tr>
 					<tr>
 						<td>보고자</td>
