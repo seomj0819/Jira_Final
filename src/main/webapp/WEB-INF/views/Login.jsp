@@ -69,6 +69,19 @@
 		$("#signUp").click(function() {
 			
 		});
+		
+		$("#google-login-button").click(function() {
+		    var clientId = "아까_받은_클라이언트ID";
+		    var redirectUri = encodeURIComponent("http://localhost:8080/TeamProject/google-callback");
+		    var scope = encodeURIComponent("email profile");
+
+		    // 구글 로그인 페이지로 화면을 보냅니다.
+		    location.href = "https://accounts.google.com/o/oauth2/v2/auth"
+		        + "?client_id=" + clientId
+		        + "&redirect_uri=" + redirectUri
+		        + "&response_type=code"
+		        + "&scope=" + scope;
+		});
 	});
 </script>
 <body>
