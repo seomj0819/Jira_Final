@@ -1,8 +1,12 @@
 import os
 import io
 import sys
+import re
 from google import genai
 from google.cloud import vision
+
+def collapse_doubled_chars(text):
+    return re.sub(r'(.)\1', r'\1', text)
 
 # --- [0. 인코딩] ---
 if sys.stdout.encoding != 'utf-8':
@@ -28,13 +32,14 @@ def run_total_process(img_path):
         content = image_file.read()
 
     image = vision.Image(content=content)
-    response = vision_client.text_detection(image=image)
+    response = vision_client.document_text_detection(image=image)
 
-    if not response.text_annotations:
+    if not response.full_text_annotation or not response.full_text_annotation.text:
         print('{"tasks":[]}')
         return
 
-    raw_text = response.text_annotations[0].description
+    raw_text = response.full_text_annotation.text
+    raw_text = collapse_doubled_chars(raw_text)
 
     # 로그는 stderr (Java 결과 파싱에 안 섞임)
     print("--- [OCR Raw Text] ---", file=sys.stderr)
@@ -63,6 +68,10 @@ def run_total_process(img_path):
    - 인식 불분명한 단어를 억지로 추측하여 채우지 마세요.
 
 4. 필터링: 'ㅜ', '하기싫어', 'mona' 등 업무와 무관한 노이즈는 제거하세요.
+
+5. OCR 한글이 한 글자씩 중복된 경우 정상 단어로 복원하세요.
+   예: 진진행행중중 → 진행중, 해해야야 할할 일일 → 해야 할 일
+   상태 값은 반드시 '해야 할 일', '진행중', '완료' 중 하나로만 쓰세요.
 
 [출력 JSON 스키마]
 {{
